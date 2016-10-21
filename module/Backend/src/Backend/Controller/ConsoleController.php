@@ -478,41 +478,7 @@ class ConsoleController extends MyController
             unset($arrDocument);
             $this->flush();
         }
-
         die('done');
-//        $instanceSearchCategory = new \My\Search\Category();
-//        $arr_category = $instanceSearchCategory->getList(['cate_status' => 1]);
-//        $instanceSearchKeyword = new \My\Search\Keyword();
-//        $instanceSearchKeyword->createIndex();
-//        die();
-//        $content = file_get_contents(PUBLIC_PATH . '/keyword.txt');
-//        $content = explode("\n", $content);
-
-        foreach ($arr_category as $category) {
-
-            $isexist = $instanceSearchKeyword->getDetail(['key_slug' => General::getSlug($category['cate_name'])]);
-
-            if ($isexist) {
-                continue;
-            }
-
-            $arr_data = [
-                'key_name' => $category['cate_name'],
-                'key_slug' => General::getSlug($category['cate_name'])
-            ];
-
-            $serviceKeyword = $this->serviceLocator->get('My\Models\Keyword');
-            $int_result = $serviceKeyword->add($arr_data);
-            unset($serviceKeyword);
-            if ($int_result) {
-                echo General::getColoredString("add keyword : {$category['cate_name']} success", 'green');
-            } else {
-                echo General::getColoredString("add keyword : {$category['cate_name']} error", 'red');
-            }
-            $this->flush();
-        }
-        echo General::getColoredString("add keyword complete", 'yellow', 'cyan');
-        return true;
     }
 
     public function workerAction()
@@ -831,7 +797,7 @@ class ConsoleController extends MyController
         }
 
         $serviceKeyword = $this->serviceLocator->get('My\Models\Keyword');
-        $serviceKeyword->edit(['is_crawler' => 1, 'updated_date' => time()], $arr_keyword['key_id']);
+        $serviceKeyword->edit(array('is_crawler' => 1), $arr_keyword['key_id']);
         unset($serviceKeyword);
 
         $keyword = $arr_keyword['key_name'];
@@ -841,7 +807,7 @@ class ConsoleController extends MyController
                 $key_match = $keyword . $value;
                 $url = 'http://www.google.com/complete/search?output=search&client=chrome&q=' . rawurlencode($key_match) . '&hl=vi&gl=vn';
                 $return = General::crawler($url);
-                $this->add_keyword(json_decode($return)[1]);
+                $this->add_keyword(json_decode($return)[1],$arr_keyword['cate_id']);
                 continue;
             } else {
                 for ($i = 0; $i < 2; $i++) {
@@ -852,18 +818,19 @@ class ConsoleController extends MyController
                     }
                     $url = 'http://www.google.com/complete/search?output=search&client=chrome&q=' . rawurlencode($key_match) . '&hl=vi&gl=vn';
                     $return = General::crawler($url);
-                    $this->add_keyword(json_decode($return)[1]);
+                    $this->add_keyword(json_decode($return)[1],$arr_keyword['cate_id']);
                     continue;
                 }
             }
         };
-        sleep(3);
+
         print_r("done");
         die;
+        sleep(3);
         $this->getKeyword();
     }
 
-    public function add_keyword($arr_key)
+    public function add_keyword($arr_key,$cate_id)
     {
         if (empty($arr_key)) {
             return false;
@@ -899,7 +866,8 @@ class ConsoleController extends MyController
                 'key_name' => $key_word,
                 'key_slug' => trim(General::getSlug($key_word)),
                 'created_date' => time(),
-                'is_crawler' => 0
+                'is_crawler' => 0,
+                'cate_id' => $cate_id,
             ];
 
             $serviceKeyword = $this->serviceLocator->get('My\Models\Keyword');
@@ -1400,76 +1368,100 @@ class ConsoleController extends MyController
         return true;
     }
     public function testAction(){
-        $count_post = 0;
+        echo "<pre>";
+        print_r("<div class=\"detail_content fl mgt15\">  <div>Lưu ý nhỏ trước khi<a href=\"http://dev.newspaper.vn\"> tập luyện</a>: Tập đúng số lượng các bài tập và đủ số hiệp liên tiếp nhau, nghỉ khoảng 45-60 giây giữa mỗi động tác. Tập full bài 3-4 ngày trong tuần (không tập trong hai ngày liên tiếp). Đặc biệt, những gì bạn cần để thực hiện 8 động tác này chỉ là một tấm thảm và khăn tập mà thôi! <br><br></div><div><span style=\"font-weight: bold;\">90 Degree Static press</span><br><br></div><div>Nằm ngửa, đầu gối vuông góc với hông, bàn chân gập lại, mở rộng vai và đặt lòng bàn tay lên phần đầu bắp đùi. Khi bạn thở ra, nâng đầu và vai khỏi mặt sàn khi ấn tay vào bắp đùi, hạ thấp phần thân trên khi bạn hít vào. Hít một hơi thật sâu, khi thở ra hóp bụng thật chặt, ấn chặt phần lưng dưới xuống mặt đất khi đưa gan bàn tay ấn vào bắp đùi, giữ nguyên tư thế trong khoảng 10 giây. <br><br></div><div>Thực hiện 3 hiệp mỗi hiệp 10 lần liên tiếp.<br><br><div style=\"text-align:center;\"><img src=\"http://dev.st.newspaper.vn/uploads/content/2016/10/21/bai-tap-dot-chay-mo-bung-duoi-cho-cac-quy-co-van-phong_1.gif\" w=\"480\" h=\"360\" alt=\"bài tập giảm mỡ bụng dưới\" title=\"bài tập giảm mỡ bụng dưới\"><br></div><br></div><div><span style=\"font-weight: bold;\">Resisted Single – Leg Stretch<br></span><br>Nằm ngửa, đầu ngẩng lên, hai chân kéo về phía ngực, bàn chân gập lại. Đan các ngón tay lại với nhau và đặt lên đùi phải, cùng lúc đó duỗi chân trái song song với mặt sàn. Ấn chặt gan bàn tay lên đùi phải, cố gắng đưa đầu gối bên phải lại gần phía ngực. Đổi chân và làm tương tự, đó là một lần. </div><div><br></div><div>Tập 3 hiệp mỗi hiệp 10 lần liên tiếp.<br><br><div style=\"text-align:center;\"><img src=\"http://dev.st.newspaper.vn/uploads/content/2016/10/21/bai-tap-dot-chay-mo-bung-duoi-cho-cac-quy-co-van-phong_2.gif\" w=\"480\" h=\"360\" alt=\"bài tập giảm mỡ bụng dưới\" title=\"bài tập giảm mỡ bụng dưới\"><br></div><br></div><div><span style=\"font-weight: bold;\">U-Boat</span><br><br></div><div>Ngồi trên mặt sàn, ngả người ra phía sau, chống hai khuỷu tay xuống mặt sàn, bàn tay úp xuống. Hóp bụng thật chặt rồi nâng cẳng chân lên tạo thành một góc 90 độ, từ từ đưa hai cẳng chân sang bên trái rồi đưa sang bên phải (Hông vẫn ở nguyên trên mặt sàn). Động tác này nhìn rất giống bạn đang vẽ chữ U với hai đầu gối. <br><br></div><div>Thực hiện động tác này 20 lần.<br><br><div style=\"text-align:center;\"><img src=\"http://dev.st.newspaper.vn/uploads/content/2016/10/21/bai-tap-dot-chay-mo-bung-duoi-cho-cac-quy-co-van-phong_3.gif\" w=\"480\" h=\"360\" alt=\"bài tập giảm mỡ bụng dưới\" title=\"bài tập giảm mỡ bụng dưới\"><br></div><br></div><div><span style=\"font-weight: bold;\">Reverse Plank Hover<br><br></span></div><div>Ngồi duỗi thẳng hai chân, chân gập lại, hai bàn tay đặt phía bên ngoài hông và úp xuống mặt sàn. Hít vào, hóp chặt bụng và dùng lực bả vai nhấc hông khỏi mặt sàn một vài inches, hơi uốn nhẹ đầu gối gót chân vẫn chống xuống sàn. Thở ra, duỗi thẳng chân và cố gắng đưa hông ra phía sau hai vai. Quay trở lại tư thế ban đầu. <br><br></div><div>Thực hiện ba hiệp, mỗi hiệp 10 lần.<br><br><div style=\"text-align:center;\"><img src=\"http://dev.st.newspaper.vn/uploads/content/2016/10/21/bai-tap-dot-chay-mo-bung-duoi-cho-cac-quy-co-van-phong_4.gif\" w=\"480\" h=\"360\" alt=\"bài tập giảm mỡ bụng dưới\" title=\"bài tập giảm mỡ bụng dưới\"><br></div><br></div><div><span style=\"font-weight: bold;\">Criss – Cross Lift and Switch<br><br></span></div><div>Nằm ngửa, khép chặt hai cánh tay trên mặt sàn, vắt chéo hai chân lên phía trên, hít vào hóp bụng thật chặt, hai cẳng chân tạo thành một góc 45 độ. Khi thở ra, đưa hai chân qua đầu, nâng hông khỏi mặt sàn bằng lực của hai cánh tay. Giữ nguyên khoảng 10 giây, sau đó đưa trở lại tư thế ban đầu. <br><br></div><div>Làm 3 hiệp mỗi hiệp 10 lần.<br><br><div style=\"text-align:center;\"><img src=\"http://dev.st.newspaper.vn/uploads/content/2016/10/21/bai-tap-dot-chay-mo-bung-duoi-cho-cac-quy-co-van-phong_5.gif\" w=\"480\" h=\"360\" alt=\"bài tập giảm mỡ bụng dưới\" title=\"bài tập giảm mỡ bụng dưới\"><br></div><span style=\"font-weight: bold;\"><br></span></div><div><span style=\"font-weight: bold;\">Inching elbow plank<br><br></span></div><div>Thực hiện động tác Elbow <a href=\"http://dev.newspaper.vn\">Plank</a>, hai chân rộng bằng vai. Kiễng hai chân, đưa hông lên cao, tạo thành một hình tam giác. </div><div><br></div><div>Thực hiện 3 hiệp mỗi hiệp 5 lần.<br><br><div style=\"text-align:center;\"><img src=\"http://dev.st.newspaper.vn/uploads/content/2016/10/21/bai-tap-dot-chay-mo-bung-duoi-cho-cac-quy-co-van-phong_6.gif\" w=\"480\" h=\"360\" alt=\"bài tập giảm mỡ bụng dưới\" title=\"bài tập giảm mỡ bụng dưới\"><br></div><br></div><div><span style=\"font-weight: bold;\">Full Plank Passe Twist</span><br><br></div><div>Bắt đầu với tư thế Full Plank, gập đầu gối phải và đưa về phía bên trái, sau đó trở lại vị trí ban đầu. Đổi chân và làm tương tự. </div><div><br></div><div>Thực hiện 3 hiệp, mỗi hiệp 10 lần. <br><br><div style=\"text-align:center;\"><img src=\"http://dev.st.newspaper.vn/uploads/content/2016/10/21/bai-tap-dot-chay-mo-bung-duoi-cho-cac-quy-co-van-phong_7.gif\" w=\"480\" h=\"360\" alt=\"bài tập giảm mỡ bụng dưới\" title=\"bài tập giảm mỡ bụng dưới\"><br></div><br></div><div><span style=\"font-weight: bold;\">Frog Press</span><br><br></div><div>Nằm ngửa khỏi mặt đất, hai đầu gối thu vào sát thân mình, gót chân chạm vào nhau. Hít vào và nhấc đầu và vai khỏi mặt đất, mắt nhìn xuống chân. Gan bàn tay úp xuống.</div><div><br></div><div>Thở ra, xoay gót chân ra phía bên ngoài, duỗi thẳng chân. Hít vào và đưa chân lại vị trí cũ. </div><div><br></div><div>Thực hiện 3 hiệp, mỗi hiệp 10 lần.<br><br><div style=\"text-align:center;\"><img src=\"http://dev.st.newspaper.vn/uploads/content/2016/10/21/bai-tap-dot-chay-mo-bung-duoi-cho-cac-quy-co-van-phong_8.gif\" w=\"480\" h=\"360\" alt=\"bài tập giảm mỡ bụng dưới\" title=\"bài tập giảm mỡ bụng dưới\"><br></div><br><div style=\"text-align: right;\"><span style=\"font-style: italic;\">(Phối hợp cùng NShapr Fitness thực hiện)</span></div></div><div style=\"text-align: center;\"><div style=\"margin: 0px; padding: 0px; color: rgb(51, 51, 51); font-size: 16px; -webkit-text-stroke: 0.1px rgba(255, 255, 255, 0.00784314); background-color: rgb(255, 255, 255); text-align: left;\"></div></div>         </div>");
+        echo "</pre>";
+        die;
+        $instanceSearchContent = new \My\Search\Content();
+
+        $upload_dir = General::mkdirUpload();
+
         for ($i = 1; $i <= 1; $i++){
             $url_child = 'http://afamily.vn/suc-khoe/trang-' . $i . '.chn';
 
             $content = General::crawler($url_child);
             $dom = HtmlDomParser::str_get_html($content);
 
-            $results = $dom->find('div.catalogies div.sub_hot .sub_hotct h2 a, div.catalogies div.sub_hot .sub_hotct2 h3 a, div.catalogies div.list-news1 h4 a');
+            $results = $dom->find('div.catalogies div.sub_hot .sub_hotct h2 a, div.catalogies div.sub_hot .sub_hotct2 li h3 a, div.catalogies div.list-news1 h4 a');
             if (count($results) <= 0) {
                 return 0;
             }
             foreach ($results as $key => $item) {
-echo "<pre>";
-print_r('http://afamily.vn/' . $item->href);
-echo "</pre>";
-die;
                 $content = General::crawler('http://afamily.vn/' . $item->href);
-                echo "<pre>";
-                print_r($content);
-                echo "</pre>";
-                die;
                 //$content = curl('http://afamily.vn/day-con-biet-boi-ngay-tai-nha-chi-voi-4-buoc-don-gian-2016060811132636.chn');
 
                 if ($content == false) {
                     continue;
                 }
-                $html = str_get_html($content);
+                $html = HtmlDomParser::str_get_html($content);
 
+                $arr_data = array();
                 if($html->find('.detail_content', 0)){
-                    $arr_data['post_title'] = trim($html->find("h1.d-title", 0)->plaintext);
-                    $arr_data['post_name'] = sanitize_title($arr_data['post_title']);
+
+                    $cont_title = html_entity_decode($html->find("h1.d-title", 0)->plaintext);
+                    $arr_data['cont_title'] = $cont_title;
+                    $arr_data['cont_slug'] = General::getSlug($cont_title);
 
                     //check post exist
-                    $obj_post = $wpdb->get_row( "SELECT * FROM wp_posts WHERE post_name = '" . $arr_data['post_name'] . "'" );
-                    if(!empty($obj_post)){
+                    $arr_detail = $instanceSearchContent->getDetail(
+                        array(
+                            'cont_slug' => $arr_data['cont_slug'],
+                            'not_cont_status' => -1
+                        )
+                    );
+                    if (!empty($arr_detail)) {
                         continue;
                     }
 
-                    $cont_detail = $html->find('.sapo', 0) -> outertext;
-
-                    $cont_detail .= $html->find('.detail_content', 0) -> outertext;
+                    //get content detail
+                    $cont_description = $html->find('.sapo', 0) -> outertext;
+                    $cont_detail = $html->find('.detail_content', 0) -> outertext;
                     $cont_detail = str_replace("<script>beforeAfter('.before-after');</script>", " " , $cont_detail);
-                    $arr_data['post_content'] = $cont_detail;
+
+                    $link_content = $html->find("div.detail_content a");
+                    if (count($link_content) > 0) {
+                        foreach ($link_content as $key => $link) {
+                            $href = $link->href;
+                            $cont_detail = str_replace($href, BASE_URL, $cont_detail);
+                        }
+                    }
+                    //get image
                     $arr_image = $html->find("div.detail_content img");
                     if (count($arr_image) > 0) {
                         foreach ($arr_image as $key => $img) {
                             $src = $img->src;
                             $extension = end(explode('.', end(explode('/', $src))));
-                            $name_img = $arr_data['post_name'] . '_' . ($key + 1) . '.' . $extension;
-                            file_put_contents($upload_dir['path'] . '/' . $name_img, curl($src));
-                            $arr_data['post_content'] = str_replace($src, $upload_dir['url'] . '/' . $name_img, $arr_data['post_content']);
+                            $name_img = $arr_data['cont_slug'] . '_' . ($key + 1) . '.' . $extension;
+                            file_put_contents($upload_dir['path'] . '/' . $name_img, General::crawler($src));
+                            $cont_detail = str_replace($src, $upload_dir['url'] . '/' . $name_img, $cont_detail);
                             if ($key == 0) {
-                                $wp_filetype = wp_check_filetype( $name_img, null );
-                                $attachment = array(
-                                    'post_mime_type' => $wp_filetype['type'],
-                                    'post_title'     => sanitize_file_name( $name_img ),
-                                    'post_content'   => '',
-                                    'post_status'    => 'inherit'
-                                );
-                                $file = $upload_dir['path'] . '/' . $name_img;
+                                $arr_data['cont_main_image'] = $upload_dir['url'] . '/' . $name_img;
                             }
 
                         }
                     }
-                    $post_id = add_post($cate_id, $arr_data, $attachment, $file);
-                    $count_post ++;
+
+                    $arr_data['cont_detail'] = html_entity_decode($cont_detail);
+                    $arr_data['cont_description'] = $cont_description;
+                    $arr_data['created_date'] = time();
+                    $arr_data['cate_id'] = 1;
+                    $arr_data['cont_views'] = 0;
+                    $arr_data['cont_status'] = 1;
+                    $arr_data['from_source'] = 'afamily/suc-khoe';
+
+                    //insert Data
+                    $serviceContent = $this->serviceLocator->get('My\Models\Content');
+                    $id = $serviceContent->add($arr_data);
+
+                    if ($id) {
+                        echo \My\General::getColoredString("Crawler success 1 post id = {$id} \n", 'green');
+                    } else {
+                        echo \My\General::getColoredString("Can not insert content db", 'red');
+                    }
                 }
+die("finish");
                 sleep(3);
             }
         }
-        return $count_post;
     }
 }

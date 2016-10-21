@@ -102,7 +102,6 @@ class storageContent extends AbstractTableGateway {
             if (!is_array($p_arrParams) || empty($p_arrParams)) {
                 return false;
             }
-            
             $adapter = $this->adapter;
             $sql = new Sql($adapter);
             $insert = $sql->insert($this->table)->values($p_arrParams);

@@ -501,6 +501,7 @@ class General {
                 curl_setopt($crawler, CURLOPT_COOKIEFILE, $strCookiePath);
                 curl_setopt($crawler, CURLOPT_COOKIE, session_name() . '=' . session_id());
             }
+            curl_setopt($crawler, CURLOPT_SSL_VERIFYPEER, FALSE);
             curl_setopt($crawler, CURLOPT_COOKIESESSION, TRUE);
             curl_setopt($crawler, CURLOPT_FOLLOWLOCATION, TRUE);
             curl_setopt($crawler, CURLOPT_DNS_CACHE_TIMEOUT, 0);
@@ -622,6 +623,17 @@ class General {
         list($day, $month, $year, $hour, $min, $second) = explode('/', $temp);
         $strReturn = 'Ngày ' . $day . ' tháng ' . $month . ' năm ' . $year . ' - ' . $hour . ' giờ ' . $min . ' phút ' . $second . ' giây';
         return $strReturn;
+    }
+    
+    public static function mkdirUpload(){
+        $today = date('Y') . '/' . date('m') . '/' . date('d');
+        $upload_dir['path'] = STATIC_PATH . '/uploads/content/'. $today;
+        if (!file_exists($upload_dir['path'])) {
+            mkdir($upload_dir['path'], 0777, true);
+        }
+
+        $upload_dir['url'] = STATIC_URL . '/uploads/content/'. $today;
+        return $upload_dir;
     }
 
 }
