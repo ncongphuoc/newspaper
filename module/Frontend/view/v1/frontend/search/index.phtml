@@ -1,0 +1,68 @@
+<div class="content">
+    <h1><?php echo $this->params['keyword']; ?></h1>
+    <div class="taxdesc">
+        <p>Tìm thấy <b><?php echo $this->intTotal; ?></b> kết quả</p>
+    </div>
+
+    <div class="breadcrumbs info-detail" xmlns:v="http://rdf.data-vocabulary.org/#">
+        <span class="first breadcrumb">
+            <a href="<?php echo BASE_URL; ?>">🏠</a>
+        </span>
+        <span typeof="v:Breadcrumb" class="breadcrumb">
+            <a rel="v:url" property="v:title"
+               href="<?php echo $this->serverUrl() . $this->Url('search', array('keyword' => $this->params['keyword'])) ?>">
+                Tìm kiếm
+            </a>
+        </span>
+    </div>
+
+    <?php if (!empty($this->arrContentList)): ?>
+        <div class="listview">
+            <ul>
+                <?php foreach ($this->arrContentList as $arr_content): ?>
+                    <li class="listitem clearfix">
+                        <a class="title"
+                           href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $arr_content['cont_slug'], 'contentId' => $arr_content['cont_id']]) ?>">
+                            <?php echo $arr_content['cont_title']; ?>
+                        </a>
+                        <a class="thumb"
+                           href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $arr_content['cont_slug'], 'contentId' => $arr_content['cont_id']]) ?>">
+                            <img src="<?php echo $arr_content['cont_main_image'] ?>"
+                                 alt="<?php echo $arr_content['cont_title'] ?>"/>
+                        </a>
+                        <div class="desc"><?php echo $arr_content['cont_description'] ?>
+                        </div>
+                    </li>
+                <?php endforeach; ?>
+                <!--        </ul>-->
+                <!--    </div>-->
+                <!--    <div id="adindexcenter" class="adbox" style="margin-bottom:20px">-->
+                <!--        <!-- KhoaHoc Cat Resp -->
+                <!--        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9275417305531302" data-ad-slot="3096293681" data-ad-format="auto"></ins>-->
+                <!--        <script>-->
+                <!--            (adsbygoogle = window.adsbygoogle || []).push({});-->
+                <!--        </script>-->
+                <!--    </div>-->
+                <!--    <div class="listview">-->
+                <!--        <ul>-->
+            </ul>
+        </div>
+        <div class="listitems">
+            <div class="title">Từ khoá tương tự</div>
+            <ul>
+                <?php if (!empty($this->arrKeywordList)):
+                    foreach ($this->arrKeywordList as $arr_key):
+                        ?>
+                        <li>
+                            <a href="<?php echo $this->serverUrl() . $this->Url('keyword', array('keySlug' => $arr_key['key_slug'], 'keyId' => $arr_key['key_id'])) ?>">
+                                <?php echo $arr_key['key_name']; ?>
+                            </a>
+                        </li>
+                    <?php endforeach;
+                endif;
+                ?>
+            </ul>
+        </div>
+        <?php echo $this->paging;?>
+    <?php endif; ?>
+</div>
