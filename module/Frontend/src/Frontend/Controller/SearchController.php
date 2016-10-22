@@ -26,7 +26,7 @@ class SearchController extends MyController
 
             $key_name = General::clean($params['keyword']);
             $intPage = (int)$params['page'] > 0 ? (int)$params['page'] : 1;
-            $intLimit = 20;
+            $intLimit = 10;
 
             $arr_condition_content = [
                 'cont_status' => 1,

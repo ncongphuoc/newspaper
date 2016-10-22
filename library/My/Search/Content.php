@@ -201,7 +201,7 @@ class Content extends SearchAbstract {
     }
 
     public function removeAllDoc() {
-        $respond = $this->getSearchType()->deleteByQuery('_type:customerList');
+        $respond = $this->getSearchType()->deleteByQuery('_type:contentList');
         $this->getSearchType()->getIndex()->refresh();
         if ($respond->isOk()) {
             return true;

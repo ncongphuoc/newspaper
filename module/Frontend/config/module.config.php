@@ -288,7 +288,7 @@ return array(
             'frontend/category' => __DIR__ . '/../view/' . FRONTEND_TEMPLATE . '/layout/category.phtml',
             'frontend/classify' => __DIR__ . '/../view/' . FRONTEND_TEMPLATE . '/layout/classify.phtml',
             'frontend/footer' => __DIR__ . '/../view/' . FRONTEND_TEMPLATE . '/layout/footer.phtml',
-            'frontend/template_email' => __DIR__ . '/../view/' . FRONTEND_TEMPLATE . '/layout/template_email.phtml',
+            'frontend/menu-mobile' => __DIR__ . '/../view/' . FRONTEND_TEMPLATE . '/layout/menu-mobile.phtml',
             'frontend/content/upload' => __DIR__ . '/../view/' . FRONTEND_TEMPLATE . '/frontend/content/upload.phtml',
             'frontend/auth/reset-password' => __DIR__ . '/../view/' . FRONTEND_TEMPLATE . '/frontend/auth/reset-password.phtml',
             'frontend/nav-user-left' => __DIR__ . '/../view/' . FRONTEND_TEMPLATE . '/layout/nav-user-left.phtml',

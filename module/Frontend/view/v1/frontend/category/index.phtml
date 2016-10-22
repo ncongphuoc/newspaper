@@ -1,61 +1,46 @@
-<div class="content">
-    <h1><?php echo $this->arrCategoryDetail['cate_name']; ?></h1>
-    <?php if (!empty($this->arrCategoryDetail['cate_meta_description'])): ?>
-        <div class="taxdesc">
-            <p><?php echo $this->arrCategoryDetail['cate_meta_description']; ?></p>
-        </div>
-    <?php endif; ?>
-    <?php if (!empty($this->arrCategoryChildren)): ?>
-        <div class="navbar">
-            <div class="title">Chuyên mục</div>
-            <ul class="navigation clearfix">
-                <?php foreach ($this->arrCategoryChildren as $arr_category):
-                    ?>
-                    <li>
-                        <a href='<?php echo $this->serverUrl() . $this->Url('category', ['cateSlug' => $arr_category['cate_slug'], 'cateId' => $arr_category['cate_id']]) ?>'>
-                            <img src="<?php echo STATIC_URL . $arr_category['cate_img_url']; ?>"/>
-                            <?php echo $arr_category['cate_name']; ?>
-                        </a>
-                    </li>
-                    <?php
-                endforeach;
-                ?>
-            </ul>
-        </div>
-    <?php endif; ?>
+<div class=td-crumb-container>
+    <div class=entry-crumbs><span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a title=""
+                                                                                                class=entry-crumb
+                                                                                                itemprop=url
+                                                                                                href="http://demo.tagdiv.com/newspaper_magazine/"><span
+                    itemprop=title>Home</span></a></span> <i class="td-icon-right td-bread-sep td-bred-no-url-last"></i>
+        <span class=td-bred-no-url-last itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><meta itemprop=title
+                                                                                                         content=World><meta
+                itemprop=url
+                content="http://demo.tagdiv.com/newspaper_magazine/2015/09/23/td-post-a-look-at-how-social-mobile-gaming-increase-sales/">World</span>
+    </div>
+</div>
 
-    <div class="listview">
-        <ul>
-            <?php foreach ($this->arrContentList as $arr_content): ?>
-                <li class="listitem clearfix">
-                    <a class="title"
-                       href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $arr_content['cont_slug'], 'contentId' => $arr_content['cont_id']]) ?>">
+
+<div class=td-ss-main-content>
+    <?php foreach ($this->arrContentList as $arr_content): ?>
+        <div class="td_module_10 td_module_wrap td-animation-stack">
+            <div class=td-module-thumb>
+                <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $arr_content['cont_slug'], 'contentId' => $arr_content['cont_id']]) ?>"
+                   rel=bookmark title="<?php echo $arr_content['cont_title']; ?>">
+                    <img width=218 height=150 class=entry-thumb src="<?php echo $arr_content['cont_main_image'] ?>"
+                         alt="" title="<?php echo $arr_content['cont_title']; ?>"/>
+                </a>
+            </div>
+            <div class=item-details>
+                <h3 class="entry-title td-module-title">
+                    <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $arr_content['cont_slug'], 'contentId' => $arr_content['cont_id']]) ?>"
+                       rel=bookmark title="<?php echo $arr_content['cont_title']; ?>">
                         <?php echo $arr_content['cont_title']; ?>
                     </a>
-                    <a class="thumb"
-                       href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $arr_content['cont_slug'], 'contentId' => $arr_content['cont_id']]) ?>">
-                        <img src="<?php echo $arr_content['cont_main_image'] ?>"
-                             alt="<?php echo $arr_content['cont_title'] ?>"/>
-                    </a>
-                    <div class="desc"><?php echo $arr_content['cont_description'] ?>
-                    </div>
-                </li>
-            <?php endforeach; ?>
-            <!--        </ul>-->
-            <!--    </div>-->
-            <!--    <div id="adindexcenter" class="adbox" style="margin-bottom:20px">-->
-            <!--        <!-- KhoaHoc Cat Resp -->
-            <!--        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9275417305531302"-->
-            <!--             data-ad-slot="3096293681" data-ad-format="auto"></ins>-->
-            <!--        <script>-->
-            <!--            (adsbygoogle = window.adsbygoogle || []).push({});-->
-            <!--        </script>-->
-            <!--    </div>-->
-            <!--    <div class="listview">-->
-            <!--        <ul>-->
-        </ul>
-    </div>
-    <div class="pagination-container">
-        <?php echo $this->paging; ?>
-    </div>
+                </h3>
+                <div class=td-module-meta-info>
+                    <a href="index.html" class=td-post-category><?php echo $this->arrCategoryDetail['cate_name']; ?></a>
+                    <span class=td-post-date><time class="entry-date updated td-module-date"
+                                                   datetime="2015-09-23T12:41:25+00:00">September 23, 2015</time></span>
+                </div>
+                <div class=td-excerpt>
+                    <?php echo mb_substr($arr_content['cont_description'], 0, 150, 'UTF-8'); ?>
+                </div>
+            </div>
+        </div>
+    <?php endforeach; ?>
+</div>
+<div class="page-nav td-pb-padding-side">
+    <?php echo $this->paging; ?>
 </div>

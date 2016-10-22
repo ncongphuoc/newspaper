@@ -20,13 +20,8 @@ class ContentController extends MyController
     public function __construct()
     {
         $this->externalJS = [
-            STATIC_URL . '/f/v1/scripts/photoswipe/photoswipe.min.js',
-            STATIC_URL . '/f/v1/scripts/photoswipe/photoswipe-ui-default.min.js',
-            STATIC_URL . '/f/v1/scripts/jquery.photoswipe.min.js',
         ];
         $this->externalCSS = [
-            STATIC_URL . '/f/v1/scripts/photoswipe/photoswipe.min.css',
-            STATIC_URL . '/f/v1/scripts/photoswipe/default-skin/default-skin.min.css'
         ];
     }
 
@@ -56,8 +51,8 @@ class ContentController extends MyController
             }
 
             //update số lần view
-            $serviceContent = $this->serviceLocator->get('My\Models\Content');
-            $serviceContent->edit(['cont_views' => $arrContent['cont_views'] + 1, 'modified_date' => time()], $cont_id);
+//            $serviceContent = $this->serviceLocator->get('My\Models\Content');
+//            $serviceContent->edit(['cont_views' => $arrContent['cont_views'] + 1, 'modified_date' => time()], $cont_id);
 
             /*
              render meta
@@ -70,11 +65,11 @@ class ContentController extends MyController
             /*
              * Category
              */
-            $arrCategoryDetail = unserialize(ARR_CATEGORY)[$arrContent['cate_id']];
-            $arrCategoryParent = [];
-            if (!empty($arrCategoryDetail['parent_id'])) {
-                $arrCategoryParent = unserialize(ARR_CATEGORY)[$arrCategoryDetail['parent_id']];
-            }
+//            $arrCategoryDetail = unserialize(ARR_CATEGORY)[$arrContent['cate_id']];
+//            $arrCategoryParent = [];
+//            if (!empty($arrCategoryDetail['parent_id'])) {
+//                $arrCategoryParent = unserialize(ARR_CATEGORY)[$arrCategoryDetail['parent_id']];
+//            }
 
             $this->renderer = $this->serviceLocator->get('Zend\View\Renderer\PhpRenderer');
 //            <meta name="robots" content="INDEX, FOLLOW"/>
@@ -112,17 +107,17 @@ class ContentController extends MyController
             $this->renderer->headMeta()->setProperty('twitter:image:src', $arrContent['cont_main_image']);
 
             //lấy tin cũ hơn cùng chuyên mục
-            $arrContentLastedList = $instanceSearchContent->getListLimit(['cate_id' => $arrContent['cate_id'], 'not_cont_status' => -1, 'less_cont_id' => $arrContent['cont_id']], 1, 6, ['cont_id' => ['order' => 'desc']]);
-
-            //Lấy tin có nội dung title gần giống nhau
-            $arrContentLikeList = $instanceSearchContent->getListLimit(['cont_status' => 1, 'full_text_title' => $arrContent['cont_title'], 'not_cont_id' => $arrContent['cont_id']], 1, 10, ['_score' => ['order' => 'desc']]);
-
-            //5 bài mới nhất
-            $arrContentNews = $instanceSearchContent->getListLimit(['cont_status' => 1, 'not_cont_id' => $arrContent['cont_id']], 1, 6, ['created_date' => ['order' => 'desc']]);
-
-            //lấy 10 keyword :)
-            $instanceSearchKeyword = new \My\Search\Keyword();
-            $arrKeywordList = $instanceSearchKeyword->getListLimit(['full_text_keyname' => $arrContent['cont_title']], 1, 10, ['_score' => ['order' => 'desc']]);
+//            $arrContentLastedList = $instanceSearchContent->getListLimit(['cate_id' => $arrContent['cate_id'], 'not_cont_status' => -1, 'less_cont_id' => $arrContent['cont_id']], 1, 6, ['cont_id' => ['order' => 'desc']]);
+//
+//            //Lấy tin có nội dung title gần giống nhau
+//            $arrContentLikeList = $instanceSearchContent->getListLimit(['cont_status' => 1, 'full_text_title' => $arrContent['cont_title'], 'not_cont_id' => $arrContent['cont_id']], 1, 10, ['_score' => ['order' => 'desc']]);
+//
+//            //5 bài mới nhất
+//            $arrContentNews = $instanceSearchContent->getListLimit(['cont_status' => 1, 'not_cont_id' => $arrContent['cont_id']], 1, 6, ['created_date' => ['order' => 'desc']]);
+//
+//            //lấy 10 keyword :)
+//            $instanceSearchKeyword = new \My\Search\Keyword();
+//            $arrKeywordList = $instanceSearchKeyword->getListLimit(['full_text_keyname' => $arrContent['cont_title']], 1, 10, ['_score' => ['order' => 'desc']]);
 
             unset($serviceContent);
             unset($instanceSearchContent);
@@ -133,11 +128,11 @@ class ContentController extends MyController
                 'params' => $params,
                 'arrContent' => $arrContent,
                 'arrCategoryDetail' => $arrCategoryDetail,
-                'arrContentLikeList' => $arrContentLikeList,
-                'arrContentLastedList' => $arrContentLastedList,
-                'arrContentNews' => $arrContentNews,
-                'arrKeywordList' => $arrKeywordList,
-                'arrCategoryParent' => $arrCategoryParent
+//                'arrContentLikeList' => $arrContentLikeList,
+//                'arrContentLastedList' => $arrContentLastedList,
+//                'arrContentNews' => $arrContentNews,
+//                'arrKeywordList' => $arrKeywordList,
+                //'arrCategoryParent' => $arrCategoryParent
             );
         } catch (\Exception $exc) {
             echo '<pre>';

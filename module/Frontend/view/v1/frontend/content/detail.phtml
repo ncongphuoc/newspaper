@@ -1,208 +1,206 @@
-<div class="content post-detail"
-     data-url="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent['cont_slug'], 'contentId' => $this->arrContent['cont_id']]) ?>"
-     data-title="<?php echo $this->arrContent['cont_title'] ?>" data-id="<?php echo $this->arrContent['cont_id'] ?>"
-     data-load="true">
-    <h1>
-        <?php echo $this->arrContent['cont_title']; ?>
-    </h1>
-    <div class="socialbox top clearfix">
-        <ul>
-            <!--            <li class="raty" itemscope itemtype="http://data-vocabulary.org/Review-aggregate">-->
-            <!--                <meta itemprop="itemreviewed" content="-->
-            <?php //echo $this->arrContent['cont_title']; ?><!--"/>-->
-            <!--                <meta itemprop="rating" content="4"/>-->
-            <!--                <meta itemprop="votes" content="14"/>-->
-            <!--                <span class=" rating" data-rating="4" data-id="-->
-            <?php //echo $this->arrContent['cont_id']; ?><!--"></span>-->
-            <!--                <span class="rating-info">4</span><span class="rating-votes">14</span>-->
-            <!--            </li>-->
-            <li class="views"><?php echo number_format($this->arrContent['cont_views'] + 1, 0, ",", "."); ?></li>
-            <li class="share">
-                <div class="sharebox">
-                    <div class="sharetoolbox">
-                        <div class="g-plusone" data-annotation="none" data-size="medium"
-                             data-href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent['cont_slug'], 'contentId' => $this->arrContent['cont_id']]); ?>"></div>
+<?php
+$content_detail = $this->arrContent;
+?>
+<div class="td-crumb-container">
+    <div class="entry-crumbs"><span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a title=""
+                                                                                                     class="entry-crumb"
+                                                                                                     itemprop="url"
+                                                                                                     href="http://demo.tagdiv.com/newspaper/"><span
+                    itemprop="title">Home</span></a></span> <i class="td-icon-right td-bread-sep"></i> <span
+            itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a title="View all posts in Technology"
+                                                                             class="entry-crumb" itemprop="url"
+                                                                             href="http://demo.tagdiv.com/newspaper/category/tagdiv-technology/"><span
+                    itemprop="title">Technology</span></a></span> <i class="td-icon-right td-bread-sep"></i> <span
+            itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a title="View all posts in Gadgets"
+                                                                             class="entry-crumb" itemprop="url"
+                                                                             href="http://demo.tagdiv.com/newspaper/category/tagdiv-technology/tagdiv-gadgets/"><span
+                    itemprop="title">Gadgets</span></a></span> <i
+            class="td-icon-right td-bread-sep td-bred-no-url-last"></i> <span class="td-bred-no-url-last" itemscope=""
+                                                                              itemtype="http://data-vocabulary.org/Breadcrumb"><meta
+                itemprop="title" content="HTC launches another selfie-phone with an UltraPixel camera up front"><meta
+                itemprop="url"
+                content="http://demo.tagdiv.com/newspaper/td-post-htc-launches-another-selfie-phone-with-an-ultrapixel-camera-up-front/">HTC launches another selfie-phone with an UltraPixel camera up front</span>
+    </div>
+</div>
+<div class="td-ss-main-content">
+    <article id=post-95
+             class="post-95 post type-post status-publish format-standard has-post-thumbnail hentry category-tagdiv-gadgets"
+             itemscope itemtype="http://schema.org/Article">
 
-                        <div class="fb-like"
-                             data-href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent['cont_slug'], 'contentId' => $this->arrContent['cont_id']]); ?>"
-                             data-layout="button_count" data-action="like" data-show-faces="false"
-                             data-share="true"></div>
-                        <div class="fb-like likebox" data-href="<?php echo \My\General::SOCIAL_FACEBOOK_URL; ?>"
-                             data-layout="button_count" data-action="like" data-show-faces="false"
-                             data-share="false"></div>
-                    </div>
+        <div class=td-post-header>
+            <header class=td-post-title>
+                <h1 class=entry-title><?php echo $content_detail['cont_title'] ?></h1>
+                <div class=td-module-meta-info>
+                <span class=td-post-date>
+                    <time class="entry-date updated td-module-date"
+                          datetime="<?php echo date("d-m-Y", $content_detail['created_date']); ?>"><?php echo date("d-m-Y", $content_detail['created_date']); ?></time></span>
+                    <div class=td-post-views><i class=td-icon-views></i><span class=td-nr-views-95>723</span></div>
                 </div>
-            </li>
-        </ul>
-    </div>
-
-    <div class="breadcrumbs info-detail" xmlns:v="http://rdf.data-vocabulary.org/#">
-        <span class="first breadcrumb">
-            <a href="<?php echo BASE_URL; ?>">🏠</a>
-        </span>
-        <?php if (!empty($this->arrCategoryParent)): ?>
-            <span itemprop="articleSection" typeof="v:Breadcrumb" class="breadcrumb">
-                    <a rel="v:url" property="v:title"
-                       href="<?php echo $this->serverUrl() . $this->Url('category', ['cateSlug' => $this->arrCategoryParent['cate_slug'], 'cateId' => $this->arrCategoryParent['cate_id']]) ?>">
-                        <?php echo $this->arrCategoryParent['cate_name']; ?>
-                    </a>
-                </span>
-        <?php endif; ?>
-        <span itemprop="articleSection" typeof="v:Breadcrumb" class="breadcrumb">
-            <a rel="v:url" property="v:title"
-               href="<?php echo $this->serverUrl() . $this->Url('category', ['cateSlug' => $this->arrCategoryDetail['cate_slug'], 'cateId' => $this->arrCategoryDetail['cate_id']]) ?>">
-                <?php echo $this->arrCategoryDetail['cate_name']; ?>
-            </a>
-        </span>
-    </div>
-
-    <div class="content-detail">
-        <div id="adsarticletop" class="adbox">
-            <!-- KhoaHoc - BaiViet - Reponsive -->
-            <!--            <ins class="adsbygoogle"-->
-            <!--                 style="display:block"-->
-            <!--                 data-ad-client="ca-pub-9275417305531302"-->
-            <!--                 data-ad-slot="2384218482"-->
-            <!--                 data-ad-format="auto"></ins>-->
-            <!--            <script>-->
-            <!--                (adsbygoogle = window.adsbygoogle || []).push({});-->
-            <!--            </script>-->
+            </header>
         </div>
-        <?php echo $this->arrContent['cont_detail']; ?>
-        <!--        <script>-->
-        <!--        // if (location.hostname.toLowerCase().indexOf("khoahoc.tv") < 0) { location.href = "http://khoahoc.tv/"; }-->
-        <!--//        </script>-->
-    </div>
-    <div class="author-info clearfix">
-        <span class="date">Cập nhật: <?php echo date('d/m/Y', $this->arrContent['updated_date']) ?></span>
-        <span class="author" style="float: right">Tổng hợp</span>
-    </div>
 
-    <div class="tags">
-        <span><b>Xem thêm:</b></span>
-        <?php if (!empty($this->arrKeywordList)):
-            foreach ($this->arrKeywordList as $arr_key):
-                ?>
-                <a href="<?php echo $this->serverUrl() . $this->Url('keyword', array('keySlug' => $arr_key['key_slug'], 'keyId' => $arr_key['key_id'])) ?>"><?php echo $arr_key['key_name']; ?></a>
-                <?php
-            endforeach;
-        endif; ?>
-    </div>
+        <div class="td-post-sharing td-post-sharing-top ">
+            <div class=td-default-sharing>
+                <a class="td-social-sharing-buttons td-social-facebook"
+                   href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Fdemo.tagdiv.com%2Fnewspaper%2Ftd-post-htc-launches-another-selfie-phone-with-an-ultrapixel-camera-up-front%2F"
+                   onclick="window.open(this.href, 'mywin','left=50,top=50,width=600,height=350,toolbar=0'); return false;"><i
+                        class=td-icon-facebook></i>
+                    <div class=td-social-but-text>Share on Facebook</div>
+                </a>
+                <a class="td-social-sharing-buttons td-social-twitter"
+                   href="https://twitter.com/intent/tweet?text=HTC+launches+another+selfie-phone+with+an+UltraPixel+camera+up+front&amp;url=http%3A%2F%2Fdemo.tagdiv.com%2Fnewspaper%2Ftd-post-htc-launches-another-selfie-phone-with-an-ultrapixel-camera-up-front%2F&amp;via=Newspaper+7"><i
+                        class=td-icon-twitter></i>
+                    <div class=td-social-but-text>Tweet on Twitter</div>
+                </a>
+                <a class="td-social-sharing-buttons td-social-google"
+                   href="http://plus.google.com/share?url=http://demo.tagdiv.com/newspaper/td-post-htc-launches-another-selfie-phone-with-an-ultrapixel-camera-up-front/"
+                   onclick="window.open(this.href, 'mywin','left=50,top=50,width=600,height=350,toolbar=0'); return false;"><i
+                        class=td-icon-googleplus></i></a>
+                <a class="td-social-sharing-buttons td-social-pinterest"
+                   href="http://pinterest.com/pin/create/button/?url=http://demo.tagdiv.com/newspaper/td-post-htc-launches-another-selfie-phone-with-an-ultrapixel-camera-up-front/&amp;media=http://demo.tagdiv.com/newspaper/wp-content/uploads/2015/04/36.jpg&amp;description=HTC+launches+another+selfie-phone+with+an+UltraPixel+camera+up+front"
+                   onclick="window.open(this.href, 'mywin','left=50,top=50,width=600,height=350,toolbar=0'); return false;"><i
+                        class=td-icon-pinterest></i></a>
+                <a class="td-social-sharing-buttons td-social-whatsapp"
+                   href="whatsapp://send?text=HTC+launches+another+selfie-phone+with+an+UltraPixel+camera+up+front%20-%20http%3A%2F%2Fdemo.tagdiv.com%2Fnewspaper%2Ftd-post-htc-launches-another-selfie-phone-with-an-ultrapixel-camera-up-front%2F"><i
+                        class=td-icon-whatsapp></i></a>
+            </div>
+        </div>
 
-    <div class="listitems">
-        <div class="title">Tham khảo thêm</div>
-        <ul>
-            <?php if (!empty($this->arrContentLikeList)):
-                foreach ($this->arrContentLikeList as $arr_content):
-                    ?>
-                    <li>
-                        <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $arr_content['cont_slug'], 'contentId' => $arr_content['cont_id']]) ?>">
-                            <?php echo $arr_content['cont_title']; ?>
-                            <span><?php echo number_format($arr_content['cont_views'], 0, ",", "."); ?>
-                                người xem</span>
-                        </a>
-                    </li>
-                <?php endforeach;
-            endif;
-            ?>
-        </ul>
-    </div>
-
-    <!--        <div id="adsarticlebottom" class="adbox">-->
-    <!--            <!-- KhoaHoc-BaiViet-Resposive -->
-    <!--            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9275417305531302"-->
-    <!--                 data-ad-slot="8671917284" data-ad-format="auto"></ins>-->
-    <!--            <script>-->
-    <!--                (adsbygoogle = window.adsbygoogle || []).push({});-->
-    <!--            </script>-->
-    <!--        </div>-->
-    <div class="socialbox bottom clearfix">
-        <ul>
-            <li class="share">
-                <div class="sharebox">
-                    <div class="sharetoolbox">
-                        <div class="g-plusone" data-annotation="none" data-size="medium"
-                             data-href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent['cont_slug'], 'contentId' => $this->arrContent['cont_id']]) ?>"></div>
-
-                        <div class="fb-like"
-                             data-href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent['cont_slug'], 'contentId' => $this->arrContent['cont_id']]) ?>"
-                             data-layout="button_count" data-action="like" data-show-faces="false"
-                             data-share="true"></div>
-                    </div>
-                </div>
-            </li>
-            <!--            <li class="raty">-->
-            <!--                <span class="rating" data-rating="4" data-id="40490"></span>-->
-            <!--                <span class="rating-info">4</span><span class="rating-votes">14</span>-->
-            <!--            </li>-->
-            <!--            <li class="views">-->
-            <?php //echo number_format($this->arrContent['cont_views'] + 1, 0, ",", "."); ?><!--</li>-->
-        </ul>
-    </div>
-
-
-    <p>
-        <a href="<?php echo \My\General::SOCIAL_FACEBOOK_URL; ?>" target="_blank" rel="nofollow">Theo dõi cộng đồng
-            <?php echo \My\General::SITE_AUTH; ?> trên
-            facebook</a>
-    </p>
-    <div class="fb-like" data-href="<?php echo \My\General::SOCIAL_FACEBOOK_URL; ?>" data-layout="standard"
-         data-action="recommend" data-show-faces="true" data-share="true"></div>
-
-    <div class="comments">
-        <div id="fb_comments" class="fb-comments"
-             data-href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent['cont_slug'], 'contentId' => $this->arrContent['cont_id']]) ?>"
-             data-num-posts="3"
-             data-width="640"></div>
-    </div>
-    <!--    <div id="suggestion" class="adbox">-->
-    <!--        <ins class="adsbygoogle" style="display: inline-block; width: 100%; height: 250px"-->
-    <!--             data-ad-client="ca-pub-9275417305531302" data-ad-slot="6979590889"></ins>-->
-    <!--        <script>-->
-    <!--            (adsbygoogle = window.adsbygoogle || []).push({});-->
-    <!--        </script>-->
-    <!--    </div>-->
-
-    <div class="more-news latest">
-        <div class="list-title">Bài viết mới nhất</div>
-        <ul class="clearfix">
-            <?php foreach ($this->arrContentNews as $arr_content): ?>
-                <li>
-                    <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $arr_content['cont_slug'], 'contentId' => $arr_content['cont_id']]) ?>">
-                        <span class="thumb-detail">
-                            <img src="<?php echo $arr_content['cont_main_image'] ?>"
-                                 alt="<?php echo $arr_content['cont_title'] ?>"/>
-                        </span>
-                        <span><?php echo $arr_content['cont_title'] ?></span>
+        <div class=td-post-content>
+            <h3 class="entry-title"><?php echo $content_detail['cont_description'] ?></h3>
+            <?php echo $content_detail['cont_detail'] ?>
+        </div>
+        <footer>
+            <div class=td-post-source-tags>
+            </div>
+            <div class="td-post-sharing td-post-sharing-bottom td-with-like"><span
+                    class=td-post-share-title>SHARE</span>
+                <div class=td-default-sharing>
+                    <a class="td-social-sharing-buttons td-social-facebook"
+                       href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Fdemo.tagdiv.com%2Fnewspaper%2Ftd-post-htc-launches-another-selfie-phone-with-an-ultrapixel-camera-up-front%2F"
+                       onclick="window.open(this.href, 'mywin','left=50,top=50,width=600,height=350,toolbar=0'); return false;"><i
+                            class=td-icon-facebook></i>
+                        <div class=td-social-but-text>Facebook</div>
                     </a>
-                </li>
-            <?php endforeach; ?>
-        </ul>
-        <a href="<?php echo $this->serverUrl() . $this->Url('category', ['cateSlug' => $this->arrCategoryParent['cate_slug'], 'cateId' => $this->arrCategoryParent['cate_id']]) ?>"
-           class="viewmore"><b>Xem thêm</b> <?php echo $this->arrCategoryParent['cate_name']; ?></a>
-    </div>
-
-    <div class="more-news">
-        <div class="list-title">Bài viết <?php echo $this->arrCategoryDetail['cate_name']; ?> khác</div>
-        <ul class="clearfix">
-            <?php
-            if (!empty($this->arrContentLastedList)):
-                foreach ($this->arrContentLastedList as $arr_content):
-                    ?>
-                    <li>
-                        <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $arr_content['cont_slug'], 'contentId' => $arr_content['cont_id']]) ?>">
-                        <span class="thumb-detail">
-                            <img src="<?php echo $arr_content['cont_main_image'] ?>"
-                                 alt="<?php echo $arr_content['cont_title'] ?>"/>
-                        </span>
-                            <span><?php echo $arr_content['cont_title'] ?></span>
-                        </a>
-                    </li>
-                <?php endforeach;
-            endif;
-            ?>
-        </ul>
-        <a href="<?php echo $this->serverUrl() . $this->Url('category', ['cateSlug' => $this->arrCategoryDetail['cate_slug'], 'cateId' => $this->arrCategoryDetail['cate_id']]) ?>"
-           class="viewmore">Xem thêm</a>
-    </div>
+                    <a class="td-social-sharing-buttons td-social-twitter"
+                       href="https://twitter.com/intent/tweet?text=HTC+launches+another+selfie-phone+with+an+UltraPixel+camera+up+front&amp;url=http%3A%2F%2Fdemo.tagdiv.com%2Fnewspaper%2Ftd-post-htc-launches-another-selfie-phone-with-an-ultrapixel-camera-up-front%2F&amp;via=Newspaper+7"><i
+                            class=td-icon-twitter></i>
+                        <div class=td-social-but-text>Twitter</div>
+                    </a>
+                    <a class="td-social-sharing-buttons td-social-google"
+                       href="http://plus.google.com/share?url=http://demo.tagdiv.com/newspaper/td-post-htc-launches-another-selfie-phone-with-an-ultrapixel-camera-up-front/"
+                       onclick="window.open(this.href, 'mywin','left=50,top=50,width=600,height=350,toolbar=0'); return false;"><i
+                            class=td-icon-googleplus></i></a>
+                    <a class="td-social-sharing-buttons td-social-pinterest"
+                       href="http://pinterest.com/pin/create/button/?url=http://demo.tagdiv.com/newspaper/td-post-htc-launches-another-selfie-phone-with-an-ultrapixel-camera-up-front/&amp;media=http://demo.tagdiv.com/newspaper/wp-content/uploads/2015/04/36.jpg&amp;description=HTC+launches+another+selfie-phone+with+an+UltraPixel+camera+up+front"
+                       onclick="window.open(this.href, 'mywin','left=50,top=50,width=600,height=350,toolbar=0'); return false;"><i
+                            class=td-icon-pinterest></i></a>
+                    <a class="td-social-sharing-buttons td-social-whatsapp"
+                       href="whatsapp://send?text=HTC+launches+another+selfie-phone+with+an+UltraPixel+camera+up+front%20-%20http%3A%2F%2Fdemo.tagdiv.com%2Fnewspaper%2Ftd-post-htc-launches-another-selfie-phone-with-an-ultrapixel-camera-up-front%2F"><i
+                            class=td-icon-whatsapp></i></a>
+                </div>
+                <div class=td-classic-sharing>
+                    <ul>
+                        <li class=td-classic-facebook>
+                            <iframe frameBorder=0
+                                    src="http://www.facebook.com/plugins/like.php?href=http://demo.tagdiv.com/newspaper/td-post-htc-launches-another-selfie-phone-with-an-ultrapixel-camera-up-front/&amp;layout=button_count&amp;show_faces=false&amp;width=105&amp;action=like&amp;colorscheme=light&amp;height=21"
+                                    style="border:none;overflow:hidden;width:105px;height:21px;background-color:transparent"></iframe>
+                        </li>
+                        <li class=td-classic-twitter><a href="https://twitter.com/share" class=twitter-share-button
+                                                        data-url="http://demo.tagdiv.com/newspaper/td-post-htc-launches-another-selfie-phone-with-an-ultrapixel-camera-up-front/"
+                                                        data-text="HTC launches another selfie-phone with an UltraPixel camera up front"
+                                                        data-via="" data-lang=en>tweet</a>
+                            <script>!function (d, s, id) {
+                                    var js, fjs = d.getElementsByTagName(s)[0];
+                                    if (!d.getElementById(id)) {
+                                        js = d.createElement(s);
+                                        js.id = id;
+                                        js.src = "http://platform.twitter.com/widgets.js";
+                                        fjs.parentNode.insertBefore(js, fjs);
+                                    }
+                                }(document, "script", "twitter-wjs");</script>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="td-block-row td-post-next-prev">
+                <div class="td-block-span6 td-post-prev-post">
+                    <div class=td-post-next-prev-content><span>Previous article</span><a
+                            href="http://demo.tagdiv.com/newspaper/td-post-ferrari-the-latest-1035bhp-monster-is-too-powerful-for-the-road/">Ferrari
+                            the latest 1035bhp monster is too powerful for the road</a></div>
+                </div>
+                <div class=td-next-prev-separator></div>
+                <div class="td-block-span6 td-post-next-post">
+                    <div class=td-post-next-prev-content><span>Next article</span><a
+                            href="http://demo.tagdiv.com/newspaper/td-post-more-reasons-to-choose-the-htc-one-m9-instead-of-the-samsung-galaxy-s6-edge/">More
+                            reasons to choose the HTC One M9 instead of the Samsung Galaxy S6 Edge</a></div>
+                </div>
+            </div>
+            <div class=author-box-wrap><a href="http://demo.tagdiv.com/newspaper/author/marius2/"><img
+                        src="http://demo.tagdiv.com/newspaper/wp-content/uploads/2015/04/avatar2.jpg" width=96 height=96
+                        alt="Matt Cloey" class="avatar avatar-96 wp-user-avatar wp-user-avatar-96 alignnone photo"/></a>
+                <div class=desc>
+                    <div class="td-author-name vcard author"><span class=fn><a
+                                href="http://demo.tagdiv.com/newspaper/author/marius2/">Matt Cloey</a></span></div>
+                    <div class=td-author-url><a href="http://www.matt-cloey.com/">http://www.matt-cloey.com</a></div>
+                    <div class=td-author-description>Lorem ipsum dolor sit amet consectetur adipiscing elit. Vestibulum
+                        ac
+                        vehicula leo. Donec urna lacus gravida ac vulputate sagittis tristique vitae lectus. Nullam
+                        rhoncus
+                        tortor at dignissim vehicula.
+                    </div>
+                    <div class=td-author-social>
+<span class=td-social-icon-wrap>
+<a target=_blank href="#" title=Behance>
+<i class="td-icon-font td-icon-behance"></i>
+</a>
+</span>
+<span class=td-social-icon-wrap>
+<a target=_blank href="#" title=Evernote>
+<i class="td-icon-font td-icon-evernote"></i>
+</a>
+</span>
+<span class=td-social-icon-wrap>
+<a target=_blank href="#" title=Facebook>
+<i class="td-icon-font td-icon-facebook"></i>
+</a>
+</span>
+<span class=td-social-icon-wrap>
+<a target=_blank href="#" title=Reddit>
+<i class="td-icon-font td-icon-reddit"></i>
+</a>
+</span>
+<span class=td-social-icon-wrap>
+<a target=_blank href="#" title=Vimeo>
+<i class="td-icon-font td-icon-vimeo"></i>
+</a>
+</span>
+<span class=td-social-icon-wrap>
+<a target=_blank href="#" title=VKontakte>
+<i class="td-icon-font td-icon-vk"></i>
+</a>
+</span>
+<span class=td-social-icon-wrap>
+<a target=_blank href="#" title=Youtube>
+<i class="td-icon-font td-icon-youtube"></i>
+</a>
+</span></div>
+                    <div class=clearfix></div>
+                </div>
+            </div>
+        <span style=display:none itemprop=author itemscope itemtype="https://schema.org/Person"><meta itemprop=name
+                                                                                                      content="Matt Cloey"></span>
+            <meta itemprop=datePublished content="2015-04-22T05:23:26+00:00">
+            <meta itemprop=dateModified content="2015-04-28T10:50:04+00:00">
+            <meta itemscope itemprop=mainEntityOfPage itemType="https://schema.org/WebPage"
+                  itemid="http://demo.tagdiv.com/newspaper/td-post-htc-launches-another-selfie-phone-with-an-ultrapixel-camera-up-front/"/>
+        <span style=display:none itemprop=publisher itemscope itemtype="https://schema.org/Organization"><span
+                style=display:none itemprop=logo itemscope itemtype="https://schema.org/ImageObject"><meta itemprop=url
+                                                                                                           content="http://demo.tagdiv.com/newspaper/wp-content/uploads/2016/01/logo-header.png"></span><meta
+                itemprop=name content="Newspaper 7"></span>
+            <meta itemprop="headline " content="HTC launches another selfie-phone with an UltraPixel camera up front">
+        <span style=display:none itemprop=image itemscope itemtype="https://schema.org/ImageObject"><meta itemprop=url
+                                                                                                          content="http://demo.tagdiv.com/newspaper/wp-content/uploads/2015/04/36.jpg"><meta
+                itemprop=width content=1687><meta itemprop=height content=1126></span></footer>
+    </article>
 </div>

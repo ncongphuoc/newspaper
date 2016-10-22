@@ -72,18 +72,13 @@ class Category extends SearchAbstract {
             'cate_sort' => ['type' => 'integer', 'index' => 'not_analyzed'],
             'cate_icon' => ['type' => 'string', 'index' => 'not_analyzed'],
             'created_date' => ['type' => 'long', 'index' => 'not_analyzed'],
-            'user_created' => ['type' => 'integer', 'index' => 'not_analyzed'],
-            'updated_date' => ['type' => 'long', 'index' => 'not_analyzed'],
-            'user_updated' => ['type' => 'integer', 'index' => 'not_analyzed'],
             'cate_meta_title' => ['type' => 'string', 'store' => 'yes', 'analyzer' => 'translation_index_analyzer', 'search_analyzer' => 'translation_search_analyzer', 'term_vector' => 'with_positions_offsets'],
             'cate_meta_keyword' => ['type' => 'string', 'store' => 'yes', 'analyzer' => 'translation_index_analyzer', 'search_analyzer' => 'translation_search_analyzer', 'term_vector' => 'with_positions_offsets'],
             'cate_meta_description' => ['type' => 'string', 'store' => 'yes', 'analyzer' => 'translation_index_analyzer', 'search_analyzer' => 'translation_search_analyzer', 'term_vector' => 'with_positions_offsets'],
             'cate_description' => ['type' => 'string', 'store' => 'yes', 'analyzer' => 'translation_index_analyzer', 'search_analyzer' => 'translation_search_analyzer', 'term_vector' => 'with_positions_offsets'],
             'cate_status' => ['type' => 'integer', 'index' => 'not_analyzed'],
-            'total_content' => ['type' => 'integer', 'index' => 'not_analyzed'],
             'parent_id' => ['type' => 'integer', 'index' => 'not_analyzed'],
-            'cate_img_url' => ['type' => 'string', 'store' => 'yes', 'analyzer' => 'translation_index_analyzer', 'search_analyzer' => 'translation_search_analyzer', 'term_vector' => 'with_positions_offsets'],
-            'cate_crawler_url' => ['type' => 'string', 'store' => 'yes', 'analyzer' => 'translation_index_analyzer', 'search_analyzer' => 'translation_search_analyzer', 'term_vector' => 'with_positions_offsets'],
+            'cate_crawler_url' => ['type' => 'string', 'index' => 'not_analyzed'],
         ]);
         $mapping->send();
     }

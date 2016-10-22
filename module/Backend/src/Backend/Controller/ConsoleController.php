@@ -10,7 +10,7 @@ class ConsoleController extends MyController
 {
 
     protected static $_arr_worker = [
-        'content', 'logs', 'mail', 'category', 'user', 'general', 'keyword', 'group', 'permission'
+        'content', 'keyword'
     ];
 
     public function __construct()
@@ -807,7 +807,7 @@ class ConsoleController extends MyController
                 $key_match = $keyword . $value;
                 $url = 'http://www.google.com/complete/search?output=search&client=chrome&q=' . rawurlencode($key_match) . '&hl=vi&gl=vn';
                 $return = General::crawler($url);
-                $this->add_keyword(json_decode($return)[1],$arr_keyword['cate_id']);
+                $this->add_keyword(json_decode($return)[1], $arr_keyword['cate_id']);
                 continue;
             } else {
                 for ($i = 0; $i < 2; $i++) {
@@ -818,7 +818,7 @@ class ConsoleController extends MyController
                     }
                     $url = 'http://www.google.com/complete/search?output=search&client=chrome&q=' . rawurlencode($key_match) . '&hl=vi&gl=vn';
                     $return = General::crawler($url);
-                    $this->add_keyword(json_decode($return)[1],$arr_keyword['cate_id']);
+                    $this->add_keyword(json_decode($return)[1], $arr_keyword['cate_id']);
                     continue;
                 }
             }
@@ -830,7 +830,7 @@ class ConsoleController extends MyController
         $this->getKeyword();
     }
 
-    public function add_keyword($arr_key,$cate_id)
+    public function add_keyword($arr_key, $cate_id)
     {
         if (empty($arr_key)) {
             return false;
@@ -852,13 +852,13 @@ class ConsoleController extends MyController
                 continue;
             }
             $block = false;
-            foreach ($arr_block_string as $string){
-                if(strpos($key_word, $string)){
+            foreach ($arr_block_string as $string) {
+                if (strpos($key_word, $string)) {
                     $block = true;
                 }
             }
 
-            if($block) {
+            if ($block) {
                 continue;
             }
 
@@ -947,7 +947,7 @@ class ConsoleController extends MyController
             if (!empty($value['cate_img_url'])) {
                 $image = $url->addChild('image:image', null, 'http://www.google.com/schemas/sitemap-image/1.1');
                 $image->addChild('image:loc', STATIC_URL . $value['cate_img_url'], 'http://www.google.com/schemas/sitemap-image/1.1');
-                $image->addChild('image:caption',$value['cate_name']. General::TITLE_META, 'http://www.google.com/schemas/sitemap-image/1.1');
+                $image->addChild('image:caption', $value['cate_name'] . General::TITLE_META, 'http://www.google.com/schemas/sitemap-image/1.1');
             }
         }
         foreach ($arrCategoryByParent as $key => $arr) {
@@ -961,7 +961,7 @@ class ConsoleController extends MyController
                 if (!empty($value['cate_img_url'])) {
                     $image = $url->addChild('image:image', null, 'http://www.google.com/schemas/sitemap-image/1.1');
                     $image->addChild('image:loc', STATIC_URL . $value['cate_img_url'], 'http://www.google.com/schemas/sitemap-image/1.1');
-                    $image->addChild('image:caption',$value['cate_name']. General::TITLE_META, 'http://www.google.com/schemas/sitemap-image/1.1');
+                    $image->addChild('image:caption', $value['cate_name'] . General::TITLE_META, 'http://www.google.com/schemas/sitemap-image/1.1');
                 }
             }
         }
@@ -1367,16 +1367,13 @@ class ConsoleController extends MyController
 
         return true;
     }
-    public function testAction(){
-        echo "<pre>";
-        print_r("<div class=\"detail_content fl mgt15\">  <div>Lưu ý nhỏ trước khi<a href=\"http://dev.newspaper.vn\"> tập luyện</a>: Tập đúng số lượng các bài tập và đủ số hiệp liên tiếp nhau, nghỉ khoảng 45-60 giây giữa mỗi động tác. Tập full bài 3-4 ngày trong tuần (không tập trong hai ngày liên tiếp). Đặc biệt, những gì bạn cần để thực hiện 8 động tác này chỉ là một tấm thảm và khăn tập mà thôi! <br><br></div><div><span style=\"font-weight: bold;\">90 Degree Static press</span><br><br></div><div>Nằm ngửa, đầu gối vuông góc với hông, bàn chân gập lại, mở rộng vai và đặt lòng bàn tay lên phần đầu bắp đùi. Khi bạn thở ra, nâng đầu và vai khỏi mặt sàn khi ấn tay vào bắp đùi, hạ thấp phần thân trên khi bạn hít vào. Hít một hơi thật sâu, khi thở ra hóp bụng thật chặt, ấn chặt phần lưng dưới xuống mặt đất khi đưa gan bàn tay ấn vào bắp đùi, giữ nguyên tư thế trong khoảng 10 giây. <br><br></div><div>Thực hiện 3 hiệp mỗi hiệp 10 lần liên tiếp.<br><br><div style=\"text-align:center;\"><img src=\"http://dev.st.newspaper.vn/uploads/content/2016/10/21/bai-tap-dot-chay-mo-bung-duoi-cho-cac-quy-co-van-phong_1.gif\" w=\"480\" h=\"360\" alt=\"bài tập giảm mỡ bụng dưới\" title=\"bài tập giảm mỡ bụng dưới\"><br></div><br></div><div><span style=\"font-weight: bold;\">Resisted Single – Leg Stretch<br></span><br>Nằm ngửa, đầu ngẩng lên, hai chân kéo về phía ngực, bàn chân gập lại. Đan các ngón tay lại với nhau và đặt lên đùi phải, cùng lúc đó duỗi chân trái song song với mặt sàn. Ấn chặt gan bàn tay lên đùi phải, cố gắng đưa đầu gối bên phải lại gần phía ngực. Đổi chân và làm tương tự, đó là một lần. </div><div><br></div><div>Tập 3 hiệp mỗi hiệp 10 lần liên tiếp.<br><br><div style=\"text-align:center;\"><img src=\"http://dev.st.newspaper.vn/uploads/content/2016/10/21/bai-tap-dot-chay-mo-bung-duoi-cho-cac-quy-co-van-phong_2.gif\" w=\"480\" h=\"360\" alt=\"bài tập giảm mỡ bụng dưới\" title=\"bài tập giảm mỡ bụng dưới\"><br></div><br></div><div><span style=\"font-weight: bold;\">U-Boat</span><br><br></div><div>Ngồi trên mặt sàn, ngả người ra phía sau, chống hai khuỷu tay xuống mặt sàn, bàn tay úp xuống. Hóp bụng thật chặt rồi nâng cẳng chân lên tạo thành một góc 90 độ, từ từ đưa hai cẳng chân sang bên trái rồi đưa sang bên phải (Hông vẫn ở nguyên trên mặt sàn). Động tác này nhìn rất giống bạn đang vẽ chữ U với hai đầu gối. <br><br></div><div>Thực hiện động tác này 20 lần.<br><br><div style=\"text-align:center;\"><img src=\"http://dev.st.newspaper.vn/uploads/content/2016/10/21/bai-tap-dot-chay-mo-bung-duoi-cho-cac-quy-co-van-phong_3.gif\" w=\"480\" h=\"360\" alt=\"bài tập giảm mỡ bụng dưới\" title=\"bài tập giảm mỡ bụng dưới\"><br></div><br></div><div><span style=\"font-weight: bold;\">Reverse Plank Hover<br><br></span></div><div>Ngồi duỗi thẳng hai chân, chân gập lại, hai bàn tay đặt phía bên ngoài hông và úp xuống mặt sàn. Hít vào, hóp chặt bụng và dùng lực bả vai nhấc hông khỏi mặt sàn một vài inches, hơi uốn nhẹ đầu gối gót chân vẫn chống xuống sàn. Thở ra, duỗi thẳng chân và cố gắng đưa hông ra phía sau hai vai. Quay trở lại tư thế ban đầu. <br><br></div><div>Thực hiện ba hiệp, mỗi hiệp 10 lần.<br><br><div style=\"text-align:center;\"><img src=\"http://dev.st.newspaper.vn/uploads/content/2016/10/21/bai-tap-dot-chay-mo-bung-duoi-cho-cac-quy-co-van-phong_4.gif\" w=\"480\" h=\"360\" alt=\"bài tập giảm mỡ bụng dưới\" title=\"bài tập giảm mỡ bụng dưới\"><br></div><br></div><div><span style=\"font-weight: bold;\">Criss – Cross Lift and Switch<br><br></span></div><div>Nằm ngửa, khép chặt hai cánh tay trên mặt sàn, vắt chéo hai chân lên phía trên, hít vào hóp bụng thật chặt, hai cẳng chân tạo thành một góc 45 độ. Khi thở ra, đưa hai chân qua đầu, nâng hông khỏi mặt sàn bằng lực của hai cánh tay. Giữ nguyên khoảng 10 giây, sau đó đưa trở lại tư thế ban đầu. <br><br></div><div>Làm 3 hiệp mỗi hiệp 10 lần.<br><br><div style=\"text-align:center;\"><img src=\"http://dev.st.newspaper.vn/uploads/content/2016/10/21/bai-tap-dot-chay-mo-bung-duoi-cho-cac-quy-co-van-phong_5.gif\" w=\"480\" h=\"360\" alt=\"bài tập giảm mỡ bụng dưới\" title=\"bài tập giảm mỡ bụng dưới\"><br></div><span style=\"font-weight: bold;\"><br></span></div><div><span style=\"font-weight: bold;\">Inching elbow plank<br><br></span></div><div>Thực hiện động tác Elbow <a href=\"http://dev.newspaper.vn\">Plank</a>, hai chân rộng bằng vai. Kiễng hai chân, đưa hông lên cao, tạo thành một hình tam giác. </div><div><br></div><div>Thực hiện 3 hiệp mỗi hiệp 5 lần.<br><br><div style=\"text-align:center;\"><img src=\"http://dev.st.newspaper.vn/uploads/content/2016/10/21/bai-tap-dot-chay-mo-bung-duoi-cho-cac-quy-co-van-phong_6.gif\" w=\"480\" h=\"360\" alt=\"bài tập giảm mỡ bụng dưới\" title=\"bài tập giảm mỡ bụng dưới\"><br></div><br></div><div><span style=\"font-weight: bold;\">Full Plank Passe Twist</span><br><br></div><div>Bắt đầu với tư thế Full Plank, gập đầu gối phải và đưa về phía bên trái, sau đó trở lại vị trí ban đầu. Đổi chân và làm tương tự. </div><div><br></div><div>Thực hiện 3 hiệp, mỗi hiệp 10 lần. <br><br><div style=\"text-align:center;\"><img src=\"http://dev.st.newspaper.vn/uploads/content/2016/10/21/bai-tap-dot-chay-mo-bung-duoi-cho-cac-quy-co-van-phong_7.gif\" w=\"480\" h=\"360\" alt=\"bài tập giảm mỡ bụng dưới\" title=\"bài tập giảm mỡ bụng dưới\"><br></div><br></div><div><span style=\"font-weight: bold;\">Frog Press</span><br><br></div><div>Nằm ngửa khỏi mặt đất, hai đầu gối thu vào sát thân mình, gót chân chạm vào nhau. Hít vào và nhấc đầu và vai khỏi mặt đất, mắt nhìn xuống chân. Gan bàn tay úp xuống.</div><div><br></div><div>Thở ra, xoay gót chân ra phía bên ngoài, duỗi thẳng chân. Hít vào và đưa chân lại vị trí cũ. </div><div><br></div><div>Thực hiện 3 hiệp, mỗi hiệp 10 lần.<br><br><div style=\"text-align:center;\"><img src=\"http://dev.st.newspaper.vn/uploads/content/2016/10/21/bai-tap-dot-chay-mo-bung-duoi-cho-cac-quy-co-van-phong_8.gif\" w=\"480\" h=\"360\" alt=\"bài tập giảm mỡ bụng dưới\" title=\"bài tập giảm mỡ bụng dưới\"><br></div><br><div style=\"text-align: right;\"><span style=\"font-style: italic;\">(Phối hợp cùng NShapr Fitness thực hiện)</span></div></div><div style=\"text-align: center;\"><div style=\"margin: 0px; padding: 0px; color: rgb(51, 51, 51); font-size: 16px; -webkit-text-stroke: 0.1px rgba(255, 255, 255, 0.00784314); background-color: rgb(255, 255, 255); text-align: left;\"></div></div>         </div>");
-        echo "</pre>";
-        die;
-        $instanceSearchContent = new \My\Search\Content();
 
+    public function testAction()
+    {
+        $instanceSearchContent = new \My\Search\Content();
         $upload_dir = General::mkdirUpload();
 
-        for ($i = 1; $i <= 1; $i++){
+        for ($i = 1; $i <= 1; $i++) {
             $url_child = 'http://afamily.vn/suc-khoe/trang-' . $i . '.chn';
 
             $content = General::crawler($url_child);
@@ -1396,7 +1393,7 @@ class ConsoleController extends MyController
                 $html = HtmlDomParser::str_get_html($content);
 
                 $arr_data = array();
-                if($html->find('.detail_content', 0)){
+                if ($html->find('.detail_content', 0)) {
 
                     $cont_title = html_entity_decode($html->find("h1.d-title", 0)->plaintext);
                     $arr_data['cont_title'] = $cont_title;
@@ -1410,13 +1407,14 @@ class ConsoleController extends MyController
                         )
                     );
                     if (!empty($arr_detail)) {
+                        echo \My\General::getColoredString("Exist this content:" . $arr_data['cont_slug'], 'red');
                         continue;
                     }
 
                     //get content detail
-                    $cont_description = $html->find('.sapo', 0) -> outertext;
-                    $cont_detail = $html->find('.detail_content', 0) -> outertext;
-                    $cont_detail = str_replace("<script>beforeAfter('.before-after');</script>", " " , $cont_detail);
+                    $cont_description = $html->find('.sapo', 0)->plaintext;
+                    $cont_detail = $html->find('.detail_content', 0)->outertext;
+                    $cont_detail = str_replace("<script>beforeAfter('.before-after');</script>", " ", $cont_detail);
 
                     $link_content = $html->find("div.detail_content a");
                     if (count($link_content) > 0) {
@@ -1459,9 +1457,12 @@ class ConsoleController extends MyController
                         echo \My\General::getColoredString("Can not insert content db", 'red');
                     }
                 }
-die("finish");
-                sleep(3);
+                sleep(1);
             }
         }
+        echo "<pre>";
+        print_r("done");
+        echo "</pre>";
+        die;
     }
 }

@@ -112,16 +112,26 @@ return array(
                         ),
                     ),
                 ),
-                'init-data-keyword' => array(
+                'test' => array(
                     'options' => array(
-                        'route' => 'init-data-keyword',
+                        'route' => 'test',
                         'defaults' => array(
                             '__NAMESPACE__' => 'Backend\Controller',
                             'controller' => 'console',
-                            'action' => 'init-keyword-old'
+                            'action' => 'test'
                         ),
                     ),
-                )
+                ),
+                  'init-data-keyword' => array(
+    'options' => array(
+        'route' => 'init-data-keyword',
+        'defaults' => array(
+            '__NAMESPACE__' => 'Backend\Controller',
+            'controller' => 'console',
+            'action' => 'init-keyword-old'
+        ),
+    ),
+)
             )
         )
     ),

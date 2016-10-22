@@ -170,23 +170,7 @@ class MyController extends AbstractActionController {
         if ($arrData['module'] === 'frontend') {
             $instanceSearchCategory = new \My\Search\Category();
             $arrCategoryList = $instanceSearchCategory->getList(['cate_status' => 1], [], ['cate_sort' => ['order' => 'asc'], 'cate_id' => ['order' => 'asc']]);
-            $arrCategoryParentList = [];
-            $arrCategoryByParent = [];
-            $arrCategoryFormat = [];
-
-            if (!empty($arrCategoryList)) {
-                foreach ($arrCategoryList as $arrCategory) {
-                    if ($arrCategory['parent_id'] == 0) {
-                        $arrCategoryParentList[$arrCategory['cate_id']] = $arrCategory;
-                    } else {
-                        $arrCategoryByParent[$arrCategory['parent_id']][] = $arrCategory;
-                    }
-                    $arrCategoryFormat[$arrCategory['cate_id']] = $arrCategory;
-                }
-            }
-            define('ARR_CATEGORY_PARENT', serialize($arrCategoryParentList));
-            define('ARR_CATEGORY_BY_PARENT', serialize($arrCategoryByParent));
-            define('ARR_CATEGORY', serialize($arrCategoryFormat));
+            define('ARR_CATEGORY', serialize($arrCategoryList));
 
             //get list content hot
             $instanceSearchContent = new \My\Search\Content();
@@ -205,9 +189,6 @@ class MyController extends AbstractActionController {
             unset($arr_content_hot);
             unset($instanceSearchCategory);
             unset($arrCategory);
-            unset($arrCategoryParentList);
-            unset($arrCategoryByParent);
-            unset($arrCategoryFormat);
         }
     }
 
