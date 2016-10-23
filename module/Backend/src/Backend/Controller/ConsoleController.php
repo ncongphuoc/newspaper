@@ -1368,15 +1368,16 @@ class ConsoleController extends MyController
         return true;
     }
 
-    public function testAction()
+    public function __afamilyCrawler()
     {
+        $url = 'http://afamily.vn/suc-khoe';
+        $num = 1;
         $instanceSearchContent = new \My\Search\Content();
         $upload_dir = General::mkdirUpload();
 
-        for ($i = 1; $i <= 1; $i++) {
-            $url_child = 'http://afamily.vn/suc-khoe/trang-' . $i . '.chn';
-
-            $content = General::crawler($url_child);
+        for ($i = 1; $i <= $num; $i++) {
+            $url_page = $url . '/trang-' . $i . '.chn';
+            $content = General::crawler($url_page);
             $dom = HtmlDomParser::str_get_html($content);
 
             $results = $dom->find('div.catalogies div.sub_hot .sub_hotct h2 a, div.catalogies div.sub_hot .sub_hotct2 li h3 a, div.catalogies div.list-news1 h4 a');
@@ -1442,8 +1443,8 @@ class ConsoleController extends MyController
                     $arr_data['cont_detail'] = html_entity_decode($cont_detail);
                     $arr_data['cont_description'] = $cont_description;
                     $arr_data['created_date'] = time();
-                    $arr_data['cate_id'] = 1;
-                    $arr_data['cont_views'] = 0;
+                    $arr_data['cate_id'] = 3;
+                    $arr_data['cont_views'] = rand(1, 1000);
                     $arr_data['cont_status'] = 1;
                     $arr_data['from_source'] = 'afamily/suc-khoe';
 
@@ -1460,9 +1461,487 @@ class ConsoleController extends MyController
                 sleep(1);
             }
         }
-        echo "<pre>";
-        print_r("done");
-        echo "</pre>";
-        die;
+    }
+
+    public function __kenh14FashionCrawler()
+    {
+        $url = 'http://kenh14.vn/fashion';
+        $num = 1;
+        $instanceSearchContent = new \My\Search\Content();
+        $upload_dir = General::mkdirUpload();
+        for ($i = 1; $i <= $num; $i++) {
+            $url_page = $url . '/trang-' . $i . '.chn';
+            $content = General::crawler($url_page);
+            $dom = HtmlDomParser::str_get_html($content);
+
+            if($i == 1) {
+                $results = $dom->find('div.kbca-fashion-top-news h2.kbcaffn-title a,div.kbca-fashion-top-news h2.kbcaftn-title a, div.kbca-fashion-content h4.kbcaccfn-title a');
+            } else {
+                $results = $dom->find('div.kbca-fashion-content h4.kbcaccfn-title a');
+            }
+
+            if (count($results) <= 0) {
+                continue;
+            }
+
+            foreach ($results as $key => $item) {
+                $content = General::crawler('http://kenh14.vn/' . $item->href);
+                //$content = curl('http://afamily.vn/day-con-biet-boi-ngay-tai-nha-chi-voi-4-buoc-don-gian-2016060811132636.chn');
+
+                if ($content == false) {
+                    continue;
+                }
+                $html = HtmlDomParser::str_get_html($content);
+
+                if ($html->find('.kcccw-news-detail', 0)) {
+
+                    $cont_title = html_entity_decode($html->find("h1.knd-title", 0)->plaintext);
+                    $arr_data['cont_title'] = $cont_title;
+                    $arr_data['cont_slug'] = General::getSlug($cont_title);
+
+                    //check post exist
+                    $arr_detail = $instanceSearchContent->getDetail(
+                        array(
+                            'cont_slug' => $arr_data['cont_slug'],
+                            'not_cont_status' => -1
+                        )
+                    );
+                    if (!empty($arr_detail)) {
+                        echo \My\General::getColoredString("Exist this content:" . $arr_data['cont_slug'], 'red');
+                        continue;
+                    }
+
+                    $cont_description = $html->find('.knd-sapo', 0)->plaintext;
+                    $cont_detail = $html->find('.knd-content', 0)->outertext;
+
+                    $arr_image = $html->find("div.knd-content img");
+                    if (count($arr_image) > 0) {
+                        foreach ($arr_image as $key => $img) {
+                            $src = $img->src;
+                            $extension = end(explode('.', end(explode('/', $src))));
+                            $name_img = $arr_data['cont_slug'] . '_' . ($key + 1) . '.' . $extension;
+                            file_put_contents($upload_dir['path'] . '/' . $name_img, General::crawler($src));
+                            $cont_detail = str_replace($src, $upload_dir['url'] . '/' . $name_img, $cont_detail);
+                            if ($key == 0) {
+                                $arr_data['cont_main_image'] = $upload_dir['url'] . '/' . $name_img;
+                            }
+
+                        }
+                    }
+
+                    $arr_data['cont_detail'] = html_entity_decode($cont_detail);
+                    $arr_data['cont_description'] = $cont_description;
+                    $arr_data['created_date'] = time();
+                    $arr_data['cate_id'] = 3;
+                    $arr_data['cont_views'] = rand(1, 1000);
+                    $arr_data['cont_status'] = 1;
+                    $arr_data['from_source'] = 'http://kenh14.vn/fashion';
+
+                    //insert Data
+                    $serviceContent = $this->serviceLocator->get('My\Models\Content');
+                    $id = $serviceContent->add($arr_data);
+
+                    if ($id) {
+                        echo \My\General::getColoredString("Crawler success 1 post id = {$id} \n", 'green');
+                    } else {
+                        echo \My\General::getColoredString("Can not insert content db", 'red');
+                    }
+                }
+            }
+            sleep(2);
+        }
+    }
+
+    public function __kenh14StarCrawler(){
+        $url = 'http://kenh14.vn/star';
+        $num = 1;
+        $instanceSearchContent = new \My\Search\Content();
+        $upload_dir = General::mkdirUpload();
+        for ($i = 1; $i <= $num; $i++) {
+            $url_page = $url . '/trang-' . $i . '.chn';
+            $content = General::crawler($url_page);
+            $dom = HtmlDomParser::str_get_html($content);
+
+            if($i == 1) {
+                $results = $dom->find('div.kcnw-top-news h2.kcnwtnf-title a, div.kcnwtn-hot-news h3.kcnwtnhn-title a, div.kcnw-list-news-wrapper h4.kcnwn-title a');
+            } else {
+                $results = $dom->find('div.kcnw-list-news-wrapper h4.kcnwn-title a');
+            }
+
+            if (count($results) <= 0) {
+                continue;
+            }
+            foreach ($results as $key => $item) {
+                $content = General::crawler('http://kenh14.vn/' . $item->href);
+                //$content = curl('http://afamily.vn/day-con-biet-boi-ngay-tai-nha-chi-voi-4-buoc-don-gian-2016060811132636.chn');
+
+                if ($content == false) {
+                    continue;
+                }
+                $html = HtmlDomParser::str_get_html($content);
+
+                if ($html->find('.kcccw-news-detail', 0)) {
+
+                    $cont_title = html_entity_decode($html->find("h1.knd-title", 0)->plaintext);
+                    $arr_data['cont_title'] = $cont_title;
+                    $arr_data['cont_slug'] = General::getSlug($cont_title);
+
+                    //check post exist
+                    $arr_detail = $instanceSearchContent->getDetail(
+                        array(
+                            'cont_slug' => $arr_data['cont_slug'],
+                            'not_cont_status' => -1
+                        )
+                    );
+                    if (!empty($arr_detail)) {
+                        echo \My\General::getColoredString("Exist this content:" . $arr_data['cont_slug'], 'red');
+                        continue;
+                    }
+
+                    $cont_description = $html->find('.knd-sapo', 0)->plaintext;
+                    $cont_detail = $html->find('.knd-content', 0)->outertext;
+
+                    $arr_image = $html->find("div.knd-content img");
+                    if (count($arr_image) > 0) {
+                        foreach ($arr_image as $key => $img) {
+                            $src = $img->src;
+                            $extension = end(explode('.', end(explode('/', $src))));
+                            $name_img = $arr_data['cont_slug'] . '_' . ($key + 1) . '.' . $extension;
+                            file_put_contents($upload_dir['path'] . '/' . $name_img, General::crawler($src));
+                            $cont_detail = str_replace($src, $upload_dir['url'] . '/' . $name_img, $cont_detail);
+                            if ($key == 0) {
+                                $arr_data['cont_main_image'] = $upload_dir['url'] . '/' . $name_img;
+                            }
+
+                        }
+                    }
+
+                    $arr_data['cont_detail'] = html_entity_decode($cont_detail);
+                    $arr_data['cont_description'] = $cont_description;
+                    $arr_data['created_date'] = time();
+                    $arr_data['cate_id'] = 4;
+                    $arr_data['cont_views'] = rand(1, 1000);
+                    $arr_data['cont_status'] = 1;
+                    $arr_data['from_source'] = 'http://kenh14.vn/star';
+
+                    //insert Data
+                    $serviceContent = $this->serviceLocator->get('My\Models\Content');
+                    $id = $serviceContent->add($arr_data);
+
+                    if ($id) {
+                        echo \My\General::getColoredString("Crawler success 1 post id = {$id} \n", 'green');
+                    } else {
+                        echo \My\General::getColoredString("Can not insert content db", 'red');
+                    }
+                }
+            }
+            sleep(2);
+        }
+    }
+
+    public function __emdepCrawler()
+    {
+        $url = 'http://emdep.vn/lam-me';
+        $num = 1;
+        $instanceSearchContent = new \My\Search\Content();
+        $upload_dir = General::mkdirUpload();
+
+        for ($i = 1; $i <= $num; $i++) {
+            $url_page = $url . '/page-' . $i . '.htm';
+            $content = General::crawler($url_page);
+            $dom = HtmlDomParser::str_get_html($content);
+            $results = $dom->find('div.list-news li.news-item a');
+
+            if (count($results) <= 0) {
+                continue;
+            }
+
+            foreach ($results as $key => $item) {
+                $content = General::crawler('http://emdep.vn/' . $item->href);
+                //$content = curl('http://afamily.vn/day-con-biet-boi-ngay-tai-nha-chi-voi-4-buoc-don-gian-2016060811132636.chn');
+
+                if ($content == false) {
+                    continue;
+                }
+                $html = HtmlDomParser::str_get_html($content);
+
+                $arr_data = array();
+                if ($html->find('.article-content', 0)) {
+
+                    $cont_title = html_entity_decode($html->find("h1.lh", 0)->plaintext);
+                    $arr_data['cont_title'] = $cont_title;
+                    $arr_data['cont_slug'] = General::getSlug($cont_title);
+
+                    //check post exist
+                    $arr_detail = $instanceSearchContent->getDetail(
+                        array(
+                            'cont_slug' => $arr_data['cont_slug'],
+                            'not_cont_status' => -1
+                        )
+                    );
+                    if (!empty($arr_detail)) {
+                        echo \My\General::getColoredString("Exist this content:" . $arr_data['cont_slug'], 'red');
+                        continue;
+                    }
+
+                    //get content detail
+                    $cont_description = $html->find('div.top-content div.sapo span.xsubject', 0)->plaintext;
+                    $cont_description = str_replace('(Emdep.vn) - ','',$cont_description);
+
+                    $html->find('.article-content .hide', 0)-> innertext = '';
+                    $cont_detail = $html->find('.article-content', 0)->outertext;
+
+                    $link_content = $html->find("div.article-content a");
+                    if (count($link_content) > 0) {
+                        foreach ($link_content as $key => $link) {
+                            $href = $link->href;
+                            $cont_detail = str_replace($href, BASE_URL, $cont_detail);
+                        }
+                    }
+                    //get image
+                    $arr_image = $html->find("div.article-content img");
+                    if (count($arr_image) > 0) {
+                        foreach ($arr_image as $key => $img) {
+                            $src = $img->src;
+                            $extension = end(explode('.', end(explode('/', $src))));
+                            $name_img = $arr_data['cont_slug'] . '_' . ($key + 1) . '.' . $extension;
+                            file_put_contents($upload_dir['path'] . '/' . $name_img, General::crawler($src));
+                            $cont_detail = str_replace($src, $upload_dir['url'] . '/' . $name_img, $cont_detail);
+                            if ($key == 0) {
+                                $arr_data['cont_main_image'] = $upload_dir['url'] . '/' . $name_img;
+                            }
+
+                        }
+                    }
+
+                    $arr_data['cont_detail'] = html_entity_decode($cont_detail);
+                    $arr_data['cont_description'] = $cont_description;
+                    $arr_data['created_date'] = time();
+                    $arr_data['cate_id'] = 6;
+                    $arr_data['cont_views'] = rand(1, 1000);
+                    $arr_data['cont_status'] = 1;
+                    $arr_data['from_source'] = 'afamily/suc-khoe';
+
+                    //insert Data
+                    $serviceContent = $this->serviceLocator->get('My\Models\Content');
+                    $id = $serviceContent->add($arr_data);
+
+                    if ($id) {
+                        echo \My\General::getColoredString("Crawler success 1 post id = {$id} \n", 'green');
+                    } else {
+                        echo \My\General::getColoredString("Can not insert content db", 'red');
+                    }
+                }
+                sleep(1);
+            }
+        }
+    }
+
+    public function __24hCrawler(){
+        $url = 'http://www.24h.com.vn/ajax/box_bai_viet_trang_su_kien/index/460/2552/1/13/0';
+        $num = 3;
+        $instanceSearchContent = new \My\Search\Content();
+        $upload_dir = General::mkdirUpload();
+
+        for ($i = 3; $i <= $num; $i++) {
+            $url_page = $url . '?page=' . $i;
+            $content = General::crawler($url_page);
+            $dom = HtmlDomParser::str_get_html($content);
+            $results = $dom->find('div.sktd-item div.xem-tiep a');
+
+            if (count($results) <= 0) {
+                continue;
+            }
+
+            foreach ($results as $key => $item) {
+                $content = General::crawler('http://www.24h.com.vn/' . $item->href);
+                //$content = General::crawler('http://www.24h.com.vn/am-thuc/cu-cai-ham-xuong-ngon-ngot-thom-lung-c460a826908.html');
+
+                if ($content == false) {
+                    continue;
+                }
+                $html = HtmlDomParser::str_get_html($content);
+
+                $arr_data = array();
+                $video = $html->find('.text-conent div[align=center]');
+                if (count($video) == 0) {
+
+                    $cont_title = html_entity_decode($html->find("h1.baiviet-title", 0)->plaintext);
+                    $arr_data['cont_title'] = $cont_title;
+                    $arr_data['cont_slug'] = General::getSlug($cont_title);
+
+                    //check post exist
+                    $arr_detail = $instanceSearchContent->getDetail(
+                        array(
+                            'cont_slug' => $arr_data['cont_slug'],
+                            'not_cont_status' => -1
+                        )
+                    );
+                    if (!empty($arr_detail)) {
+                        echo \My\General::getColoredString("Exist this content:" . $arr_data['cont_slug'], 'red');
+                        continue;
+                    }
+
+                    //get content detail
+                    $cont_description = $html->find('div.div-baiviet p.baiviet-sapo', 0)->plaintext;
+
+                    $html->find('.text-conent div[itemprop=publisher]', 0)-> outertext = '';
+                    $html->find('.text-conent div[itemprop=image]', 0)-> outertext = '';
+                    $html->find('.text-conent .baiviet-bailienquan', 0)-> outertext = '';
+                    $cont_detail = $html->find('.text-conent', 0)->outertext;
+                    $cont_detail = str_replace('<script type="text/javascript">window.onload = function () {resizeNewsImage("news-image", 500);}</script>','', $cont_detail);
+                    $cont_detail = str_replace("return openNewImage(this, '')",'return true', $cont_detail);
+
+
+                    //get image
+                    $arr_image = $html->find("div.text-conent img");
+                    if (count($arr_image) > 0) {
+                        foreach ($arr_image as $key => $img) {
+                            $src = $img->src;
+                            $extension = end(explode('.', end(explode('/', $src))));
+                            $name_img = $arr_data['cont_slug'] . '_' . ($key + 1) . '.' . $extension;
+                            file_put_contents($upload_dir['path'] . '/' . $name_img, General::crawler($src));
+                            $cont_detail = str_replace($src, $upload_dir['url'] . '/' . $name_img, $cont_detail);
+                            if ($key == 0) {
+                                $arr_data['cont_main_image'] = $upload_dir['url'] . '/' . $name_img;
+                            }
+                            sleep(0.5);
+                        }
+                    }
+
+                    $arr_data['cont_detail'] = html_entity_decode($cont_detail);
+                    $arr_data['cont_description'] = $cont_description;
+                    $arr_data['created_date'] = time();
+                    $arr_data['cate_id'] = 7;
+                    $arr_data['cont_views'] = rand(1, 1000);
+                    $arr_data['cont_status'] = 1;
+                    $arr_data['from_source'] = 'http://www.24h.com.vn/mon-ngon-moi-ngay';
+
+                    //insert Data
+                    $serviceContent = $this->serviceLocator->get('My\Models\Content');
+                    $id = $serviceContent->add($arr_data);
+
+                    if ($id) {
+                        echo \My\General::getColoredString("Crawler success 1 post id = {$id} \n", 'green');
+                    } else {
+                        echo \My\General::getColoredString("Can not insert content db", 'red');
+                    }
+                }
+                sleep(1);
+            }
+        }
+    }
+
+    public function testAction(){
+        $url = 'https://www.ivivu.com/blog/category/viet-nam/';
+        $num = 3;
+        $instanceSearchContent = new \My\Search\Content();
+        $upload_dir = General::mkdirUpload();
+
+        for ($i = 3; $i <= $num; $i++) {
+            $url_page = $url . '/page/' . $i . '/';
+            $content = General::crawler($url_page);
+            $dom = HtmlDomParser::str_get_html($content);
+            $results = $dom->find('div.archive-postlist h2 a');
+
+            if (count($results) <= 0) {
+                continue;
+            }
+
+            foreach ($results as $key => $item) {
+                $content = General::crawler($item->href);
+                //$content = curl('http://afamily.vn/day-con-biet-boi-ngay-tai-nha-chi-voi-4-buoc-don-gian-2016060811132636.chn');
+
+                if ($content == false) {
+                    continue;
+                }
+                $html = HtmlDomParser::str_get_html($content);
+
+                $arr_data = array();
+                if ($html->find('.entry-content', 0)) {
+
+                    $cont_title = html_entity_decode($html->find("h1.entry-title", 0)->plaintext);
+                    $arr_data['cont_title'] = $cont_title;
+                    $arr_data['cont_slug'] = General::getSlug($cont_title);
+
+                    //check post exist
+                    $arr_detail = $instanceSearchContent->getDetail(
+                        array(
+                            'cont_slug' => $arr_data['cont_slug'],
+                            'not_cont_status' => -1
+                        )
+                    );
+                    if (!empty($arr_detail)) {
+                        echo \My\General::getColoredString("Exist this content:" . $arr_data['cont_slug'], 'red');
+                        continue;
+                    }
+                    $cont_description = '';
+
+                    //get content detail
+                    $html->find('.entry-content .top-sns-wrap', 0)-> innertext = '';
+                    //$html->find('.entry-content .ltt-contentbox', 0)-> innertext = '';
+                    $check = true;
+                    $i = 0;
+                    while($check){
+                        $html->find(".entry-content .ltt-contentbox", $i) ->innertext =  '';
+                        $i ++;
+                        if($html->find(".entry-content .ltt-contentbox", $i)){
+                            $check = true;
+                        }else{
+                            $check = false;
+                        }
+                    }
+                    $html->find('.entry-content .author', 0)-> innertext = '';
+                    $html->find('.entry-content .updated', 0)-> innertext = '';
+                    $html->find('.entry-content .post-rating-wrap', 0)-> innertext = '';
+                    $html->find('.entry-content .bottom-like-share', 0)-> innertext = '';
+                    $cont_detail = $html->find('.entry-content', 0) -> outertext;
+
+                    $cont_detail = str_replace('Cẩm nang du lịch iVIVU.com', 'Cẩm nang du lịch', $cont_detail);
+                    $cont_detail = str_replace('iVIVU.com', 'Tintuc360', $cont_detail);
+                    $link_content = $html->find("div.entry-content a");
+                    if (count($link_content) > 0) {
+                        foreach ($link_content as $key => $link) {
+                            $href = $link->href;
+                            $cont_detail = str_replace($href, BASE_URL . '/danh-muc/du-lich-7.html', $cont_detail);
+                        }
+                    }
+                    //get image
+                    $arr_image = $html->find("div.entry-content img");
+                    if (count($arr_image) > 0) {
+                        foreach ($arr_image as $key => $img) {
+                            $src = $img->src;
+                            $extension = end(explode('.', end(explode('/', $src))));
+                            $name_img = $arr_data['cont_slug'] . '_' . ($key + 1) . '.' . $extension;
+                            file_put_contents($upload_dir['path'] . '/' . $name_img, General::crawler($src));
+                            $cont_detail = str_replace($src, $upload_dir['url'] . '/' . $name_img, $cont_detail);
+                            if ($key == 0) {
+                                $arr_data['cont_main_image'] = $upload_dir['url'] . '/' . $name_img;
+                            }
+                            sleep(0.5);
+                        }
+                    }
+
+                    $arr_data['cont_detail'] = html_entity_decode($cont_detail);
+                    $arr_data['cont_description'] = $cont_description;
+                    $arr_data['created_date'] = time();
+                    $arr_data['cate_id'] = 7;
+                    $arr_data['cont_views'] = rand(1, 1000);
+                    $arr_data['cont_status'] = 1;
+                    $arr_data['from_source'] = 'ivivu.com/blog/category/viet-nam/';
+
+                    //insert Data
+                    $serviceContent = $this->serviceLocator->get('My\Models\Content');
+                    $id = $serviceContent->add($arr_data);
+
+                    if ($id) {
+                        echo \My\General::getColoredString("Crawler success 1 post id = {$id} \n", 'green');
+                    } else {
+                        echo \My\General::getColoredString("Can not insert content db", 'red');
+                    }
+                }
+                sleep(1);
+            }
+        }
     }
 }
