@@ -94,6 +94,7 @@ class SearchController extends MyController
 
             $instanceSearchContent = new \My\Search\Content();
             $arrContentList = $instanceSearchContent->getListLimit(['full_text_title' => $arrKeyDetail['key_name']], $intPage, $intLimit, ['_score' => ['order' => 'desc']]);
+
             $intTotal = $instanceSearchContent->getTotal(['cont_title' => $arrKeyDetail['key_name']]);
             $helper = $this->serviceLocator->get('viewhelpermanager')->get('Paging');
             $paging = $helper($params['module'], $params['__CONTROLLER__'], $params['action'], $intTotal, $intPage, $intLimit, 'keyword', $params);

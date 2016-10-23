@@ -1,17 +1,20 @@
 <div class=td-crumb-container>
-    <div class=entry-crumbs><span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a title=""
-                                                                                                class=entry-crumb
-                                                                                                itemprop=url
-                                                                                                href="http://demo.tagdiv.com/newspaper_magazine/"><span
-                    itemprop=title>Home</span></a></span> <i class="td-icon-right td-bread-sep td-bred-no-url-last"></i>
-        <span class=td-bred-no-url-last itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><meta itemprop=title
-                                                                                                         content=World><meta
-                itemprop=url
-                content="http://demo.tagdiv.com/newspaper_magazine/2015/09/23/td-post-a-look-at-how-social-mobile-gaming-increase-sales/">World</span>
+    <div class=entry-crumbs>
+        <span>
+            <a title="Home" class=entry-crumb itemprop=url href="<?php echo $this->serverUrl() . $this->Url('home') ?>">
+                <span itemprop=title><i class="fa fa-home"></i> Home</span>
+            </a>
+        </span>
+        <i class="td-icon-right td-bread-sep td-bred-no-url-last"></i>
+        <span class=td-bred-no-url-last>
+            <meta itemprop=title content="<?php echo $this->arrCategoryDetail['cate_name']; ?>">
+            <meta itemprop=url content="<?php echo $this->serverUrl() . $this->Url('category', ['cateSlug' =>  $this->arrCategoryDetail['cate_slug'], 'cateId' => $this->arrCategoryDetail['cate_id']]) ?>">
+            <?php echo $this->arrCategoryDetail['cate_name']; ?>
+        </span>
     </div>
 </div>
 
-
+<h1 class="entry-title td-page-title"><?php echo $this->arrCategoryDetail['cate_name']; ?></h1>
 <div class=td-ss-main-content>
     <?php foreach ($this->arrContentList as $arr_content): ?>
         <div class="td_module_10 td_module_wrap td-animation-stack">
@@ -32,10 +35,10 @@
                 <div class=td-module-meta-info>
                     <a href="index.html" class=td-post-category><?php echo $this->arrCategoryDetail['cate_name']; ?></a>
                     <span class=td-post-date><time class="entry-date updated td-module-date"
-                                                   datetime="2015-09-23T12:41:25+00:00">September 23, 2015</time></span>
+                                                   datetime=""><?php echo date("d-m-Y", $arr_content['created_date']); ?><?php echo date("d-m-Y", $arr_content['created_date']); ?></time></span>
                 </div>
                 <div class=td-excerpt>
-                    <?php echo mb_substr($arr_content['cont_description'], 0, 150, 'UTF-8'); ?>
+                    <?php echo (strlen($arr_content['cont_description']) < 100) ? $arr_content['cont_description'] : mb_substr($arr_content['cont_description'], 0, 100, 'UTF-8') . '. . . '; ?>
                 </div>
             </div>
         </div>

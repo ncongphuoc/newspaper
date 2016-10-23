@@ -1,25 +1,26 @@
 <?php
 $content_detail = $this->arrContent;
+$category_detail = $this->arrCategoryDetail;
 ?>
 <div class="td-crumb-container">
-    <div class="entry-crumbs"><span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a title=""
-                                                                                                     class="entry-crumb"
-                                                                                                     itemprop="url"
-                                                                                                     href="http://demo.tagdiv.com/newspaper/"><span
-                    itemprop="title">Home</span></a></span> <i class="td-icon-right td-bread-sep"></i> <span
-            itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a title="View all posts in Technology"
-                                                                             class="entry-crumb" itemprop="url"
-                                                                             href="http://demo.tagdiv.com/newspaper/category/tagdiv-technology/"><span
-                    itemprop="title">Technology</span></a></span> <i class="td-icon-right td-bread-sep"></i> <span
-            itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a title="View all posts in Gadgets"
-                                                                             class="entry-crumb" itemprop="url"
-                                                                             href="http://demo.tagdiv.com/newspaper/category/tagdiv-technology/tagdiv-gadgets/"><span
-                    itemprop="title">Gadgets</span></a></span> <i
-            class="td-icon-right td-bread-sep td-bred-no-url-last"></i> <span class="td-bred-no-url-last" itemscope=""
-                                                                              itemtype="http://data-vocabulary.org/Breadcrumb"><meta
-                itemprop="title" content="HTC launches another selfie-phone with an UltraPixel camera up front"><meta
-                itemprop="url"
-                content="http://demo.tagdiv.com/newspaper/td-post-htc-launches-another-selfie-phone-with-an-ultrapixel-camera-up-front/">HTC launches another selfie-phone with an UltraPixel camera up front</span>
+    <div class="entry-crumbs">
+        <span>
+            <a title="Home" class="entry-crumb" itemprop="url"  href="<?php echo $this->serverUrl() . $this->Url('home') ?>">
+                <span itemprop="title"><i class="fa fa-home"></i> Home</span>
+            </a>
+        </span>
+        <i class="td-icon-right td-bread-sep"></i>
+        <span>
+            <a title="<?php echo $category_detail['cate_name'] ?>" class="entry-crumb" itemprop="url" href="<?php echo $this->serverUrl() . $this->Url('category', ['cateSlug' =>  $category_detail['cate_slug'], 'cateId' => $category_detail['cate_id']]) ?>">
+                <span itemprop="title"><?php echo $category_detail['cate_name'] ?></span>
+            </a>
+        </span>
+        <i class="td-icon-right td-bread-sep"></i>
+        <span class=td-bred-no-url-last>
+            <meta itemprop=title content="<?php echo $content_detail['cont_title']; ?>">
+            <meta itemprop=url content="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' =>  $content_detail['cont_slug'], 'contentId' => $content_detail['cont_id']]) ?>">
+            <?php echo $content_detail['cont_title']; ?>
+        </span>
     </div>
 </div>
 <div class="td-ss-main-content">
@@ -34,7 +35,10 @@ $content_detail = $this->arrContent;
                 <span class=td-post-date>
                     <time class="entry-date updated td-module-date"
                           datetime="<?php echo date("d-m-Y", $content_detail['created_date']); ?>"><?php echo date("d-m-Y", $content_detail['created_date']); ?></time></span>
-                    <div class=td-post-views><i class=td-icon-views></i><span class=td-nr-views-95>723</span></div>
+                    <div class=td-post-views>
+                        <i class=td-icon-views></i>
+                        <span class=td-nr-views-95><?php echo $content_detail['cont_views'] ?></span>
+                    </div>
                 </div>
             </header>
         </div>

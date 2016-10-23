@@ -65,11 +65,8 @@ class ContentController extends MyController
             /*
              * Category
              */
-//            $arrCategoryDetail = unserialize(ARR_CATEGORY)[$arrContent['cate_id']];
-//            $arrCategoryParent = [];
-//            if (!empty($arrCategoryDetail['parent_id'])) {
-//                $arrCategoryParent = unserialize(ARR_CATEGORY)[$arrCategoryDetail['parent_id']];
-//            }
+            $instanceSearchCategory = new \My\Search\Category();
+            $categoryDetail = $instanceSearchCategory->getDetail(array('cate_id'=>$arrContent['cate_id']));
 
             $this->renderer = $this->serviceLocator->get('Zend\View\Renderer\PhpRenderer');
 //            <meta name="robots" content="INDEX, FOLLOW"/>
@@ -127,7 +124,7 @@ class ContentController extends MyController
             return array(
                 'params' => $params,
                 'arrContent' => $arrContent,
-                'arrCategoryDetail' => $arrCategoryDetail,
+                'arrCategoryDetail' => $categoryDetail,
 //                'arrContentLikeList' => $arrContentLikeList,
 //                'arrContentLastedList' => $arrContentLastedList,
 //                'arrContentNews' => $arrContentNews,

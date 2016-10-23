@@ -1,68 +1,70 @@
-<div class="content">
-    <h1><?php echo $this->params['keyword']; ?></h1>
-    <div class="taxdesc">
-        <p>Tìm thấy <b><?php echo $this->intTotal; ?></b> kết quả</p>
-    </div>
-
-    <div class="breadcrumbs info-detail" xmlns:v="http://rdf.data-vocabulary.org/#">
-        <span class="first breadcrumb">
-            <a href="<?php echo BASE_URL; ?>">🏠</a>
-        </span>
-        <span typeof="v:Breadcrumb" class="breadcrumb">
-            <a rel="v:url" property="v:title"
-               href="<?php echo $this->serverUrl() . $this->Url('search', array('keyword' => $this->params['keyword'])) ?>">
-                Tìm kiếm
+<div class=td-crumb-container>
+    <div class=entry-crumbs>
+        <span>
+            <a title="" class="entry-crumb" itemprop="url" href="<?php echo $this->serverUrl() . $this->Url('home') ?>">
+                <span itemprop="title"><i class="fa fa-home"></i> Home</span>
             </a>
         </span>
+        <i class="td-icon-right td-bread-sep td-bred-no-url-last"></i>
+        <span class="td-bred-no-url-last">
+            <meta itemprop="title" content="Search">
+            <meta itemprop="url" content="<?php echo $this->serverUrl() . $this->Url('search', ['keyword' => $this->params['keyword']]) ?>">Search
+        </span>
     </div>
+</div>
 
-    <?php if (!empty($this->arrContentList)): ?>
-        <div class="listview">
-            <ul>
-                <?php foreach ($this->arrContentList as $arr_content): ?>
-                    <li class="listitem clearfix">
-                        <a class="title"
-                           href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $arr_content['cont_slug'], 'contentId' => $arr_content['cont_id']]) ?>">
-                            <?php echo $arr_content['cont_title']; ?>
-                        </a>
-                        <a class="thumb"
-                           href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $arr_content['cont_slug'], 'contentId' => $arr_content['cont_id']]) ?>">
-                            <img src="<?php echo $arr_content['cont_main_image'] ?>"
-                                 alt="<?php echo $arr_content['cont_title'] ?>"/>
-                        </a>
-                        <div class="desc"><?php echo $arr_content['cont_description'] ?>
-                        </div>
-                    </li>
-                <?php endforeach; ?>
-                <!--        </ul>-->
-                <!--    </div>-->
-                <!--    <div id="adindexcenter" class="adbox" style="margin-bottom:20px">-->
-                <!--        <!-- KhoaHoc Cat Resp -->
-                <!--        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9275417305531302" data-ad-slot="3096293681" data-ad-format="auto"></ins>-->
-                <!--        <script>-->
-                <!--            (adsbygoogle = window.adsbygoogle || []).push({});-->
-                <!--        </script>-->
-                <!--    </div>-->
-                <!--    <div class="listview">-->
-                <!--        <ul>-->
-            </ul>
+<div class="td-ss-main-content">
+    <div class="td-page-header">
+        <h1 class="entry-title td-page-title">
+            <span class="td-search-query"><?php echo $this->params['keyword'] ?></span> - <span> Kết quả</span>
+        </h1>
+        <p>Tìm thấy <b><?php echo $this->intTotal; ?></b> kết quả</p>
+        <div class="search-page-search-wrap">
+            <form method="get" class="td-search-form-widget" action="<?php echo $this->serverUrl() . $this->Url('search') ?>">
+                <div role=search>
+                    <input class="td-widget-search-input" type="text" value="<?php echo $this->params['keyword'] ?>" name="keyword"/><input
+                        class="wpb_button wpb_btn-inverse btn" type="submit" id="searchsubmit" value="Search"/>
+                </div>
+            </form>
+            <div class="td_search_subtitle">
+                Nếu chưa hài lòng với những kết quả này, vui lòng thử từ khóa khác
+            </div>
         </div>
-        <div class="listitems">
-            <div class="title">Từ khoá tương tự</div>
-            <ul>
-                <?php if (!empty($this->arrKeywordList)):
-                    foreach ($this->arrKeywordList as $arr_key):
-                        ?>
-                        <li>
-                            <a href="<?php echo $this->serverUrl() . $this->Url('keyword', array('keySlug' => $arr_key['key_slug'], 'keyId' => $arr_key['key_id'])) ?>">
-                                <?php echo $arr_key['key_name']; ?>
-                            </a>
-                        </li>
-                    <?php endforeach;
-                endif;
-                ?>
-            </ul>
+    </div>
+    <?php if (!empty($this->arrContentList)){
+            foreach ($this->arrContentList as $arr_content):
+    ?>
+        <div class="td_module_16 td_module_wrap td-animation-stack">
+            <div class=td-module-thumb>
+                <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $arr_content['cont_slug'], 'contentId' => $arr_content['cont_id']]) ?>" rel=bookmark title="<?php echo $arr_content['cont_title'] ?>">
+                    <img width="150" height="150" class=entry-thumb src="<?php echo $arr_content['cont_main_image'] ?>" alt="<?php echo $arr_content['cont_title'] ?>"/>
+                </a>
+            </div>
+            <div class=item-details>
+                <h3 class="entry-title td-module-title">
+                    <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $arr_content['cont_slug'], 'contentId' => $arr_content['cont_id']]) ?>" rel=bookmark
+                                                           title="<?php echo $arr_content['cont_title'] ?>">
+                        <?php echo (strlen($arr_content['cont_description']) < 100) ? $arr_content['cont_title'] : mb_substr($arr_content['cont_title'], 0, 100, 'UTF-8') . '. . . '; ?>
+                    </a>
+                </h3>
+                <div class=td-module-meta-info>
+                    <span class=td-post-date>
+                        <time class="entry-date updated td-module-date"
+                                                   datetime="<?php echo date("d-m-Y", $arr_content['created_date']); ?>"><?php echo date("d-m-Y", $arr_content['created_date']); ?></time>
+                    </span>
+                </div>
+                <div class=td-excerpt>
+                    <?php echo (strlen($arr_content['cont_description']) < 100) ? $arr_content['cont_description'] : mb_substr($arr_content['cont_description'], 0, 100, 'UTF-8') . '. . . '; ?>
+                </div>
+            </div>
         </div>
-        <?php echo $this->paging;?>
-    <?php endif; ?>
+    <?php
+            endforeach;
+    } else {
+    ?>
+    <div class="no-results td-pb-padding-side"><h2>Không có kết quả cho từ khóa của bạn</h2></div>
+    <?php } ?>
+</div>
+<div class="page-nav td-pb-padding-side">
+    <?php echo $this->paging; ?>
 </div>
