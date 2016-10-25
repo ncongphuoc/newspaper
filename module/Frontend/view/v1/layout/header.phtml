@@ -12,40 +12,33 @@ $action = $paramsRouter['action'];
             <div class=top-bar-style-1>
                 <div class=td-header-sp-top-menu>
                     <div class=td-weather-top-widget id=td_top_weather_uid>
-                        <i class="td-icons few-clouds-n"></i>
-                        <div class=td-weather-now data-block-uid=td_top_weather_uid>
-                            <span class=td-big-degrees>15</span>
-                            <span class=td-weather-unit>C</span>
-                        </div>
+
                         <div class=td-weather-header>
-                            <div class=td-weather-city>New York</div>
+                            <div class=td-weather-city>Welcome to Tintuc360</div>
                         </div>
                     </div>
                     <div class=td_data_time>
                         <div>
-                            Monday, October 17
+                            <?php echo date('l') . ', ' . date('F') . ' ' . date('d'); ?>
                         </div>
                     </div>
                     <ul class="top-header-menu td_ul_login">
-                        <li class=menu-item><a class="td-login-modal-js menu-item" href="#login-form"
-                                               data-effect=mpf-td-login-effect>Sign in / Join</a><span
-                                class="td-sp-ico-login td_sp_login_ico_style"></span></li>
+                        <li class=menu-item>
+                            <a class="td-login-modal-js menu-item" href="javascript:;" data-effect=mpf-td-login-effect>Sign in / Join</a>
+                            <span class="td-sp-ico-login td_sp_login_ico_style"></span></li>
                     </ul>
                     <div class=menu-top-container>
                         <ul id=menu-top-menu class=top-header-menu>
                             <li id=menu-item-10
                                 class="menu-item menu-item-type-post_type menu-item-object-page menu-item-first td-menu-item td-normal-menu menu-item-10">
-                                <a href="blog/index.html">Blog</a></li>
+                                <a href="javascript:;">Blog</a></li>
                             <li id=menu-item-11
                                 class="menu-item menu-item-type-custom menu-item-object-custom td-menu-item td-normal-menu menu-item-11">
-                                <a target=_blank href="http://demo.tagdiv.com/newspaper_tech/forums/">Forums</a>
+                                <a target=_blank href="javascript:;">Forums</a>
                             </li>
                             <li id=menu-item-9
                                 class="menu-item menu-item-type-post_type menu-item-object-page td-menu-item td-normal-menu menu-item-9">
-                                <a href="contact/index.html">Contact</a></li>
-                            <li id=menu-item-12
-                                class="menu-item menu-item-type-custom menu-item-object-custom td-menu-item td-normal-menu menu-item-12">
-                                <a target=_blank href="http://themeforest.net/item/newspaper/5489609">Buy now!</a>
+                                <a href="javascript:;">Contact</a>
                             </li>
                         </ul>
                     </div>
@@ -57,22 +50,22 @@ $action = $paramsRouter['action'];
                     </a>
                     </span>
                     <span class=td-social-icon-wrap>
-                    <a target=_blank href="#" title=Twitter>
+                    <a target=_blank href="javascript:;" title=Twitter>
                     <i class="td-icon-font td-icon-twitter"></i>
                     </a>
                     </span>
                     <span class=td-social-icon-wrap>
-                    <a target=_blank href="#" title=Vimeo>
+                    <a target=_blank href="javascript:;" title=Vimeo>
                     <i class="td-icon-font td-icon-vimeo"></i>
                     </a>
                     </span>
                     <span class=td-social-icon-wrap>
-                    <a target=_blank href="#" title=VKontakte>
+                    <a target=_blank href="javascript:;" title=VKontakte>
                     <i class="td-icon-font td-icon-vk"></i>
                     </a>
                     </span>
                     <span class=td-social-icon-wrap>
-                    <a target=_blank href="#" title=Youtube>
+                    <a target=_blank href="javascript:;" title=Youtube>
                     <i class="td-icon-font td-icon-youtube"></i>
                     </a>
                     </span>
@@ -170,12 +163,12 @@ $action = $paramsRouter['action'];
                     <div class="td-main-menu-logo td-logo-in-header">
                         <a class="td-mobile-logo td-sticky-header" href="<?php echo $this->serverUrl() . $this->Url('home') ?>">
                             <img class=td-retina-data
-                                 data-retina="http://demo.tagdiv.com/newspaper/wp-content/uploads/2016/01/logo-white@2x.png"
+                                 data-retina="<?php echo STATIC_URL . '/f/' . FRONTEND_TEMPLATE . '/images/logo-02.png'; ?>"
                                  src="<?php echo STATIC_URL . '/f/' . FRONTEND_TEMPLATE . '/images/logo-02.png'; ?>" alt="Tintuc360"/>
                         </a>
                         <a class="td-header-logo td-sticky-header" href="<?php echo $this->serverUrl() . $this->Url('home') ?>">
                             <img class="td-retina-data"
-                                 data-retina="http://demo.tagdiv.com/newspaper/wp-content/uploads/2016/01/logo-header@2x.png"
+                                 data-retina="<?php echo STATIC_URL . '/f/' . FRONTEND_TEMPLATE . '/images/logo-01.png'; ?>"
                                  src="<?php echo STATIC_URL . '/f/' . FRONTEND_TEMPLATE . '/images/logo-01.png'; ?>" alt="Tintuc360"/>
                         </a>
                     </div>
@@ -208,6 +201,7 @@ $action = $paramsRouter['action'];
                         </div>
                     </div>
                 </div>
+                <!-- SEARCH -->
                 <div class="header-search-wrap">
                     <div class="dropdown header-search">
                         <div class="td-drop-down-search aria-labelledby=td-header-search-button">
@@ -221,6 +215,7 @@ $action = $paramsRouter['action'];
                         </div>
                     </div>
                 </div>
+                <!-- END SEARCH -->
             </div>
         </div>
     </div>

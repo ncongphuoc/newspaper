@@ -1832,7 +1832,7 @@ class ConsoleController extends MyController
         }
     }
 
-    public function testAction(){
+    public function __ivivuCrawler(){
         $url = 'https://www.ivivu.com/blog/category/viet-nam/';
         $num = 3;
         $instanceSearchContent = new \My\Search\Content();
@@ -1929,6 +1929,103 @@ class ConsoleController extends MyController
                     $arr_data['cont_views'] = rand(1, 1000);
                     $arr_data['cont_status'] = 1;
                     $arr_data['from_source'] = 'ivivu.com/blog/category/viet-nam/';
+
+                    //insert Data
+                    $serviceContent = $this->serviceLocator->get('My\Models\Content');
+                    $id = $serviceContent->add($arr_data);
+
+                    if ($id) {
+                        echo \My\General::getColoredString("Crawler success 1 post id = {$id} \n", 'green');
+                    } else {
+                        echo \My\General::getColoredString("Can not insert content db", 'red');
+                    }
+                }
+                sleep(1);
+            }
+        }
+    }
+    public function testAction()
+    {
+        $url = 'http://emdep.vn/lam-me';
+        $num = 1;
+        $instanceSearchContent = new \My\Search\Content();
+        $upload_dir = General::mkdirUpload();
+
+        for ($i = 1; $i <= $num; $i++) {
+            $url_page = $url . '/page-' . $i . '.htm';
+            $content = General::crawler($url_page);
+            $dom = HtmlDomParser::str_get_html($content);
+            $results = $dom->find('div.list-news li.news-item a');
+
+            if (count($results) <= 0) {
+                continue;
+            }
+
+            foreach ($results as $key => $item) {
+                $content = General::crawler('http://emdep.vn/' . $item->href);
+                //$content = curl('http://afamily.vn/day-con-biet-boi-ngay-tai-nha-chi-voi-4-buoc-don-gian-2016060811132636.chn');
+
+                if ($content == false) {
+                    continue;
+                }
+                $html = HtmlDomParser::str_get_html($content);
+
+                $arr_data = array();
+                if ($html->find('.article-content', 0)) {
+
+                    $cont_title = html_entity_decode($html->find("h1.lh", 0)->plaintext);
+                    $arr_data['cont_title'] = $cont_title;
+                    $arr_data['cont_slug'] = General::getSlug($cont_title);
+
+                    //check post exist
+                    $arr_detail = $instanceSearchContent->getDetail(
+                        array(
+                            'cont_slug' => $arr_data['cont_slug'],
+                            'not_cont_status' => -1
+                        )
+                    );
+                    if (!empty($arr_detail)) {
+                        echo \My\General::getColoredString("Exist this content:" . $arr_data['cont_slug'], 'red');
+                        continue;
+                    }
+
+                    //get content detail
+                    $cont_description = $html->find('div.top-content div.sapo span.xsubject', 0)->plaintext;
+                    $cont_description = str_replace('(Emdep.vn) - ','',$cont_description);
+
+                    $html->find('.article-content .hide', 0)-> innertext = '';
+                    $cont_detail = $html->find('.article-content', 0)->outertext;
+
+                    $link_content = $html->find("div.article-content a");
+                    if (count($link_content) > 0) {
+                        foreach ($link_content as $key => $link) {
+                            $href = $link->href;
+                            $cont_detail = str_replace($href, BASE_URL, $cont_detail);
+                        }
+                    }
+                    //get image
+                    $arr_image = $html->find("div.article-content img");
+                    if (count($arr_image) > 0) {
+                        foreach ($arr_image as $key => $img) {
+                            $src = $img->src;
+                            $extension = end(explode('.', end(explode('/', $src))));
+                            $name_img = $arr_data['cont_slug'] . '_' . ($key + 1) . '.' . $extension;
+                            file_put_contents($upload_dir['path'] . '/' . $name_img, General::crawler($src));
+                            $cont_detail = str_replace($src, $upload_dir['url'] . '/' . $name_img, $cont_detail);
+                            if ($key == 0) {
+                                $arr_data['cont_main_image'] = $upload_dir['url'] . '/' . $name_img;
+                            }
+
+                        }
+                    }
+
+                    $arr_data['cont_detail'] = html_entity_decode($cont_detail);
+                    $arr_data['cont_description'] = $cont_description;
+                    $arr_data['created_date'] = time();
+                    $arr_data['cate_id'] = 6;
+                    $arr_data['cont_views'] = rand(1, 1000);
+                    $arr_data['cont_status'] = 1;
+                    $arr_data['from_source'] = 'afamily/suc-khoe';
 
                     //insert Data
                     $serviceContent = $this->serviceLocator->get('My\Models\Content');

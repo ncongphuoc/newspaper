@@ -35,7 +35,7 @@
                 <div class=td-module-meta-info>
                     <a href="index.html" class=td-post-category><?php echo $this->arrCategoryDetail['cate_name']; ?></a>
                     <span class=td-post-date><time class="entry-date updated td-module-date"
-                                                   datetime=""><?php echo date("d-m-Y", $arr_content['created_date']); ?><?php echo date("d-m-Y", $arr_content['created_date']); ?></time></span>
+                                                   datetime=""><?php echo date("d-m-Y", $arr_content['created_date']); ?></time></span>
                 </div>
                 <div class=td-excerpt>
                     <?php echo (strlen($arr_content['cont_description']) < 100) ? $arr_content['cont_description'] : mb_substr($arr_content['cont_description'], 0, 100, 'UTF-8') . '. . . '; ?>

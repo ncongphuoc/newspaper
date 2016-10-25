@@ -43,8 +43,8 @@ class SearchController extends MyController
 
             $this->renderer = $this->serviceLocator->get('Zend\View\Renderer\PhpRenderer');
             $this->renderer->headMeta()->appendName('dc.description', $params['keyword']);
-            $this->renderer->headTitle('Tìm kiếm - ' . $params['keyword'] . General::TITLE_META);
-            $this->renderer->headMeta()->appendName('keywords', General::KEYWORD_DEFAULT . $params['keyword']);
+            $this->renderer->headTitle($params['keyword'] . General::TITLE_META);
+            $this->renderer->headMeta()->appendName('keywords', General::KEYWORD_DEFAULT . ', '. $params['keyword']);
             $this->renderer->headMeta()->appendName('description', $params['keyName']);
             $this->renderer->headMeta()->setProperty('og:url', $this->url()->fromRoute('search', ['keyword' => $params['keyword'], 'page' => $intPage]));
             $this->renderer->headMeta()->setProperty('og:title', $params['keyword']);

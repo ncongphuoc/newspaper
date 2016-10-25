@@ -4,16 +4,16 @@ namespace My;
 
 class General {
 
-    const SITE_DOMAIN_FULL = 'http://khampha.tech';
-    const TITLE_META = " - Khampha.tech";
-    const SITE_AUTH = "Khampha.tech";
-    const SITE_DOMAIN = 'Khampha.tech';
-    const SITE_SLOGAN = 'Khám phá công nghệ';
-    const SITE_HOTLINE = '(+84) 97 353 1618';
-    const KEYWORD_DEFAULT = 'Khampha.tech, khampha, kham pha khoa hoc, tin tuc khoa hoc, su kien khoa hoc, kham pha doi song, bi an, bi an khoa hoc, goc hai huoc, tin tuc khoa hoc nhanh nhat, tong hop tin tuc khoa hoc, cong nghe';
-    const DESCRIPTION_DEFAULT = 'Khampha.tech - Khám phá công nghệ, Cập nhật thông tin khoa học , công nghê, khám phá những bí ẩn của cuộc sống - khoa học, nghiên cứu những phát minh mới';
+    const SITE_DOMAIN_FULL = 'http://tintuc360.me';
+    const TITLE_META = " - Tintuc360.me";
+    const SITE_AUTH = "Tintuc360.me";
+    const SITE_DOMAIN = 'Tintuc360.me';
+    const SITE_SLOGAN = 'Tin tức tổng hợp';
+    const SITE_HOTLINE = '';
+    const KEYWORD_DEFAULT = 'teen viet nam, giới trẻ, xu hướng, âm nhạc, xem phim, đời sống, hàng hiệu, chuyện lạ, thời trang trẻ, mới lớn, đang yêu, sành điệu, chuyện cười, khéo tay, các sao';
+    const DESCRIPTION_DEFAULT = 'Tintuc360.me - Trang tin tức giải trí - xã hội Việt Nam - Quốc Tế. Đưa tin nhanh nhất : thời trang, video ngôi sao, phim ảnh, tình yêu, học đường, các chuyển động xã hội.';
     const SITE_IMAGES_DEFAULT = 'http://static.khampha.tech/f/v1/images/home.png';
-    const SITE_SOCIAL = 'https://www.facebook.com/khampha.tech/';
+    const SITE_SOCIAL = 'https://www.facebook.com/tintuc360.me/';
     const SITE_LOCATION = "";
     const MEMBER = 5;
     const ADMINISTRATOR = 2;

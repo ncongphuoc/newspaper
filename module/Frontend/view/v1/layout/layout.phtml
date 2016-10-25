@@ -270,12 +270,9 @@
         }
 
         .td-menu-background, .td-search-background {
-            background-image: url(wp-content/uploads/2016/05/mobile-bg.jpg)
+            background-image: url(http://dev.st.newspaper.vn/f/v1/images/bg-mobile.jpg)
         }
-
-        .white-popup-block:before {
-            background-image: url(http://demo.tagdiv.com/newspaper/wp-content/uploads/2016/05/login-mod.jpg)
-        }</style>
+</style>
     <noscript>
         <style type="text/css">.wpb_animate_when_almost_visible {
                 opacity: 1
@@ -300,13 +297,13 @@
 <!-- SEARCH -->
 <div class=td-search-wrap-mob>
     <div class=td-drop-down-search aria-labelledby=td-header-search-button>
-        <form method=get class=td-search-form action="http://demo.tagdiv.com/newspaper/">
+        <form method=get class=td-search-form action="<?php echo $this->serverUrl() . $this->Url('search') ?>">
             <div class=td-search-close>
                 <a href="#"><i class=td-icon-close-mobile></i></a>
             </div>
             <div role=search class=td-search-input>
                 <span>Search</span>
-                <input id=td-header-search-mob type=text value="" name=s autocomplete=off/>
+                <input id=td-header-search-mob type=text value="" name="keyword"/>
             </div>
         </form>
         <div id=td-aj-search-mob></div>
