@@ -10,15 +10,11 @@ class Keyword extends ModelAbstract {
     }
 
     public function __construct() {
-        $this->setTmpKeyCache('tmpLogs');
-        parent::__construct();
+        return;
     }
 
     public function add($p_arrParams) {
         $intResult = $this->getParentTable()->add($p_arrParams);
-        if ($intResult) {
-            $this->cache->increase($this->tmpKeyCache, 1);
-        }
         return $intResult;
     }
 

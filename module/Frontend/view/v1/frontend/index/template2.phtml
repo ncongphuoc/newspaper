@@ -703,48 +703,33 @@
                             <span>ĐỌC NHIỀU NHẤT</span>
                         </h4>
                     </div>
-                    <divclass="td_block_inner">
-                        <div class="td_module_16 td_module_wrap td-animation-stack">
-                            <div class="td-module-thumb"><a href="http://demo.tagdiv.com/newspaper_magazine/2015/09/23/td-post-george-boateng-keeping-ron-vlaar-was-paul-lambert-masterstroke/" rel="bookmark" title="George Boateng: Keeping Ron Vlaar was Paul Lambert masterstroke"><img width="150" height="150" class="entry-thumb td-animation-stack-type0-2" src="http://demo.tagdiv.com/newspaper_magazine/wp-content/uploads/2015/09/24-150x150.jpg" alt="" title="George Boateng: Keeping Ron Vlaar was Paul Lambert masterstroke"></a></div>
-                            <div class="item-details">
-                                <h3 class="entry-title td-module-title"><a href="http://demo.tagdiv.com/newspaper_magazine/2015/09/23/td-post-george-boateng-keeping-ron-vlaar-was-paul-lambert-masterstroke/" rel="bookmark" title="George Boateng: Keeping Ron Vlaar was Paul Lambert masterstroke">George Boateng: Keeping Ron Vlaar was Paul Lambert masterstroke</a></h3>
-                                <div class="td-module-meta-info">
-                                    <a href="http://demo.tagdiv.com/newspaper_magazine/category/sport/" class="td-post-category">Sport</a> <span class="td-post-author-name"><a href="http://demo.tagdiv.com/newspaper_magazine/author/admin/">David Lee</a> <span>-</span> </span> <span class="td-post-date"><time class="entry-date updated td-module-date" datetime="2015-09-23T12:42:05+00:00">September 23, 2015</time></span> <div class="td-module-comments"><a href="http://demo.tagdiv.com/newspaper_magazine/2015/09/23/td-post-george-boateng-keeping-ron-vlaar-was-paul-lambert-masterstroke/#respond">0</a></div> </div>
-                                <div class="td-excerpt">
-                                    All right. Well, take care yourself. I guess that's what you're best, presence old master? A tremor in the Force. The last time felt... </div>
+                    <div class="td_block_inner">
+                        <?php foreach(unserialize(ARR_CONTENT_HOT_LIST) as $content): ?>
+                            <div class="td_module_16 td_module_wrap td-animation-stack">
+                                <div class="td-module-thumb">
+                                    <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $content['cont_slug'], 'contentId' => $content['cont_id']]) ?>" rel="bookmark" title="<?php echo $content['concont_titletent_title'] ?>">
+                                        <img width="150" height="100" class="entry-thumb td-animation-stack-type0-2" src="<?php echo $content['cont_main_image'] ?>" alt="" title="<?php echo $content['cont_title'] ?>">
+                                    </a>
+                                </div>
+                                <div class="item-details">
+                                    <h4 class="entry-title td-module-title">
+                                        <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $content['cont_slug'], 'contentId' => $content['cont_id']]) ?>" rel="bookmark" title="<?php echo $content['cont_title'] ?>">
+                                            <?php echo $content['cont_title'] ?>
+                                        </a>
+                                    </h4>
+                                    <div class="td-module-meta-info">
+                                        <a href="http://demo.tagdiv.com/newspaper_magazine/category/sport/" class="td-post-category">Sport</a>
+                                        <span class="td-post-date">
+                                            <time class="entry-date updated td-module-date" datetime="<?php echo date("d-m-Y", $content['created_date']); ?>">
+                                                <?php echo date("d-m-Y", $content['created_date']); ?>
+                                            </time>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="td_module_16 td_module_wrap td-animation-stack">
-                            <div class="td-module-thumb"><a href="http://demo.tagdiv.com/newspaper_magazine/2015/09/24/td-post-gigabyte-geforce-gtx-950-review-pricing-is-everything/" rel="bookmark" title="Gigabyte GeForce GTX 950 Review: Pricing Is Everything"><img width="150" height="150" class="entry-thumb td-animation-stack-type0-2" src="http://demo.tagdiv.com/newspaper_magazine/wp-content/uploads/2015/09/18-150x150.jpg" alt="" title="Gigabyte GeForce GTX 950 Review: Pricing Is Everything"></a></div>
-                            <div class="item-details">
-                                <h3 class="entry-title td-module-title"><a href="http://demo.tagdiv.com/newspaper_magazine/2015/09/24/td-post-gigabyte-geforce-gtx-950-review-pricing-is-everything/" rel="bookmark" title="Gigabyte GeForce GTX 950 Review: Pricing Is Everything">Gigabyte GeForce GTX 950 Review: Pricing Is Everything</a></h3>
-                                <div class="td-module-meta-info">
-                                    <a href="http://demo.tagdiv.com/newspaper_magazine/category/tech/" class="td-post-category">Tech</a> <span class="td-post-author-name"><a href="http://demo.tagdiv.com/newspaper_magazine/author/admin/">David Lee</a> <span>-</span> </span> <span class="td-post-date"><time class="entry-date updated td-module-date" datetime="2015-09-24T12:41:52+00:00">September 24, 2015</time></span> <div class="td-module-comments"><a href="http://demo.tagdiv.com/newspaper_magazine/2015/09/24/td-post-gigabyte-geforce-gtx-950-review-pricing-is-everything/#respond">0</a></div> </div>
-                                <div class="td-excerpt">
-                                    All right. Well, take care yourself. I guess that's what you're best, presence old master? A tremor in the Force. The last time felt... </div>
-                            </div>
-                        </div>
-                        <div class="td_module_16 td_module_wrap td-animation-stack">
-                            <div class="td-module-thumb"><a href="http://demo.tagdiv.com/newspaper_magazine/2015/09/23/td-post-fashion-week-parties-night-4/" rel="bookmark" title="Fashion Week Parties: Night 4"><img width="150" height="150" class="entry-thumb td-animation-stack-type0-2" src="http://demo.tagdiv.com/newspaper_magazine/wp-content/uploads/2015/09/9-150x150.jpg" alt="" title="Fashion Week Parties: Night 4"></a></div>
-                            <div class="item-details">
-                                <h3 class="entry-title td-module-title"><a href="http://demo.tagdiv.com/newspaper_magazine/2015/09/23/td-post-fashion-week-parties-night-4/" rel="bookmark" title="Fashion Week Parties: Night 4">Fashion Week Parties: Night 4</a></h3>
-                                <div class="td-module-meta-info">
-                                    <a href="http://demo.tagdiv.com/newspaper_magazine/category/fashion/" class="td-post-category">Fashion</a> <span class="td-post-author-name"><a href="http://demo.tagdiv.com/newspaper_magazine/author/admin/">David Lee</a> <span>-</span> </span> <span class="td-post-date"><time class="entry-date updated td-module-date" datetime="2015-09-23T12:41:34+00:00">September 23, 2015</time></span> <div class="td-module-comments"><a href="http://demo.tagdiv.com/newspaper_magazine/2015/09/23/td-post-fashion-week-parties-night-4/#respond">0</a></div> </div>
-                                <div class="td-excerpt">
-                                    All right. Well, take care yourself. I guess that's what you're best, presence old master? A tremor in the Force. The last time felt... </div>
-                            </div>
-                        </div>
-                        <div class="td_module_16 td_module_wrap td-animation-stack">
-                            <div class="td-module-thumb"><a href="http://demo.tagdiv.com/newspaper_magazine/2015/09/24/td-post-celebrity-make-up-artist-gary-cockerill-shows-you-beauty-trick/" rel="bookmark" title="Celebrity make-up artist Gary Cockerill shows you beauty trick"><img width="150" height="150" class="entry-thumb td-animation-stack-type0-2" src="http://demo.tagdiv.com/newspaper_magazine/wp-content/uploads/2015/09/15-150x150.jpg" alt="" title="Celebrity make-up artist Gary Cockerill shows you beauty trick"></a></div>
-                            <div class="item-details">
-                                <h3 class="entry-title td-module-title"><a href="http://demo.tagdiv.com/newspaper_magazine/2015/09/24/td-post-celebrity-make-up-artist-gary-cockerill-shows-you-beauty-trick/" rel="bookmark" title="Celebrity make-up artist Gary Cockerill shows you beauty trick">Celebrity make-up artist Gary Cockerill shows you beauty trick</a></h3>
-                                <div class="td-module-meta-info">
-                                    <a href="http://demo.tagdiv.com/newspaper_magazine/category/photography/" class="td-post-category">Photography</a> <span class="td-post-author-name"><a href="http://demo.tagdiv.com/newspaper_magazine/author/admin/">David Lee</a> <span>-</span> </span> <span class="td-post-date"><time class="entry-date updated td-module-date" datetime="2015-09-24T14:41:46+00:00">September 24, 2015</time></span> <div class="td-module-comments"><a href="http://demo.tagdiv.com/newspaper_magazine/2015/09/24/td-post-celebrity-make-up-artist-gary-cockerill-shows-you-beauty-trick/#respond">0</a></div> </div>
-                                <div class="td-excerpt">
-                                    All right. Well, take care yourself. I guess that's what you're best, presence old master? A tremor in the Force. The last time felt... </div>
-                            </div>
-                        </div>
+                        <?php endforeach; ?>
                     </div>
+                </div>
 
 
             <div class="td_block_wrap td_block_15 td-pb-border-top">

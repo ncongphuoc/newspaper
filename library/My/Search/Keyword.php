@@ -70,7 +70,8 @@ class Keyword extends SearchAbstract {
             'key_name' => ['type' => 'string', 'store' => 'yes', 'analyzer' => 'translation_index_analyzer', 'search_analyzer' => 'translation_search_analyzer', 'term_vector' => 'with_positions_offsets'],
             'key_slug' => ['type' => 'string', 'index' => 'not_analyzed'],
             'created_date' => ['type' => 'long', 'index' => 'not_analyzed'],
-            'cate_id' => ['type' => 'long', 'index' => 'not_analyzed']
+            'cate_id' => ['type' => 'long', 'index' => 'not_analyzed'],
+            'key_weight' => ['type' => 'long', 'index' => 'not_analyzed']
         ]);
         $mapping->send();
     }
@@ -218,6 +219,12 @@ class Keyword extends SearchAbstract {
         if (isset($params['is_crawler'])) {
             $addQuery = new ESQuery\Term();
             $addQuery->setTerm('is_crawler', $params['is_crawler']);
+            $boolQuery->addMust($addQuery);
+        }
+
+        if (isset($params['cate_id'])) {
+            $addQuery = new ESQuery\Term();
+            $addQuery->setTerm('cate_id', $params['cate_id']);
             $boolQuery->addMust($addQuery);
         }
         

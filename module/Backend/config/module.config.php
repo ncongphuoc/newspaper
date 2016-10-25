@@ -92,6 +92,16 @@ return array(
                         ),
                     ),
                 ),
+                'crawlercontent' => array(
+                    'options' => array(
+                        'route' => 'crawlercontent',
+                        'defaults' => array(
+                            '__NAMESPACE__' => 'Backend\Controller',
+                            'controller' => 'console',
+                            'action' => 'crawler-content'
+                        ),
+                    ),
+                ),
                 'sitemap' => array(
                     'options' => array(
                         'route' => 'sitemap',

@@ -25,13 +25,20 @@ class SearchController extends MyController
             }
 
             $key_name = General::clean($params['keyword']);
+
             $intPage = (int)$params['page'] > 0 ? (int)$params['page'] : 1;
             $intLimit = 10;
 
-            $arr_condition_content = [
+            $arr_condition_content = array(
                 'cont_status' => 1,
                 'full_text_title' => $key_name
-            ];
+            );
+
+            $instanceSearchKeyword = new \My\Search\Keyword();
+            $keyword_detail = $instanceSearchKeyword->getDetail(['key_slug' => trim(General::getSlug($key_name))]);
+            if(!empty($keyword_detail)){
+                $arr_condition_content['in_cate_id'] = array($keyword_detail['cate_id']);
+            }
 
             $instanceSearchContent = new \My\Search\Content();
             $arrContentList = $instanceSearchContent->getListLimit($arr_condition_content, $intPage, $intLimit, ['_score' => ['order' => 'desc']]);

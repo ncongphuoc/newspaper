@@ -170,11 +170,15 @@ class MyController extends AbstractActionController {
         if ($arrData['module'] === 'frontend') {
             $instanceSearchCategory = new \My\Search\Category();
             $arrCategoryList = $instanceSearchCategory->getList(['cate_status' => 1], [], ['cate_sort' => ['order' => 'asc'], 'cate_id' => ['order' => 'asc']]);
-            define('ARR_CATEGORY', serialize($arrCategoryList));
+            $arr_category = array();
+            foreach ($arrCategoryList as $category) {
+                $arr_category[$category['cate_id']] = $category;
+            }
+            define('ARR_CATEGORY', serialize($arr_category));
 
             //get list content hot
             $instanceSearchContent = new \My\Search\Content();
-            $arr_content_hot = $instanceSearchContent->getListLimit(['cont_status' => 1], 1, 10, ['cont_views' => ['order' => 'desc']]);
+            $arr_content_hot = $instanceSearchContent->getListLimit(['cont_status' => 1], 1, 5, ['cont_views' => ['order' => 'desc']]);
             define('ARR_CONTENT_HOT_LIST', serialize($arr_content_hot));
 
             //50 KEYWORD :)
