@@ -49,11 +49,11 @@ class SearchController extends MyController
             $paging = $helper($params['module'], $params['__CONTROLLER__'], $params['action'], $intTotal, $intPage, $intLimit, 'search', $params);
 
             $this->renderer = $this->serviceLocator->get('Zend\View\Renderer\PhpRenderer');
-            $this->renderer->headMeta()->appendName('dc.description', $params['keyword']);
             $this->renderer->headTitle($params['keyword'] . General::TITLE_META);
+            $this->renderer->headMeta()->appendName('robots', 'index');
             $this->renderer->headMeta()->appendName('keywords', General::KEYWORD_DEFAULT . ', '. $params['keyword']);
-            $this->renderer->headMeta()->appendName('description', $params['keyName']);
-            $this->renderer->headMeta()->setProperty('og:url', $this->url()->fromRoute('search', ['keyword' => $params['keyword'], 'page' => $intPage]));
+            $this->renderer->headMeta()->appendName('description', $params['keyword']);
+            $this->renderer->headMeta()->setProperty('og:url', BASE_URL . $this->url()->fromRoute('search', ['keyword' => $params['keyword'], 'page' => $intPage]));
             $this->renderer->headMeta()->setProperty('og:title', $params['keyword']);
             $this->renderer->headMeta()->setProperty('og:description', $params['keyword']);
 

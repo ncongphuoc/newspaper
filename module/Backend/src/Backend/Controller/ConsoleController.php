@@ -779,11 +779,7 @@ class ConsoleController extends MyController
 
     public function crawlerKeywordAction()
     {
-        for ($i = 0; $i < 8; $i++) {
-            $this->getKeyword();
-            echo \My\General::getColoredString("i =  " . $i, 'yellow');
-        }
-        echo \My\General::getColoredString("Finish , time: " . date('H:i:s'), 'green');
+        $this->getKeyword();
         return;
     }
 
@@ -832,9 +828,9 @@ class ConsoleController extends MyController
         if ($int_result) {
             echo \My\General::getColoredString("Crawler success keyword_id = {$arr_keyword['key_id']}", 'green');
         }
-//
-//        sleep(3);
-//        $this->getKeyword();
+
+        sleep(2);
+        $this->getKeyword();
     }
 
     public function add_keyword($arr_key, $keyword_detail)
