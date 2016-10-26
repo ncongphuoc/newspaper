@@ -1132,7 +1132,7 @@ class ConsoleController extends MyController
                         break;
                     case 3:
                         $this->__afamilyCrawler($i, 'http://afamily.vn/suc-khoe', $cate_id);
-                        $this->__emdepCrawler($i, 'http://emdep.vn/thoi-trang', $cate_id);
+                        $this->__emdepCrawler($i, 'http://emdep.vn/song-khoe', $cate_id);
                         break;
                     case 4:
                         $this->__afamilyCrawler($i, 'http://afamily.vn/dep', $cate_id);
