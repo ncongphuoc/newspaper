@@ -10,7 +10,6 @@ class Content extends ModelAbstract {
     }
 
     public function __construct() {
-        return;
     }
 
     public function getList($arrCondition = array()) {

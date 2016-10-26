@@ -10,7 +10,6 @@ class Keyword extends ModelAbstract {
     }
 
     public function __construct() {
-        return;
     }
 
     public function add($p_arrParams) {
