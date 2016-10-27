@@ -1,7 +1,8 @@
 <?php
 $content_detail = $this->arrContent;
 $category_detail = $this->arrCategoryDetail;
-$arrKeywordList = $this->arrKeywordList
+$arrKeywordList = $this->arrKeywordList;
+$list_category = unserialize(ARR_CATEGORY);
 ?>
 <div class="td-crumb-container">
     <div class="entry-crumbs">
@@ -143,5 +144,89 @@ $arrKeywordList = $this->arrKeywordList
             </div>
         </footer>
     </article>
-    
+    <div class="td_block_wrap td_block_related_posts  td-pb-border-top">
+        <h4 class="td-related-content-title">
+            <a class="more_content td-related-left td-cur-simple-item" href="#content_related">BÀI LIÊN QUAN</a>
+            <a class="more_content td-related-right" href="#content_category">CÙNG DANH MỤC</a>
+        </h4>
+        <div id="content_related" class="show_content td_block_inner td_animated_xlong td_fadeInDown" style="height: auto;">
+            <div class="td-related-row">
+                <?php foreach ($this->arrContentLikeList as $content) { ?>
+                <div class="td-related-span4">
+                    <div class="td_module_related_posts td-animation-stack td_mod_related_posts">
+                        <div class="td-module-image">
+                            <div class="td-module-thumb">
+                                <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $content['cont_slug'], 'contentId' => $content['cont_id']]) ?>"
+                                    rel="bookmark"
+                                    title="<?php echo $content['cont_title'] ?>">
+                                    <img width="218" height="150" class="entry-thumb td-animation-stack-type0-2"
+                                        src="<?php echo $content['cont_main_image'] ?>"
+                                        alt="<?php echo $content['cont_title'] ?>"
+                                        title="<?php echo $content['cont_title'] ?>">
+                                </a>
+                            </div>
+                            <a href="<?php echo $this->serverUrl() . $this->Url('category', ['cateSlug' => $list_category[$content['cate_id']]['cate_slug'], 'cateId' => $list_category[$content['cate_id']]['cate_id']]) ?>"
+                               class="td-post-category">
+                                <?php echo $list_category[$content['cate_id']]['cate_name'] ?>
+                            </a>
+                        </div>
+                        <div class="item-details">
+                            <h3 class="entry-title td-module-title">
+                                <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $content['cont_slug'], 'contentId' => $content['cont_id']]) ?>"
+                                    rel="bookmark"
+                                    title="<?php echo $content['cont_title'] ?>">
+                                    <?php echo (strlen($content['cont_title']) < 100) ? $content['cont_title'] : mb_substr($content['cont_title'], 0, 100, 'UTF-8') . '...'; ?>
+                                </a>
+                            </h3>
+                        </div>
+                    </div>
+
+                </div>
+                <?php } ?>
+            </div>
+        </div>
+        <div id="content_category" class="show_content td_block_inner td_animated_xlong td_fadeInDown" style="height: auto; display: none">
+            <div class="td-related-row">
+                <?php foreach ($this->arrContentCateList as $content) { ?>
+                <div class="td-related-span4">
+                    <div class="td_module_related_posts td-animation-stack td_mod_related_posts">
+                        <div class="td-module-image">
+                            <div class="td-module-thumb">
+                                <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $content['cont_slug'], 'contentId' => $content['cont_id']]) ?>"
+                                    rel="bookmark" title="<?php echo $content['cont_title'] ?>">
+                                    <img width="218" height="150" class="entry-thumb td-animation-stack-type0-2"
+                                        src="<?php echo $content['cont_main_image'] ?>"
+                                        alt="<?php echo $content['cont_title'] ?>"
+                                         title="<?php echo $content['cont_title'] ?>">
+                                </a>
+                            </div>
+                            <a href="<?php echo $this->serverUrl() . $this->Url('category', ['cateSlug' => $list_category[$content['cate_id']]['cate_slug'], 'cateId' => $list_category[$content['cate_id']]['cate_id']]) ?>" class="td-post-category">
+                                <?php echo $list_category[$content['cate_id']]['cate_name'] ?>
+                            </a>
+                        </div>
+                        <div class="item-details">
+                            <h3 class="entry-title td-module-title">
+                                <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $content['cont_slug'], 'contentId' => $content['cont_id']]) ?>"
+                                    rel="bookmark" title="<?php echo $content['cont_title'] ?>">
+                                    <?php echo (strlen($content['cont_title']) < 100) ? $content['cont_title'] : mb_substr($content['cont_title'], 0, 100, 'UTF-8') . '...'; ?>
+
+                                </a>
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
 </div>
+<script type="text/javascript">
+    jQuery('.more_content').click(function(){
+        var id = jQuery(this).attr('href');
+        jQuery('.show_content').hide();
+        jQuery(id).show();
+        jQuery('.more_content').removeClass('td-cur-simple-item');
+        jQuery(this).addClass('td-cur-simple-item');
+        return true;
+    });
+</script>

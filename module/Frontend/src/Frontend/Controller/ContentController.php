@@ -105,14 +105,25 @@ class ContentController extends MyController
 
             $this->renderer->headLink(array('rel' => 'amphtml', 'href' => BASE_URL . $this->url()->fromRoute('view-content', ['contentSlug' => $arrContent['cont_slug'], 'contentId' => $cont_id])));
             $this->renderer->headLink(array('rel' => 'canonical', 'href' => BASE_URL . $this->url()->fromRoute('view-content', ['contentSlug' => $arrContent['cont_slug'], 'contentId' => $cont_id])));
-            //lấy tin cũ hơn cùng chuyên mục
-//            $arrContentLastedList = $instanceSearchContent->getListLimit(['cate_id' => $arrContent['cate_id'], 'not_cont_status' => -1, 'less_cont_id' => $arrContent['cont_id']], 1, 6, ['cont_id' => ['order' => 'desc']]);
+
+            //content same category
+            $arrFields = array('cont_id', 'cont_title', 'cont_slug', 'cate_id','cont_main_image','created_date','cont_description');
+            $arrContentCateList = $instanceSearchContent->getListLimit(
+                ['cate_id' => $arrContent['cate_id'], 'not_cont_status' => -1, 'less_cont_id' => $arrContent['cont_id']],
+                1,
+                6,
+                ['cont_id' => ['order' => 'desc']],
+                $arrFields
+            );
 //
-//            //Lấy tin có nội dung title gần giống nhau
-//            $arrContentLikeList = $instanceSearchContent->getListLimit(['cont_status' => 1, 'full_text_title' => $arrContent['cont_title'], 'not_cont_id' => $arrContent['cont_id']], 1, 10, ['_score' => ['order' => 'desc']]);
-//
-//            //5 bài mới nhất
-//            $arrContentNews = $instanceSearchContent->getListLimit(['cont_status' => 1, 'not_cont_id' => $arrContent['cont_id']], 1, 6, ['created_date' => ['order' => 'desc']]);
+//            //content like title
+            $arrContentLikeList = $instanceSearchContent->getListLimit(
+                ['cont_status' => 1, 'full_text_title' => $arrContent['cont_title'], 'not_cont_id' => $arrContent['cont_id']],
+                1,
+                6,
+                ['_score' => ['order' => 'desc']],
+                $arrFields
+            );
 //
             //lấy 10 keyword :)
             $instanceSearchKeyword = new \My\Search\Keyword();
@@ -127,11 +138,10 @@ class ContentController extends MyController
                 'params' => $params,
                 'arrContent' => $arrContent,
                 'arrCategoryDetail' => $categoryDetail,
-//                'arrContentLikeList' => $arrContentLikeList,
-//                'arrContentLastedList' => $arrContentLastedList,
+                'arrContentLikeList' => $arrContentLikeList,
+                'arrContentCateList' => $arrContentCateList,
 //                'arrContentNews' => $arrContentNews,
                 'arrKeywordList' => $arrKeywordList,
-                //'arrCategoryParent' => $arrCategoryParent
             );
         } catch (\Exception $exc) {
             echo '<pre>';
