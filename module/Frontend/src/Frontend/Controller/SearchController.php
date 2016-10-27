@@ -34,13 +34,6 @@ class SearchController extends MyController
                 'full_text_title' => $key_name
             );
 
-            $instanceSearchKeyword = new \My\Search\Keyword();
-            $keyword_detail = $instanceSearchKeyword->getDetail(['key_slug' => trim(General::getSlug($key_name))]);
-            if (!empty($keyword_detail)) {
-                $arr_condition_content['in_cate_id'] = array($keyword_detail['cate_id']);
-
-            }
-
             $arrFields = array('cont_id', 'cont_title', 'cont_slug', 'cate_id','cont_main_image','created_date');
             $instanceSearchContent = new \My\Search\Content();
             $arrContentList = $instanceSearchContent->getListLimit($arr_condition_content, $intPage, $intLimit, ['_score' => ['order' => 'desc']], $arrFields);
@@ -113,18 +106,41 @@ class SearchController extends MyController
             if (empty($arrKeyDetail)) {
                 return $this->redirect()->toRoute('404', array());
             }
+            $arr_condition_content = array(
+                'cont_status' => 1,
+                'full_text_title' => $arrKeyDetail['key_name']
+            );
 
+            if ($arrKeyDetail['cate_id'] != -1) {
+                $arr_condition_content['in_cate_id'] = array($arrKeyDetail['cate_id']);
+
+            }
             $intPage = is_numeric($params['page']) ? $params['page'] : 1;
-            $intLimit = 20;
+            $intLimit = 10;
 
+            $arrFields = array('cont_id', 'cont_title', 'cont_slug', 'cate_id','cont_main_image','created_date');
             $instanceSearchContent = new \My\Search\Content();
-            $arrContentList = $instanceSearchContent->getListLimit(['full_text_title' => $arrKeyDetail['key_name']], $intPage, $intLimit, ['_score' => ['order' => 'desc']]);
+            $arrContentList = $instanceSearchContent->getListLimit($arr_condition_content, $intPage, $intLimit, ['_score' => ['order' => 'desc']],$arrFields);
 
-            $intTotal = $instanceSearchContent->getTotal(['cont_title' => $arrKeyDetail['key_name']]);
+            $intTotal = $instanceSearchContent->getTotal($arr_condition_content);
             $helper = $this->serviceLocator->get('viewhelpermanager')->get('Paging');
             $paging = $helper($params['module'], $params['__CONTROLLER__'], $params['action'], $intTotal, $intPage, $intLimit, 'keyword', $params);
 
+            //get keyword
+            $listContent = array();
+            $instanceSearchKeyword = new \My\Search\Keyword();
+            foreach ($arrContentList as $content) {
+                $listContent[$content['cont_id']] = $content;
+                $arrCondition = array(
+                    'full_text_keyname' => $content['cont_title'],
+                    'in_cate_id' => array($content['cate_id'], -1)
+                );
+                $arrKeywordList = $instanceSearchKeyword->getListLimit($arrCondition, 1, 5, ['_score' => ['order' => 'desc']]);
+                $listContent[$content['cont_id']]['list_keyword'] = $arrKeywordList;
+            }
+
             $this->renderer = $this->serviceLocator->get('Zend\View\Renderer\PhpRenderer');
+            $this->renderer->headMeta()->appendName('robots', 'index');
             $this->renderer->headMeta()->appendName('dc.description', html_entity_decode($arrKeyDetail['key_name']) . General::TITLE_META);
             $this->renderer->headMeta()->appendName('dc.subject', html_entity_decode($arrKeyDetail['key_name']) . General::TITLE_META);
             $this->renderer->headTitle('Từ khoá - ' . html_entity_decode($arrKeyDetail['key_name']) . General::TITLE_META);
@@ -134,6 +150,8 @@ class SearchController extends MyController
             $this->renderer->headMeta()->setProperty('og:url', $this->url()->fromRoute('keyword', array('keySlug' => $arrKeyDetail['key_slug'], 'keyId' => $arrKeyDetail['key_id'], 'page' => $intPage)));
             $this->renderer->headMeta()->setProperty('og:title', html_entity_decode('Danh sách bài viết trong từ khoá : ' . $arrKeyDetail['key_name'] . General::TITLE_META));
             $this->renderer->headMeta()->setProperty('og:description', html_entity_decode('Danh sách bài viết trong từ khoá : ' . $arrKeyDetail['key_name'] . General::TITLE_META));
+            $this->renderer->headLink(array('rel' => 'amphtml', 'href' => BASE_URL . $this->url()->fromRoute('keyword', array('keySlug' => $arrKeyDetail['key_slug'], 'keyId' => $arrKeyDetail['key_id'], 'page' => $intPage))));
+            $this->renderer->headLink(array('rel' => 'canonical', 'href' => BASE_URL . $this->url()->fromRoute('keyword', array('keySlug' => $arrKeyDetail['key_slug'], 'keyId' => $arrKeyDetail['key_id'], 'page' => $intPage))));
 
             /*
              * get 20 keyword tương tự
@@ -146,7 +164,7 @@ class SearchController extends MyController
                 'paging' => $paging,
                 'intPage' => $intPage,
                 'intTotal' => $intTotal,
-                'arrContentList' => $arrContentList,
+                'arrContentList' => $listContent,
                 'arrKeyDetail' => $arrKeyDetail
             );
         } catch (\Exception $exc) {

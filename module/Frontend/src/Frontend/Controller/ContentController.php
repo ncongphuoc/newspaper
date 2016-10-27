@@ -76,6 +76,7 @@ class ContentController extends MyController
             $this->renderer->headTitle(html_entity_decode($metaTitle) . General::TITLE_META);
             $this->renderer->headMeta()->appendName('keywords', html_entity_decode($metaKeyword));
             $this->renderer->headMeta()->appendName('description', html_entity_decode($metaDescription));
+            $this->renderer->headMeta()->appendName('robots', 'noindex');
             $this->renderer->headMeta()->appendName('social', $metaSocial);
             $this->renderer->headMeta()->setProperty('og:url', $this->url()->fromRoute('view-content', ['contentSlug' => $arrContent['cont_slug'], 'contentId' => $cont_id]));
             $this->renderer->headMeta()->setProperty('og:title', html_entity_decode($arrContent['cont_title']));

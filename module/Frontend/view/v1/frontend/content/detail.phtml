@@ -86,7 +86,7 @@ $list_category = unserialize(ARR_CATEGORY);
                         <li><span>KEYWORD</span></li>
                         <?php foreach ($arrKeywordList as $keyword) { ?>
                             <li>
-                                <a href="<?php echo $this->serverUrl() . $this->Url('search', ['keyword' => $keyword['key_name']]) ?>"><?php echo $keyword['key_name'] ?></a>
+                                <a href="<?php echo $this->serverUrl() . $this->Url('keyword', ['keyId' => $keyword['key_id'],'keySlug' => $keyword['key_slug']]) ?>"><?php echo $keyword['key_name'] ?></a>
                             </li>
                         <?php } ?>
                     </ul>

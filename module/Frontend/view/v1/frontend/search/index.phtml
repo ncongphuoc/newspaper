@@ -63,7 +63,7 @@ $arr_category = unserialize(ARR_CATEGORY);
                     <ul class="td-tags td-post-small-box clearfix">
                         <li><span>KEYWORD</span></li>
                         <?php foreach ($arr_content['list_keyword'] as $keyword){ ?>
-                            <li><a href="<?php echo $this->serverUrl() . $this->Url('search', ['keyword' => $keyword['key_name']]) ?>"><?php echo $keyword['key_name'] ?></a></li>
+                            <li><a href="<?php echo $this->serverUrl() . $this->Url('keyword', ['keyId' => $keyword['key_id'], 'keySlug' => $keyword['key_slug']]) ?>"><?php echo $keyword['key_name'] ?></a></li>
                         <?php } ?>
                     </ul>
                 </div>
