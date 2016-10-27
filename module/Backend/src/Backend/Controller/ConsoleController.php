@@ -908,7 +908,7 @@ class ConsoleController extends MyController
             }
         }
 
-        $result = file_put_contents(PUBLIC_PATH . '/xml/sitemap-khampha.xml', $xml->asXML());
+        $result = file_put_contents(PUBLIC_PATH . '/xml/sitemap-tintuc360.xml', $xml->asXML());
         if ($result) {
             echo General::getColoredString("Create sitemap.xml completed!", 'blue', 'cyan');
             $this->flush();
@@ -1117,11 +1117,13 @@ class ConsoleController extends MyController
 //        $arr_category = $instanceSearchCategory->getList(['cate_status' => 1], [], ['cate_id' => ['order' => 'asc']]);
 
         $arr_category = [6, 1, 2, 3, 5, 7, 4];
-        for ($i = 2; $i <= 2; $i++) {
+        for ($i = 50; $i > 0; $i--) {
             foreach ($arr_category as $cate_id) {
                 switch ($cate_id) {
                     case 1:
-                        $this->__kenh14Crawler($i, $cate_id);
+                        if($i>0 && $i<11) {
+                            $this->__kenh14Crawler($i, $cate_id);
+                        }
                         break;
                     case 2:
                         $this->__emdepCrawler($i, 'http://emdep.vn/thoi-trang', $cate_id);
@@ -1135,7 +1137,9 @@ class ConsoleController extends MyController
                         $this->__emdepCrawler($i, 'http://emdep.vn/lam-dep', $cate_id);
                         break;
                     case 5:
-                        $this->__24hCrawler($i, $cate_id);
+                        if($i>0 && $i<11){
+                            $this->__24hCrawler($i, $cate_id);
+                        }
                         $this->__emdepCrawler($i, 'http://emdep.vn/mon-ngon', $cate_id);
                         break;
                     case 6:
@@ -1147,7 +1151,9 @@ class ConsoleController extends MyController
                 }
             }
             echo \My\General::getColoredString("Finish page " . $i, 'white');
+            sleep(5);
         }
+
         echo \My\General::getColoredString("DONE time: " . date('H:i:s'), 'light_cyan');
     }
 
@@ -1487,7 +1493,7 @@ class ConsoleController extends MyController
                 $arr_data['cont_description'] = $cont_description;
                 $arr_data['created_date'] = time();
                 $arr_data['cate_id'] = $cate_id;
-                $arr_data['cont_views'] = rand(1, 1000);
+                $arr_data['cont_views'] = 0;
                 $arr_data['cont_status'] = 1;
                 $arr_data['from_source'] = 'afamily';
 
@@ -1575,7 +1581,7 @@ class ConsoleController extends MyController
                     $arr_data['cont_description'] = $cont_description;
                     $arr_data['created_date'] = time();
                     $arr_data['cate_id'] = 3;
-                    $arr_data['cont_views'] = rand(1, 1000);
+                    $arr_data['cont_views'] = 0;
                     $arr_data['cont_status'] = 1;
                     $arr_data['from_source'] = 'http://kenh14.vn/fashion';
 
@@ -1663,7 +1669,7 @@ class ConsoleController extends MyController
                     $arr_data['cont_description'] = $cont_description;
                     $arr_data['created_date'] = time();
                     $arr_data['cate_id'] = 4;
-                    $arr_data['cont_views'] = rand(1, 1000);
+                    $arr_data['cont_views'] = 0;
                     $arr_data['cont_status'] = 1;
                     $arr_data['from_source'] = 'http://kenh14.vn/star';
 
@@ -1750,7 +1756,7 @@ class ConsoleController extends MyController
                         if ($key == 0) {
                             $arr_data['cont_main_image'] = $upload_dir['url'] . '/' . $name_img;
                         }
-
+                        sleep(1);
                     }
                 }
 
@@ -1758,7 +1764,7 @@ class ConsoleController extends MyController
                 $arr_data['cont_description'] = $cont_description;
                 $arr_data['created_date'] = time();
                 $arr_data['cate_id'] = $cate_id;
-                $arr_data['cont_views'] = rand(1, 1000);
+                $arr_data['cont_views'] = 0;
                 $arr_data['cont_status'] = 1;
                 $arr_data['from_source'] = 'emdep';
 
@@ -1772,7 +1778,7 @@ class ConsoleController extends MyController
                     echo \My\General::getColoredString("Can not insert content db", 'red');
                 }
             }
-            sleep(1);
+            sleep(3);
         }
     }
 
@@ -1843,7 +1849,7 @@ class ConsoleController extends MyController
                         if ($key == 0) {
                             $arr_data['cont_main_image'] = $upload_dir['url'] . '/' . $name_img;
                         }
-                        sleep(0.5);
+                        sleep(1);
                     }
                 }
 
@@ -1851,7 +1857,7 @@ class ConsoleController extends MyController
                 $arr_data['cont_description'] = $cont_description;
                 $arr_data['created_date'] = time();
                 $arr_data['cate_id'] = $cate_id;
-                $arr_data['cont_views'] = rand(1, 1000);
+                $arr_data['cont_views'] = 0;
                 $arr_data['cont_status'] = 1;
                 $arr_data['from_source'] = '24h';
 
@@ -1865,7 +1871,7 @@ class ConsoleController extends MyController
                     echo \My\General::getColoredString("Can not insert content db", 'red');
                 }
             }
-            sleep(1);
+            sleep(2);
         }
     }
 
@@ -1963,7 +1969,7 @@ class ConsoleController extends MyController
                 $arr_data['cont_description'] = $cont_description;
                 $arr_data['created_date'] = time();
                 $arr_data['cate_id'] = $cate_id;
-                $arr_data['cont_views'] = rand(1, 1000);
+                $arr_data['cont_views'] = 0;
                 $arr_data['cont_status'] = 1;
                 $arr_data['from_source'] = 'ivivu';
 
@@ -1977,7 +1983,7 @@ class ConsoleController extends MyController
                     echo \My\General::getColoredString("Can not insert content db", 'red');
                 }
             }
-            sleep(1);
+            sleep(2);
         }
     }
 
@@ -2049,7 +2055,7 @@ class ConsoleController extends MyController
                         if ($key == 0) {
                             $arr_data['cont_main_image'] = $upload_dir['url'] . '/' . $name_img;
                         }
-
+                        sleep(1);
                     }
                 }
 
@@ -2057,7 +2063,7 @@ class ConsoleController extends MyController
                 $arr_data['cont_description'] = $cont_description;
                 $arr_data['created_date'] = time();
                 $arr_data['cate_id'] = $cate_id;
-                $arr_data['cont_views'] = rand(1, 1000);
+                $arr_data['cont_views'] = 0;
                 $arr_data['cont_status'] = 1;
                 $arr_data['from_source'] = 'kenh14';
 
@@ -2071,7 +2077,7 @@ class ConsoleController extends MyController
                     echo \My\General::getColoredString("Can not insert content db", 'red');
                 }
             }
-            sleep(1);
+            sleep(2);
         }
     }
 

@@ -36,6 +36,15 @@ class General {
     //define social url
     const SOCIAL_FACEBOOK_URL = 'https://www.facebook.com/khampha.tech/';
 
+    //category
+    const CATEGORY_CHUYEN_SAO = 1;
+    const CATEGORY_THOI_TRANG = 2;
+    const CATEGORY_SUC_KHOE = 3;
+    const CATEGORY_LAM_DEP = 4;
+    const CATEGORY_MON_NGON = 5;
+    const CATEGORY_ME_VA_BE = 6;
+    const CATEGORY_DU_LICH = 7;
+
     static $foreground_colors = array(
         'black' => '0;30', 'dark_gray' => '1;30',
         'blue' => '0;34', 'light_blue' => '1;34',

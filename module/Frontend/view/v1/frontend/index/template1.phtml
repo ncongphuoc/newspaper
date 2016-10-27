@@ -7,29 +7,35 @@
                         <div class="td-big-grid-wrapper">
                             <div class="td_module_mx5 td-animation-stack td-big-grid-post-0 td-big-grid-post td-big-thumb">
                                 <div class="td-module-thumb">
-                                    <a href="http://demo.tagdiv.com/newspaper_magazine/2015/09/24/td-post-celebrity-make-up-artist-gary-cockerill-shows-you-beauty-trick/"
-                                        rel="bookmark"
-                                        title="Celebrity make-up artist Gary Cockerill shows you beauty trick"><img
-                                            width="534" height="462" class="entry-thumb td-animation-stack-type0-2"
-                                            src="http://demo.tagdiv.com/newspaper_magazine/wp-content/uploads/2015/09/15-534x462.jpg"
-                                            alt=""
-                                            title="Celebrity make-up artist Gary Cockerill shows you beauty trick"></a>
+                                    <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][0]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][0]['cont_id']]) ?>"
+                                        rel="bookmark" title="<?php echo $this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][0]['cont_title'] ?>">
+                                        <img width="534" height="462" class="entry-thumb td-animation-stack-type0-2"
+                                                src="<?php echo $this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][0]['cont_main_image'] ?>"
+                                            alt="<?php echo $this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][0]['cont_title'] ?>"
+                                            title="<?php echo $this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][0]['cont_title'] ?>">
+                                    </a>
                                 </div>
                                 <div class="td-meta-info-container">
                                     <div class="td-meta-align">
                                         <div class="td-big-grid-meta">
-                                            <a href="http://demo.tagdiv.com/newspaper_magazine/category/photography/"
-                                               class="td-post-category">Photography</a>
-                                            <h3 class="entry-title td-module-title"><a
-                                                    href="http://demo.tagdiv.com/newspaper_magazine/2015/09/24/td-post-celebrity-make-up-artist-gary-cockerill-shows-you-beauty-trick/"
+                                            <a href="<?php echo $this->serverUrl() . $this->Url('category', ['cateSlug' => $this->arrCategory[\My\General::CATEGORY_CHUYEN_SAO]['cate_slug'], 'cateId' => $this->arrCategory[\My\General::CATEGORY_CHUYEN_SAO]['cate_id']]) ?>"
+                                               class="td-post-category">
+                                                <?php echo $this->arrCategory[\My\General::CATEGORY_CHUYEN_SAO]['cate_name'] ?>
+                                            </a>
+                                            <h3 class="entry-title td-module-title">
+                                                <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][0]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][0]['cont_id']]) ?>"
                                                     rel="bookmark"
-                                                    title="Celebrity make-up artist Gary Cockerill shows you beauty trick">Celebrity
-                                                    make-up artist Gary Cockerill shows you beauty trick</a></h3></div>
+                                                    title="<?php echo $this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][0]['cont_title'] ?>">
+                                                    <?php echo $this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][0]['cont_title'] ?>
+                                                </a>
+                                            </h3>
+                                        </div>
                                         <div class="td-module-meta-info">
-                                            <span class="td-post-author-name"><a
-                                                    href="http://demo.tagdiv.com/newspaper_magazine/author/admin/">David Lee</a> <span>-</span> </span>
-                                            <span class="td-post-date"><time class="entry-date updated td-module-date"
-                                                                             datetime="2015-09-24T14:41:46+00:00">September 24, 2015</time></span>
+<!--                                            <span class="td-post-date">-->
+<!--                                                <time class="entry-date updated td-module-date" datetime="--><?php //echo date('d-m-Y',$this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][0]['created_date']); ?><!--">-->
+<!--                                                    --><?php //echo date('d-m-Y',$this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][0]['created_date']); ?>
+<!--                                                </time>-->
+<!--                                            </span>-->
                                         </div>
                                     </div>
                                 </div>
@@ -37,94 +43,116 @@
                             <div class="td-big-grid-scroll">
                                 <div class="td_module_mx6 td-animation-stack td-big-grid-post-1 td-big-grid-post td-small-thumb">
                                     <div class="td-module-thumb">
-                                        <a
-                                            href="http://demo.tagdiv.com/newspaper_magazine/2015/09/24/td-post-the-workout-that-burns-more-calories-than-running/"
+                                        <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_LAM_DEP][0]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_LAM_DEP][0]['cont_id']]) ?>"
                                             rel="bookmark"
-                                            title="The Workout That Burns More Calories Than Running"><img width="265"
-                                                                                                           height="198"
-                                                                                                           class="entry-thumb td-animation-stack-type0-2"
-                                                                                                           src="http://demo.tagdiv.com/newspaper_magazine/wp-content/uploads/2015/09/61-265x198.jpg"
-                                                                                                           alt=""
-                                                                                                           title="The Workout That Burns More Calories Than Running"></a>
+                                            title="<?php echo $this->arrContent[\My\General::CATEGORY_LAM_DEP][0]['cont_title'] ?>">
+                                            <img width="265" height="198"
+                                               class="entry-thumb td-animation-stack-type0-2"
+                                               src="<?php echo $this->arrContent[\My\General::CATEGORY_LAM_DEP][0]['cont_main_image'] ?>"
+                                               alt="<?php echo $this->arrContent[\My\General::CATEGORY_LAM_DEP][0]['cont_title'] ?>"
+                                               title="<?php echo $this->arrContent[\My\General::CATEGORY_LAM_DEP][0]['cont_title'] ?>">
+                                        </a>
                                     </div>
                                     <div class="td-meta-info-container">
                                         <div class="td-meta-align">
                                             <div class="td-big-grid-meta">
-                                                <a href="http://demo.tagdiv.com/newspaper_magazine/category/lifestyle/health/"
-                                                   class="td-post-category">Health</a>
-                                                <h3 class="entry-title td-module-title"><a
-                                                        href="http://demo.tagdiv.com/newspaper_magazine/2015/09/24/td-post-the-workout-that-burns-more-calories-than-running/"
+                                                <a href="<?php echo $this->serverUrl() . $this->Url('category', ['cateSlug' => $this->arrCategory[\My\General::CATEGORY_LAM_DEP]['cate_slug'], 'cateId' => $this->arrCategory[\My\General::CATEGORY_LAM_DEP]['cate_id']]) ?>"
+                                                   class="td-post-category">
+                                                    <?php echo $this->arrCategory[\My\General::CATEGORY_LAM_DEP]['cate_name'] ?>
+                                                </a>
+                                                <h3 class="entry-title td-module-title">
+                                                    <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_LAM_DEP][0]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_LAM_DEP][0]['cont_id']]) ?>"
                                                         rel="bookmark"
-                                                        title="The Workout That Burns More Calories Than Running">The
-                                                        Workout That Burns More Calories Than Running</a></h3></div>
+                                                        title="<?php echo $this->arrContent[\My\General::CATEGORY_LAM_DEP][0]['cont_title'] ?>">
+                                                        <?php echo $this->arrContent[\My\General::CATEGORY_LAM_DEP][0]['cont_title'] ?>
+                                                    </a>
+                                                </h3>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="td_module_mx6 td-animation-stack td-big-grid-post-2 td-big-grid-post td-small-thumb">
-                                    <div class="td-module-thumb"><a
-                                            href="http://demo.tagdiv.com/newspaper_magazine/2015/09/24/td-post-gigabyte-geforce-gtx-950-review-pricing-is-everything/"
+                                    <div class="td-module-thumb">
+                                        <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_MON_NGON][0]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_MON_NGON][0]['cont_id']]) ?>"
                                             rel="bookmark"
-                                            title="Gigabyte GeForce GTX 950 Review: Pricing Is Everything"><img
-                                                width="265" height="198" class="entry-thumb td-animation-stack-type0-2"
-                                                src="http://demo.tagdiv.com/newspaper_magazine/wp-content/uploads/2015/09/18-265x198.jpg"
-                                                alt=""
-                                                title="Gigabyte GeForce GTX 950 Review: Pricing Is Everything"></a>
+                                            title="<?php echo $this->arrContent[\My\General::CATEGORY_MON_NGON][0]['cont_title'] ?>">
+                                            <img width="265" height="198" class="entry-thumb td-animation-stack-type0-2"
+                                                src="<?php echo $this->arrContent[\My\General::CATEGORY_MON_NGON][0]['cont_main_image'] ?>"
+                                                alt="<?php echo $this->arrContent[\My\General::CATEGORY_MON_NGON][0]['cont_title'] ?>"
+                                                title="<?php echo $this->arrContent[\My\General::CATEGORY_MON_NGON][0]['cont_title'] ?>">
+                                        </a>
                                     </div>
                                     <div class="td-meta-info-container">
                                         <div class="td-meta-align">
                                             <div class="td-big-grid-meta">
-                                                <a href="http://demo.tagdiv.com/newspaper_magazine/category/tech/"
-                                                   class="td-post-category">Tech</a>
-                                                <h3 class="entry-title td-module-title"><a
-                                                        href="http://demo.tagdiv.com/newspaper_magazine/2015/09/24/td-post-gigabyte-geforce-gtx-950-review-pricing-is-everything/"
+                                                <a href="<?php echo $this->serverUrl() . $this->Url('category', ['cateSlug' => $this->arrCategory[\My\General::CATEGORY_MON_NGON]['cate_slug'], 'cateId' => $this->arrCategory[\My\General::CATEGORY_MON_NGON]['cate_id']]) ?>"
+                                                   class="td-post-category">
+                                                    <?php echo $this->arrCategory[\My\General::CATEGORY_MON_NGON]['cate_name'] ?>
+                                                </a>
+                                                <h3 class="entry-title td-module-title">
+                                                    <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_MON_NGON][0]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_MON_NGON][0]['cont_id']]) ?>"
                                                         rel="bookmark"
-                                                        title="Gigabyte GeForce GTX 950 Review: Pricing Is Everything">Gigabyte
-                                                        GeForce GTX 950 Review: Pricing Is Everything</a></h3></div>
+                                                        title="<?php echo $this->arrContent[\My\General::CATEGORY_MON_NGON][0]['cont_title'] ?>">
+                                                        <?php echo $this->arrContent[\My\General::CATEGORY_MON_NGON][0]['cont_title'] ?>
+                                                    </a>
+                                                </h3>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="td_module_mx6 td-animation-stack td-big-grid-post-3 td-big-grid-post td-small-thumb">
-                                    <div class="td-module-thumb"><a
-                                            href="http://demo.tagdiv.com/newspaper_magazine/2015/09/23/td-post-a-thomas-hart-benton-mural-repurposed-as-a-writing-desk/"
+                                    <div class="td-module-thumb">
+                                        <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_THOI_TRANG][0]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_THOI_TRANG][0]['cont_id']]) ?>"
                                             rel="bookmark"
-                                            title="A Thomas Hart Benton Mural, Repurposed as a Writing Desk"><img
-                                                width="265" height="198" class="entry-thumb td-animation-stack-type0-2"
-                                                src="http://demo.tagdiv.com/newspaper_magazine/wp-content/uploads/2015/09/54-265x198.jpg"
-                                                alt="" title="A Thomas Hart Benton Mural, Repurposed as a Writing Desk"></a>
+                                            title="<?php echo $this->arrContent[\My\General::CATEGORY_THOI_TRANG][0]['cont_title'] ?>">
+                                            <img width="265" height="198" class="entry-thumb td-animation-stack-type0-2"
+                                                src="<?php echo $this->arrContent[\My\General::CATEGORY_THOI_TRANG][0]['cont_main_image'] ?>"
+                                                alt="<?php echo $this->arrContent[\My\General::CATEGORY_THOI_TRANG][0]['cont_title'] ?>"
+                                                 title="<?php echo $this->arrContent[\My\General::CATEGORY_THOI_TRANG][0]['cont_title'] ?>">
+                                        </a>
                                     </div>
                                     <div class="td-meta-info-container">
                                         <div class="td-meta-align">
                                             <div class="td-big-grid-meta">
-                                                <a href="http://demo.tagdiv.com/newspaper_magazine/category/lifestyle/arts/"
-                                                   class="td-post-category">Arts</a>
-                                                <h3 class="entry-title td-module-title"><a
-                                                        href="http://demo.tagdiv.com/newspaper_magazine/2015/09/23/td-post-a-thomas-hart-benton-mural-repurposed-as-a-writing-desk/"
+                                                <a href="<?php echo $this->serverUrl() . $this->Url('category', ['cateSlug' => $this->arrCategory[\My\General::CATEGORY_THOI_TRANG]['cate_slug'], 'cateId' => $this->arrCategory[\My\General::CATEGORY_THOI_TRANG]['cate_id']]) ?>"
+                                                   class="td-post-category">
+                                                    <?php echo $this->arrCategory[\My\General::CATEGORY_THOI_TRANG]['cate_name'] ?>
+                                                </a>
+                                                <h3 class="entry-title td-module-title">
+                                                    <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_THOI_TRANG][0]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_THOI_TRANG][0]['cont_id']]) ?>"
                                                         rel="bookmark"
-                                                        title="A Thomas Hart Benton Mural, Repurposed as a Writing Desk">A
-                                                        Thomas Hart Benton Mural, Repurposed as a Writing Desk</a></h3>
+                                                        title="<?php echo $this->arrContent[\My\General::CATEGORY_THOI_TRANG][0]['cont_title'] ?>"><?php echo $this->arrContent[\My\General::CATEGORY_THOI_TRANG][0]['cont_title'] ?>
+                                                    </a>
+                                                </h3>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="td_module_mx6 td-animation-stack td-big-grid-post-4 td-big-grid-post td-small-thumb">
-                                    <div class="td-module-thumb"><a
-                                            href="http://demo.tagdiv.com/newspaper_magazine/2015/09/23/td-post-fashion-week-parties-night-4/"
-                                            rel="bookmark" title="Fashion Week Parties: Night 4"><img width="265"
-                                                                                                      height="198"
-                                                                                                      class="entry-thumb td-animation-stack-type0-2"
-                                                                                                      src="http://demo.tagdiv.com/newspaper_magazine/wp-content/uploads/2015/09/9-265x198.jpg"
-                                                                                                      alt=""
-                                                                                                      title="Fashion Week Parties: Night 4"></a>
+                                    <div class="td-module-thumb">
+                                        <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_DU_LICH][0]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_DU_LICH][0]['cont_id']]) ?>"
+                                            rel="bookmark" title="<?php echo $this->arrContent[\My\General::CATEGORY_DU_LICH][0]['cont_title'] ?>">
+                                            <img width="265" height="198"
+                                                  class="entry-thumb td-animation-stack-type0-2"
+                                                  src="<?php echo $this->arrContent[\My\General::CATEGORY_DU_LICH][0]['cont_main_image'] ?>"
+                                                  alt="<?php echo $this->arrContent[\My\General::CATEGORY_DU_LICH][0]['cont_title'] ?>"
+                                                  title="<?php echo $this->arrContent[\My\General::CATEGORY_DU_LICH][0]['cont_title'] ?>">
+                                        </a>
                                     </div>
                                     <div class="td-meta-info-container">
                                         <div class="td-meta-align">
                                             <div class="td-big-grid-meta">
-                                                <a href="http://demo.tagdiv.com/newspaper_magazine/category/fashion/"
-                                                   class="td-post-category">Fashion</a>
-                                                <h3 class="entry-title td-module-title"><a
-                                                        href="http://demo.tagdiv.com/newspaper_magazine/2015/09/23/td-post-fashion-week-parties-night-4/"
-                                                        rel="bookmark" title="Fashion Week Parties: Night 4">Fashion
-                                                        Week Parties: Night 4</a></h3></div>
+                                                <a href="<?php echo $this->serverUrl() . $this->Url('category', ['cateSlug' => $this->arrCategory[\My\General::CATEGORY_DU_LICH]['cate_slug'], 'cateId' => $this->arrCategory[\My\General::CATEGORY_DU_LICH]['cate_id']]) ?>"
+                                                   class="td-post-category">
+                                                    <?php echo $this->arrCategory[\My\General::CATEGORY_DU_LICH]['cate_name'] ?>
+                                                </a>
+                                                <h3 class="entry-title td-module-title">
+                                                    <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_DU_LICH][0]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_DU_LICH][0]['cont_id']]) ?>"
+                                                        rel="bookmark" title="<?php echo $this->arrContent[\My\General::CATEGORY_DU_LICH][0]['cont_title'] ?>">
+                                                        <?php echo $this->arrContent[\My\General::CATEGORY_DU_LICH][0]['cont_title'] ?>
+                                                    </a>
+                                                </h3>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

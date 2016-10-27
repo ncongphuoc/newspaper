@@ -36,35 +36,53 @@ class SearchController extends MyController
 
             $instanceSearchKeyword = new \My\Search\Keyword();
             $keyword_detail = $instanceSearchKeyword->getDetail(['key_slug' => trim(General::getSlug($key_name))]);
-            if(!empty($keyword_detail)){
+            if (!empty($keyword_detail)) {
                 $arr_condition_content['in_cate_id'] = array($keyword_detail['cate_id']);
+
             }
 
+            $arrFields = array('cont_id', 'cont_title', 'cont_slug', 'cate_id','cont_main_image','created_date');
             $instanceSearchContent = new \My\Search\Content();
-            $arrContentList = $instanceSearchContent->getListLimit($arr_condition_content, $intPage, $intLimit, ['_score' => ['order' => 'desc']]);
+            $arrContentList = $instanceSearchContent->getListLimit($arr_condition_content, $intPage, $intLimit, ['_score' => ['order' => 'desc']], $arrFields);
 
             //phân trang
             $intTotal = $instanceSearchContent->getTotal($arr_condition_content);
             $helper = $this->serviceLocator->get('viewhelpermanager')->get('Paging');
             $paging = $helper($params['module'], $params['__CONTROLLER__'], $params['action'], $intTotal, $intPage, $intLimit, 'search', $params);
 
+            //get keyword
+            $listContent = array();
+            $instanceSearchKeyword = new \My\Search\Keyword();
+            foreach ($arrContentList as $content) {
+                $listContent[$content['cont_id']] = $content;
+                $arrCondition = array(
+                    'full_text_keyname' => $content['cont_title'],
+                    'in_cate_id' => array($content['cate_id'], -1)
+                );
+                $arrKeywordList = $instanceSearchKeyword->getListLimit($arrCondition, 1, 5, ['_score' => ['order' => 'desc']]);
+                $listContent[$content['cont_id']]['list_keyword'] = $arrKeywordList;
+            }
+
             $this->renderer = $this->serviceLocator->get('Zend\View\Renderer\PhpRenderer');
             $this->renderer->headTitle($params['keyword'] . General::TITLE_META);
             $this->renderer->headMeta()->appendName('robots', 'index');
-            $this->renderer->headMeta()->appendName('keywords', General::KEYWORD_DEFAULT . ', '. $params['keyword']);
+            $this->renderer->headMeta()->appendName('keywords', General::KEYWORD_DEFAULT . ', ' . $params['keyword']);
             $this->renderer->headMeta()->appendName('description', $params['keyword']);
             $this->renderer->headMeta()->setProperty('og:url', BASE_URL . $this->url()->fromRoute('search', ['keyword' => $params['keyword'], 'page' => $intPage]));
             $this->renderer->headMeta()->setProperty('og:title', $params['keyword']);
             $this->renderer->headMeta()->setProperty('og:description', $params['keyword']);
 
+            $this->renderer->headLink(array('rel' => 'amphtml', 'href' => BASE_URL . $this->url()->fromRoute('search', ['keyword' => $params['keyword']])));
+            $this->renderer->headLink(array('rel' => 'canonical', 'href' => BASE_URL . $this->url()->fromRoute('search', ['keyword' => $params['keyword']])));
+
             //get 50 keyword gần giống nhất
-            $instanceSearchKeyword = new \My\Search\Keyword();
-            $arrKeywordList = $instanceSearchKeyword->getListLimit(['full_text_keyname' => $key_name], 1, $intLimit, ['_score' => ['order' => 'desc']]);
+//            $instanceSearchKeyword = new \My\Search\Keyword();
+//            $arrKeywordList = $instanceSearchKeyword->getListLimit(['full_text_keyname' => $key_name], 1, $intLimit, ['_score' => ['order' => 'desc']]);
 
             return [
                 'paging' => $paging,
                 'params' => $params,
-                'arrContentList' => $arrContentList,
+                'arrContentList' => $listContent,
                 'arrKeywordList' => $arrKeywordList,
                 'intTotal' => $intTotal
             ];

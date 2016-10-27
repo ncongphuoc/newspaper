@@ -21,98 +21,72 @@
                         }
                     </style>
                     <div class=td-block-title-wrap>
-                        <h4 class=block-title>
-                            <span>MẸ VÀ BÉ</span>
-                        </h4>
+                        <a href="<?php echo $this->serverUrl() . $this->Url('category', ['cateSlug' => $this->arrCategory[\My\General::CATEGORY_ME_VA_BE]['cate_slug'], 'cateId' => $this->arrCategory[\My\General::CATEGORY_ME_VA_BE]['cate_id']]) ?>">
+                            <h4 class=block-title>
+                                <span>MẸ VÀ BÉ</span>
+                            </h4>
+                        </a>
                     </div>
                     <div class="td_block_inner td-column-1">
                         <div class="td_module_mx1 td_module_wrap td-animation-stack">
-                            <div class=td-module-thumb><a
-                                    href="td-post-five-reasons-why-in-form-leicester-city-will-finish-the-job-and-stay-up/index.html"
+                            <div class=td-module-thumb>
+                                <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_ME_VA_BE][0]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_ME_VA_BE][0]['cont_id']]) ?>"
                                     rel=bookmark
-                                    title="Five reasons why in-form Leicester City will finish the job and stay up"><img
-                                        width=356 height=220 class=entry-thumb
-                                        src="wp-content/uploads/2015/04/95-356x220.jpg" alt=""
-                                        title="Five reasons why in-form Leicester City will finish the job and stay up"/></a>
+                                    title="<?php echo $this->arrContent[\My\General::CATEGORY_ME_VA_BE][0]['cont_title'] ?>">
+                                    <img width=356 height=220 class=entry-thumb
+                                        src="<?php echo $this->arrContent[\My\General::CATEGORY_ME_VA_BE][0]['cont_main_image'] ?>"
+                                         alt="<?php echo $this->arrContent[\My\General::CATEGORY_ME_VA_BE][0]['cont_title'] ?>"
+                                        title="<?php echo $this->arrContent[\My\General::CATEGORY_ME_VA_BE][0]['cont_title'] ?>"/>
+                                </a>
                             </div>
                             <div class=td-module-meta-info>
-                                <h3 class="entry-title td-module-title"><a
-                                        href="td-post-five-reasons-why-in-form-leicester-city-will-finish-the-job-and-stay-up/index.html"
+                                <h3 class="entry-title td-module-title">
+                                    <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_ME_VA_BE][0]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_ME_VA_BE][0]['cont_id']]) ?>"
                                         rel=bookmark
-                                        title="Five reasons why in-form Leicester City will finish the job and stay up">Five
-                                        reasons why in-form Leicester City will finish the job and stay up</a>
+                                        title="<?php echo $this->arrContent[\My\General::CATEGORY_ME_VA_BE][0]['cont_title'] ?>">
+                                        <?php echo $this->arrContent[\My\General::CATEGORY_ME_VA_BE][0]['cont_title'] ?>
+                                    </a>
                                 </h3>
                                 <div class=td-editor-date>
-<span class=td-author-date>
-<span class=td-post-author-name><a href="author/marius2/index.html">Matt Cloey</a> <span>-</span> </span> <span
-class=td-post-date><time class="entry-date updated td-module-date" datetime="2015-04-22T05:26:58+00:00">Apr 22, 2015</time></span> </span>
+                                    <span class=td-author-date>
+                                        <span class=td-post-date>
+                                                <?php echo date('d-m-Y', $this->arrContent[\My\General::CATEGORY_ME_VA_BE][0]['created_date']); ?>
+                                            </time>
+                                        </span>
+                                    </span>
                                 </div>
                             </div>
                         </div>
+                        <?php for($i=1; $i<=3; $i++) { ?>
                         <div class="td_module_mx2 td_module_wrap td-animation-stack">
-                            <div class=td-module-thumb><a
-                                    href="td-post-erik-jones-has-day-he-wont-soon-forget-as-denny-backup-at-bristol/index.html"
+                            <div class=td-module-thumb>
+                                <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_ME_VA_BE][$i]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_ME_VA_BE][$i]['cont_id']]) ?>"
                                     rel=bookmark
-                                    title="Erik Jones has day he won&#8217;t soon forget as Denny backup at Bristol"><img
-                                        width=80 height=60 class=entry-thumb
-                                        src="wp-content/uploads/2015/04/94-80x60.jpg" alt=""
-                                        title="Erik Jones has day he won&#8217;t soon forget as Denny backup at Bristol"/></a>
+                                    title="<?php echo $this->arrContent[\My\General::CATEGORY_ME_VA_BE][$i]['cont_title'] ?>">
+                                    <img width=80 height=60 class=entry-thumb
+                                        src="<?php echo $this->arrContent[\My\General::CATEGORY_ME_VA_BE][$i]['cont_main_image'] ?>"
+                                         alt="<?php echo $this->arrContent[\My\General::CATEGORY_ME_VA_BE][$i]['cont_title'] ?>"
+                                        title="<?php echo $this->arrContent[\My\General::CATEGORY_ME_VA_BE][$i]['cont_title'] ?>"/></a>
                             </div>
                             <div class=item-details>
-                                <h3 class="entry-title td-module-title"><a
-                                        href="td-post-erik-jones-has-day-he-wont-soon-forget-as-denny-backup-at-bristol/index.html"
+                                <h3 class="entry-title td-module-title">
+                                    <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_ME_VA_BE][$i]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_ME_VA_BE][$i]['cont_id']]) ?>"
                                         rel=bookmark
-                                        title="Erik Jones has day he won&#8217;t soon forget as Denny backup at Bristol">Erik
-                                        Jones has day he won&#8217;t soon forget as Denny backup at Bristol</a>
+                                        title="<?php echo $this->arrContent[\My\General::CATEGORY_ME_VA_BE][$i]['cont_title'] ?>">
+                                        <?php echo $this->arrContent[\My\General::CATEGORY_ME_VA_BE][$i]['cont_title'] ?>
+                                    </a>
                                 </h3>
                                 <div class=td-module-meta-info>
-                                        <span class=td-post-date><time class="entry-date updated td-module-date"
-                                                                       datetime="2015-04-22T05:23:58+00:00">Apr 22, 2015</time></span>
+                                        <span class=td-post-date>
+                                            <time class="entry-date updated td-module-date"
+                                                       datetime="<?php echo date('d-m-Y', $this->arrContent[\My\General::CATEGORY_ME_VA_BE][$i]['created_date']); ?>">
+                                                <?php echo date('d-m-Y', $this->arrContent[\My\General::CATEGORY_ME_VA_BE][$i]['created_date']); ?>
+                                            </time>
+                                        </span>
                                 </div>
                             </div>
                         </div>
-                        <div class="td_module_mx2 td_module_wrap td-animation-stack">
-                            <div class=td-module-thumb><a
-                                    href="td-post-what-did-we-learn-from-manchester-united-loss-at-chelsea/index.html"
-                                    rel=bookmark
-                                    title="What did we learn from Manchester United loss at Chelsea?"><img
-                                        width=80 height=60 class=entry-thumb
-                                        src="wp-content/uploads/2015/04/96-80x60.jpg" alt=""
-                                        title="What did we learn from Manchester United loss at Chelsea?"/></a>
-                            </div>
-                            <div class=item-details>
-                                <h3 class="entry-title td-module-title"><a
-                                        href="td-post-what-did-we-learn-from-manchester-united-loss-at-chelsea/index.html"
-                                        rel=bookmark
-                                        title="What did we learn from Manchester United loss at Chelsea?">What
-                                        did we learn from Manchester United loss at Chelsea?</a></h3>
-                                <div class=td-module-meta-info>
-                                        <span class=td-post-date><time class="entry-date updated td-module-date"
-                                                                       datetime="2015-04-22T05:23:58+00:00">Apr 22, 2015</time></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="td_module_mx2 td_module_wrap td-animation-stack">
-                            <div class=td-module-thumb><a
-                                    href="td-post-wigan-warriors-return-as-ben-flower-makes-his-own-victory/index.html"
-                                    rel=bookmark
-                                    title="Wigan Warriors return as Ben Flower makes his own victory"><img
-                                        width=80 height=60 class=entry-thumb
-                                        src="wp-content/uploads/2015/04/92-80x60.jpg" alt=""
-                                        title="Wigan Warriors return as Ben Flower makes his own victory"/></a>
-                            </div>
-                            <div class=item-details>
-                                <h3 class="entry-title td-module-title"><a
-                                        href="td-post-wigan-warriors-return-as-ben-flower-makes-his-own-victory/index.html"
-                                        rel=bookmark
-                                        title="Wigan Warriors return as Ben Flower makes his own victory">Wigan
-                                        Warriors return as Ben Flower makes his own victory</a></h3>
-                                <div class=td-module-meta-info>
-                                        <span class=td-post-date><time class="entry-date updated td-module-date"
-                                                                       datetime="2015-04-22T05:23:57+00:00">Apr 22, 2015</time></span>
-                                </div>
-                            </div>
-                        </div>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
@@ -146,90 +120,64 @@ class=td-post-date><time class="entry-date updated td-module-date" datetime="201
                     </div>
                     <div class="td_block_inner td-column-1">
                         <div class="td_module_mx1 td_module_wrap td-animation-stack">
-                            <div class=td-module-thumb><a
-                                    href="td-post-food-health-star-ratings-kelloggs-reveals-the-cereal-that-gets-1-5-stars/index.html"
-                                    rel=bookmark
-                                    title="Food health star ratings: Kellogg&#8217;s reveals the cereal that gets 1.5 stars"><img
-                                        width=356 height=220 class=entry-thumb
-                                        src="wp-content/uploads/2015/04/64-356x220.jpg" alt=""
-                                        title="Food health star ratings: Kellogg&#8217;s reveals the cereal that gets 1.5 stars"/></a>
+                            <div class=td-module-thumb>
+                                <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_MON_NGON][0]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_MON_NGON][0]['cont_id']]) ?>"
+                                   rel=bookmark
+                                   title="<?php echo $this->arrContent[\My\General::CATEGORY_MON_NGON][0]['cont_title'] ?>">
+                                    <img width=356 height=220 class=entry-thumb
+                                         src="<?php echo $this->arrContent[\My\General::CATEGORY_MON_NGON][0]['cont_main_image'] ?>"
+                                         alt="<?php echo $this->arrContent[\My\General::CATEGORY_MON_NGON][0]['cont_title'] ?>"
+                                         title="<?php echo $this->arrContent[\My\General::CATEGORY_MON_NGON][0]['cont_title'] ?>"/>
+                                </a>
                             </div>
                             <div class=td-module-meta-info>
-                                <h3 class="entry-title td-module-title"><a
-                                        href="td-post-food-health-star-ratings-kelloggs-reveals-the-cereal-that-gets-1-5-stars/index.html"
-                                        rel=bookmark
-                                        title="Food health star ratings: Kellogg&#8217;s reveals the cereal that gets 1.5 stars">Food
-                                        health star ratings: Kellogg&#8217;s reveals the cereal that gets 1.5
-                                        stars</a></h3>
+                                <h3 class="entry-title td-module-title">
+                                    <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_MON_NGON][0]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_MON_NGON][0]['cont_id']]) ?>"
+                                       rel=bookmark
+                                       title="<?php echo $this->arrContent[\My\General::CATEGORY_MON_NGON][0]['cont_title'] ?>">
+                                        <?php echo $this->arrContent[\My\General::CATEGORY_MON_NGON][0]['cont_title'] ?>
+                                    </a>
+                                </h3>
                                 <div class=td-editor-date>
-<span class=td-author-date>
-<span class=td-post-author-name><a href="author/admin/index.html">Armin Vans</a> <span>-</span> </span> <span
-class=td-post-date><time class="entry-date updated td-module-date" datetime="2015-04-22T05:23:41+00:00">Apr 22, 2015</time></span> </span>
+                                    <span class=td-author-date>
+                                        <span class=td-post-date>
+                                                <?php echo date('d-m-Y', $this->arrContent[\My\General::CATEGORY_MON_NGON][0]['created_date']); ?>
+                                            </time>
+                                        </span>
+                                    </span>
                                 </div>
                             </div>
                         </div>
-                        <div class="td_module_mx2 td_module_wrap td-animation-stack">
-                            <div class=td-module-thumb><a
-                                    href="td-post-the-secret-to-living-200-years-just-ask-a-whale/index.html"
-                                    rel=bookmark
-                                    title="The Secret To Living 200 Years? Just Ask A Whale"><img width=80
-                                                                                                  height=60
-                                                                                                  class=entry-thumb
-                                                                                                  src="wp-content/uploads/2015/04/62-80x60.jpg"
-                                                                                                  alt=""
-                                                                                                  title="The Secret To Living 200 Years? Just Ask A Whale"/></a>
-                            </div>
-                            <div class=item-details>
-                                <h3 class="entry-title td-module-title"><a
-                                        href="td-post-the-secret-to-living-200-years-just-ask-a-whale/index.html"
-                                        rel=bookmark
-                                        title="The Secret To Living 200 Years? Just Ask A Whale">The Secret
-                                        To Living 200 Years? Just Ask A Whale</a></h3>
-                                <div class=td-module-meta-info>
-                                        <span class=td-post-date><time class="entry-date updated td-module-date"
-                                                                       datetime="2015-04-22T05:23:40+00:00">Apr 22, 2015</time></span>
+                        <?php for($i=1; $i<=3; $i++) { ?>
+                            <div class="td_module_mx2 td_module_wrap td-animation-stack">
+                                <div class=td-module-thumb>
+                                    <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_MON_NGON][$i]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_MON_NGON][$i]['cont_id']]) ?>"
+                                       rel=bookmark
+                                       title="<?php echo $this->arrContent[\My\General::CATEGORY_MON_NGON][$i]['cont_title'] ?>">
+                                        <img width=80 height=60 class=entry-thumb
+                                             src="<?php echo $this->arrContent[\My\General::CATEGORY_MON_NGON][$i]['cont_main_image'] ?>"
+                                             alt="<?php echo $this->arrContent[\My\General::CATEGORY_MON_NGON][$i]['cont_title'] ?>"
+                                             title="<?php echo $this->arrContent[\My\General::CATEGORY_MON_NGON][$i]['cont_title'] ?>"/></a>
+                                </div>
+                                <div class=item-details>
+                                    <h3 class="entry-title td-module-title">
+                                        <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_MON_NGON][$i]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_MON_NGON][$i]['cont_id']]) ?>"
+                                           rel=bookmark
+                                           title="<?php echo $this->arrContent[\My\General::CATEGORY_MON_NGON][$i]['cont_title'] ?>">
+                                            <?php echo $this->arrContent[\My\General::CATEGORY_MON_NGON][$i]['cont_title'] ?>
+                                        </a>
+                                    </h3>
+                                    <div class=td-module-meta-info>
+                                        <span class=td-post-date>
+                                            <time class="entry-date updated td-module-date"
+                                                  datetime="<?php echo date('d-m-Y', $this->arrContent[\My\General::CATEGORY_MON_NGON][$i]['created_date']); ?>">
+                                                <?php echo date('d-m-Y', $this->arrContent[\My\General::CATEGORY_MON_NGON][$i]['created_date']); ?>
+                                            </time>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="td_module_mx2 td_module_wrap td-animation-stack">
-                            <div class=td-module-thumb><a
-                                    href="td-post-the-dangers-of-eating-too-much-restaurant-food/index.html"
-                                    rel=bookmark title="The dangers of eating too much restaurant food"><img
-                                        width=80 height=60 class=entry-thumb
-                                        src="wp-content/uploads/2015/04/60-80x60.jpg" alt=""
-                                        title="The dangers of eating too much restaurant food"/></a></div>
-                            <div class=item-details>
-                                <h3 class="entry-title td-module-title"><a
-                                        href="td-post-the-dangers-of-eating-too-much-restaurant-food/index.html"
-                                        rel=bookmark title="The dangers of eating too much restaurant food">The
-                                        dangers of eating too much restaurant food</a></h3>
-                                <div class=td-module-meta-info>
-                                        <span class=td-post-date><time class="entry-date updated td-module-date"
-                                                                       datetime="2015-04-22T05:23:39+00:00">Apr 22, 2015</time></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="td_module_mx2 td_module_wrap td-animation-stack">
-                            <div class=td-module-thumb><a
-                                    href="td-post-10-superfoods-that-lower-cholesterol/index.html"
-                                    rel=bookmark title="10 Superfoods That Lower Cholesterol"><img width=80
-                                                                                                   height=60
-                                                                                                   class=entry-thumb
-                                                                                                   src="wp-content/uploads/2015/04/61-80x60.jpg"
-                                                                                                   alt=""
-                                                                                                   title="10 Superfoods That Lower Cholesterol"/></a>
-                            </div>
-                            <div class=item-details>
-                                <h3 class="entry-title td-module-title"><a
-                                        href="td-post-10-superfoods-that-lower-cholesterol/index.html"
-                                        rel=bookmark title="10 Superfoods That Lower Cholesterol">10
-                                        Superfoods That Lower Cholesterol</a></h3>
-                                <div class=td-module-meta-info>
-                                        <span class=td-post-date><time class="entry-date updated td-module-date"
-                                                                       datetime="2015-03-22T05:45:40+00:00">Mar 22, 2015</time></span>
-                                </div>
-                            </div>
-                        </div>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
@@ -242,30 +190,14 @@ class=td-post-date><time class="entry-date updated td-module-date" datetime="201
                     <span>CATEGORIES</span>
                 </div>
                 <ul>
-                    <li class="cat-item cat-item-13">
-                        <a href="http://demo.tagdiv.com/newspaper_magazine/category/lifestyle/arts/">Arts</a>
-                        <span class="td-cat-no">15</span>
+                    <?php foreach ($this->arrCategory as $category) { ?>
+                    <li class="cat-item">
+                        <a href="<?php echo $this->serverUrl() . $this->Url('category', ['cateSlug' => $category['cate_slug'], 'cateId' => $category['cate_id']]) ?>">
+                            <?php echo $category['cate_name'] ?>
+                        </a>
+                        <span class="td-cat-no"><?php echo $category['total_content'] ?></span>
                     </li>
-                    <li class="cat-item cat-item-4"><a href="http://demo.tagdiv.com/newspaper_magazine/category/fashion/">Fashion</a>
-                    </li>
-                    <li class="cat-item cat-item-2"><a href="http://demo.tagdiv.com/newspaper_magazine/category/featured/" title="Featured posts">Featured</a>
-                    </li>
-                    <li class="cat-item cat-item-10"><a href="http://demo.tagdiv.com/newspaper_magazine/category/lifestyle/health/">Health</a>
-                    </li>
-                    <li class="cat-item cat-item-12"><a href="http://demo.tagdiv.com/newspaper_magazine/category/lifestyle/music/">Music</a>
-                    </li>
-                    <li class="cat-item cat-item-5"><a href="http://demo.tagdiv.com/newspaper_magazine/category/photography/">Photography</a>
-                    </li>
-                    <li class="cat-item cat-item-11"><a href="http://demo.tagdiv.com/newspaper_magazine/category/lifestyle/recipes/">Recipes</a>
-                    </li>
-                    <li class="cat-item cat-item-7"><a href="http://demo.tagdiv.com/newspaper_magazine/category/sport/">Sport</a>
-                    </li>
-                    <li class="cat-item cat-item-6"><a href="http://demo.tagdiv.com/newspaper_magazine/category/tech/">Tech</a>
-                    </li>
-                    <li class="cat-item cat-item-9"><a href="http://demo.tagdiv.com/newspaper_magazine/category/lifestyle/travel/">Travel</a>
-                    </li>
-                    <li class="cat-item cat-item-3"><a href="http://demo.tagdiv.com/newspaper_magazine/category/world/">World</a>
-                    </li>
+                <?php } ?>
                 </ul>
             </aside>
         </div>

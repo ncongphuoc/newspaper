@@ -38,7 +38,7 @@
                                                    datetime=""><?php echo date("d-m-Y", $arr_content['created_date']); ?></time></span>
                 </div>
                 <div class=td-excerpt>
-                    <?php echo (strlen($arr_content['cont_description']) < 100) ? $arr_content['cont_description'] : mb_substr($arr_content['cont_description'], 0, 100, 'UTF-8') . '. . . '; ?>
+                    <?php echo (strlen($arr_content['cont_description']) < 100) ? $arr_content['cont_description'] : mb_substr($arr_content['cont_description'], 0, 100, 'UTF-8') . '...'; ?>
                 </div>
             </div>
         </div>

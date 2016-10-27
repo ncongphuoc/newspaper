@@ -126,7 +126,7 @@ class Content extends SearchAbstract {
     /**
      * Get List Limit
      */
-    public function getListLimit($params = array(), $intPage = 1, $intLimit = 15, $sort = ['created_date' => ['order' => 'desc']]) {
+    public function getListLimit($params = array(), $intPage = 1, $intLimit = 15, $sort = ['created_date' => ['order' => 'desc']], $arrFields = array()) {
         try {
             $intFrom = $intLimit * ($intPage - 1);
             $boolQuery = new Bool();
@@ -136,6 +136,9 @@ class Content extends SearchAbstract {
                     ->setSize($intLimit)
                     ->setSort($sort);
             $query->setQuery($boolQuery);
+            if ($arrFields && is_array($arrFields)) {
+                $query->setSource($arrFields);
+            }
             $instanceSearch = new Search(General::getSearchConfig());
             $resultSet = $instanceSearch->addIndex($this->getSearchIndex())
                     ->addType($this->getSearchType())

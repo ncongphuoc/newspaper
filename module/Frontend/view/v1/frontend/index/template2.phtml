@@ -1,3 +1,6 @@
+<?php
+$arr_category = unserialize(ARR_CATEGORY)
+?>
 <div class="vc_row wpb_row td-pb-row td-ss-row">
     <div class="wpb_column vc_column_container td-pb-span8">
         <div class="vc_column-inner ">
@@ -12,7 +15,8 @@
                             background-color: #f9c100;
                             border-color: #f9c100
                         }
-                        .td_chuyen_sao .block-title span, .td_chuyen_sao .td-trending-now-title, .td_chuyen_sao .block-title a, .td_chuyen_sao .td-read-more a{
+
+                        .td_chuyen_sao .block-title span, .td_chuyen_sao .td-trending-now-title, .td_chuyen_sao .block-title a, .td_chuyen_sao .td-read-more a {
                             background-color: #f9c100
                         }
 
@@ -21,134 +25,84 @@
                         }
                     </style>
                     <div class=td-block-title-wrap>
+                        <a href="<?php echo $this->serverUrl() . $this->Url('category', ['cateSlug' => $this->arrCategory[\My\General::CATEGORY_CHUYEN_SAO]['cate_slug'], 'cateId' => $this->arrCategory[\My\General::CATEGORY_CHUYEN_SAO]['cate_id']]) ?>">
                         <h4 class=block-title>
                             <span>CHUYỆN SAO</span>
                         </h4>
+                        </a>
                     </div>
                     <div class=td_block_inner>
                         <div class=td-block-row>
                             <div class=td-block-span6>
                                 <div class="td_module_4 td_module_wrap td-animation-stack">
                                     <div class=td-module-image>
-                                        <div class=td-module-thumb><a
-                                                href="10-landscapes-wont-even-imagined-exist/index.html"
-                                                rel=bookmark
-                                                title="10 Landscapes You Won’t Have Even Imagined Exist"><img
-                                                    width=324 height=235 class=entry-thumb
-                                                    src="wp-content/uploads/2015/03/travel-girl-324x235.jpg"
-                                                    alt=""
-                                                    title="10 Landscapes You Won’t Have Even Imagined Exist"/></a>
+                                        <div class=td-module-thumb>
+                                            <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][1]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][1]['cont_id']]) ?>"
+                                               rel=bookmark
+                                               title="<?php echo $this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][1]['cont_title'] ?>">
+                                                <img width=324 height=235 class=entry-thumb
+                                                     src="<?php echo $this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][1]['cont_main_image'] ?>"
+                                                     alt="<?php echo $this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][1]['cont_title'] ?>"
+                                                     title="<?php echo $this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][1]['cont_title'] ?>"/>
+                                            </a>
                                         </div>
-                                        <a href="category/tagdiv-lifestyle/tagdiv-travel/index.html"
-                                           class=td-post-category>Travel</a></div>
-                                    <h3 class="entry-title td-module-title"><a
-                                            href="10-landscapes-wont-even-imagined-exist/index.html"
-                                            rel=bookmark
-                                            title="10 Landscapes You Won’t Have Even Imagined Exist">10
-                                            Landscapes You Won’t Have Even Imagined Exist</a></h3>
+                                        <a href="<?php echo $this->serverUrl() . $this->Url('category', ['cateSlug' => $this->arrCategory[\My\General::CATEGORY_CHUYEN_SAO]['cate_slug'], 'cateId' => $this->arrCategory[\My\General::CATEGORY_CHUYEN_SAO]['cate_id']]) ?>"
+                                           class=td-post-category>
+                                            <?php echo $this->arrCategory[\My\General::CATEGORY_CHUYEN_SAO]['cate_name'] ?>
+                                        </a>
+                                    </div>
+                                    <h3 class="entry-title td-module-title">
+                                        <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][1]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][1]['cont_id']]) ?>"
+                                           rel=bookmark
+                                           title="<?php echo $this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][1]['cont_title'] ?>">
+                                            <?php echo $this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][1]['cont_title'] ?>
+                                        </a>
+                                    </h3>
                                     <div class=td-module-meta-info>
-                                        <span class=td-post-author-name><a href="author/marius/index.html">John Doe</a> <span>-</span> </span>
-                                            <span class=td-post-date><time
-                                                    class="entry-date updated td-module-date"
-                                                    datetime="2015-03-22T05:47:34+00:00">Mar 22, 2015</time></span>
-                                        <div class=td-module-comments><a
-                                                href="10-landscapes-wont-even-imagined-exist/index.html#respond">0</a>
-                                        </div>
+                                            <span class=td-post-date>
+                                                <time class="entry-date updated td-module-date"
+                                                      datetime="2015-03-22T05:47:34+00:00">
+                                                    <?php echo date('d-m-Y', $this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][1]['created_date']); ?>
+                                                </time>
+                                            </span>
                                     </div>
                                     <div class=td-excerpt>
-                                        Prince Edward Island, Canada
-                                        Prince Edward Island is a Canadian province. It is one of the three
-                                        Maritime provinces and it is the smallest in...
+                                        <?php echo (strlen($this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][1]['cont_description']) < 150) ? $this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][1]['cont_description'] : mb_substr($this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][1]['cont_description'], 0, 150, 'UTF-8') . '...'; ?>
                                     </div>
                                 </div>
                             </div>
                             <div class=td-block-span6>
-                                <div class="td_module_6 td_module_wrap td-animation-stack">
-                                    <div class=td-module-thumb><a
-                                            href="decorating-to-celebrate-the-great-outdoor-space/index.html"
-                                            rel=bookmark
-                                            title="Decorating to Celebrate the Great Outdoor Space"><img
-                                                width=100 height=70 class=entry-thumb
-                                                src="wp-content/uploads/2015/01/outside-100x70.jpg" alt=""
-                                                title="Decorating to Celebrate the Great Outdoor Space"/></a>
-                                    </div>
-                                    <div class=item-details>
-                                        <h3 class="entry-title td-module-title"><a
-                                                href="decorating-to-celebrate-the-great-outdoor-space/index.html"
-                                                rel=bookmark
-                                                title="Decorating to Celebrate the Great Outdoor Space">Decorating
-                                                to Celebrate the Great Outdoor Space</a></h3>
-                                        <div class=td-module-meta-info>
-                                                <span class=td-post-date><time
-                                                        class="entry-date updated td-module-date"
-                                                        datetime="2015-01-22T05:46:01+00:00">Jan 22, 2015</time></span>
+                                <?php for ($i = 2; $i <= 5; $i++) { ?>
+                                    <div class="td_module_6 td_module_wrap td-animation-stack">
+                                        <div class=td-module-thumb>
+                                            <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][$i]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][$i]['cont_id']]) ?>"
+                                                rel="bookmark"
+                                                title="<?php echo $this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][$i]['cont_title'] ?>">
+                                                <img width=100 height=70 class=entry-thumb
+                                                    src="<?php echo $this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][$i]['cont_main_image'] ?>"
+                                                    alt="<?php echo $this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][$i]['cont_title'] ?>"
+                                                    title="<?php echo $this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][$i]['cont_title'] ?>"/>
+                                            </a>
+                                        </div>
+                                        <div class=item-details>
+                                            <h3 class="entry-title td-module-title">
+                                                <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][$i]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][$i]['cont_id']]) ?>"
+                                                    rel="bookmark"
+                                                    title="<?php echo $this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][$i]['cont_title'] ?>">
+                                                    <?php echo $this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][$i]['cont_title'] ?>
+                                                </a>
+                                            </h3>
+                                            <div class=td-module-meta-info>
+                                                <span class=td-post-date>
+                                                    <time class="entry-date updated td-module-date"
+                                                        datetime="<?php echo date('d-m-Y', $this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][$i]['created_date']); ?>">
+                                                        <?php echo date('d-m-Y', $this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][$i]['created_date']); ?>
+                                                    </time>
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="td_module_6 td_module_wrap td-animation-stack">
-                                    <div class=td-module-thumb><a
-                                            href="td-post-zeta-architecture-hexagon-is-the-new-circle-in-2016/index.html"
-                                            rel=bookmark
-                                            title="Zeta Architecture: Hexagon is the new circle in 2016"><img
-                                                width=100 height=70 class=entry-thumb
-                                                src="wp-content/uploads/2015/01/house-interior-100x70.jpg"
-                                                alt=""
-                                                title="Zeta Architecture: Hexagon is the new circle in 2016"/></a>
-                                    </div>
-                                    <div class=item-details>
-                                        <h3 class="entry-title td-module-title"><a
-                                                href="td-post-zeta-architecture-hexagon-is-the-new-circle-in-2016/index.html"
-                                                rel=bookmark
-                                                title="Zeta Architecture: Hexagon is the new circle in 2016">Zeta
-                                                Architecture: Hexagon is the new circle in 2016</a></h3>
-                                        <div class=td-module-meta-info>
-                                                <span class=td-post-date><time
-                                                        class="entry-date updated td-module-date"
-                                                        datetime="2015-01-22T05:44:07+00:00">Jan 22, 2015</time></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="td_module_6 td_module_wrap td-animation-stack">
-                                    <div class=td-module-thumb><a
-                                            href="td-post-what-do-i-need-to-make-it-in-business/index.html"
-                                            rel=bookmark title="What Do I Need To Make It In Business?"><img
-                                                width=100 height=70 class=entry-thumb
-                                                src="wp-content/uploads/2015/04/bag-100x70.jpg" alt=""
-                                                title="What Do I Need To Make It In Business?"/></a></div>
-                                    <div class=item-details>
-                                        <h3 class="entry-title td-module-title"><a
-                                                href="td-post-what-do-i-need-to-make-it-in-business/index.html"
-                                                rel=bookmark title="What Do I Need To Make It In Business?">What
-                                                Do I Need To Make It In Business?</a></h3>
-                                        <div class=td-module-meta-info>
-                                                <span class=td-post-date><time
-                                                        class="entry-date updated td-module-date"
-                                                        datetime="2015-04-21T06:15:43+00:00">Apr 21, 2015</time></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="td_module_6 td_module_wrap td-animation-stack">
-                                    <div class=td-module-thumb><a
-                                            href="td-post-planning-a-winter-holiday-canary-islands-offers-the-best-value-getaway-this-season/index.html"
-                                            rel=bookmark
-                                            title="Planning a winter holiday? Canary Islands offers"><img
-                                                width=100 height=70 class=entry-thumb
-                                                src="wp-content/uploads/2015/03/boat-100x70.jpg" alt=""
-                                                title="Planning a winter holiday? Canary Islands offers"/></a>
-                                    </div>
-                                    <div class=item-details>
-                                        <h3 class="entry-title td-module-title"><a
-                                                href="td-post-planning-a-winter-holiday-canary-islands-offers-the-best-value-getaway-this-season/index.html"
-                                                rel=bookmark
-                                                title="Planning a winter holiday? Canary Islands offers">Planning
-                                                a winter holiday? Canary Islands offers</a></h3>
-                                        <div class=td-module-meta-info>
-                                                <span class=td-post-date><time
-                                                        class="entry-date updated td-module-date"
-                                                        datetime="2015-03-22T05:45:36+00:00">Mar 22, 2015</time></span>
-                                        </div>
-                                    </div>
-                                </div>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>
@@ -163,6 +117,7 @@
                             background-color: #4caf50;
                             border-color: #4caf50
                         }
+
                         .td_thoi_trang .block-title span, .td_thoi_trang .block-title a, .td_thoi_trang .td-read-more a {
                             background-color: #4caf50
                         }
@@ -171,182 +126,124 @@
                             border-color: #4caf50
                         }</style>
                     <div class=td-block-title-wrap>
+                        <a href="<?php echo $this->serverUrl() . $this->Url('category', ['cateSlug' => $this->arrCategory[\My\General::CATEGORY_THOI_TRANG]['cate_slug'], 'cateId' => $this->arrCategory[\My\General::CATEGORY_THOI_TRANG]['cate_id']]) ?>">
                         <h4 class=block-title>
                             <span>THỜI TRANG</span>
                         </h4>
+                        </a>
                     </div>
                     <div class=td_block_inner>
                         <div class=td-block-row>
+                            <?php for($i=0; $i<=1; $i++) { ?>
                             <div class=td-block-span6>
                                 <div class="td_module_2 td_module_wrap td-animation-stack">
                                     <div class=td-module-image>
-                                        <div class=td-module-thumb><a
-                                                href="whitewater-rafting-day-trip-new-york-east/index.html"
+                                        <div class=td-module-thumb>
+                                            <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_THOI_TRANG][$i]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_THOI_TRANG][$i]['cont_id']]) ?>"
                                                 rel=bookmark
-                                                title="Whitewater Rafting Day Trip from New York in the East"><img
-                                                    width=324 height=160 class=entry-thumb
-                                                    src="wp-content/uploads/2015/04/green-house-324x160.jpg"
-                                                    alt=""
-                                                    title="Whitewater Rafting Day Trip from New York in the East"/></a>
+                                                title="<?php echo $this->arrContent[\My\General::CATEGORY_THOI_TRANG][$i]['cont_title'] ?>">
+                                                <img width=324 height=160 class=entry-thumb
+                                                    src="<?php echo $this->arrContent[\My\General::CATEGORY_THOI_TRANG][$i]['cont_main_image'] ?>"
+                                                    alt="<?php echo $this->arrContent[\My\General::CATEGORY_THOI_TRANG][$i]['cont_title'] ?>"
+                                                    title="<?php echo $this->arrContent[\My\General::CATEGORY_THOI_TRANG][$i]['cont_title'] ?>"/>
+                                            </a>
                                         </div>
-                                        <a href="category/tagdiv-lifestyle/tagdiv-business/index.html"
-                                           class=td-post-category>Business</a></div>
-                                    <h3 class="entry-title td-module-title"><a
-                                            href="whitewater-rafting-day-trip-new-york-east/index.html"
+                                        <a href="<?php echo $this->serverUrl() . $this->Url('category', ['cateSlug' => $this->arrCategory[\My\General::CATEGORY_THOI_TRANG]['cate_slug'], 'cateId' => $this->arrCategory[\My\General::CATEGORY_THOI_TRANG]['cate_id']]) ?>"
+                                           class=td-post-category>
+                                            <?php echo $this->arrCategory[\My\General::CATEGORY_THOI_TRANG]['cate_name'] ?>
+                                        </a>
+                                    </div>
+                                    <h3 class="entry-title td-module-title">
+                                        <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_THOI_TRANG][$i]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_THOI_TRANG][$i]['cont_id']]) ?>"
                                             rel=bookmark
-                                            title="Whitewater Rafting Day Trip from New York in the East">Whitewater
-                                            Rafting Day Trip from New York in the East</a></h3>
+                                            title="<?php echo $this->arrContent[\My\General::CATEGORY_THOI_TRANG][$i]['cont_title'] ?>">
+                                            <?php echo $this->arrContent[\My\General::CATEGORY_THOI_TRANG][$i]['cont_title'] ?>
+                                        </a>
+                                    </h3>
                                     <div class=td-module-meta-info>
-                                        <span class=td-post-author-name><a href="author/marius2/index.html">Matt Cloey</a> <span>-</span> </span>
-                                            <span class=td-post-date><time
-                                                    class="entry-date updated td-module-date"
-                                                    datetime="2015-04-22T06:23:44+00:00">Apr 22, 2015</time></span>
-                                        <div class=td-module-comments><a
-                                                href="whitewater-rafting-day-trip-new-york-east/index.html#respond">0</a>
-                                        </div>
+                                            <span class=td-post-date>
+                                                <time class="entry-date updated td-module-date"
+                                                    datetime="<?php echo date('d-m-Y', $this->arrContent[\My\General::CATEGORY_THOI_TRANG][$i]['created_date']); ?>">
+                                                    <?php echo date('d-m-Y', $this->arrContent[\My\General::CATEGORY_THOI_TRANG][$i]['created_date']); ?>
+                                                </time>
+                                            </span>
                                     </div>
                                     <div class=td-excerpt>
-                                        Whitewater Rafting Day Trip from NYC
-                                        Meet at West 45th Street and 11th Avenue and board the bus for
-                                        world-renowned Hunter Mountain. Many...
+                                        <?php echo (strlen($this->arrContent[\My\General::CATEGORY_THOI_TRANG][$i]['cont_description']) < 150) ? $this->arrContent[\My\General::CATEGORY_THOI_TRANG][$i]['cont_description'] : mb_substr($this->arrContent[\My\General::CATEGORY_THOI_TRANG][$i]['cont_description'], 0, 150, 'UTF-8') . '...'; ?>
                                     </div>
                                 </div>
                             </div>
-                            <div class=td-block-span6>
-                                <div class="td_module_2 td_module_wrap td-animation-stack">
-                                    <div class=td-module-image>
-                                        <div class=td-module-thumb><a
-                                                href="td-post-five-things-you-may-have-missed-over-the-weekend-from-the-world-of-business/index.html"
-                                                rel=bookmark
-                                                title="Five things you may have missed over the weekend from the world of business"><img
-                                                    width=324 height=160 class=entry-thumb
-                                                    src="wp-content/uploads/2015/04/green-324x160.jpg" alt=""
-                                                    title="Five things you may have missed over the weekend from the world of business"/></a>
-                                        </div>
-                                        <a href="category/tagdiv-lifestyle/tagdiv-business/index.html"
-                                           class=td-post-category>Business</a></div>
-                                    <h3 class="entry-title td-module-title"><a
-                                            href="td-post-five-things-you-may-have-missed-over-the-weekend-from-the-world-of-business/index.html"
-                                            rel=bookmark
-                                            title="Five things you may have missed over the weekend from the world of business">Five
-                                            things you may have missed over the weekend from the...</a></h3>
-                                    <div class=td-module-meta-info>
-                                        <span class=td-post-author-name><a href="author/admin/index.html">Armin Vans</a> <span>-</span> </span>
-                                            <span class=td-post-date><time
-                                                    class="entry-date updated td-module-date"
-                                                    datetime="2015-04-22T06:23:43+00:00">Apr 22, 2015</time></span>
-                                        <div class=td-module-comments><a
-                                                href="td-post-five-things-you-may-have-missed-over-the-weekend-from-the-world-of-business/index.html#respond">0</a>
-                                        </div>
-                                    </div>
-                                    <div class=td-excerpt>
-                                        The model is talking about booking her latest gig, modeling
-                                        WordPress underwear in the brand latest Perfectly Fit campaign,
-                                        which was shot...
-                                    </div>
-                                </div>
-                            </div>
+                            <?php } ?>
                         </div>
                         <div class=td-block-row>
+                            <?php for($i=2;$i<=3;$i++) {?>
                             <div class=td-block-span6>
                                 <div class="td_module_6 td_module_wrap td-animation-stack">
-                                    <div class=td-module-thumb><a
-                                            href="td-post-express-recipes-how-to-make-creamy-papaya-raita/index.html"
+                                    <div class=td-module-thumb>
+                                        <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_THOI_TRANG][$i]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_THOI_TRANG][$i]['cont_id']]) ?>"
                                             rel=bookmark
-                                            title="Express Recipes: How to make Creamy Papaya Raita"><img
-                                                width=100 height=70 class=entry-thumb
-                                                src="wp-content/uploads/2015/04/green-girl-100x70.jpg" alt=""
-                                                title="Express Recipes: How to make Creamy Papaya Raita"/></a>
+                                            title="<?php echo $this->arrContent[\My\General::CATEGORY_THOI_TRANG][$i]['cont_title'] ?>">
+                                            <img width=100 height=70 class=entry-thumb
+                                                src="<?php echo $this->arrContent[\My\General::CATEGORY_THOI_TRANG][$i]['cont_main_image'] ?>"
+                                                 alt="<?php echo $this->arrContent[\My\General::CATEGORY_THOI_TRANG][$i]['cont_title'] ?>"
+                                                title="<?php echo $this->arrContent[\My\General::CATEGORY_THOI_TRANG][$i]['cont_title'] ?>"/>
+                                        </a>
                                     </div>
                                     <div class=item-details>
-                                        <h3 class="entry-title td-module-title"><a
-                                                href="td-post-express-recipes-how-to-make-creamy-papaya-raita/index.html"
+                                        <h3 class="entry-title td-module-title">
+                                            <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_THOI_TRANG][$i]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_THOI_TRANG][$i]['cont_id']]) ?>"
                                                 rel=bookmark
-                                                title="Express Recipes: How to make Creamy Papaya Raita">Express
-                                                Recipes: How to make Creamy Papaya Raita</a></h3>
+                                                title="<?php echo $this->arrContent[\My\General::CATEGORY_THOI_TRANG][$i]['cont_title'] ?>">
+                                                <?php echo $this->arrContent[\My\General::CATEGORY_THOI_TRANG][$i]['cont_title'] ?>
+                                            </a>
+                                        </h3>
                                         <div class=td-module-meta-info>
-                                                <span class=td-post-date><time
-                                                        class="entry-date updated td-module-date"
-                                                        datetime="2015-04-22T06:23:33+00:00">Apr 22, 2015</time></span>
+                                                <span class=td-post-date>
+                                                    <time class="entry-date updated td-module-date"
+                                                        datetime="<?php echo date('d-m-Y', $this->arrContent[\My\General::CATEGORY_THOI_TRANG][$i]['created_date']); ?>">
+                                                        <?php echo date('d-m-Y', $this->arrContent[\My\General::CATEGORY_THOI_TRANG][$i]['created_date']); ?>
+                                                    </time>
+                                                </span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class=td-block-span6>
-                                <div class="td_module_6 td_module_wrap td-animation-stack">
-                                    <div class=td-module-thumb><a
-                                            href="td-post-400k-for-whisky-most-expensive-foods-and-drink-auctioned/index.html"
-                                            rel=bookmark
-                                            title="400k for whisky? Most expensive foods and drink auctioned"><img
-                                                width=100 height=70 class=entry-thumb
-                                                src="wp-content/uploads/2015/04/65-100x70.jpg" alt=""
-                                                title="400k for whisky? Most expensive foods and drink auctioned"/></a>
-                                    </div>
-                                    <div class=item-details>
-                                        <h3 class="entry-title td-module-title"><a
-                                                href="td-post-400k-for-whisky-most-expensive-foods-and-drink-auctioned/index.html"
-                                                rel=bookmark
-                                                title="400k for whisky? Most expensive foods and drink auctioned">400k
-                                                for whisky? Most expensive foods and drink auctioned</a></h3>
-                                        <div class=td-module-meta-info>
-                                                <span class=td-post-date><time
-                                                        class="entry-date updated td-module-date"
-                                                        datetime="2015-04-22T05:23:42+00:00">Apr 22, 2015</time></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <?php } ?>
                         </div>
                         <div class=td-block-row>
-                            <div class=td-block-span6>
-                                <div class="td_module_6 td_module_wrap td-animation-stack">
-                                    <div class=td-module-thumb><a
-                                            href="td-post-seeking-business-cuomo-heads-to-cuba-with-a-new-york-trade-delegation/index.html"
-                                            rel=bookmark
-                                            title="Seeking Business, Cuomo Heads to Cuba With a New York Trade Delegation"><img
-                                                width=100 height=70 class=entry-thumb
-                                                src="wp-content/uploads/2015/04/66-100x70.jpg" alt=""
-                                                title="Seeking Business, Cuomo Heads to Cuba With a New York Trade Delegation"/></a>
-                                    </div>
-                                    <div class=item-details>
-                                        <h3 class="entry-title td-module-title"><a
-                                                href="td-post-seeking-business-cuomo-heads-to-cuba-with-a-new-york-trade-delegation/index.html"
-                                                rel=bookmark
-                                                title="Seeking Business, Cuomo Heads to Cuba With a New York Trade Delegation">Seeking
-                                                Business, Cuomo Heads to Cuba With a New York Trade...</a></h3>
-                                        <div class=td-module-meta-info>
-                                                <span class=td-post-date><time
-                                                        class="entry-date updated td-module-date"
-                                                        datetime="2015-04-22T05:23:42+00:00">Apr 22, 2015</time></span>
+                            <?php for($i=4;$i<=5;$i++) {?>
+                                <div class=td-block-span6>
+                                    <div class="td_module_6 td_module_wrap td-animation-stack">
+                                        <div class=td-module-thumb>
+                                            <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_THOI_TRANG][$i]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_THOI_TRANG][$i]['cont_id']]) ?>"
+                                               rel=bookmark
+                                               title="<?php echo $this->arrContent[\My\General::CATEGORY_THOI_TRANG][$i]['cont_title'] ?>">
+                                                <img width=100 height=70 class=entry-thumb
+                                                     src="<?php echo $this->arrContent[\My\General::CATEGORY_THOI_TRANG][$i]['cont_main_image'] ?>"
+                                                     alt="<?php echo $this->arrContent[\My\General::CATEGORY_THOI_TRANG][$i]['cont_title'] ?>"
+                                                     title="<?php echo $this->arrContent[\My\General::CATEGORY_THOI_TRANG][$i]['cont_title'] ?>"/>
+                                            </a>
+                                        </div>
+                                        <div class=item-details>
+                                            <h3 class="entry-title td-module-title">
+                                                <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_THOI_TRANG][$i]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_THOI_TRANG][$i]['cont_id']]) ?>"
+                                                   rel=bookmark
+                                                   title="<?php echo $this->arrContent[\My\General::CATEGORY_THOI_TRANG][$i]['cont_title'] ?>">
+                                                    <?php echo $this->arrContent[\My\General::CATEGORY_THOI_TRANG][$i]['cont_title'] ?>
+                                                </a>
+                                            </h3>
+                                            <div class=td-module-meta-info>
+                                                <span class=td-post-date>
+                                                    <time class="entry-date updated td-module-date"
+                                                          datetime="<?php echo date('d-m-Y', $this->arrContent[\My\General::CATEGORY_THOI_TRANG][$i]['created_date']); ?>">
+                                                        <?php echo date('d-m-Y', $this->arrContent[\My\General::CATEGORY_THOI_TRANG][$i]['created_date']); ?>
+                                                    </time>
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class=td-block-span6>
-                                <div class="td_module_6 td_module_wrap td-animation-stack">
-                                    <div class=td-module-thumb><a
-                                            href="td-post-food-health-star-ratings-kelloggs-reveals-the-cereal-that-gets-1-5-stars/index.html"
-                                            rel=bookmark
-                                            title="Food health star ratings: Kellogg&#8217;s reveals the cereal that gets 1.5 stars"><img
-                                                width=100 height=70 class=entry-thumb
-                                                src="wp-content/uploads/2015/04/64-100x70.jpg" alt=""
-                                                title="Food health star ratings: Kellogg&#8217;s reveals the cereal that gets 1.5 stars"/></a>
-                                    </div>
-                                    <div class=item-details>
-                                        <h3 class="entry-title td-module-title"><a
-                                                href="td-post-food-health-star-ratings-kelloggs-reveals-the-cereal-that-gets-1-5-stars/index.html"
-                                                rel=bookmark
-                                                title="Food health star ratings: Kellogg&#8217;s reveals the cereal that gets 1.5 stars">Food
-                                                health star ratings: Kellogg&#8217;s reveals the cereal that
-                                                gets 1.5...</a></h3>
-                                        <div class=td-module-meta-info>
-                                                <span class=td-post-date><time
-                                                        class="entry-date updated td-module-date"
-                                                        datetime="2015-04-22T05:23:41+00:00">Apr 22, 2015</time></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
@@ -360,6 +257,7 @@
                             background-color: #607d8b;
                             border-color: #607d8b
                         }
+
                         .td_lam_dep .block-title span, .td_lam_dep .block-title a, .td_lam_dep .td-read-more a {
                             background-color: #607d8b
                         }
@@ -373,134 +271,58 @@
                     </div>
                     <div class="td_block_inner td-column-2">
                         <div class=td-block-row>
+                            <?php for($i=0 ; $i<=2 ; $i++) { ?>
                             <div class=td-block-span4>
                                 <div class="td_module_mx4 td_module_wrap td-animation-stack">
                                     <div class=td-module-image>
-                                        <div class=td-module-thumb><a
-                                                href="td-post-patricia-urquiola-coats-transparent-furniture-for-glas-italia-with-an-iridescent-sheen/index.html"
-                                                rel=bookmark
-                                                title="Patricia Urquiola transparent furniture for Glas Italia with iridescent"><img
-                                                    width=218 height=150 class=entry-thumb
-                                                    src="wp-content/uploads/2015/04/119-218x150.jpg" alt=""
-                                                    title="Patricia Urquiola transparent furniture for Glas Italia with iridescent"/></a>
+                                        <div class=td-module-thumb>
+                                            <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_DU_LICH][$i]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_DU_LICH][$i]['cont_id']]) ?>"
+                                                rel="bookmark"
+                                                title="<?php echo $this->arrContent[\My\General::CATEGORY_DU_LICH][$i]['cont_title'] ?>">
+                                                <img width=218 height=150 class=entry-thumb
+                                                    src="<?php echo $this->arrContent[\My\General::CATEGORY_DU_LICH][$i]['cont_main_image'] ?>"
+                                                     alt="<?php echo $this->arrContent[\My\General::CATEGORY_DU_LICH][$i]['cont_title'] ?>"
+                                                    title="<?php echo $this->arrContent[\My\General::CATEGORY_DU_LICH][$i]['cont_title'] ?>"/>
+                                            </a>
                                         </div>
-                                        <a href="category/tagdiv-design/tagdiv-interiors/index.html"
-                                           class=td-post-category>Interiors</a></div>
-                                    <h3 class="entry-title td-module-title"><a
-                                            href="td-post-patricia-urquiola-coats-transparent-furniture-for-glas-italia-with-an-iridescent-sheen/index.html"
-                                            rel=bookmark
-                                            title="Patricia Urquiola transparent furniture for Glas Italia with iridescent">Patricia
-                                            Urquiola transparent furniture for Glas Italia with iridescent</a>
+                                    </div>
+                                    <h3 class="entry-title td-module-title">
+                                        <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_DU_LICH][$i]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_DU_LICH][$i]['cont_id']]) ?>"
+                                            rel="bookmark"
+                                            title="<?php echo $this->arrContent[\My\General::CATEGORY_DU_LICH][$i]['cont_title'] ?>">
+                                            <?php echo $this->arrContent[\My\General::CATEGORY_DU_LICH][$i]['cont_title'] ?>
+                                        </a>
                                     </h3>
                                 </div>
                             </div>
-                            <div class=td-block-span4>
-                                <div class="td_module_mx4 td_module_wrap td-animation-stack">
-                                    <div class=td-module-image>
-                                        <div class=td-module-thumb><a
-                                                href="td-post-denton-corker-marshall-the-mysterious-black-box-is-biennale-pavilion/index.html"
-                                                rel=bookmark
-                                                title="Denton Corker Marshall the mysterious black box is biennale pavilion"><img
-                                                    width=218 height=150 class=entry-thumb
-                                                    src="wp-content/uploads/2015/04/115-218x150.jpg" alt=""
-                                                    title="Denton Corker Marshall the mysterious black box is biennale pavilion"/></a>
-                                        </div>
-                                        <a href="category/tagdiv-design/tagdiv-architecture/index.html"
-                                           class=td-post-category>Architecture</a></div>
-                                    <h3 class="entry-title td-module-title"><a
-                                            href="td-post-denton-corker-marshall-the-mysterious-black-box-is-biennale-pavilion/index.html"
-                                            rel=bookmark
-                                            title="Denton Corker Marshall the mysterious black box is biennale pavilion">Denton
-                                            Corker Marshall the mysterious black box is biennale pavilion</a>
-                                    </h3>
-                                </div>
-                            </div>
-                            <div class=td-block-span4>
-                                <div class="td_module_mx4 td_module_wrap td-animation-stack">
-                                    <div class=td-module-image>
-                                        <div class=td-module-thumb><a
-                                                href="td-post-man-agrees-to-complete-50000-hereford-inlet-lighthouse-paint-job/index.html"
-                                                rel=bookmark
-                                                title="Man agrees to complete $5,000 Hereford Inlet Lighthouse painting job"><img
-                                                    width=218 height=150 class=entry-thumb
-                                                    src="wp-content/uploads/2015/04/107-218x150.jpg" alt=""
-                                                    title="Man agrees to complete $5,000 Hereford Inlet Lighthouse painting job"/></a>
-                                        </div>
-                                        <a href="category/tagdiv-design/tagdiv-architecture/index.html"
-                                           class=td-post-category>Architecture</a></div>
-                                    <h3 class="entry-title td-module-title"><a
-                                            href="td-post-man-agrees-to-complete-50000-hereford-inlet-lighthouse-paint-job/index.html"
-                                            rel=bookmark
-                                            title="Man agrees to complete $5,000 Hereford Inlet Lighthouse painting job">Man
-                                            agrees to complete $5,000 Hereford Inlet Lighthouse painting job</a>
-                                    </h3>
-                                </div>
-                            </div>
+                            <?php } ?>
                         </div>
                         <div class=td-block-row>
-                            <div class=td-block-span4>
-                                <div class="td_module_mx4 td_module_wrap td-animation-stack">
-                                    <div class=td-module-image>
-                                        <div class=td-module-thumb><a
-                                                href="td-post-patricia-urquiola-coats-transparent-furniture-for-glas-italia-with-an-iridescent-sheen/index.html"
-                                                rel=bookmark
-                                                title="Patricia Urquiola transparent furniture for Glas Italia with iridescent"><img
-                                                    width=218 height=150 class=entry-thumb
-                                                    src="wp-content/uploads/2015/04/119-218x150.jpg" alt=""
-                                                    title="Patricia Urquiola transparent furniture for Glas Italia with iridescent"/></a>
+                            <?php for($i=3 ; $i<=5 ; $i++) { ?>
+                                <div class=td-block-span4>
+                                    <div class="td_module_mx4 td_module_wrap td-animation-stack">
+                                        <div class=td-module-image>
+                                            <div class=td-module-thumb>
+                                                <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_DU_LICH][$i]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_DU_LICH][$i]['cont_id']]) ?>"
+                                                   rel="bookmark"
+                                                   title="<?php echo $this->arrContent[\My\General::CATEGORY_DU_LICH][$i]['cont_title'] ?>">
+                                                    <img width=218 height=150 class=entry-thumb
+                                                         src="<?php echo $this->arrContent[\My\General::CATEGORY_DU_LICH][$i]['cont_main_image'] ?>"
+                                                         alt="<?php echo $this->arrContent[\My\General::CATEGORY_DU_LICH][$i]['cont_title'] ?>"
+                                                         title="<?php echo $this->arrContent[\My\General::CATEGORY_DU_LICH][$i]['cont_title'] ?>"/>
+                                                </a>
+                                            </div>
                                         </div>
-                                        <a href="category/tagdiv-design/tagdiv-interiors/index.html"
-                                           class=td-post-category>Interiors</a></div>
-                                    <h3 class="entry-title td-module-title"><a
-                                            href="td-post-patricia-urquiola-coats-transparent-furniture-for-glas-italia-with-an-iridescent-sheen/index.html"
-                                            rel=bookmark
-                                            title="Patricia Urquiola transparent furniture for Glas Italia with iridescent">Patricia
-                                            Urquiola transparent furniture for Glas Italia with iridescent</a>
-                                    </h3>
+                                        <h3 class="entry-title td-module-title">
+                                            <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_DU_LICH][$i]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_DU_LICH][$i]['cont_id']]) ?>"
+                                               rel="bookmark"
+                                               title="<?php echo $this->arrContent[\My\General::CATEGORY_DU_LICH][$i]['cont_title'] ?>">
+                                                <?php echo $this->arrContent[\My\General::CATEGORY_DU_LICH][$i]['cont_title'] ?>
+                                            </a>
+                                        </h3>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class=td-block-span4>
-                                <div class="td_module_mx4 td_module_wrap td-animation-stack">
-                                    <div class=td-module-image>
-                                        <div class=td-module-thumb><a
-                                                href="td-post-denton-corker-marshall-the-mysterious-black-box-is-biennale-pavilion/index.html"
-                                                rel=bookmark
-                                                title="Denton Corker Marshall the mysterious black box is biennale pavilion"><img
-                                                    width=218 height=150 class=entry-thumb
-                                                    src="wp-content/uploads/2015/04/115-218x150.jpg" alt=""
-                                                    title="Denton Corker Marshall the mysterious black box is biennale pavilion"/></a>
-                                        </div>
-                                        <a href="category/tagdiv-design/tagdiv-architecture/index.html"
-                                           class=td-post-category>Architecture</a></div>
-                                    <h3 class="entry-title td-module-title"><a
-                                            href="td-post-denton-corker-marshall-the-mysterious-black-box-is-biennale-pavilion/index.html"
-                                            rel=bookmark
-                                            title="Denton Corker Marshall the mysterious black box is biennale pavilion">Denton
-                                            Corker Marshall the mysterious black box is biennale pavilion</a>
-                                    </h3>
-                                </div>
-                            </div>
-                            <div class=td-block-span4>
-                                <div class="td_module_mx4 td_module_wrap td-animation-stack">
-                                    <div class=td-module-image>
-                                        <div class=td-module-thumb><a
-                                                href="td-post-man-agrees-to-complete-50000-hereford-inlet-lighthouse-paint-job/index.html"
-                                                rel=bookmark
-                                                title="Man agrees to complete $5,000 Hereford Inlet Lighthouse painting job"><img
-                                                    width=218 height=150 class=entry-thumb
-                                                    src="wp-content/uploads/2015/04/107-218x150.jpg" alt=""
-                                                    title="Man agrees to complete $5,000 Hereford Inlet Lighthouse painting job"/></a>
-                                        </div>
-                                        <a href="category/tagdiv-design/tagdiv-architecture/index.html"
-                                           class=td-post-category>Architecture</a></div>
-                                    <h3 class="entry-title td-module-title"><a
-                                            href="td-post-man-agrees-to-complete-50000-hereford-inlet-lighthouse-paint-job/index.html"
-                                            rel=bookmark
-                                            title="Man agrees to complete $5,000 Hereford Inlet Lighthouse painting job">Man
-                                            agrees to complete $5,000 Hereford Inlet Lighthouse painting job</a>
-                                    </h3>
-                                </div>
-                            </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
@@ -514,7 +336,8 @@
                             background-color: #f44336;
                             border-color: #f44336
                         }
-                        .td_suc_khoe .block-title span, .td_suc_khoe .block-title a, .td_suc_khoe .td-read-more a{
+
+                        .td_suc_khoe .block-title span, .td_suc_khoe .block-title a, .td_suc_khoe .td-read-more a {
                             background-color: #f44336
                         }
 
@@ -532,128 +355,73 @@
                             <div class=td-block-span6>
                                 <div class="td_module_4 td_module_wrap td-animation-stack">
                                     <div class=td-module-image>
-                                        <div class=td-module-thumb><a
-                                                href="td-post-amazons-apple-watch-killer-will-be-free-and-sell-you-everything/index.html"
+                                        <div class=td-module-thumb>
+                                            <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_SUC_KHOE][0]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_SUC_KHOE][0]['cont_id']]) ?>"
                                                 rel=bookmark
-                                                title="Amazon&#8217;s Apple Watch killer will be free and sell you everything"><img
-                                                    width=324 height=235 class=entry-thumb
-                                                    src="wp-content/uploads/2015/04/headphones-324x235.jpg"
-                                                    alt=""
-                                                    title="Amazon&#8217;s Apple Watch killer will be free and sell you everything"/></a>
+                                                title="<?php echo $this->arrContent[\My\General::CATEGORY_SUC_KHOE][0]['cont_title'] ?>">
+                                                <img width=324 height=235 class=entry-thumb
+                                                    src="<?php echo $this->arrContent[\My\General::CATEGORY_SUC_KHOE][0]['cont_main_image'] ?>"
+                                                    alt="<?php echo $this->arrContent[\My\General::CATEGORY_SUC_KHOE][0]['cont_title'] ?>"
+                                                    title="<?php echo $this->arrContent[\My\General::CATEGORY_SUC_KHOE][0]['cont_title'] ?>"/>
+                                            </a>
                                         </div>
-                                        <a href="category/tagdiv-technology/index.html"
-                                           class=td-post-category>Technology</a></div>
-                                    <h3 class="entry-title td-module-title"><a
-                                            href="td-post-amazons-apple-watch-killer-will-be-free-and-sell-you-everything/index.html"
+                                        <a href="<?php echo $this->serverUrl() . $this->Url('category', ['cateSlug' => $this->arrCategory[\My\General::CATEGORY_SUC_KHOE]['cate_slug'], 'cateId' => $this->arrCategory[\My\General::CATEGORY_SUC_KHOE]['cate_id']]) ?>"
+                                           class=td-post-category>
+                                            <?php echo $this->arrCategory[\My\General::CATEGORY_SUC_KHOE]['cate_name'] ?>
+                                        </a>
+                                    </div>
+                                    <h3 class="entry-title td-module-title">
+                                        <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_SUC_KHOE][0]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_SUC_KHOE][0]['cont_id']]) ?>"
                                             rel=bookmark
-                                            title="Amazon&#8217;s Apple Watch killer will be free and sell you everything">Amazon&#8217;s
-                                            Apple Watch killer will be free and sell you everything</a></h3>
+                                            title="<?php echo $this->arrContent[\My\General::CATEGORY_SUC_KHOE][0]['cont_title'] ?>">
+                                            <?php echo $this->arrContent[\My\General::CATEGORY_SUC_KHOE][0]['cont_title'] ?>
+                                        </a>
+                                    </h3>
                                     <div class=td-module-meta-info>
-                                        <span class=td-post-author-name><a href="author/marius/index.html">John Doe</a> <span>-</span> </span>
                                             <span class=td-post-date><time
                                                     class="entry-date updated td-module-date"
-                                                    datetime="2015-04-24T05:44:22+00:00">Apr 24, 2015</time></span>
-                                        <div class=td-module-comments><a
-                                                href="td-post-amazons-apple-watch-killer-will-be-free-and-sell-you-everything/index.html#respond">0</a>
-                                        </div>
+                                                    datetime="<?php echo date('d-m-Y', $this->arrContent[\My\General::CATEGORY_SUC_KHOE][0]['created_date']); ?>">
+                                                    <?php echo date('d-m-Y', $this->arrContent[\My\General::CATEGORY_SUC_KHOE][0]['created_date']); ?>
+                                                </time>
+                                            </span>
                                     </div>
                                     <div class=td-excerpt>
-                                        The model is talking about booking her latest gig, modeling
-                                        WordPress underwear in the brand latest Perfectly Fit campaign,
-                                        which was shot by Lachian...
+                                        <?php echo (strlen($this->arrContent[\My\General::CATEGORY_SUC_KHOE][0]['cont_description']) < 150) ? $this->arrContent[\My\General::CATEGORY_SUC_KHOE][0]['cont_description'] : mb_substr($this->arrContent[\My\General::CATEGORY_SUC_KHOE][0]['cont_description'], 0, 150, 'UTF-8') . '...'; ?>
                                     </div>
                                 </div>
                             </div>
                             <div class=td-block-span6>
-                                <div class="td_module_6 td_module_wrap td-animation-stack">
-                                    <div class=td-module-thumb><a
-                                            href="td-post-microsoft-subsumes-open-tech-unit-back-inside-mothership/index.html"
-                                            rel=bookmark
-                                            title="Microsoft Subsumes Open Tech Unit Back Inside Mothership"><img
-                                                width=100 height=70 class=entry-thumb
-                                                src="wp-content/uploads/2015/04/tee-100x70.jpg" alt=""
-                                                title="Microsoft Subsumes Open Tech Unit Back Inside Mothership"/></a>
-                                    </div>
-                                    <div class=item-details>
-                                        <h3 class="entry-title td-module-title"><a
-                                                href="td-post-microsoft-subsumes-open-tech-unit-back-inside-mothership/index.html"
-                                                rel=bookmark
-                                                title="Microsoft Subsumes Open Tech Unit Back Inside Mothership">Microsoft
-                                                Subsumes Open Tech Unit Back Inside Mothership</a></h3>
-                                        <div class=td-module-meta-info>
-                                                <span class=td-post-date><time
-                                                        class="entry-date updated td-module-date"
-                                                        datetime="2015-04-24T05:23:25+00:00">Apr 24, 2015</time></span>
+                                <?php for ($i = 2; $i <= 5; $i++) { ?>
+                                    <div class="td_module_6 td_module_wrap td-animation-stack">
+                                        <div class=td-module-thumb>
+                                            <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_SUC_KHOE][$i]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_SUC_KHOE][$i]['cont_id']]) ?>"
+                                               rel="bookmark"
+                                               title="<?php echo $this->arrContent[\My\General::CATEGORY_SUC_KHOE][$i]['cont_title'] ?>">
+                                                <img width=100 height=70 class=entry-thumb
+                                                     src="<?php echo $this->arrContent[\My\General::CATEGORY_SUC_KHOE][$i]['cont_main_image'] ?>"
+                                                     alt="<?php echo $this->arrContent[\My\General::CATEGORY_SUC_KHOE][$i]['cont_title'] ?>"
+                                                     title="<?php echo $this->arrContent[\My\General::CATEGORY_SUC_KHOE][$i]['cont_title'] ?>"/>
+                                            </a>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="td_module_6 td_module_wrap td-animation-stack">
-                                    <div class=td-module-thumb><a
-                                            href="td-post-why-tech-accelerators-may-soon-be-as-irrelevant-as-an-mba/index.html"
-                                            rel=bookmark
-                                            title="Why tech accelerators may soon be as irrelevant as an MBA"><img
-                                                width=100 height=70 class=entry-thumb
-                                                src="wp-content/uploads/2015/04/singer-100x70.jpg" alt=""
-                                                title="Why tech accelerators may soon be as irrelevant as an MBA"/></a>
-                                    </div>
-                                    <div class=item-details>
-                                        <h3 class="entry-title td-module-title"><a
-                                                href="td-post-why-tech-accelerators-may-soon-be-as-irrelevant-as-an-mba/index.html"
-                                                rel=bookmark
-                                                title="Why tech accelerators may soon be as irrelevant as an MBA">Why
-                                                tech accelerators may soon be as irrelevant as an MBA</a></h3>
-                                        <div class=td-module-meta-info>
-                                            <div class=entry-review-stars><i class=td-icon-star></i><i
-                                                    class=td-icon-star></i><i class=td-icon-star></i><i
-                                                    class=td-icon-star></i><i class=td-icon-star-empty></i>
+                                        <div class=item-details>
+                                            <h3 class="entry-title td-module-title">
+                                                <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_SUC_KHOE][$i]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_SUC_KHOE][$i]['cont_id']]) ?>"
+                                                   rel="bookmark"
+                                                   title="<?php echo $this->arrContent[\My\General::CATEGORY_SUC_KHOE][$i]['cont_title'] ?>">
+                                                    <?php echo $this->arrContent[\My\General::CATEGORY_SUC_KHOE][$i]['cont_title'] ?>
+                                                </a>
+                                            </h3>
+                                            <div class=td-module-meta-info>
+                                                <span class=td-post-date>
+                                                    <time class="entry-date updated td-module-date"
+                                                          datetime="<?php echo date('d-m-Y', $this->arrContent[\My\General::CATEGORY_SUC_KHOE][$i]['created_date']); ?>">
+                                                        <?php echo date('d-m-Y', $this->arrContent[\My\General::CATEGORY_SUC_KHOE][$i]['created_date']); ?>
+                                                    </time>
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="td_module_6 td_module_wrap td-animation-stack">
-                                    <div class=td-module-thumb><a
-                                            href="td-post-canon-xc10-4k-digital-camcorder-is-out-compact-versatile-and-for-only-2500/index.html"
-                                            rel=bookmark
-                                            title="Canon XC10 4K Digital Camcorder Is Out: Compact and Versatile"><img
-                                                width=100 height=70 class=entry-thumb
-                                                src="wp-content/uploads/2015/04/snickers-100x70.jpg" alt=""
-                                                title="Canon XC10 4K Digital Camcorder Is Out: Compact and Versatile"/></a>
-                                    </div>
-                                    <div class=item-details>
-                                        <h3 class="entry-title td-module-title"><a
-                                                href="td-post-canon-xc10-4k-digital-camcorder-is-out-compact-versatile-and-for-only-2500/index.html"
-                                                rel=bookmark
-                                                title="Canon XC10 4K Digital Camcorder Is Out: Compact and Versatile">Canon
-                                                XC10 4K Digital Camcorder Is Out: Compact and Versatile</a></h3>
-                                        <div class=td-module-meta-info>
-                                                <span class=td-post-date><time
-                                                        class="entry-date updated td-module-date"
-                                                        datetime="2015-04-22T05:23:32+00:00">Apr 22, 2015</time></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="td_module_6 td_module_wrap td-animation-stack">
-                                    <div class=td-module-thumb><a
-                                            href="td-post-part-gopro-dropcam-flir-fx-camera-does-sports-a-new-camera/index.html"
-                                            rel=bookmark
-                                            title="Part GoPro Dropcam: Flir FX Camera Does Sports a new camera"><img
-                                                width=100 height=70 class=entry-thumb
-                                                src="wp-content/uploads/2015/04/43-100x70.jpg" alt=""
-                                                title="Part GoPro Dropcam: Flir FX Camera Does Sports a new camera"/></a>
-                                    </div>
-                                    <div class=item-details>
-                                        <h3 class="entry-title td-module-title"><a
-                                                href="td-post-part-gopro-dropcam-flir-fx-camera-does-sports-a-new-camera/index.html"
-                                                rel=bookmark
-                                                title="Part GoPro Dropcam: Flir FX Camera Does Sports a new camera">Part
-                                                GoPro Dropcam: Flir FX Camera Does Sports a new camera</a></h3>
-                                        <div class=td-module-meta-info>
-                                                <span class=td-post-date><time
-                                                        class="entry-date updated td-module-date"
-                                                        datetime="2015-04-22T05:23:31+00:00">Apr 22, 2015</time></span>
-                                        </div>
-                                    </div>
-                                </div>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>
@@ -704,23 +472,31 @@
                         </h4>
                     </div>
                     <div class="td_block_inner">
-                        <?php foreach(unserialize(ARR_CONTENT_HOT_LIST) as $content): ?>
+                        <?php foreach (unserialize(ARR_CONTENT_HOT_LIST) as $content): ?>
                             <div class="td_module_16 td_module_wrap td-animation-stack">
                                 <div class="td-module-thumb">
-                                    <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $content['cont_slug'], 'contentId' => $content['cont_id']]) ?>" rel="bookmark" title="<?php echo $content['concont_titletent_title'] ?>">
-                                        <img width="150" height="100" class="entry-thumb td-animation-stack-type0-2" src="<?php echo $content['cont_main_image'] ?>" alt="" title="<?php echo $content['cont_title'] ?>">
+                                    <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $content['cont_slug'], 'contentId' => $content['cont_id']]) ?>"
+                                       rel="bookmark" title="<?php echo $content['concont_titletent_title'] ?>">
+                                        <img width="150" height="100" class="entry-thumb td-animation-stack-type0-2"
+                                             src="<?php echo $content['cont_main_image'] ?>" alt=""
+                                             title="<?php echo $content['cont_title'] ?>">
                                     </a>
                                 </div>
                                 <div class="item-details">
                                     <h4 class="entry-title td-module-title">
-                                        <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $content['cont_slug'], 'contentId' => $content['cont_id']]) ?>" rel="bookmark" title="<?php echo $content['cont_title'] ?>">
+                                        <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $content['cont_slug'], 'contentId' => $content['cont_id']]) ?>"
+                                           rel="bookmark" title="<?php echo $content['cont_title'] ?>">
                                             <?php echo $content['cont_title'] ?>
                                         </a>
                                     </h4>
                                     <div class="td-module-meta-info">
-                                        <a href="http://demo.tagdiv.com/newspaper_magazine/category/sport/" class="td-post-category">Sport</a>
+                                        <a href="<?php echo $this->serverUrl() . $this->Url('category', ['cateSlug' => $arr_category[$content['cate_id']]['cate_slug'], 'cateId' => $arr_category[$content['cate_id']]['cate_id']]) ?>"
+                                           class="td-post-category">
+                                            <?php echo $arr_category[$content['cate_id']]['cate_name'] ?>
+                                        </a>
                                         <span class="td-post-date">
-                                            <time class="entry-date updated td-module-date" datetime="<?php echo date("d-m-Y", $content['created_date']); ?>">
+                                            <time class="entry-date updated td-module-date"
+                                                  datetime="<?php echo date("d-m-Y", $content['created_date']); ?>">
                                                 <?php echo date("d-m-Y", $content['created_date']); ?>
                                             </time>
                                         </span>
@@ -732,135 +508,177 @@
                 </div>
 
 
-            <div class="td_block_wrap td_block_15 td-pb-border-top">
-                <div class=td-block-title-wrap>
-                    <h4 class=block-title>
-                        <span>MỚI NHẤT</span>
-                    </h4>
-                </div>
-                <div class="td_block_inner td-column-1">
-                    <div class=td-block-span12>
-                        <div class="td_module_mx4 td_module_wrap td-animation-stack">
-                            <div class=td-module-image>
-                                <div class=td-module-thumb><a
-                                        href="td-post-rosie-huntington-whiteley-talks-beauty-habits-career-ambitions-and-going-nude-for-art/index.html"
-                                        rel=bookmark
-                                        title="Rosie Huntington Whiteley Talks Beauty Habits Career Art"><img
-                                            width=218 height=150 class=entry-thumb
-                                            src="wp-content/uploads/2015/04/108-218x150.jpg" alt=""
-                                            title="Rosie Huntington Whiteley Talks Beauty Habits Career Art"/></a>
-                                </div>
-                                <a href="category/tagdiv-design/tagdiv-make-it-modern/index.html"
-                                   class=td-post-category>Make it modern</a></div>
-                            <h3 class="entry-title td-module-title"><a
-                                    href="td-post-rosie-huntington-whiteley-talks-beauty-habits-career-ambitions-and-going-nude-for-art/index.html"
-                                    rel=bookmark
-                                    title="Rosie Huntington Whiteley Talks Beauty Habits Career Art">Rosie
-                                    Huntington Whiteley Talks Beauty Habits Career Art</a></h3>
-                        </div>
+                <div class="td_block_wrap td_block_15 td-pb-border-top">
+                    <div class=td-block-title-wrap>
+                        <h4 class=block-title>
+                            <span>MỚI NHẤT</span>
+                        </h4>
                     </div>
-                    <div class=td-block-span12>
-                        <div class="td_module_mx4 td_module_wrap td-animation-stack">
-                            <div class=td-module-image>
-                                <div class=td-module-thumb><a
-                                        href="td-post-bayside-ranch-a-perfect-canvas-for-interior-designer-2016/index.html"
-                                        rel=bookmark
-                                        title="Bayside Ranch a perfect canvas for interior designer 2016"><img
-                                            width=218 height=150 class=entry-thumb
-                                            src="wp-content/uploads/2015/04/109-218x150.jpg" alt=""
-                                            title="Bayside Ranch a perfect canvas for interior designer 2016"/></a>
+                    <div class="td_block_inner td-column-1">
+                        <div class=td-block-span12>
+                            <div class="td_module_mx4 td_module_wrap td-animation-stack">
+                                <div class=td-module-image>
+                                    <div class=td-module-thumb>
+                                        <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][0]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][0]['cont_id']]) ?>"
+                                            rel="bookmark"
+                                            title="<?php echo $this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][0]['cont_title'] ?>">
+                                            <img width=218 height=150 class=entry-thumb
+                                                src="<?php echo $this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][0]['cont_main_image'] ?>"
+                                                alt="<?php echo $this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][0]['cont_title'] ?>"
+                                                title="<?php echo $this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][0]['cont_title'] ?>"/>
+                                        </a>
+                                    </div>
+                                    <a href="<?php echo $this->serverUrl() . $this->Url('category', ['cateSlug' => $this->arrCategory[\My\General::CATEGORY_CHUYEN_SAO]['cate_slug'], 'cateId' => $this->arrCategory[\My\General::CATEGORY_CHUYEN_SAO]['cate_id']]) ?>"
+                                       class=td-post-category>
+                                        <?php echo $this->arrCategory[\My\General::CATEGORY_CHUYEN_SAO]['cate_name'] ?>
+                                    </a>
                                 </div>
-                                <a href="category/tagdiv-design/tagdiv-make-it-modern/index.html"
-                                   class=td-post-category>Make it modern</a></div>
-                            <h3 class="entry-title td-module-title"><a
-                                    href="td-post-bayside-ranch-a-perfect-canvas-for-interior-designer-2016/index.html"
-                                    rel=bookmark
-                                    title="Bayside Ranch a perfect canvas for interior designer 2016">Bayside
-                                    Ranch a perfect canvas for interior designer 2016</a></h3>
+                                <h3 class="entry-title td-module-title">
+                                    <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][0]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][0]['cont_id']]) ?>"
+                                        rel="bookmark"
+                                        title="<?php echo $this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][0]['cont_title'] ?>">
+                                        <?php echo $this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][0]['cont_title'] ?>
+                                    </a>
+                                </h3>
+                            </div>
                         </div>
-                    </div>
-                    <div class=td-block-span12>
-                        <div class="td_module_mx4 td_module_wrap td-animation-stack">
-                            <div class=td-module-image>
-                                <div class=td-module-thumb><a
-                                        href="td-post-2015-decorators-opens-with-home-design-inspiration-benefiting-symphony-orchestra/index.html"
-                                        rel=bookmark
-                                        title="2016 Decorators opens with home design inspiration"><img
-                                            width=218 height=150 class=entry-thumb
-                                            src="wp-content/uploads/2015/04/house-218x150.jpg" alt=""
-                                            title="2016 Decorators opens with home design inspiration"/></a>
+                        <div class=td-block-span12>
+                            <div class="td_module_mx4 td_module_wrap td-animation-stack">
+                                <div class=td-module-image>
+                                    <div class=td-module-thumb>
+                                        <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_DU_LICH][0]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_DU_LICH][0]['cont_id']]) ?>"
+                                           rel="bookmark"
+                                           title="<?php echo $this->arrContent[\My\General::CATEGORY_DU_LICH][0]['cont_title'] ?>">
+                                            <img width=218 height=150 class=entry-thumb
+                                                 src="<?php echo $this->arrContent[\My\General::CATEGORY_DU_LICH][0]['cont_main_image'] ?>"
+                                                 alt="<?php echo $this->arrContent[\My\General::CATEGORY_DU_LICH][0]['cont_title'] ?>"
+                                                 title="<?php echo $this->arrContent[\My\General::CATEGORY_DU_LICH][0]['cont_title'] ?>"/>
+                                        </a>
+                                    </div>
+                                    <a href="<?php echo $this->serverUrl() . $this->Url('category', ['cateSlug' => $this->arrCategory[\My\General::CATEGORY_DU_LICH]['cate_slug'], 'cateId' => $this->arrCategory[\My\General::CATEGORY_DU_LICH]['cate_id']]) ?>"
+                                       class=td-post-category>
+                                        <?php echo $this->arrCategory[\My\General::CATEGORY_DU_LICH]['cate_name'] ?>
+                                    </a>
                                 </div>
-                                <a href="category/tagdiv-design/tagdiv-make-it-modern/index.html"
-                                   class=td-post-category>Make it modern</a></div>
-                            <h3 class="entry-title td-module-title"><a
-                                    href="td-post-2015-decorators-opens-with-home-design-inspiration-benefiting-symphony-orchestra/index.html"
-                                    rel=bookmark
-                                    title="2016 Decorators opens with home design inspiration">2016
-                                    Decorators opens with home design inspiration</a></h3>
+                                <h3 class="entry-title td-module-title">
+                                    <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_DU_LICH][0]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_DU_LICH][0]['cont_id']]) ?>"
+                                       rel="bookmark"
+                                       title="<?php echo $this->arrContent[\My\General::CATEGORY_DU_LICH][0]['cont_title'] ?>">
+                                        <?php echo $this->arrContent[\My\General::CATEGORY_DU_LICH][0]['cont_title'] ?>
+                                    </a>
+                                </h3>
+                            </div>
                         </div>
-                    </div>
-                    <div class=td-block-span12>
-                        <div class="td_module_mx4 td_module_wrap td-animation-stack">
-                            <div class=td-module-image>
-                                <div class=td-module-thumb><a
-                                        href="td-post-artist-brings-air-of-distinction-to-delafield-apartment/index.html"
-                                        rel=bookmark
-                                        title="Artist brings air of distinction to Delafield apartment"><img
-                                            width=218 height=150 class=entry-thumb
-                                            src="wp-content/uploads/2015/04/110-218x150.jpg" alt=""
-                                            title="Artist brings air of distinction to Delafield apartment"/></a>
+                        <div class=td-block-span12>
+                            <div class="td_module_mx4 td_module_wrap td-animation-stack">
+                                <div class=td-module-image>
+                                    <div class=td-module-thumb>
+                                        <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_THOI_TRANG][0]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_THOI_TRANG][0]['cont_id']]) ?>"
+                                           rel="bookmark"
+                                           title="<?php echo $this->arrContent[\My\General::CATEGORY_THOI_TRANG][0]['cont_title'] ?>">
+                                            <img width=218 height=150 class=entry-thumb
+                                                 src="<?php echo $this->arrContent[\My\General::CATEGORY_THOI_TRANG][0]['cont_main_image'] ?>"
+                                                 alt="<?php echo $this->arrContent[\My\General::CATEGORY_THOI_TRANG][0]['cont_title'] ?>"
+                                                 title="<?php echo $this->arrContent[\My\General::CATEGORY_THOI_TRANG][0]['cont_title'] ?>"/>
+                                        </a>
+                                    </div>
+                                    <a href="<?php echo $this->serverUrl() . $this->Url('category', ['cateSlug' => $this->arrCategory[\My\General::CATEGORY_THOI_TRANG]['cate_slug'], 'cateId' => $this->arrCategory[\My\General::CATEGORY_THOI_TRANG]['cate_id']]) ?>"
+                                       class=td-post-category>
+                                        <?php echo $this->arrCategory[\My\General::CATEGORY_THOI_TRANG]['cate_name'] ?>
+                                    </a>
                                 </div>
-                                <a href="category/tagdiv-design/tagdiv-make-it-modern/index.html"
-                                   class=td-post-category>Make it modern</a></div>
-                            <h3 class="entry-title td-module-title"><a
-                                    href="td-post-artist-brings-air-of-distinction-to-delafield-apartment/index.html"
-                                    rel=bookmark
-                                    title="Artist brings air of distinction to Delafield apartment">Artist
-                                    brings air of distinction to Delafield apartment</a></h3>
+                                <h3 class="entry-title td-module-title">
+                                    <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_THOI_TRANG][0]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_THOI_TRANG][0]['cont_id']]) ?>"
+                                       rel="bookmark"
+                                       title="<?php echo $this->arrContent[\My\General::CATEGORY_THOI_TRANG][0]['cont_title'] ?>">
+                                        <?php echo $this->arrContent[\My\General::CATEGORY_THOI_TRANG][0]['cont_title'] ?>
+                                    </a>
+                                </h3>
+                            </div>
                         </div>
-                    </div>
-                    <div class=td-block-span12>
-                        <div class="td_module_mx4 td_module_wrap td-animation-stack">
-                            <div class=td-module-image>
-                                <div class=td-module-thumb><a
-                                        href="td-post-2015-decorators-opens-with-home-design-inspiration-benefiting-symphony-orchestra/index.html"
-                                        rel=bookmark
-                                        title="2016 Decorators opens with home design inspiration"><img
-                                            width=218 height=150 class=entry-thumb
-                                            src="wp-content/uploads/2015/04/house-218x150.jpg" alt=""
-                                            title="2016 Decorators opens with home design inspiration"/></a>
+                        <div class=td-block-span12>
+                            <div class="td_module_mx4 td_module_wrap td-animation-stack">
+                                <div class=td-module-image>
+                                    <div class=td-module-thumb>
+                                        <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_LAM_DEP][0]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_LAM_DEP][0]['cont_id']]) ?>"
+                                           rel="bookmark"
+                                           title="<?php echo $this->arrContent[\My\General::CATEGORY_LAM_DEP][0]['cont_title'] ?>">
+                                            <img width=218 height=150 class=entry-thumb
+                                                 src="<?php echo $this->arrContent[\My\General::CATEGORY_LAM_DEP][0]['cont_main_image'] ?>"
+                                                 alt="<?php echo $this->arrContent[\My\General::CATEGORY_LAM_DEP][0]['cont_title'] ?>"
+                                                 title="<?php echo $this->arrContent[\My\General::CATEGORY_LAM_DEP][0]['cont_title'] ?>"/>
+                                        </a>
+                                    </div>
+                                    <a href="<?php echo $this->serverUrl() . $this->Url('category', ['cateSlug' => $this->arrCategory[\My\General::CATEGORY_LAM_DEP]['cate_slug'], 'cateId' => $this->arrCategory[\My\General::CATEGORY_LAM_DEP]['cate_id']]) ?>"
+                                       class=td-post-category>
+                                        <?php echo $this->arrCategory[\My\General::CATEGORY_LAM_DEP]['cate_name'] ?>
+                                    </a>
                                 </div>
-                                <a href="category/tagdiv-design/tagdiv-make-it-modern/index.html"
-                                   class=td-post-category>Make it modern</a></div>
-                            <h3 class="entry-title td-module-title"><a
-                                    href="td-post-2015-decorators-opens-with-home-design-inspiration-benefiting-symphony-orchestra/index.html"
-                                    rel=bookmark
-                                    title="2016 Decorators opens with home design inspiration">2016
-                                    Decorators opens with home design inspiration</a></h3>
+                                <h3 class="entry-title td-module-title">
+                                    <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_LAM_DEP][0]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_LAM_DEP][0]['cont_id']]) ?>"
+                                       rel="bookmark"
+                                       title="<?php echo $this->arrContent[\My\General::CATEGORY_LAM_DEP][0]['cont_title'] ?>">
+                                        <?php echo $this->arrContent[\My\General::CATEGORY_LAM_DEP][0]['cont_title'] ?>
+                                    </a>
+                                </h3>
+                            </div>
                         </div>
-                    </div>
-                    <div class=td-block-span12>
-                        <div class="td_module_mx4 td_module_wrap td-animation-stack">
-                            <div class=td-module-image>
-                                <div class=td-module-thumb><a
-                                        href="td-post-artist-brings-air-of-distinction-to-delafield-apartment/index.html"
-                                        rel=bookmark
-                                        title="Artist brings air of distinction to Delafield apartment"><img
-                                            width=218 height=150 class=entry-thumb
-                                            src="wp-content/uploads/2015/04/110-218x150.jpg" alt=""
-                                            title="Artist brings air of distinction to Delafield apartment"/></a>
+                        <div class=td-block-span12>
+                            <div class="td_module_mx4 td_module_wrap td-animation-stack">
+                                <div class=td-module-image>
+                                    <div class=td-module-thumb>
+                                        <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_MON_NGON][0]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_MON_NGON][0]['cont_id']]) ?>"
+                                           rel="bookmark"
+                                           title="<?php echo $this->arrContent[\My\General::CATEGORY_MON_NGON][0]['cont_title'] ?>">
+                                            <img width=218 height=150 class=entry-thumb
+                                                 src="<?php echo $this->arrContent[\My\General::CATEGORY_MON_NGON][0]['cont_main_image'] ?>"
+                                                 alt="<?php echo $this->arrContent[\My\General::CATEGORY_MON_NGON][0]['cont_title'] ?>"
+                                                 title="<?php echo $this->arrContent[\My\General::CATEGORY_MON_NGON][0]['cont_title'] ?>"/>
+                                        </a>
+                                    </div>
+                                    <a href="<?php echo $this->serverUrl() . $this->Url('category', ['cateSlug' => $this->arrCategory[\My\General::CATEGORY_MON_NGON]['cate_slug'], 'cateId' => $this->arrCategory[\My\General::CATEGORY_MON_NGON]['cate_id']]) ?>"
+                                       class=td-post-category>
+                                        <?php echo $this->arrCategory[\My\General::CATEGORY_MON_NGON]['cate_name'] ?>
+                                    </a>
                                 </div>
-                                <a href="category/tagdiv-design/tagdiv-make-it-modern/index.html"
-                                   class=td-post-category>Make it modern</a></div>
-                            <h3 class="entry-title td-module-title"><a
-                                    href="td-post-artist-brings-air-of-distinction-to-delafield-apartment/index.html"
-                                    rel=bookmark
-                                    title="Artist brings air of distinction to Delafield apartment">Artist
-                                    brings air of distinction to Delafield apartment</a></h3>
+                                <h3 class="entry-title td-module-title">
+                                    <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_MON_NGON][0]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_MON_NGON][0]['cont_id']]) ?>"
+                                       rel="bookmark"
+                                       title="<?php echo $this->arrContent[\My\General::CATEGORY_MON_NGON][0]['cont_title'] ?>">
+                                        <?php echo $this->arrContent[\My\General::CATEGORY_MON_NGON][0]['cont_title'] ?>
+                                    </a>
+                                </h3>
+                            </div>
+                        </div>
+                        <div class=td-block-span12>
+                            <div class="td_module_mx4 td_module_wrap td-animation-stack">
+                                <div class=td-module-image>
+                                    <div class=td-module-thumb>
+                                        <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_SUC_KHOE][0]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_SUC_KHOE][0]['cont_id']]) ?>"
+                                           rel="bookmark"
+                                           title="<?php echo $this->arrContent[\My\General::CATEGORY_SUC_KHOE][0]['cont_title'] ?>">
+                                            <img width=218 height=150 class=entry-thumb
+                                                 src="<?php echo $this->arrContent[\My\General::CATEGORY_SUC_KHOE][0]['cont_main_image'] ?>"
+                                                 alt="<?php echo $this->arrContent[\My\General::CATEGORY_SUC_KHOE][0]['cont_title'] ?>"
+                                                 title="<?php echo $this->arrContent[\My\General::CATEGORY_SUC_KHOE][0]['cont_title'] ?>"/>
+                                        </a>
+                                    </div>
+                                    <a href="<?php echo $this->serverUrl() . $this->Url('category', ['cateSlug' => $this->arrCategory[\My\General::CATEGORY_SUC_KHOE]['cate_slug'], 'cateId' => $this->arrCategory[\My\General::CATEGORY_SUC_KHOE]['cate_id']]) ?>"
+                                       class=td-post-category>
+                                        <?php echo $this->arrCategory[\My\General::CATEGORY_SUC_KHOE]['cate_name'] ?>
+                                    </a>
+                                </div>
+                                <h3 class="entry-title td-module-title">
+                                    <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_SUC_KHOE][0]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_SUC_KHOE][0]['cont_id']]) ?>"
+                                       rel="bookmark"
+                                       title="<?php echo $this->arrContent[\My\General::CATEGORY_SUC_KHOE][0]['cont_title'] ?>">
+                                        <?php echo $this->arrContent[\My\General::CATEGORY_SUC_KHOE][0]['cont_title'] ?>
+                                    </a>
+                                </h3>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>

@@ -177,8 +177,9 @@ class MyController extends AbstractActionController {
             define('ARR_CATEGORY', serialize($arr_category));
 
             //get list content hot
+            $arrFields = array('cont_id', 'cont_title', 'cont_slug', 'cate_id','cont_main_image','created_date');
             $instanceSearchContent = new \My\Search\Content();
-            $arr_content_hot = $instanceSearchContent->getListLimit(['cont_status' => 1], 1, 5, ['cont_views' => ['order' => 'desc']]);
+            $arr_content_hot = $instanceSearchContent->getListLimit(['cont_status' => 1], 1, 5, ['cont_views' => ['order' => 'desc']],$arrFields);
             define('ARR_CONTENT_HOT_LIST', serialize($arr_content_hot));
 
             //50 KEYWORD :)

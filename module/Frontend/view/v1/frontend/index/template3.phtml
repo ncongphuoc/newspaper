@@ -9,171 +9,42 @@
                         </h4>
                     </div>
                     <div class=td_block_inner>
+                    <?php for($i=1;$i<=5;$i++) { ?>
                         <div class=td-block-span12>
                             <div class="td_module_10 td_module_wrap td-animation-stack">
-                                <div class=td-module-thumb><a
-                                        href="td-post-aston-villa-beat-liverpool-to-join-arsenal-in-the-fa-cup-final/index.html"
-                                        rel=bookmark
-                                        title="Aston Villa beat Liverpool team to join in the FA Cup final"><img
-                                            width=218 height=150 class=entry-thumb
-                                            src="wp-content/uploads/2015/04/snowboard-218x150.jpg" alt=""
-                                            title="Aston Villa beat Liverpool team to join in the FA Cup final"/></a>
+                                <div class=td-module-thumb>
+                                    <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_LAM_DEP][$i]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_LAM_DEP][$i]['cont_id']]) ?>"
+                                        rel="bookmark"
+                                        title="<?php echo $this->arrContent[\My\General::CATEGORY_LAM_DEP][$i]['cont_title'] ?>">
+                                        <img width=218 height=150 class=entry-thumb
+                                            src="<?php echo $this->arrContent[\My\General::CATEGORY_LAM_DEP][$i]['cont_main_image'] ?>"
+                                             alt="<?php echo $this->arrContent[\My\General::CATEGORY_LAM_DEP][$i]['cont_title'] ?>"
+                                            title="<?php echo $this->arrContent[\My\General::CATEGORY_LAM_DEP][$i]['cont_title'] ?>"/>
+                                    </a>
                                 </div>
                                 <div class=item-details>
-                                    <h3 class="entry-title td-module-title"><a
-                                            href="td-post-aston-villa-beat-liverpool-to-join-arsenal-in-the-fa-cup-final/index.html"
+                                    <h3 class="entry-title td-module-title">
+                                        <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent[\My\General::CATEGORY_LAM_DEP][$i]['cont_slug'], 'contentId' => $this->arrContent[\My\General::CATEGORY_LAM_DEP][$i]['cont_id']]) ?>"
                                             rel=bookmark
-                                            title="Aston Villa beat Liverpool team to join in the FA Cup final">Aston
-                                            Villa beat Liverpool team to join in the FA Cup final</a></h3>
+                                            title="<?php echo $this->arrContent[\My\General::CATEGORY_LAM_DEP][$i]['cont_title'] ?>">
+                                            <?php echo $this->arrContent[\My\General::CATEGORY_LAM_DEP][$i]['cont_title'] ?>
+                                        </a>
+                                    </h3>
                                     <div class=td-module-meta-info>
-                                        <span class=td-post-author-name><a href="author/marius/index.html">John Doe</a> <span>-</span> </span>
-                                            <span class=td-post-date><time
-                                                    class="entry-date updated td-module-date"
-                                                    datetime="2015-04-22T05:23:55+00:00">Apr 22, 2015</time></span>
-                                        <div class=td-module-comments><a
-                                                href="td-post-aston-villa-beat-liverpool-to-join-arsenal-in-the-fa-cup-final/index.html#respond">0</a>
-                                        </div>
+                                            <span class=td-post-date>
+                                                <time class="entry-date updated td-module-date"
+                                                    datetime="2015-04-22T05:23:55+00:00">
+                                                    <?php echo date('d-m-Y', $this->arrContent[\My\General::CATEGORY_LAM_DEP][1]['created_date']); ?>
+                                                </time>
+                                            </span>
                                     </div>
                                     <div class=td-excerpt>
-                                        Calvin Klein known for launching the careers of such svelte models
-                                        as Brooke Shields and Kate Moss to cast a model who deviates from
-                                        the...
+                                        <?php echo (strlen($this->arrContent[\My\General::CATEGORY_LAM_DEP][1]['cont_description']) < 150) ? $this->arrContent[\My\General::CATEGORY_LAM_DEP][1]['cont_description'] : mb_substr($this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][1]['cont_description'], 0, 150, 'UTF-8') . '...'; ?>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class=td-block-span12>
-                            <div class="td_module_10 td_module_wrap td-animation-stack">
-                                <div class=td-module-thumb><a
-                                        href="td-post-home-run-kitten-favored-in-competitive-san-simeon/index.html"
-                                        rel=bookmark
-                                        title="Home Run Kitten Favored in Competitive San Simeon"><img
-                                            width=218 height=150 class=entry-thumb
-                                            src="wp-content/uploads/2015/04/gym-girl-218x150.jpg" alt=""
-                                            title="Home Run Kitten Favored in Competitive San Simeon"/></a>
-                                </div>
-                                <div class=item-details>
-                                    <h3 class="entry-title td-module-title"><a
-                                            href="td-post-home-run-kitten-favored-in-competitive-san-simeon/index.html"
-                                            rel=bookmark
-                                            title="Home Run Kitten Favored in Competitive San Simeon">Home
-                                            Run Kitten Favored in Competitive San Simeon</a></h3>
-                                    <div class=td-module-meta-info>
-                                        <span class=td-post-author-name><a href="author/admin/index.html">Armin Vans</a> <span>-</span> </span>
-                                            <span class=td-post-date><time
-                                                    class="entry-date updated td-module-date"
-                                                    datetime="2015-04-22T05:23:54+00:00">Apr 22, 2015</time></span>
-                                        <div class=td-module-comments><a
-                                                href="td-post-home-run-kitten-favored-in-competitive-san-simeon/index.html#respond">0</a>
-                                        </div>
-                                    </div>
-                                    <div class=td-excerpt>
-                                        The model is talking about booking her latest gig, modeling
-                                        WordPress underwear in the brand latest Perfectly Fit campaign,
-                                        which was shot by Lachian Bailey....
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class=td-block-span12>
-                            <div class="td_module_10 td_module_wrap td-animation-stack">
-                                <div class=td-module-thumb><a
-                                        href="td-post-blake-griffin-posterizes-aron-baynes-twice-in-clippers-spurs-game/index.html"
-                                        rel=bookmark
-                                        title="Blake Griffin posterizes Aron Baynes twice in Clippers-Spurs Game"><img
-                                            width=218 height=150 class=entry-thumb
-                                            src="wp-content/uploads/2015/04/boat-red-218x150.jpg" alt=""
-                                            title="Blake Griffin posterizes Aron Baynes twice in Clippers-Spurs Game"/></a>
-                                </div>
-                                <div class=item-details>
-                                    <h3 class="entry-title td-module-title"><a
-                                            href="td-post-blake-griffin-posterizes-aron-baynes-twice-in-clippers-spurs-game/index.html"
-                                            rel=bookmark
-                                            title="Blake Griffin posterizes Aron Baynes twice in Clippers-Spurs Game">Blake
-                                            Griffin posterizes Aron Baynes twice in Clippers-Spurs Game</a></h3>
-                                    <div class=td-module-meta-info>
-                                        <span class=td-post-author-name><a href="author/admin/index.html">Armin Vans</a> <span>-</span> </span>
-                                            <span class=td-post-date><time
-                                                    class="entry-date updated td-module-date"
-                                                    datetime="2015-04-22T05:23:54+00:00">Apr 22, 2015</time></span>
-                                        <div class=td-module-comments><a
-                                                href="td-post-blake-griffin-posterizes-aron-baynes-twice-in-clippers-spurs-game/index.html#respond">0</a>
-                                        </div>
-                                    </div>
-                                    <div class=td-excerpt>
-                                        The model is talking about booking her latest gig, modeling
-                                        WordPress underwear in the brand latest Perfectly Fit campaign,
-                                        which was shot by Lachian Bailey....
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class=td-block-span12>
-                            <div class="td_module_10 td_module_wrap td-animation-stack">
-                                <div class=td-module-thumb><a
-                                        href="td-post-john-isner-lonely-standard-bearer-of-us-mens-tennis/index.html"
-                                        rel=bookmark
-                                        title="John Isner, lonely standard-bearer of US men&#8217;s tennis"><img
-                                            width=218 height=150 class=entry-thumb
-                                            src="wp-content/uploads/2015/04/biker-218x150.jpg" alt=""
-                                            title="John Isner, lonely standard-bearer of US men&#8217;s tennis"/></a>
-                                </div>
-                                <div class=item-details>
-                                    <h3 class="entry-title td-module-title"><a
-                                            href="td-post-john-isner-lonely-standard-bearer-of-us-mens-tennis/index.html"
-                                            rel=bookmark
-                                            title="John Isner, lonely standard-bearer of US men&#8217;s tennis">John
-                                            Isner, lonely standard-bearer of US men&#8217;s tennis</a></h3>
-                                    <div class=td-module-meta-info>
-                                        <span class=td-post-author-name><a href="author/marius2/index.html">Matt Cloey</a> <span>-</span> </span>
-                                            <span class=td-post-date><time
-                                                    class="entry-date updated td-module-date"
-                                                    datetime="2015-04-22T05:23:53+00:00">Apr 22, 2015</time></span>
-                                        <div class=td-module-comments><a
-                                                href="td-post-john-isner-lonely-standard-bearer-of-us-mens-tennis/index.html#respond">0</a>
-                                        </div>
-                                    </div>
-                                    <div class=td-excerpt>
-                                        The model is talking about booking her latest gig, modeling
-                                        WordPress underwear in the brand latest Perfectly Fit campaign,
-                                        which was shot by Lachian Bailey....
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class=td-block-span12>
-                            <div class="td_module_10 td_module_wrap td-animation-stack">
-                                <div class=td-module-thumb><a
-                                        href="td-post-south-korean-horse-racing-expands-broadcasts-abroad/index.html"
-                                        rel=bookmark
-                                        title="South Korean Horse Racing Expands Broadcasts Abroad"><img
-                                            width=218 height=150 class=entry-thumb
-                                            src="wp-content/uploads/2015/04/85-218x150.jpg" alt=""
-                                            title="South Korean Horse Racing Expands Broadcasts Abroad"/></a>
-                                </div>
-                                <div class=item-details>
-                                    <h3 class="entry-title td-module-title"><a
-                                            href="td-post-south-korean-horse-racing-expands-broadcasts-abroad/index.html"
-                                            rel=bookmark
-                                            title="South Korean Horse Racing Expands Broadcasts Abroad">South
-                                            Korean Horse Racing Expands Broadcasts Abroad</a></h3>
-                                    <div class=td-module-meta-info>
-                                        <span class=td-post-author-name><a href="author/marius2/index.html">Matt Cloey</a> <span>-</span> </span>
-                                            <span class=td-post-date><time
-                                                    class="entry-date updated td-module-date"
-                                                    datetime="2015-04-22T05:23:53+00:00">Apr 22, 2015</time></span>
-                                        <div class=td-module-comments><a
-                                                href="td-post-south-korean-horse-racing-expands-broadcasts-abroad/index.html#respond">0</a>
-                                        </div>
-                                    </div>
-                                    <div class=td-excerpt>
-                                        The model is talking about booking her latest gig, modeling
-                                        WordPress underwear in the brand latest Perfectly Fit campaign,
-                                        which was shot by Lachian Bailey....
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <?php } ?>
                     </div>
                 </div>
             </div>

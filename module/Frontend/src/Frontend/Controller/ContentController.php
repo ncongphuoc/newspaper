@@ -103,6 +103,8 @@ class ContentController extends MyController
             $this->renderer->headMeta()->setProperty('twitter:creator', General::SITE_AUTH);
             $this->renderer->headMeta()->setProperty('twitter:image:src', $arrContent['cont_main_image']);
 
+            $this->renderer->headLink(array('rel' => 'amphtml', 'href' => BASE_URL . $this->url()->fromRoute('view-content', ['contentSlug' => $arrContent['cont_slug'], 'contentId' => $cont_id])));
+            $this->renderer->headLink(array('rel' => 'canonical', 'href' => BASE_URL . $this->url()->fromRoute('view-content', ['contentSlug' => $arrContent['cont_slug'], 'contentId' => $cont_id])));
             //lấy tin cũ hơn cùng chuyên mục
 //            $arrContentLastedList = $instanceSearchContent->getListLimit(['cate_id' => $arrContent['cate_id'], 'not_cont_status' => -1, 'less_cont_id' => $arrContent['cont_id']], 1, 6, ['cont_id' => ['order' => 'desc']]);
 //
@@ -112,9 +114,9 @@ class ContentController extends MyController
 //            //5 bài mới nhất
 //            $arrContentNews = $instanceSearchContent->getListLimit(['cont_status' => 1, 'not_cont_id' => $arrContent['cont_id']], 1, 6, ['created_date' => ['order' => 'desc']]);
 //
-//            //lấy 10 keyword :)
-//            $instanceSearchKeyword = new \My\Search\Keyword();
-//            $arrKeywordList = $instanceSearchKeyword->getListLimit(['full_text_keyname' => $arrContent['cont_title']], 1, 10, ['_score' => ['order' => 'desc']]);
+            //lấy 10 keyword :)
+            $instanceSearchKeyword = new \My\Search\Keyword();
+            $arrKeywordList = $instanceSearchKeyword->getListLimit(['full_text_keyname' => $arrContent['cont_title']], 1, 10, ['_score' => ['order' => 'desc']]);
 
             unset($serviceContent);
             unset($instanceSearchContent);
@@ -128,7 +130,7 @@ class ContentController extends MyController
 //                'arrContentLikeList' => $arrContentLikeList,
 //                'arrContentLastedList' => $arrContentLastedList,
 //                'arrContentNews' => $arrContentNews,
-//                'arrKeywordList' => $arrKeywordList,
+                'arrKeywordList' => $arrKeywordList,
                 //'arrCategoryParent' => $arrCategoryParent
             );
         } catch (\Exception $exc) {
