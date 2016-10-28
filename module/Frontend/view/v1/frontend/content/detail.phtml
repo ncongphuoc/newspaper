@@ -175,7 +175,7 @@ $list_category = unserialize(ARR_CATEGORY);
                                 <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $content['cont_slug'], 'contentId' => $content['cont_id']]) ?>"
                                     rel="bookmark"
                                     title="<?php echo $content['cont_title'] ?>">
-                                    <?php echo (strlen($content['cont_title']) < 70) ? $content['cont_title'] : mb_substr($content['cont_title'], 0, 70, 'UTF-8') . '...'; ?>
+                                    <?php echo (strlen($content['cont_title']) < 60) ? $content['cont_title'] : mb_substr($content['cont_title'], 0, 60, 'UTF-8') . '...'; ?>
                                 </a>
                             </h3>
                         </div>
@@ -208,7 +208,7 @@ $list_category = unserialize(ARR_CATEGORY);
                             <h3 class="entry-title td-module-title">
                                 <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $content['cont_slug'], 'contentId' => $content['cont_id']]) ?>"
                                     rel="bookmark" title="<?php echo $content['cont_title'] ?>">
-                                    <?php echo (strlen($content['cont_title']) < 70) ? $content['cont_title'] : mb_substr($content['cont_title'], 0, 70, 'UTF-8') . '...'; ?>
+                                    <?php echo (strlen($content['cont_title']) < 60) ? $content['cont_title'] : mb_substr($content['cont_title'], 0, 60, 'UTF-8') . '...'; ?>
 
                                 </a>
                             </h3>

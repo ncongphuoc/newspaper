@@ -75,8 +75,8 @@ class ContentController extends MyController
             $this->renderer = $this->serviceLocator->get('Zend\View\Renderer\PhpRenderer');
 //            <meta name="robots" content="INDEX, FOLLOW"/>
             //$this->renderer->headMeta()->appendName('robots','noindex');
-            $this->renderer->headMeta()->appendName('dc.description', html_entity_decode($arrCategoryDetail['cate_meta_description']) . General::TITLE_META);
-            $this->renderer->headMeta()->appendName('dc.subject', html_entity_decode($arrCategoryDetail['cate_name']) . General::TITLE_META);
+            $this->renderer->headMeta()->appendName('dc.description', html_entity_decode($categoryDetail['cate_meta_description']) . General::TITLE_META);
+            $this->renderer->headMeta()->appendName('dc.subject', html_entity_decode($categoryDetail['cate_name']) . General::TITLE_META);
             $this->renderer->headTitle(html_entity_decode($metaTitle) . General::TITLE_META);
             $this->renderer->headMeta()->appendName('keywords', html_entity_decode($metaKeyword));
             $this->renderer->headMeta()->appendName('description', html_entity_decode($metaDescription));
@@ -93,7 +93,7 @@ class ContentController extends MyController
             $this->renderer->headMeta()->setProperty('itemprop:dateCreated', date('Y-m-d H:i', $arrContent['created_date']) . ' + 07:00');
 
             $this->renderer->headMeta()->setProperty('og:type', 'article');
-            $this->renderer->headMeta()->setProperty('article:section', $arrCategoryDetail['cate_name']);
+            $this->renderer->headMeta()->setProperty('article:section', $categoryDetail['cate_name']);
             $this->renderer->headMeta()->setProperty('article:published_time', date('Y-m-d H:i', $arrContent['created_date']) . ' + 07:00');
             $this->renderer->headMeta()->setProperty('article:modified_time', date('Y-m-d H:i', $arrContent['updated_date']) . ' + 07:00');
 
