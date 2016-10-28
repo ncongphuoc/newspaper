@@ -1155,7 +1155,6 @@ class ConsoleController extends MyController
         }
 
         echo \My\General::getColoredString("DONE time: " . date('H:i:s'), 'light_cyan');
-        return true;
     }
 
     public function __khoahocTV()
@@ -1481,13 +1480,7 @@ class ConsoleController extends MyController
                         $src = $img->src;
                         $extension = end(explode('.', end(explode('/', $src))));
                         $name_img = $arr_data['cont_slug'] . '_' . ($key + 1) . '.' . $extension;
-                        $image_content = General::crawler($src);
-                        if($image_content) {
-                            file_put_contents($upload_dir['path'] . '/' . $name_img, $image_content);
-                        } else {
-                            $image_content = General::crawler('http://static.tintuc360.me/f/v1/images/no-image-available.jpg');
-                            file_put_contents($upload_dir['path'] . '/' . $name_img, $image_content);
-                        }
+                        file_put_contents($upload_dir['path'] . '/' . $name_img, General::crawler($src));
                         $cont_detail = str_replace($src, $upload_dir['url'] . '/' . $name_img, $cont_detail);
                         if ($key == 0) {
                             $arr_data['cont_main_image'] = $upload_dir['url'] . '/' . $name_img;
@@ -1711,7 +1704,7 @@ class ConsoleController extends MyController
 
         foreach ($results as $key => $item) {
             $content = General::crawler('http://emdep.vn/' . $item->href);
-            //$content = General::crawler('http://emdep.vn/lam-me/nhung-bi-mat-cua-con-co-chuyen-da-va-meo-giup-me-vuot-qua-20160321111119071.htm');
+            //$content = curl('http://afamily.vn/day-con-biet-boi-ngay-tai-nha-chi-voi-4-buoc-don-gian-2016060811132636.chn');
 
             if ($content == false) {
                 continue;
@@ -1736,6 +1729,7 @@ class ConsoleController extends MyController
                     echo \My\General::getColoredString("Exist this content:" . $arr_data['cont_slug'], 'red');
                     continue;
                 }
+
                 //get content detail
                 $cont_description = $html->find('div.top-content div.sapo span.xsubject', 0)->plaintext;
                 $cont_description = str_replace('(Emdep.vn) - ', '', $cont_description);
@@ -1757,13 +1751,7 @@ class ConsoleController extends MyController
                         $src = $img->src;
                         $extension = end(explode('.', end(explode('/', $src))));
                         $name_img = $arr_data['cont_slug'] . '_' . ($key + 1) . '.' . $extension;
-                        $image_content = General::crawler($src);
-                        if($image_content) {
-                            file_put_contents($upload_dir['path'] . '/' . $name_img, $image_content);
-                        } else {
-                            $image_content = General::crawler('http://static.tintuc360.me/f/v1/images/no-image-available.jpg');
-                            file_put_contents($upload_dir['path'] . '/' . $name_img, $image_content);
-                        }
+                        file_put_contents($upload_dir['path'] . '/' . $name_img, General::crawler($src));
                         $cont_detail = str_replace($src, $upload_dir['url'] . '/' . $name_img, $cont_detail);
                         if ($key == 0) {
                             $arr_data['cont_main_image'] = $upload_dir['url'] . '/' . $name_img;
@@ -1856,13 +1844,7 @@ class ConsoleController extends MyController
                         $src = $img->src;
                         $extension = end(explode('.', end(explode('/', $src))));
                         $name_img = $arr_data['cont_slug'] . '_' . ($key + 1) . '.' . $extension;
-                        $image_content = General::crawler($src);
-                        if($image_content) {
-                            file_put_contents($upload_dir['path'] . '/' . $name_img, $image_content);
-                        } else {
-                            $image_content = General::crawler('http://static.tintuc360.me/f/v1/images/no-image-available.jpg');
-                            file_put_contents($upload_dir['path'] . '/' . $name_img, $image_content);
-                        }
+                        file_put_contents($upload_dir['path'] . '/' . $name_img, General::crawler($src));
                         $cont_detail = str_replace($src, $upload_dir['url'] . '/' . $name_img, $cont_detail);
                         if ($key == 0) {
                             $arr_data['cont_main_image'] = $upload_dir['url'] . '/' . $name_img;
@@ -1974,13 +1956,7 @@ class ConsoleController extends MyController
                         $src = $img->src;
                         $extension = end(explode('.', end(explode('/', $src))));
                         $name_img = $arr_data['cont_slug'] . '_' . ($key + 1) . '.' . $extension;
-                        $image_content = General::crawler($src);
-                        if($image_content) {
-                            file_put_contents($upload_dir['path'] . '/' . $name_img, $image_content);
-                        } else {
-                            $image_content = General::crawler('http://static.tintuc360.me/f/v1/images/no-image-available.jpg');
-                            file_put_contents($upload_dir['path'] . '/' . $name_img, $image_content);
-                        }
+                        file_put_contents($upload_dir['path'] . '/' . $name_img, General::crawler($src));
                         $cont_detail = str_replace($src, $upload_dir['url'] . '/' . $name_img, $cont_detail);
                         if ($key == 0) {
                             $arr_data['cont_main_image'] = $upload_dir['url'] . '/' . $name_img;
@@ -2074,13 +2050,7 @@ class ConsoleController extends MyController
                         $src = $img->src;
                         $extension = end(explode('.', end(explode('/', $src))));
                         $name_img = $arr_data['cont_slug'] . '_' . ($key + 1) . '.' . $extension;
-                        $image_content = General::crawler($src);
-                        if($image_content) {
-                            file_put_contents($upload_dir['path'] . '/' . $name_img, $image_content);
-                        } else {
-                            $image_content = General::crawler('http://static.tintuc360.me/f/v1/images/no-image-available.jpg');
-                            file_put_contents($upload_dir['path'] . '/' . $name_img, $image_content);
-                        }
+                        file_put_contents($upload_dir['path'] . '/' . $name_img, General::crawler($src));
                         $cont_detail = str_replace($src, $upload_dir['url'] . '/' . $name_img, $cont_detail);
                         if ($key == 0) {
                             $arr_data['cont_main_image'] = $upload_dir['url'] . '/' . $name_img;
@@ -2115,6 +2085,6 @@ class ConsoleController extends MyController
     {
         $instanceSearchContent = new \My\Search\Content();
         $instanceSearchContent->createIndex();
-        exit('done');
+        die;
     }
 }
