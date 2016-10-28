@@ -1117,7 +1117,7 @@ class ConsoleController extends MyController
 //        $arr_category = $instanceSearchCategory->getList(['cate_status' => 1], [], ['cate_id' => ['order' => 'asc']]);
 
         $arr_category = [6, 1, 2, 3, 5, 7, 4];
-        for ($i = 50; $i > 0; $i--) {
+        for ($i = 1; $i < 2; $i--) {
             foreach ($arr_category as $cate_id) {
                 switch ($cate_id) {
                     case 1:

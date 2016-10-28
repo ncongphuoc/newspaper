@@ -55,4 +55,9 @@ class Content extends ModelAbstract {
         return $intResult;
     }
 
+    public function editBackground($p_arrParams, $arrCondition) {
+        $intResult = $this->getParentTable()->editBackground($p_arrParams, $arrCondition);
+        return $intResult;
+    }
+
 }

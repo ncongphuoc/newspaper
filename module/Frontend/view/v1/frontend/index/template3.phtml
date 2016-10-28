@@ -4,9 +4,11 @@
             <div class=wpb_wrapper>
                 <div class="td_block_wrap td_block_11 td-pb-border-top">
                     <div class=td-block-title-wrap>
-                        <h4 class=block-title>
-                            <span>LÀM ĐẸP</span>
-                        </h4>
+                        <a title="Làm đẹp" href="<?php echo $this->serverUrl() . $this->Url('category', ['cateSlug' => $this->arrCategory[\My\General::CATEGORY_LAM_DEP]['cate_slug'], 'cateId' => $this->arrCategory[\My\General::CATEGORY_LAM_DEP]['cate_id']]) ?>">
+                            <h4 class=block-title>
+                                <span>LÀM ĐẸP</span>
+                            </h4>
+                        </a>
                     </div>
                     <div class=td_block_inner>
                     <?php for($i=1;$i<=5;$i++) { ?>

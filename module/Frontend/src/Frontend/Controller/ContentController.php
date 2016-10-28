@@ -51,8 +51,12 @@ class ContentController extends MyController
             }
 
             //update số lần view
-//            $serviceContent = $this->serviceLocator->get('My\Models\Content');
-//            $serviceContent->edit(['cont_views' => $arrContent['cont_views'] + 1, 'modified_date' => time()], $cont_id);
+            $p_arrParams = array(
+                'cont_views' => $arrContent['cont_views'] + 1,
+                'cont_id' => $cont_id
+            );
+            $instanceJob = new \My\Job\JobContent();
+            $instanceJob->addJob(SEARCH_PREFIX . 'editContent', $p_arrParams);
 
             /*
              render meta

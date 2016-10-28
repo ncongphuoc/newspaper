@@ -150,6 +150,19 @@ class storageContent extends AbstractTableGateway {
         }
     }
 
+    public function editBackground($p_arrParams, $intProductID) {
+        try {
+            if (!is_array($p_arrParams) || empty($p_arrParams) || empty($intProductID)) {
+                return false;
+            }
+            $result = $this->update($p_arrParams, 'cont_id=' . $intProductID);
+            return $result;
+        } catch (\Exception $exc) {
+            $exc->getMessage();
+            return false;
+        }
+    }
+
     public function multiEdit($p_arrParams, $arrCondition) {
         try {
             if (!is_array($p_arrParams) || empty($p_arrParams) || empty($arrCondition) || !is_array($arrCondition)) {
