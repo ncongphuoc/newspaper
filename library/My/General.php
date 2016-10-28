@@ -45,6 +45,8 @@ class General {
     const CATEGORY_ME_VA_BE = 6;
     const CATEGORY_DU_LICH = 7;
 
+    const IMAGE_DEFAULT = STATIC_URL . '/f/v1/images/no-image-available.jpg';
+
     static $foreground_colors = array(
         'black' => '0;30', 'dark_gray' => '1;30',
         'blue' => '0;34', 'light_blue' => '1;34',
