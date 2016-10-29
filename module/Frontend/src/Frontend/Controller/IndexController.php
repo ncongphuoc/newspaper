@@ -47,6 +47,9 @@ class IndexController extends MyController
 
             $arr_content_cate[$category['cate_id']] = $arr_content_new;
         }
+
+        $this->renderer = $this->serviceLocator->get('Zend\View\Renderer\PhpRenderer');
+        $this->renderer->headMeta()->appendName('robots', 'index');
         
         return [
             'param' => $params,
