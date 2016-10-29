@@ -48,33 +48,6 @@ $list_category = unserialize(ARR_CATEGORY);
             </header>
         </div>
 
-        <div class="td-post-sharing td-post-sharing-top ">
-            <div class=td-default-sharing>
-                <a class="td-social-sharing-buttons td-social-facebook"
-                   href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Fdemo.tagdiv.com%2Fnewspaper%2Ftd-post-htc-launches-another-selfie-phone-with-an-ultrapixel-camera-up-front%2F"
-                   onclick="window.open(this.href, 'mywin','left=50,top=50,width=600,height=350,toolbar=0'); return false;"><i
-                        class=td-icon-facebook></i>
-                    <div class=td-social-but-text>Share on Facebook</div>
-                </a>
-                <a class="td-social-sharing-buttons td-social-twitter"
-                   href="https://twitter.com/intent/tweet?text=HTC+launches+another+selfie-phone+with+an+UltraPixel+camera+up+front&amp;url=http%3A%2F%2Fdemo.tagdiv.com%2Fnewspaper%2Ftd-post-htc-launches-another-selfie-phone-with-an-ultrapixel-camera-up-front%2F&amp;via=Newspaper+7"><i
-                        class=td-icon-twitter></i>
-                    <div class=td-social-but-text>Tweet on Twitter</div>
-                </a>
-                <a class="td-social-sharing-buttons td-social-google"
-                   href="http://plus.google.com/share?url=http://demo.tagdiv.com/newspaper/td-post-htc-launches-another-selfie-phone-with-an-ultrapixel-camera-up-front/"
-                   onclick="window.open(this.href, 'mywin','left=50,top=50,width=600,height=350,toolbar=0'); return false;"><i
-                        class=td-icon-googleplus></i></a>
-                <a class="td-social-sharing-buttons td-social-pinterest"
-                   href="http://pinterest.com/pin/create/button/?url=http://demo.tagdiv.com/newspaper/td-post-htc-launches-another-selfie-phone-with-an-ultrapixel-camera-up-front/&amp;media=http://demo.tagdiv.com/newspaper/wp-content/uploads/2015/04/36.jpg&amp;description=HTC+launches+another+selfie-phone+with+an+UltraPixel+camera+up+front"
-                   onclick="window.open(this.href, 'mywin','left=50,top=50,width=600,height=350,toolbar=0'); return false;"><i
-                        class=td-icon-pinterest></i></a>
-                <a class="td-social-sharing-buttons td-social-whatsapp"
-                   href="whatsapp://send?text=HTC+launches+another+selfie-phone+with+an+UltraPixel+camera+up+front%20-%20http%3A%2F%2Fdemo.tagdiv.com%2Fnewspaper%2Ftd-post-htc-launches-another-selfie-phone-with-an-ultrapixel-camera-up-front%2F"><i
-                        class=td-icon-whatsapp></i></a>
-            </div>
-        </div>
-
         <div class=td-post-content>
             <h3 class="entry-title"><?php echo $content_detail['cont_description'] ?></h3>
             <?php echo $content_detail['cont_detail'] ?>
@@ -93,51 +66,14 @@ $list_category = unserialize(ARR_CATEGORY);
                 </div>
             <?php } ?>
             <div class="td-post-sharing td-post-sharing-bottom td-with-like">
-                <span class=td-post-share-title>SHARE</span>
-                <div class=td-default-sharing>
-                    <a class="td-social-sharing-buttons td-social-facebook"
-                       href="http://www.facebook.com/sharer.php?u=<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent['cont_slug'], 'contentId' => $this->arrContent['cont_id']]) ?>"
-                       onclick="window.open(this.href, 'mywin','left=50,top=50,width=600,height=350,toolbar=0'); return false;"><i
-                            class=td-icon-facebook></i>
-                        <div class=td-social-but-text>Facebook</div>
-                    </a>
-                    <a class="td-social-sharing-buttons td-social-twitter"
-                       href="https://twitter.com/intent/tweet?text=<?php echo $content_detail['cont_title'] ?>&url=<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent['cont_slug'], 'contentId' => $this->arrContent['cont_id']]) ?>"><i
-                            class=td-icon-twitter></i>
-                        <div class=td-social-but-text>Twitter</div>
-                    </a>
-                    <a class="td-social-sharing-buttons td-social-google"
-                       href="http://plus.google.com/share?url=<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent['cont_slug'], 'contentId' => $this->arrContent['cont_id']]) ?>"
-                       onclick="window.open(this.href, 'mywin','left=50,top=50,width=600,height=350,toolbar=0'); return false;"><i
-                            class=td-icon-googleplus></i></a>
-                </div>
-                <div class=td-classic-sharing>
-                    <ul>
-                        <li class=td-classic-facebook>
-                            <iframe frameBorder=0
-                                    src="http://www.facebook.com/plugins/like.php?href=<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent['cont_slug'], 'contentId' => $this->arrContent['cont_id']]) ?>/&amp;layout=button_count&amp;show_faces=false&amp;width=105&amp;action=like&amp;colorscheme=light&amp;height=21"
-                                    style="border:none;overflow:hidden;width:105px;height:21px;background-color:transparent">
-
-                            </iframe>
-                        </li>
-                        <li class=td-classic-twitter>
-                            <a href="https://twitter.com/share" class=twitter-share-button
-                                                        data-url="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent['cont_slug'], 'contentId' => $this->arrContent['cont_id']]) ?>"
-                                                        data-text="<?php echo $this->arrContent['cont_title'] ?>"
-                                                        data-via="" data-lang=en>tweet</a>
-                            <script>!function (d, s, id) {
-                                    var js, fjs = d.getElementsByTagName(s)[0];
-                                    if (!d.getElementById(id)) {
-                                        js = d.createElement(s);
-                                        js.id = id;
-                                        js.src = "http://platform.twitter.com/widgets.js";
-                                        fjs.parentNode.insertBefore(js, fjs);
-                                    }
-                                }(document, "script", "twitter-wjs");</script>
-                        </li>
-                    </ul>
+<!--                <span class=td-post-share-title>SHARE</span>-->
+                <div class="fb-share-button"
+                     data-href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent['cont_slug'], 'contentId' => $this->arrContent['cont_id']]) ?>"
+                     data-layout="button_count"
+                     data-size="large">
                 </div>
             </div>
+
             <div class="fb-comments"
                  data-href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $this->arrContent['cont_slug'], 'contentId' => $this->arrContent['cont_id']]) ?>"
                  data-numposts="5">
