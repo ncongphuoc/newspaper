@@ -2082,7 +2082,7 @@ class ConsoleController extends MyController
             foreach ($arr_category as $cate_id) {
                 switch ($cate_id) {
                     case 1:
-                        if ($i > 0 && $i < 11) {
+                        if ($i > 0 && $i < 2) {
                             $this->kenh14CrawlerKeyword($i, $cate_id);
                         }
                         break;
