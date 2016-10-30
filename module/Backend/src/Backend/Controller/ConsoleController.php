@@ -1962,8 +1962,6 @@ class ConsoleController extends MyController
                 continue;
             }
             $html = HtmlDomParser::str_get_html($content);
-
-            $arr_data = array();
             if ($html->find('.article-content', 0)) {
 
                 $html->find('.article-content .hide', 0)->innertext = '';
@@ -2017,8 +2015,6 @@ class ConsoleController extends MyController
     public function ivivuCrawlerKeyword($page, $cate_id)
     {
         $url = 'https://www.ivivu.com/blog/category/viet-nam/';
-        $instanceSearchContent = new \My\Search\Content();
-        $upload_dir = General::mkdirUpload();
 
         $url_page = $url . '/page/' . $page . '/';
         $content = General::crawler($url_page);
@@ -2051,9 +2047,6 @@ class ConsoleController extends MyController
     {
         $url = 'http://kenh14.vn/star.chn';
 
-        $instanceSearchContent = new \My\Search\Content();
-        $upload_dir = General::mkdirUpload();
-
         $url_page = $url;
 
         $content = General::crawler($url_page);
@@ -2075,22 +2068,6 @@ class ConsoleController extends MyController
 
             $arr_data = array();
             if ($html->find('.knc-content', 0)) {
-
-                $cont_title = html_entity_decode($html->find("h1.kbwc-title", 0)->plaintext);
-                $arr_data['cont_title'] = $cont_title;
-                $arr_data['cont_slug'] = General::getSlug($cont_title);
-
-                //check post exist
-                $arr_detail = $instanceSearchContent->getDetail(
-                    array(
-                        'cont_slug' => $arr_data['cont_slug'],
-                        'not_cont_status' => -1
-                    )
-                );
-                if (!empty($arr_detail)) {
-                    echo \My\General::getColoredString("Exist this content:" . $arr_data['cont_slug'], 'red');
-                    continue;
-                }
                 $cont_detail = $html->find('.knc-content', 0)->plaintext;
                 $this->addKeywordDemo($cont_detail);
             }
