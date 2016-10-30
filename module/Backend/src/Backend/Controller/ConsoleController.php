@@ -797,6 +797,18 @@ class ConsoleController extends MyController
         }
 
         $keyword = $arr_keyword['key_name'];
+        $count = str_word_count($keyword);
+        if ($count > 6) {
+            $serviceKeyword = $this->serviceLocator->get('My\Models\Keyword');
+            $int_result = $serviceKeyword->edit(array('is_crawler' => 1, 'key_weight' => 1), $arr_keyword['key_id']);
+            unset($serviceKeyword);
+
+            if ($int_result) {
+                echo \My\General::getColoredString("Crawler success keyword_id = {$arr_keyword['key_id']}", 'green');
+            }
+            $this->getKeyword();
+
+        }
 
         foreach ($match as $key => $value) {
             if ($key == 0) {
@@ -829,7 +841,7 @@ class ConsoleController extends MyController
             echo \My\General::getColoredString("Crawler success keyword_id = {$arr_keyword['key_id']}", 'green');
         }
 
-        sleep(2);
+        sleep(1);
         $this->getKeyword();
     }
 
@@ -845,6 +857,7 @@ class ConsoleController extends MyController
             '2014',
             '2015',
             '2016',
+            'webtretho'
         );
 
         $instanceSearchKeyWord = new \My\Search\Keyword();
@@ -857,7 +870,7 @@ class ConsoleController extends MyController
             }
             $block = false;
             foreach ($arr_block_string as $string) {
-                if (strpos($key_word, $string)) {
+                if (strpos($key_word, $string) !== false) {
                     $block = true;
                 }
             }
@@ -1121,7 +1134,7 @@ class ConsoleController extends MyController
             foreach ($arr_category as $cate_id) {
                 switch ($cate_id) {
                     case 1:
-                        if($i>0 && $i<11) {
+                        if ($i > 0 && $i < 11) {
                             $this->__kenh14Crawler($i, $cate_id);
                         }
                         break;
@@ -1137,7 +1150,7 @@ class ConsoleController extends MyController
                         $this->__emdepCrawler($i, 'http://emdep.vn/lam-dep', $cate_id);
                         break;
                     case 5:
-                        if($i>0 && $i<11){
+                        if ($i > 0 && $i < 11) {
                             $this->__24hCrawler($i, $cate_id);
                         }
                         $this->__emdepCrawler($i, 'http://emdep.vn/mon-ngon', $cate_id);
@@ -1906,8 +1919,9 @@ class ConsoleController extends MyController
 
     public function testAction()
     {
-        $instanceSearchContent = new \My\Search\Content();
-        $instanceSearchContent->createIndex();
-        die;
+//        $instanceSearchContent = new \My\Search\Content();
+//        $instanceSearchContent->createIndex();
+//        die;
+
     }
 }
