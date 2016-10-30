@@ -779,10 +779,8 @@ class ConsoleController extends MyController
 
     public function crawlerKeywordAction()
     {
-        for ($i = 0; $i < 10; $i++) {
             $this->getKeyword();
-        }
-        return;
+            return;
     }
 
     public function getKeyword()
@@ -844,8 +842,7 @@ class ConsoleController extends MyController
         }
 
         sleep(1);
-        //$this->getKeyword();
-        return true;
+        $this->getKeyword();
     }
 
     public function add_keyword($arr_key, $keyword_detail)
