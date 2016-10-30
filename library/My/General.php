@@ -645,4 +645,12 @@ class General {
         return $upload_dir;
     }
 
+    public static function blockString(){
+        return array(
+            'http','2012','2013','2014','2015','2016','webtretho','excel','phương trình','c++', 'java', 'sql', 'giải tích', 'mp3',
+            'ebook','download','youtube','zing','tướng tuần','pdf','lyric','tiếng anh','tiếng nhật','tiếng trung','karaoke',
+            '.com','beat','vietsub','tập','tap', 'toán', 'hóa', 'lý'
+        );
+    }
+
 }

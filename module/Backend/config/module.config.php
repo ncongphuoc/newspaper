@@ -102,6 +102,16 @@ return array(
                         ),
                     ),
                 ),
+                'keywordcontent' => array(
+                    'options' => array(
+                        'route' => 'keywordcontent',
+                        'defaults' => array(
+                            '__NAMESPACE__' => 'Backend\Controller',
+                            'controller' => 'console',
+                            'action' => 'keyword-content'
+                        ),
+                    ),
+                ),
                 'sitemap' => array(
                     'options' => array(
                         'route' => 'sitemap',

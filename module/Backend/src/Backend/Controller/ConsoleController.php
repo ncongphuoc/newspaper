@@ -779,7 +779,9 @@ class ConsoleController extends MyController
 
     public function crawlerKeywordAction()
     {
-        $this->getKeyword();
+        for ($i = 0; $i < 10; $i++) {
+            $this->getKeyword();
+        }
         return;
     }
 
@@ -842,7 +844,8 @@ class ConsoleController extends MyController
         }
 
         sleep(1);
-        $this->getKeyword();
+        //$this->getKeyword();
+        return true;
     }
 
     public function add_keyword($arr_key, $keyword_detail)
@@ -851,21 +854,16 @@ class ConsoleController extends MyController
             return false;
         }
 
-        $arr_block_string = array(
-            'http',
-            '2013',
-            '2014',
-            '2015',
-            '2016',
-            'webtretho'
-        );
+        $arr_block_string = General::blockString();
 
         $instanceSearchKeyWord = new \My\Search\Keyword();
         foreach ($arr_key as $key_word) {
-            $is_exsit = $instanceSearchKeyWord->getDetail(['key_slug' => trim(General::getSlug($key_word))]);
+
+            $word_slug = trim(General::getSlug($key_word));
+            $is_exsit = $instanceSearchKeyWord->getDetail(['key_slug' => $word_slug]);
 
             if ($is_exsit) {
-                echo \My\General::getColoredString("Exsit keyword: " . trim(General::getSlug($key_word)), 'red');
+                echo \My\General::getColoredString("Exsit keyword: " . $word_slug, 'red');
                 continue;
             }
             $block = false;
@@ -881,11 +879,11 @@ class ConsoleController extends MyController
 
             $arr_data = [
                 'key_name' => $key_word,
-                'key_slug' => trim(General::getSlug($key_word)),
+                'key_slug' => $word_slug,
                 'created_date' => time(),
                 'is_crawler' => 0,
-                'cate_id' => $keyword_detail['cate_id'],
-                'key_weight' => $keyword_detail['key_weight'],
+                'cate_id' => ($keyword_detail['cate_id'] == -2) ? -1 : $keyword_detail['cate_id'],
+                'key_weight' => 1,
             ];
 
             $serviceKeyword = $this->serviceLocator->get('My\Models\Keyword');
@@ -1825,16 +1823,16 @@ class ConsoleController extends MyController
 
     public function __kenh14Crawler($page, $cate_id)
     {
-        $url = 'http://kenh14.vn/timeline/laytinmoitronglist';
+        $url = 'http://kenh14.vn/star.chn';
 
         $instanceSearchContent = new \My\Search\Content();
         $upload_dir = General::mkdirUpload();
 
-        $url_page = $url . '-' . $page . '-2-1-1-1-1-1-0-3-1.chn';
+        $url_page = $url;
 
         $content = General::crawler($url_page);
         $dom = HtmlDomParser::str_get_html($content);
-        $results = $dom->find('li.knswli h3.knswli-title a');
+        $results = $dom->find('li.ktncli h3.ktncli-title a,li.knswli h3.knswli-title a');
 
         if (count($results) <= 0) {
             return;
@@ -1917,11 +1915,301 @@ class ConsoleController extends MyController
         }
     }
 
+    public function afamilyCrawlerKeyword($page, $url, $cate_id)
+    {
+        $url_page = $url . '/trang-' . $page . '.chn';
+        $content = General::crawler($url_page);
+        $dom = HtmlDomParser::str_get_html($content);
+
+        $results = $dom->find('div.catalogies div.sub_hot .sub_hotct h2 a, div.catalogies div.sub_hot .sub_hotct2 li h3 a, div.catalogies div.list-news1 h4 a');
+        if (count($results) <= 0) {
+            return 0;
+        }
+        foreach ($results as $key => $item) {
+            $content = General::crawler('http://afamily.vn/' . $item->href);
+            //$content = curl('http://afamily.vn/day-con-biet-boi-ngay-tai-nha-chi-voi-4-buoc-don-gian-2016060811132636.chn');
+
+            if ($content == false) {
+                continue;
+            }
+            $html = HtmlDomParser::str_get_html($content);
+            if ($html->find('.detail_content', 0)) {
+
+                $cont_detail = $html->find('.detail_content', 0)->plaintext;
+                $this->addKeywordDemo($cont_detail);
+            }
+            sleep(1);
+        }
+        return true;
+    }
+
+    public function emdepCrawlerKeyword($page, $url, $cate_id)
+    {
+        $url_page = $url . '/page-' . $page . '.htm';
+        $content = General::crawler($url_page);
+        $dom = HtmlDomParser::str_get_html($content);
+        $results = $dom->find('div.list-news li.news-item a');
+
+        if (count($results) <= 0) {
+            return;
+        }
+
+        foreach ($results as $key => $item) {
+            $content = General::crawler('http://emdep.vn/' . $item->href);
+            //$content = curl('http://afamily.vn/day-con-biet-boi-ngay-tai-nha-chi-voi-4-buoc-don-gian-2016060811132636.chn');
+
+            if ($content == false) {
+                continue;
+            }
+            $html = HtmlDomParser::str_get_html($content);
+
+            $arr_data = array();
+            if ($html->find('.article-content', 0)) {
+
+                $html->find('.article-content .hide', 0)->innertext = '';
+                $cont_detail = $html->find('.article-content', 0)->plaintext;
+                $this->addKeywordDemo($cont_detail);
+            }
+            sleep(1);
+        }
+    }
+
+    public function _24hCrawlerKeyword($page, $cate_id)
+    {
+        $url = 'http://www.24h.com.vn/ajax/box_bai_viet_trang_su_kien/index/460/2552/1/13/0';
+
+        $url_page = $url . '?page=' . $page;
+        $content = General::crawler($url_page);
+        $dom = HtmlDomParser::str_get_html($content);
+        $results = $dom->find('div.sktd-item div.xem-tiep a');
+
+        if (count($results) <= 0) {
+            return;
+        }
+
+        foreach ($results as $key => $item) {
+            $content = General::crawler('http://www.24h.com.vn/' . $item->href);
+            //$content = General::crawler('http://www.24h.com.vn/am-thuc/cu-cai-ham-xuong-ngon-ngot-thom-lung-c460a826908.html');
+
+            if ($content == false) {
+                continue;
+            }
+            $html = HtmlDomParser::str_get_html($content);
+
+            $arr_data = array();
+            $video = $html->find('.text-conent div[align=center]');
+            if (count($video) == 0) {
+                //get content detail
+                $cont_description = $html->find('div.div-baiviet p.baiviet-sapo', 0)->plaintext;
+
+                $html->find('.text-conent div[itemprop=publisher]', 0)->outertext = '';
+                $html->find('.text-conent div[itemprop=image]', 0)->outertext = '';
+                $html->find('.text-conent .baiviet-bailienquan', 0)->outertext = '';
+                $cont_detail = $html->find('.text-conent', 0)->plaintext;
+
+                $this->addKeywordDemo($cont_detail);
+
+            }
+            sleep(1);
+        }
+    }
+
+    public function ivivuCrawlerKeyword($page, $cate_id)
+    {
+        $url = 'https://www.ivivu.com/blog/category/viet-nam/';
+        $instanceSearchContent = new \My\Search\Content();
+        $upload_dir = General::mkdirUpload();
+
+        $url_page = $url . '/page/' . $page . '/';
+        $content = General::crawler($url_page);
+        $dom = HtmlDomParser::str_get_html($content);
+        $results = $dom->find('div.archive-postlist h2 a');
+
+        if (count($results) <= 0) {
+            return;
+        }
+
+        foreach ($results as $key => $item) {
+            $content = General::crawler($item->href);
+            //$content = curl('http://afamily.vn/day-con-biet-boi-ngay-tai-nha-chi-voi-4-buoc-don-gian-2016060811132636.chn');
+
+            if ($content == false) {
+                continue;
+            }
+            $html = HtmlDomParser::str_get_html($content);
+
+            if ($html->find('.entry-content', 0)) {
+
+                $cont_detail = $html->find('.entry-content', 0)->plaintext;
+                $this->addKeywordDemo($cont_detail);
+            }
+            sleep(1);
+        }
+    }
+
+    public function kenh14CrawlerKeyword($page, $cate_id)
+    {
+        $url = 'http://kenh14.vn/star.chn';
+
+        $instanceSearchContent = new \My\Search\Content();
+        $upload_dir = General::mkdirUpload();
+
+        $url_page = $url;
+
+        $content = General::crawler($url_page);
+        $dom = HtmlDomParser::str_get_html($content);
+        $results = $dom->find('li.ktncli h3.ktncli-title a,li.knswli h3.knswli-title a');
+
+        if (count($results) <= 0) {
+            return;
+        }
+
+        foreach ($results as $key => $item) {
+            $content = General::crawler('http://kenh14.vn' . $item->href);
+            //$content = curl('http://afamily.vn/day-con-biet-boi-ngay-tai-nha-chi-voi-4-buoc-don-gian-2016060811132636.chn');
+
+            if ($content == false) {
+                continue;
+            }
+            $html = HtmlDomParser::str_get_html($content);
+
+            $arr_data = array();
+            if ($html->find('.knc-content', 0)) {
+
+                $cont_title = html_entity_decode($html->find("h1.kbwc-title", 0)->plaintext);
+                $arr_data['cont_title'] = $cont_title;
+                $arr_data['cont_slug'] = General::getSlug($cont_title);
+
+                //check post exist
+                $arr_detail = $instanceSearchContent->getDetail(
+                    array(
+                        'cont_slug' => $arr_data['cont_slug'],
+                        'not_cont_status' => -1
+                    )
+                );
+                if (!empty($arr_detail)) {
+                    echo \My\General::getColoredString("Exist this content:" . $arr_data['cont_slug'], 'red');
+                    continue;
+                }
+                $cont_detail = $html->find('.knc-content', 0)->plaintext;
+                $this->addKeywordDemo($cont_detail);
+            }
+            sleep(1);
+        }
+    }
+
+    public function keywordContentAction()
+    {
+        $arr_category = [6, 1, 2, 3, 5, 7, 4];
+        for ($i = 1; $i < 5; $i++) {
+            foreach ($arr_category as $cate_id) {
+                switch ($cate_id) {
+                    case 1:
+                        if ($i > 0 && $i < 11) {
+                            $this->kenh14CrawlerKeyword($i, $cate_id);
+                        }
+                        break;
+                    case 2:
+                        $this->emdepCrawlerKeyword($i, 'http://emdep.vn/thoi-trang', $cate_id);
+                        break;
+                    case 3:
+                        $this->afamilyCrawlerKeyword($i, 'http://afamily.vn/suc-khoe', $cate_id);
+                        $this->emdepCrawlerKeyword($i, 'http://emdep.vn/song-khoe', $cate_id);
+                        break;
+                    case 4:
+                        $this->afamilyCrawlerKeyword($i, 'http://afamily.vn/dep', $cate_id);
+                        $this->emdepCrawlerKeyword($i, 'http://emdep.vn/lam-dep', $cate_id);
+                        break;
+                    case 5:
+                        if ($i > 0 && $i < 11) {
+                            $this->_24hCrawlerKeyword($i, $cate_id);
+                        }
+                        $this->emdepCrawlerKeyword($i, 'http://emdep.vn/mon-ngon', $cate_id);
+                        break;
+                    case 6:
+                        $this->emdepCrawlerKeyword($i, 'http://emdep.vn/lam-me', $cate_id);
+                        break;
+                    case 7:
+                        $this->ivivuCrawlerKeyword($i, $cate_id);
+                        break;
+                }
+            }
+            echo \My\General::getColoredString("Finish page " . $i, 'white');
+            sleep(2);
+        }
+
+        echo \My\General::getColoredString("DONE time: " . date('H:i:s'), 'light_cyan');
+    }
+
+    public function addKeywordDemo($textContent)
+    {
+
+        $arr_stop_word = ["bị", "bởi", "cả", "các", "cái", "cần", "càng", "chỉ", "chiếc", "cho", "chứ", "chưa", "có", "thể", "cứ", "của", "cùng", "cũng", "đã", "đang", "đây", "để", "nỗi", "đều", "điều", "do", "đó", "được", "dưới", "gì", "khi", "không", "là", "lại", "lên", "lúc", "mà", "mỗi", "một", "này", "nên", "nếu", "ngay", "nhiều", "như", "nhưng", "những", "nơi", "nữa", "phải", "qua", "ra", "rằng", "rằng", "rất", "rất", "rồi", "sau", "sẽ", "so", "sự", "tại", "theo", "thì", "trên", "trước", "từ", "từng", "và", "vẫn", "vào", "vậy", "vì", "việc", "với", "vừa", "2014", "2015", "2016"];
+
+        $arr_word_content = explode(" ", $textContent);
+        $arr_word_content = array_filter($arr_word_content);
+        $arr_word_content = array_diff($arr_word_content, $arr_stop_word);
+
+        $instanceSearchKeyWord = new \My\Search\Keyword();
+        foreach ($arr_word_content as $word) {
+
+            if (preg_match('/[\'^£$%&*().:"}{@#~?><>,|=_+¬-]/', $word)) {
+                continue;
+            }
+            if(strlen($word) > 7){
+                continue;
+            }
+
+            $word_slug = trim(General::getSlug($word));
+            $is_exsit = $instanceSearchKeyWord->getDetail(['key_slug' => $word_slug]);
+
+            if ($is_exsit) {
+                echo \My\General::getColoredString("Exsit keyword: " . $word_slug, 'red');
+                continue;
+            }
+
+            $arr_data = [
+                'key_name' => $word,
+                'key_slug' => $word_slug,
+                'created_date' => time(),
+                'is_crawler' => 0,
+                'cate_id' => -2,
+                'key_weight' => 2,
+            ];
+
+            $serviceKeyword = $this->serviceLocator->get('My\Models\Keyword');
+            $int_result = $serviceKeyword->add($arr_data);
+            unset($serviceKeyword);
+            if ($int_result) {
+                echo \My\General::getColoredString("Insert success 1 row with id = {$int_result}", 'green');
+            }
+            $this->flush();
+        }
+        unset($instanceSearchKeyWord);
+        return true;
+    }
+
     public function testAction()
     {
-//        $instanceSearchContent = new \My\Search\Content();
-//        $instanceSearchContent->createIndex();
+//        $instanceSearchKeyWord = new \My\Search\Keyword();
+//        $instanceSearchKeyWord->createIndex();
 //        die;
+        $url = 'http://kenh14.vn/star.chn';
 
+        $instanceSearchContent = new \My\Search\Content();
+        $upload_dir = General::mkdirUpload();
+
+        $url_page = $url;
+
+        $content = General::crawler($url_page);
+        $dom = HtmlDomParser::str_get_html($content);
+        $results = $dom->find('li.ktncli h3.ktncli-title a,li.knswli h3.knswli-title a');
+        foreach ($results as $key => $item) {
+            echo "<pre>";
+            print_r($item->href);
+            echo "</pre>";
+
+        }
+        die;
     }
 }
