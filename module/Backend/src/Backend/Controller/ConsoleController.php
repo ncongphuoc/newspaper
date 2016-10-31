@@ -899,7 +899,7 @@ class ConsoleController extends MyController
     {
         $this->sitemapOther();
         $this->siteMapCategory();
-        $this->siteMapContent();
+        //$this->siteMapContent();
         $this->siteMapSearch();
 
         $xml = '<?xml version="1.0" encoding="UTF-8"?><sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></sitemapindex>';
@@ -1043,7 +1043,7 @@ class ConsoleController extends MyController
         $intLimit = 4000;
         for ($intPage = 1; $intPage < 10000; $intPage++) {
             $file = PUBLIC_PATH . '/xml/keyword-' . $intPage . '.xml';
-            $arrKeyList = $instanceSearchKeyword->getListLimit(['full' => 1], $intPage, $intLimit, ['key_id' => ['order' => 'desc']]);
+            $arrKeyList = $instanceSearchKeyword->getListLimit(['not_cate_id' => -2], $intPage, $intLimit, ['key_id' => ['order' => 'desc']]);
 
             if (empty($arrKeyList)) {
                 break;

@@ -111,14 +111,14 @@ class SearchController extends MyController
                 'full_text_title' => $arrKeyDetail['key_name']
             );
 
-            if ($arrKeyDetail['cate_id'] != -1) {
+            if ($arrKeyDetail['cate_id'] != -1 && $arrKeyDetail['cate_id'] != -2) {
                 $arr_condition_content['in_cate_id'] = array($arrKeyDetail['cate_id']);
 
             }
             $intPage = is_numeric($params['page']) ? $params['page'] : 1;
             $intLimit = 10;
 
-            $arrFields = array('cont_id', 'cont_title', 'cont_slug', 'cate_id','cont_main_image','created_date');
+            $arrFields = array('cont_id', 'cont_title', 'cont_slug', 'cate_id','cont_main_image','created_date','cont_description');
             $instanceSearchContent = new \My\Search\Content();
             $arrContentList = $instanceSearchContent->getListLimit($arr_condition_content, $intPage, $intLimit, ['_score' => ['order' => 'desc']],$arrFields);
 

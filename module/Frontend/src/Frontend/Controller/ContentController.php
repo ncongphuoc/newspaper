@@ -132,7 +132,7 @@ class ContentController extends MyController
 //
             //lấy 10 keyword :)
             $instanceSearchKeyword = new \My\Search\Keyword();
-            $arrKeywordList = $instanceSearchKeyword->getListLimit(['full_text_keyname' => $arrContent['cont_title']], 1, 10, ['_score' => ['order' => 'desc']]);
+            $arrKeywordList = $instanceSearchKeyword->getListLimit(['full_text_keyname' => $arrContent['cont_title'],'not_cate_id'=>-2], 1, 10, ['_score' => ['order' => 'desc']]);
 
             unset($serviceContent);
             unset($instanceSearchContent);
