@@ -37,7 +37,7 @@ $keyDetail = $this->arrKeyDetail;
                     <h3 class="entry-title td-module-title">
                         <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $arr_content['cont_slug'], 'contentId' => $arr_content['cont_id']]) ?>" rel=bookmark
                            title="<?php echo $arr_content['cont_title'] ?>">
-                            <?php echo (strlen($arr_content['cont_title']) < 150) ? $arr_content['cont_title'] : mb_substr($arr_content['cont_title'], 0, 150, 'UTF-8') . '. . . '; ?>
+                            <?php echo (strlen($arr_content['cont_title']) < 150) ? $arr_content['cont_title'] : mb_substr($arr_content['cont_title'], 0, 150, 'UTF-8') . '...'; ?>
                         </a>
                     </h3>
                     <div class=td-module-meta-info>
@@ -50,7 +50,7 @@ $keyDetail = $this->arrKeyDetail;
                         </span>
                     </div>
                     <div class="td-excerpt">
-                        <?php echo (strlen($arr_content['cont_description']) < 150) ? $arr_content['cont_description'] : mb_substr($arr_content['cont_description'], 0, 150, 'UTF-8') . '... '; ?>
+                        <?php echo (strlen($arr_content['cont_description']) < 300) ? $arr_content['cont_description'] : mb_substr($arr_content['cont_description'], 0, 300, 'UTF-8') . '... '; ?>
                     </div>
                     <div class="td-post-source-tags">
                         <ul class="td-tags td-post-small-box clearfix">

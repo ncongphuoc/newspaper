@@ -116,7 +116,7 @@ class SearchController extends MyController
 
             }
             $intPage = is_numeric($params['page']) ? $params['page'] : 1;
-            $intLimit = 10;
+            $intLimit = 15;
 
             $arrFields = array('cont_id', 'cont_title', 'cont_slug', 'cate_id','cont_main_image','created_date','cont_description');
             $instanceSearchContent = new \My\Search\Content();
@@ -143,7 +143,7 @@ class SearchController extends MyController
             $this->renderer->headMeta()->appendName('robots', 'index');
             $this->renderer->headMeta()->appendName('dc.description', html_entity_decode($arrKeyDetail['key_name']) . General::TITLE_META);
             $this->renderer->headMeta()->appendName('dc.subject', html_entity_decode($arrKeyDetail['key_name']) . General::TITLE_META);
-            $this->renderer->headTitle('Từ khoá - ' . html_entity_decode($arrKeyDetail['key_name']) . General::TITLE_META);
+            $this->renderer->headTitle(html_entity_decode($arrKeyDetail['key_name']) . General::TITLE_META);
             $this->renderer->headMeta()->appendName('keywords', html_entity_decode($arrKeyDetail['key_name']));
             $this->renderer->headMeta()->appendName('description', html_entity_decode('Danh sách bài viết trong từ khoá : ' . $arrKeyDetail['key_name'] . General::TITLE_META));
             $this->renderer->headMeta()->appendName('social', null);
