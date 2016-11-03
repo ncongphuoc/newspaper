@@ -112,6 +112,16 @@ return array(
                         ),
                     ),
                 ),
+                'resizeimage' => array(
+                    'options' => array(
+                        'route' => 'resizeimage',
+                        'defaults' => array(
+                            '__NAMESPACE__' => 'Backend\Controller',
+                            'controller' => 'console',
+                            'action' => 'resize-image'
+                        ),
+                    ),
+                ),
                 'sitemap' => array(
                     'options' => array(
                         'route' => 'sitemap',

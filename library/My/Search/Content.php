@@ -76,7 +76,8 @@ class Content extends SearchAbstract {
             'cont_views' => ['type' => 'integer', 'index' => 'not_analyzed'],
             'cont_status' => ['type' => 'integer', 'index' => 'not_analyzed'],
             'from_source' => ['type' => 'string', 'index' => 'not_analyzed'],
-            'cont_main_image' => ['type' => 'string', 'index' => 'not_analyzed']
+            'cont_main_image' => ['type' => 'string', 'index' => 'not_analyzed'],
+            'cont_resize_image' => ['type' => 'string', 'index' => 'not_analyzed']
         ]);
         $mapping->send();
     }

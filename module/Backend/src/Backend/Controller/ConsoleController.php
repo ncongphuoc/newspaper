@@ -993,7 +993,7 @@ class ConsoleController extends MyController
     {
         $instanceSearchContent = new \My\Search\Content();
         $intLimit = 2000;
-        for ($intPage = 1; $intPage < 10000; $intPage++) {
+        for ($intPage = 1; $intPage < 100; $intPage++) {
 
             $file = PUBLIC_PATH . '/xml/content-' . $intPage . '.xml';
             $arrContentList = $instanceSearchContent->getListLimit(['not_cont_status' => -1], $intPage, $intLimit, ['cont_id' => ['order' => 'desc']]);
@@ -1483,15 +1483,28 @@ class ConsoleController extends MyController
                 }
                 //get image
                 $arr_image = $html->find("div.detail_content img");
+                $arr_data['cont_main_image'] = 'http://static.tintuc360.me/f/v1/images/no-image-available.jpg';
+                $arr_data['cont_resize_image'] = 'http://static.tintuc360.me/f/v1/images/no-image-available.jpg';
                 if (count($arr_image) > 0) {
                     foreach ($arr_image as $key => $img) {
                         $src = $img->src;
                         $extension = end(explode('.', end(explode('/', $src))));
                         $name_img = $arr_data['cont_slug'] . '_' . ($key + 1) . '.' . $extension;
-                        file_put_contents($upload_dir['path'] . '/' . $name_img, General::crawler($src));
+                        $image_content = General::crawler($src);
+                        if($image_content) {
+                            file_put_contents($upload_dir['path'] . '/' . $name_img, $image_content);
+                        } else {
+                            $image_content = General::crawler('http://static.tintuc360.me/f/v1/images/no-image-available.jpg');
+                            file_put_contents($upload_dir['path'] . '/' . $name_img, $image_content);
+                        }
                         $cont_detail = str_replace($src, $upload_dir['url'] . '/' . $name_img, $cont_detail);
                         if ($key == 0) {
                             $arr_data['cont_main_image'] = $upload_dir['url'] . '/' . $name_img;
+                            $arr_data['cont_resize_image'] = $upload_dir['url'] . '/' . $name_img;
+                            $results = $this->resizeImage($upload_dir,$arr_data['cont_slug'], $extension, $cate_id);
+                            if($results) {
+                                $arr_data['cont_resize_image'] = $results;
+                            }
                         }
 
                     }
@@ -1576,16 +1589,29 @@ class ConsoleController extends MyController
                     }
                 }
                 //get image
+                $arr_data['cont_main_image'] = 'http://static.tintuc360.me/f/v1/images/no-image-available.jpg';
+                $arr_data['cont_resize_image'] = 'http://static.tintuc360.me/f/v1/images/no-image-available.jpg';
                 $arr_image = $html->find("div.article-content img");
                 if (count($arr_image) > 0) {
                     foreach ($arr_image as $key => $img) {
                         $src = $img->src;
                         $extension = end(explode('.', end(explode('/', $src))));
                         $name_img = $arr_data['cont_slug'] . '_' . ($key + 1) . '.' . $extension;
-                        file_put_contents($upload_dir['path'] . '/' . $name_img, General::crawler($src));
+                        $image_content = General::crawler($src);
+                        if($image_content) {
+                            file_put_contents($upload_dir['path'] . '/' . $name_img, $image_content);
+                        } else {
+                            $image_content = General::crawler('http://static.tintuc360.me/f/v1/images/no-image-available.jpg');
+                            file_put_contents($upload_dir['path'] . '/' . $name_img, $image_content);
+                        }
                         $cont_detail = str_replace($src, $upload_dir['url'] . '/' . $name_img, $cont_detail);
                         if ($key == 0) {
                             $arr_data['cont_main_image'] = $upload_dir['url'] . '/' . $name_img;
+                            $arr_data['cont_resize_image'] = $upload_dir['url'] . '/' . $name_img;
+                            $results = $this->resizeImage($upload_dir,$arr_data['cont_slug'], $extension, $cate_id);
+                            if($results) {
+                                $arr_data['cont_resize_image'] = $results;
+                            }
                         }
                         sleep(1);
                     }
@@ -1669,16 +1695,29 @@ class ConsoleController extends MyController
 
 
                 //get image
+                $arr_data['cont_main_image'] = 'http://static.tintuc360.me/f/v1/images/no-image-available.jpg';
+                $arr_data['cont_resize_image'] = 'http://static.tintuc360.me/f/v1/images/no-image-available.jpg';
                 $arr_image = $html->find("div.text-conent img");
                 if (count($arr_image) > 0) {
                     foreach ($arr_image as $key => $img) {
                         $src = $img->src;
                         $extension = end(explode('.', end(explode('/', $src))));
                         $name_img = $arr_data['cont_slug'] . '_' . ($key + 1) . '.' . $extension;
-                        file_put_contents($upload_dir['path'] . '/' . $name_img, General::crawler($src));
+                        $image_content = General::crawler($src);
+                        if($image_content) {
+                            file_put_contents($upload_dir['path'] . '/' . $name_img, $image_content);
+                        } else {
+                            $image_content = General::crawler('http://static.tintuc360.me/f/v1/images/no-image-available.jpg');
+                            file_put_contents($upload_dir['path'] . '/' . $name_img, $image_content);
+                        }
                         $cont_detail = str_replace($src, $upload_dir['url'] . '/' . $name_img, $cont_detail);
                         if ($key == 0) {
                             $arr_data['cont_main_image'] = $upload_dir['url'] . '/' . $name_img;
+                            $arr_data['cont_resize_image'] = $upload_dir['url'] . '/' . $name_img;
+                            $results = $this->resizeImage($upload_dir,$arr_data['cont_slug'], $extension, $cate_id);
+                            if($results) {
+                                $arr_data['cont_resize_image'] = $results;
+                            }
                         }
                         sleep(1);
                     }
@@ -1781,16 +1820,29 @@ class ConsoleController extends MyController
                     }
                 }
                 //get image
+                $arr_data['cont_main_image'] = 'http://static.tintuc360.me/f/v1/images/no-image-available.jpg';
+                $arr_data['cont_resize_image'] = 'http://static.tintuc360.me/f/v1/images/no-image-available.jpg';
                 $arr_image = $html->find("div.entry-content img");
                 if (count($arr_image) > 0) {
                     foreach ($arr_image as $key => $img) {
                         $src = $img->src;
                         $extension = end(explode('.', end(explode('/', $src))));
                         $name_img = $arr_data['cont_slug'] . '_' . ($key + 1) . '.' . $extension;
-                        file_put_contents($upload_dir['path'] . '/' . $name_img, General::crawler($src));
+                        $image_content = General::crawler($src);
+                        if($image_content) {
+                            file_put_contents($upload_dir['path'] . '/' . $name_img, $image_content);
+                        } else {
+                            $image_content = General::crawler('http://static.tintuc360.me/f/v1/images/no-image-available.jpg');
+                            file_put_contents($upload_dir['path'] . '/' . $name_img, $image_content);
+                        }
                         $cont_detail = str_replace($src, $upload_dir['url'] . '/' . $name_img, $cont_detail);
                         if ($key == 0) {
                             $arr_data['cont_main_image'] = $upload_dir['url'] . '/' . $name_img;
+                            $arr_data['cont_resize_image'] = $upload_dir['url'] . '/' . $name_img;
+                            $results = $this->resizeImage($upload_dir,$arr_data['cont_slug'], $extension, $cate_id);
+                            if($results) {
+                                $arr_data['cont_resize_image'] = $results;
+                            }
                         }
                         sleep(0.5);
                     }
@@ -1834,7 +1886,7 @@ class ConsoleController extends MyController
         if (count($results) <= 0) {
             return;
         }
-
+        $results = array_reverse($results);
         foreach ($results as $key => $item) {
             $content = General::crawler('http://kenh14.vn' . $item->href);
             //$content = curl('http://afamily.vn/day-con-biet-boi-ngay-tai-nha-chi-voi-4-buoc-don-gian-2016060811132636.chn');
@@ -1875,16 +1927,29 @@ class ConsoleController extends MyController
 //                        }
 //                    }
                 //get image
+                $arr_data['cont_main_image'] = 'http://static.tintuc360.me/f/v1/images/no-image-available.jpg';
+                $arr_data['cont_resize_image'] = 'http://static.tintuc360.me/f/v1/images/no-image-available.jpg';
                 $arr_image = $html->find("div.knc-content img");
                 if (count($arr_image) > 0) {
                     foreach ($arr_image as $key => $img) {
                         $src = $img->src;
                         $extension = end(explode('.', end(explode('/', $src))));
                         $name_img = $arr_data['cont_slug'] . '_' . ($key + 1) . '.' . $extension;
-                        file_put_contents($upload_dir['path'] . '/' . $name_img, General::crawler($src));
+                        $image_content = General::crawler($src);
+                        if($image_content) {
+                            file_put_contents($upload_dir['path'] . '/' . $name_img, $image_content);
+                        } else {
+                            $image_content = General::crawler('http://static.tintuc360.me/f/v1/images/no-image-available.jpg');
+                            file_put_contents($upload_dir['path'] . '/' . $name_img, $image_content);
+                        }
                         $cont_detail = str_replace($src, $upload_dir['url'] . '/' . $name_img, $cont_detail);
                         if ($key == 0) {
                             $arr_data['cont_main_image'] = $upload_dir['url'] . '/' . $name_img;
+                            $arr_data['cont_resize_image'] = $upload_dir['url'] . '/' . $name_img;
+                            $results = $this->resizeImage($upload_dir,$arr_data['cont_slug'], $extension, $cate_id);
+                            if($results) {
+                                $arr_data['cont_resize_image'] = $results;
+                            }
                         }
                         sleep(1);
                     }
@@ -2163,27 +2228,57 @@ class ConsoleController extends MyController
         return true;
     }
 
+    public function resizeImage($upload_dir, $cont_slug, $extension, $cate_id){
+
+        $path_old = $upload_dir['path'] . '/' . $cont_slug . '_1.' . $extension;
+        if (!file_exists($path_old)) {
+            $path_old = STATIC_PATH . '/f/v1/images/no-image-available.jpg';
+        }
+        $name_main_image = $cont_slug . '_main.' . $extension;
+        $result = General::resizeImages($cate_id, $path_old, $name_main_image, $upload_dir['path']);
+        if($result) {
+            return $upload_dir['url'] . '/' . $cont_slug . '_main.' . $extension;
+        } else {
+            return false;
+        }
+    }
+
     public function testAction()
     {
-//        $instanceSearchKeyWord = new \My\Search\Keyword();
-//        $instanceSearchKeyWord->createIndex();
-//        die;
-        $url = 'http://kenh14.vn/star.chn';
-
         $instanceSearchContent = new \My\Search\Content();
+        $serviceContent = $this->serviceLocator->get('My\Models\Content');
         $upload_dir = General::mkdirUpload();
+        $intLimit = 100;
+        for ($intPage = 1; $intPage < 6; $intPage++) {
+            $arrContentList = $instanceSearchContent->getListLimit(['not_cont_status' => -1], $intPage, $intLimit, ['cont_id' => ['order' => 'asc']], array('cont_id','cate_id','cont_main_image','cont_slug'));
 
-        $url_page = $url;
+            if (empty($arrContentList)) {
+                break;
+            }
 
-        $content = General::crawler($url_page);
-        $dom = HtmlDomParser::str_get_html($content);
-        $results = $dom->find('li.ktncli h3.ktncli-title a,li.knswli h3.knswli-title a');
-        foreach ($results as $key => $item) {
-            echo "<pre>";
-            print_r($item->href);
-            echo "</pre>";
+           foreach ($arrContentList as $content) {
+                if(empty($content['cont_main_image'])) {
+                    $content['cont_main_image'] = STATIC_URL . '/f/v1/images/no-image-available.jpg';
+                }
+               $path_main_image_old = str_replace(STATIC_URL, STATIC_PATH, $content['cont_main_image']);
+               $struct_image = explode('.', end(explode('/', $path_main_image_old)));
 
+               $extension = $struct_image[1];
+               //$name_main_image_old = $struct_image[0];
+
+               $name_main_image_new = $content['cont_slug'] . '_main.' . $extension;
+
+               $new_info = General::resizeImages($content['cate_id'], $path_main_image_old, $name_main_image_new, $upload_dir['path']);
+               if ($new_info) {
+                   $url_image = $upload_dir['url'] . '/' . $name_main_image_new;
+                   $serviceContent->editBackground(array('cont_resize_image' => $url_image), $content['cont_id']);
+
+                   echo General::getColoredString("add image resize content id = " . $content['cont_id'] . " Successfully", 'cyan');
+               } else {
+                   echo General::getColoredString("Cannot update main content: " . $content['cont_id'], 'light_cyan', 'red');
+               }
+           }
         }
-        die;
+        die("done");
     }
 }

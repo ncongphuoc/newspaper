@@ -278,38 +278,6 @@ class General {
         }
     }
 
-    public static function resizeImages($strControllerName, $pathFile, $fileName) {
-
-        $arrThumb = self::getThumbSize($strControllerName);
-        $serviceImage = new \Intervention\Image\ImageManager();
-
-        foreach ($arrThumb as $thumbSize) {
-            list($width, $height) = explode('x', $thumbSize);
-            $thumbFileDir = UPLOAD_PATH . $strControllerName . '/' . $thumbSize . '/';
-
-            if (!is_dir($thumbFileDir)) {
-                mkdir($thumbFileDir, 0777, true);
-                chmod($thumbFileDir, 0777);
-            }
-            try {
-                $image = $serviceImage->make($pathFile)->fit($width, $height);
-                $resultThumb = $image->save($thumbFileDir . $fileName);
-            } catch (\Exception $exc) {
-                echo $exc->getMessage();
-                continue;
-            }
-
-            if ($resultThumb) {
-                $arrThumbImage[$thumbSize] = UPLOAD_URL . $strControllerName . '/' . $thumbSize . '/' . $fileName;
-            }
-        }
-        $arrResult = [
-            'sourceImage' => UPLOAD_URL . $strControllerName . '/' . $fileName,
-            'thumbImage' => $arrThumbImage
-        ];
-        return $arrResult;
-    }
-
     /**
      * Get thumb image size for user, topic, category, banner controller
      *
@@ -320,10 +288,17 @@ class General {
     public static function getThumbSize($strControllerName = '') {
         if ($strControllerName) {
             switch ($strControllerName) {
-                case 'content':
-                    return array('91x55', '172x104', '371x177', '507x270', '770x318');
-                case 'user':
-                    return array('150x150', '30x30', '120x120');
+                case 6:
+                case 5:
+                    return array('356x220');
+                case 7:
+                    return array('265x198');
+                case 2:
+                    return array('324x160');
+                case 3:
+                    return array('324x235');
+                case 4:
+                    return array('218x150');
                 default:
                     return array();
             }
@@ -331,6 +306,31 @@ class General {
             throw new \Zend\Http\Exception('Controller name cannot be empty');
         }
     }
+
+    public static function resizeImages($strCategory, $pathFile, $fileName, $thumbFileDir) {
+
+        //$arrThumb = self::getThumbSize($strCategory);
+        $arrThumb = array('265x198');
+        $serviceImage = new \Intervention\Image\ImageManager();
+
+        foreach ($arrThumb as $thumbSize) {
+            list($width, $height) = explode('x', $thumbSize);
+
+            try {
+                $image = $serviceImage->make($pathFile)->resize($width, $height);
+                $resultThumb = $image->save($thumbFileDir . '/' . $fileName);
+            } catch (\Exception $exc) {
+                echo $exc->getMessage();
+                continue;
+            }
+        }
+        if($resultThumb){
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
 
     /**
      * Get Elasticsearch Config
