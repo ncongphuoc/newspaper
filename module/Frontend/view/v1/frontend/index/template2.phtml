@@ -79,7 +79,7 @@ $arr_category = unserialize(ARR_CATEGORY)
                                                 rel="bookmark"
                                                 title="<?php echo $this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][$i]['cont_title'] ?>">
                                                 <img width=100 height=70 class=entry-thumb
-                                                    src="<?php echo $this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][$i]['cont_main_image'] ?>"
+                                                    src="<?php echo $this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][$i]['cont_resize_image'] ?>"
                                                     alt="<?php echo $this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][$i]['cont_title'] ?>"
                                                     title="<?php echo $this->arrContent[\My\General::CATEGORY_CHUYEN_SAO][$i]['cont_title'] ?>"/>
                                             </a>
@@ -184,7 +184,7 @@ $arr_category = unserialize(ARR_CATEGORY)
                                             rel=bookmark
                                             title="<?php echo $this->arrContent[\My\General::CATEGORY_THOI_TRANG][$i]['cont_title'] ?>">
                                             <img width=100 height=70 class=entry-thumb
-                                                src="<?php echo $this->arrContent[\My\General::CATEGORY_THOI_TRANG][$i]['cont_main_image'] ?>"
+                                                src="<?php echo $this->arrContent[\My\General::CATEGORY_THOI_TRANG][$i]['cont_resize_image'] ?>"
                                                  alt="<?php echo $this->arrContent[\My\General::CATEGORY_THOI_TRANG][$i]['cont_title'] ?>"
                                                 title="<?php echo $this->arrContent[\My\General::CATEGORY_THOI_TRANG][$i]['cont_title'] ?>"/>
                                         </a>
@@ -219,7 +219,7 @@ $arr_category = unserialize(ARR_CATEGORY)
                                                rel=bookmark
                                                title="<?php echo $this->arrContent[\My\General::CATEGORY_THOI_TRANG][$i]['cont_title'] ?>">
                                                 <img width=100 height=70 class=entry-thumb
-                                                     src="<?php echo $this->arrContent[\My\General::CATEGORY_THOI_TRANG][$i]['cont_main_image'] ?>"
+                                                     src="<?php echo $this->arrContent[\My\General::CATEGORY_THOI_TRANG][$i]['cont_resize_image'] ?>"
                                                      alt="<?php echo $this->arrContent[\My\General::CATEGORY_THOI_TRANG][$i]['cont_title'] ?>"
                                                      title="<?php echo $this->arrContent[\My\General::CATEGORY_THOI_TRANG][$i]['cont_title'] ?>"/>
                                             </a>
@@ -284,7 +284,7 @@ $arr_category = unserialize(ARR_CATEGORY)
                                                 rel="bookmark"
                                                 title="<?php echo $this->arrContent[\My\General::CATEGORY_DU_LICH][$i]['cont_title'] ?>">
                                                 <img width=218 height=150 class=entry-thumb
-                                                    src="<?php echo $this->arrContent[\My\General::CATEGORY_DU_LICH][$i]['cont_main_image'] ?>"
+                                                    src="<?php echo $this->arrContent[\My\General::CATEGORY_DU_LICH][$i]['cont_resize_image'] ?>"
                                                      alt="<?php echo $this->arrContent[\My\General::CATEGORY_DU_LICH][$i]['cont_title'] ?>"
                                                     title="<?php echo $this->arrContent[\My\General::CATEGORY_DU_LICH][$i]['cont_title'] ?>"/>
                                             </a>
@@ -311,7 +311,7 @@ $arr_category = unserialize(ARR_CATEGORY)
                                                    rel="bookmark"
                                                    title="<?php echo $this->arrContent[\My\General::CATEGORY_DU_LICH][$i]['cont_title'] ?>">
                                                     <img width=218 height=150 class=entry-thumb
-                                                         src="<?php echo $this->arrContent[\My\General::CATEGORY_DU_LICH][$i]['cont_main_image'] ?>"
+                                                         src="<?php echo $this->arrContent[\My\General::CATEGORY_DU_LICH][$i]['cont_resize_image'] ?>"
                                                          alt="<?php echo $this->arrContent[\My\General::CATEGORY_DU_LICH][$i]['cont_title'] ?>"
                                                          title="<?php echo $this->arrContent[\My\General::CATEGORY_DU_LICH][$i]['cont_title'] ?>"/>
                                                 </a>
@@ -404,7 +404,7 @@ $arr_category = unserialize(ARR_CATEGORY)
                                                rel="bookmark"
                                                title="<?php echo $this->arrContent[\My\General::CATEGORY_SUC_KHOE][$i]['cont_title'] ?>">
                                                 <img width=100 height=70 class=entry-thumb
-                                                     src="<?php echo $this->arrContent[\My\General::CATEGORY_SUC_KHOE][$i]['cont_main_image'] ?>"
+                                                     src="<?php echo $this->arrContent[\My\General::CATEGORY_SUC_KHOE][$i]['cont_resize_image'] ?>"
                                                      alt="<?php echo $this->arrContent[\My\General::CATEGORY_SUC_KHOE][$i]['cont_title'] ?>"
                                                      title="<?php echo $this->arrContent[\My\General::CATEGORY_SUC_KHOE][$i]['cont_title'] ?>"/>
                                             </a>
@@ -457,7 +457,7 @@ $arr_category = unserialize(ARR_CATEGORY)
                                     <a href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $content['cont_slug'], 'contentId' => $content['cont_id']]) ?>"
                                        rel="bookmark" title="<?php echo $content['concont_titletent_title'] ?>">
                                         <img width="150" height="100" class="entry-thumb td-animation-stack-type0-2"
-                                             src="<?php echo $content['cont_main_image'] ?>" alt=""
+                                             src="<?php echo $content['cont_resize_image'] ?>" alt=""
                                              title="<?php echo $content['cont_title'] ?>">
                                     </a>
                                 </div>

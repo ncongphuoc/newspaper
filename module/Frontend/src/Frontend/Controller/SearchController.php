@@ -118,7 +118,7 @@ class SearchController extends MyController
             $intPage = is_numeric($params['page']) ? $params['page'] : 1;
             $intLimit = 15;
 
-            $arrFields = array('cont_id', 'cont_title', 'cont_slug', 'cate_id','cont_main_image','created_date','cont_description');
+            $arrFields = array('cont_id', 'cont_title', 'cont_slug', 'cate_id','cont_resize_image','created_date','cont_description');
             $instanceSearchContent = new \My\Search\Content();
             $arrContentList = $instanceSearchContent->getListLimit($arr_condition_content, $intPage, $intLimit, ['_score' => ['order' => 'desc']],$arrFields);
 

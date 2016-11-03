@@ -24,7 +24,7 @@ class IndexController extends MyController
         $instanceSearchContent = new \My\Search\Content();
         $instanceTotalContent = new \My\Search\Content();
 
-        $arrFields = array('cont_id', 'cont_title', 'cont_slug', 'cate_id','cont_main_image','created_date','cont_description');
+        $arrFields = array('cont_id', 'cont_title', 'cont_slug', 'cate_id','cont_main_image','created_date','cont_description','cont_resize_image');
         $arr_category = array();
         $arr_content_cate = array();
         foreach ($listCategory as $category) {

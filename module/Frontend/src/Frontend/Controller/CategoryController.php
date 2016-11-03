@@ -37,8 +37,9 @@ class CategoryController extends MyController {
             'cate_id' => $categoryDetail['cate_id']
         );
 
+        $arrFields = array('cont_id', 'cont_title', 'cont_slug', 'cate_id','cont_resize_image','created_date','cont_description');
         $instanceSearchContent = new \My\Search\Content();
-        $arrContentList = $instanceSearchContent->getListLimit($arrCondition, $intPage, $intLimit, ['created_date' => ['order' => 'desc']]);
+        $arrContentList = $instanceSearchContent->getListLimit($arrCondition, $intPage, $intLimit, ['created_date' => ['order' => 'desc']],$arrFields);
 
         $intTotal = $instanceSearchContent->getTotal($arrCondition);
         $helper = $this->serviceLocator->get('viewhelpermanager')->get('Paging');
