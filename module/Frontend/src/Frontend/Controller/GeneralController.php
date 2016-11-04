@@ -76,13 +76,13 @@ class GeneralController extends MyController {
     public function contactAction() {
 
         $this->renderer = $this->serviceLocator->get('Zend\View\Renderer\PhpRenderer');
-        $this->renderer->headMeta()->appendName('dc.description', html_entity_decode('Gửi liên hệ với chúng tôi, gửi liên hệ với website quynhon247.com') . General::TITLE_META);
-        $this->renderer->headTitle(html_entity_decode('Gửi liên hệ với chúng tôi, gửi liên hệ với website quynhon247.com') . General::TITLE_META);
-        $this->renderer->headMeta()->appendName('keywords', html_entity_decode('lien he, lien he quynhon247.com, lien he voi quynhon247,') . General::SITE_DOMAIN);
-        $this->renderer->headMeta()->appendName('description', html_entity_decode('Gửi liên hệ với chúng tôi, gửi liên hệ với website quynhon247.com, ') . General::TITLE_META);
+        $this->renderer->headMeta()->appendName('dc.description', html_entity_decode('Gửi liên hệ với chúng tôi') . General::TITLE_META);
+        $this->renderer->headTitle(html_entity_decode('Gửi liên hệ với chúng tôi') . General::TITLE_META);
+        $this->renderer->headMeta()->appendName('keywords', html_entity_decode('lien he, lien he tintuc360.me, lien he voi tintuc360,') . General::SITE_DOMAIN);
+        $this->renderer->headMeta()->appendName('description', html_entity_decode('Gửi liên hệ với chúng tôi, ') . General::TITLE_META);
         //$this->renderer->headMeta()->setProperty('og:url', $this->url()->fromRoute('add-contact'));
-        $this->renderer->headMeta()->setProperty('og:title', html_entity_decode('Gửi liên hệ với chúng tôi, gửi liên hệ với website quynhon247.com, ') . General::TITLE_META);
-        $this->renderer->headMeta()->setProperty('og:description', html_entity_decode('Gửi liên hệ với chúng tôi, gửi liên hệ với website quynhon247.com, ') . General::TITLE_META);
+        $this->renderer->headMeta()->setProperty('og:title', html_entity_decode('Gửi liên hệ với chúng tôi ') . General::TITLE_META);
+        $this->renderer->headMeta()->setProperty('og:description', html_entity_decode('Gửi liên hệ với chúng tôi') . General::TITLE_META);
 
 
     }
