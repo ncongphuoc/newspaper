@@ -29,23 +29,16 @@ $action = $paramsRouter['action'];
                     </ul>
                     <div class=menu-top-container>
                         <ul id=menu-top-menu class=top-header-menu>
-                            <li id=menu-item-10
-                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-first td-menu-item td-normal-menu menu-item-10">
-                                <a href="javascript:;">Blog</a></li>
-                            <li id=menu-item-11
-                                class="menu-item menu-item-type-custom menu-item-object-custom td-menu-item td-normal-menu menu-item-11">
-                                <a target=_blank href="javascript:;">Forums</a>
-                            </li>
                             <li id=menu-item-9
                                 class="menu-item menu-item-type-post_type menu-item-object-page td-menu-item td-normal-menu menu-item-9">
-                                <a href="javascript:;">Contact</a>
+                                <a href="<?php echo $this->serverUrl() . $this->Url('contact') ?>">Contact us</a>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div class=td-header-sp-top-widget>
                     <span class=td-social-icon-wrap>
-                    <a target=_blank href="#" title=Facebook>
+                    <a target=_blank href="https://www.facebook.com/tintuc360.me/" title=Facebook>
                     <i class="td-icon-font td-icon-facebook"></i>
                     </a>
                     </span>

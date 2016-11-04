@@ -23,7 +23,7 @@
                     <div class=td-block-title-wrap>
                         <a title"Mẹ và bé" href="<?php echo $this->serverUrl() . $this->Url('category', ['cateSlug' => $this->arrCategory[\My\General::CATEGORY_ME_VA_BE]['cate_slug'], 'cateId' => $this->arrCategory[\My\General::CATEGORY_ME_VA_BE]['cate_id']]) ?>">
                             <h4 class=block-title>
-                                <span>MẸ VÀ BÉ</span>
+                                <span><i class="fa <?php echo $this->arrCategory[\My\General::CATEGORY_ME_VA_BE]['cate_icon'] ?>"></i> MẸ VÀ BÉ</span>
                             </h4>
                         </a>
                     </div>
@@ -116,7 +116,7 @@
                     <div class=td-block-title-wrap>
                         <a title="Món ngon" href="<?php echo $this->serverUrl() . $this->Url('category', ['cateSlug' => $this->arrCategory[\My\General::CATEGORY_MON_NGON]['cate_slug'], 'cateId' => $this->arrCategory[\My\General::CATEGORY_MON_NGON]['cate_id']]) ?>">
                             <h4 class=block-title>
-                                <span>MÓN NGON</span>
+                                <span><i class="fa <?php echo $this->arrCategory[\My\General::CATEGORY_MON_NGON]['cate_icon'] ?>"></i> MÓN NGON</span>
                             </h4>
                         </a>
                     </div>
@@ -195,7 +195,7 @@
                     <?php foreach ($this->arrCategory as $category) { ?>
                     <li class="cat-item">
                         <a href="<?php echo $this->serverUrl() . $this->Url('category', ['cateSlug' => $category['cate_slug'], 'cateId' => $category['cate_id']]) ?>">
-                            <?php echo $category['cate_name'] ?>
+                            <i class="fa <?php echo $category['cate_icon'] ?>"></i>  <?php echo $category['cate_name'] ?>
                         </a>
                         <span class="td-cat-no"><?php echo $category['total_content'] ?></span>
                     </li>
