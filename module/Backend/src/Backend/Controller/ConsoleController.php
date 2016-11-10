@@ -1483,8 +1483,8 @@ class ConsoleController extends MyController
                 }
                 //get image
                 $arr_image = $html->find("div.detail_content img");
-                $arr_data['cont_main_image'] = 'http://static.tintuc360.me/f/v1/images/no-image-available.jpg';
-                $arr_data['cont_resize_image'] = 'http://static.tintuc360.me/f/v1/images/no-image-available.jpg';
+                $arr_data['cont_main_image'] = 'https://static.tintuc360.me/f/v1/images/no-image-available.jpg';
+                $arr_data['cont_resize_image'] = 'https://static.tintuc360.me/f/v1/images/no-image-available.jpg';
                 if (count($arr_image) > 0) {
                     foreach ($arr_image as $key => $img) {
                         $src = $img->src;
@@ -1494,7 +1494,7 @@ class ConsoleController extends MyController
                         if($image_content) {
                             file_put_contents($upload_dir['path'] . '/' . $name_img, $image_content);
                         } else {
-                            $image_content = General::crawler('http://static.tintuc360.me/f/v1/images/no-image-available.jpg');
+                            $image_content = General::crawler('https://static.tintuc360.me/f/v1/images/no-image-available.jpg');
                             file_put_contents($upload_dir['path'] . '/' . $name_img, $image_content);
                         }
                         $cont_detail = str_replace($src, $upload_dir['url'] . '/' . $name_img, $cont_detail);
@@ -1589,8 +1589,8 @@ class ConsoleController extends MyController
                     }
                 }
                 //get image
-                $arr_data['cont_main_image'] = 'http://static.tintuc360.me/f/v1/images/no-image-available.jpg';
-                $arr_data['cont_resize_image'] = 'http://static.tintuc360.me/f/v1/images/no-image-available.jpg';
+                $arr_data['cont_main_image'] = 'https://static.tintuc360.me/f/v1/images/no-image-available.jpg';
+                $arr_data['cont_resize_image'] = 'https://static.tintuc360.me/f/v1/images/no-image-available.jpg';
                 $arr_image = $html->find("div.article-content img");
                 if (count($arr_image) > 0) {
                     foreach ($arr_image as $key => $img) {
@@ -1601,7 +1601,7 @@ class ConsoleController extends MyController
                         if($image_content) {
                             file_put_contents($upload_dir['path'] . '/' . $name_img, $image_content);
                         } else {
-                            $image_content = General::crawler('http://static.tintuc360.me/f/v1/images/no-image-available.jpg');
+                            $image_content = General::crawler('https://static.tintuc360.me/f/v1/images/no-image-available.jpg');
                             file_put_contents($upload_dir['path'] . '/' . $name_img, $image_content);
                         }
                         $cont_detail = str_replace($src, $upload_dir['url'] . '/' . $name_img, $cont_detail);
@@ -1695,8 +1695,8 @@ class ConsoleController extends MyController
 
 
                 //get image
-                $arr_data['cont_main_image'] = 'http://static.tintuc360.me/f/v1/images/no-image-available.jpg';
-                $arr_data['cont_resize_image'] = 'http://static.tintuc360.me/f/v1/images/no-image-available.jpg';
+                $arr_data['cont_main_image'] = 'https://static.tintuc360.me/f/v1/images/no-image-available.jpg';
+                $arr_data['cont_resize_image'] = 'https://static.tintuc360.me/f/v1/images/no-image-available.jpg';
                 $arr_image = $html->find("div.text-conent img");
                 if (count($arr_image) > 0) {
                     foreach ($arr_image as $key => $img) {
@@ -1707,7 +1707,7 @@ class ConsoleController extends MyController
                         if($image_content) {
                             file_put_contents($upload_dir['path'] . '/' . $name_img, $image_content);
                         } else {
-                            $image_content = General::crawler('http://static.tintuc360.me/f/v1/images/no-image-available.jpg');
+                            $image_content = General::crawler('https://static.tintuc360.me/f/v1/images/no-image-available.jpg');
                             file_put_contents($upload_dir['path'] . '/' . $name_img, $image_content);
                         }
                         $cont_detail = str_replace($src, $upload_dir['url'] . '/' . $name_img, $cont_detail);
@@ -1820,8 +1820,8 @@ class ConsoleController extends MyController
                     }
                 }
                 //get image
-                $arr_data['cont_main_image'] = 'http://static.tintuc360.me/f/v1/images/no-image-available.jpg';
-                $arr_data['cont_resize_image'] = 'http://static.tintuc360.me/f/v1/images/no-image-available.jpg';
+                $arr_data['cont_main_image'] = 'https://static.tintuc360.me/f/v1/images/no-image-available.jpg';
+                $arr_data['cont_resize_image'] = 'https://static.tintuc360.me/f/v1/images/no-image-available.jpg';
                 $arr_image = $html->find("div.entry-content img");
                 if (count($arr_image) > 0) {
                     foreach ($arr_image as $key => $img) {
@@ -1832,7 +1832,7 @@ class ConsoleController extends MyController
                         if($image_content) {
                             file_put_contents($upload_dir['path'] . '/' . $name_img, $image_content);
                         } else {
-                            $image_content = General::crawler('http://static.tintuc360.me/f/v1/images/no-image-available.jpg');
+                            $image_content = General::crawler('https://static.tintuc360.me/f/v1/images/no-image-available.jpg');
                             file_put_contents($upload_dir['path'] . '/' . $name_img, $image_content);
                         }
                         $cont_detail = str_replace($src, $upload_dir['url'] . '/' . $name_img, $cont_detail);
@@ -1927,8 +1927,8 @@ class ConsoleController extends MyController
 //                        }
 //                    }
                 //get image
-                $arr_data['cont_main_image'] = 'http://static.tintuc360.me/f/v1/images/no-image-available.jpg';
-                $arr_data['cont_resize_image'] = 'http://static.tintuc360.me/f/v1/images/no-image-available.jpg';
+                $arr_data['cont_main_image'] = 'https://static.tintuc360.me/f/v1/images/no-image-available.jpg';
+                $arr_data['cont_resize_image'] = 'https://static.tintuc360.me/f/v1/images/no-image-available.jpg';
                 $arr_image = $html->find("div.knc-content img");
                 if (count($arr_image) > 0) {
                     foreach ($arr_image as $key => $img) {
@@ -1939,7 +1939,7 @@ class ConsoleController extends MyController
                         if($image_content) {
                             file_put_contents($upload_dir['path'] . '/' . $name_img, $image_content);
                         } else {
-                            $image_content = General::crawler('http://static.tintuc360.me/f/v1/images/no-image-available.jpg');
+                            $image_content = General::crawler('https://static.tintuc360.me/f/v1/images/no-image-available.jpg');
                             file_put_contents($upload_dir['path'] . '/' . $name_img, $image_content);
                         }
                         $cont_detail = str_replace($src, $upload_dir['url'] . '/' . $name_img, $cont_detail);
