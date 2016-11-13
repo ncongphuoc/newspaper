@@ -20,13 +20,27 @@ $keyDetail = $this->arrKeyDetail;
 <div class="td-ss-main-content">
     <div class="td-page-header">
         <h1 class="entry-title td-page-title">
-            <span class="td-search-query"><?php echo $keyDetail['key_name'] ?></span> - <span> Kết quả</span>
+            <span class="td-search-query"><?php echo $keyDetail['key_name'] ?></span>
         </h1>
         <p>Tìm thấy <b><?php echo $this->intTotal; ?></b> bài viết liên quan</p>
     </div>
-    <?php if (!empty($this->arrContentList)){
+    <?php if (!empty($this->arrContentList)){ $i = 1;
         foreach ($this->arrContentList as $arr_content):
-            ?>
+            if($i % 5 == 0) {
+                ?>
+                <div class="td-a-rec td-a-rec-id-header" style="margin-top: 10px;margin-bottom: 10px">
+                    <div class="td-visible-desktop">
+                        <div class="adsoptimal-slot" style="width: 728px; height: 90px;"></div>
+                    </div>
+                    <div class="td-visible-tablet-landscape">
+                        <div class="adsoptimal-slot" style="width: 728px; height: 90px;"></div>
+                    </div>
+                    <div class="td-visible-tablet-portrait">
+                        <div class="adsoptimal-slot" style="width: 728px; height: 90px;"></div>
+                    </div>
+                </div>
+        <?php } ?>
+
             <div class="td_module_10 td_module_wrap td-animation-stack">
                 <div class=td-module-thumb>
                     <a rel="nofollow" href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $arr_content['cont_slug'], 'contentId' => $arr_content['cont_id']]) ?>" rel=bookmark title="<?php echo $arr_content['cont_title'] ?>">
@@ -64,6 +78,7 @@ $keyDetail = $this->arrKeyDetail;
                 </div>
             </div>
             <?php
+        $i ++;
         endforeach;
     } else {
         ?>
