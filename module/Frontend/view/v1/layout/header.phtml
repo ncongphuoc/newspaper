@@ -24,7 +24,8 @@ $action = $paramsRouter['action'];
                     </div>
                     <ul class="top-header-menu td_ul_login">
                         <li class=menu-item>
-                            <a class="td-login-modal-js menu-item" href="javascript:;" data-effect=mpf-td-login-effect>Sign in / Join</a>
+                            <a class="td-login-modal-js menu-item" href="javascript:;" data-effect=mpf-td-login-effect>Sign
+                                in / Join</a>
                             <span class="td-sp-ico-login td_sp_login_ico_style"></span></li>
                     </ul>
                     <div class=menu-top-container>
@@ -108,15 +109,24 @@ $action = $paramsRouter['action'];
                     <a class=td-main-logo href="<?php echo $this->serverUrl() . $this->Url('home') ?>">
                         <img class=td-retina-data
                              data-retina="<?php echo STATIC_URL . '/f/' . FRONTEND_TEMPLATE . '/images/logo-01.png'; ?>"
-                             src="<?php echo STATIC_URL . '/f/' . FRONTEND_TEMPLATE . '/images/logo-01.png'; ?>" alt="Tintuc360"/>
+                             src="<?php echo STATIC_URL . '/f/' . FRONTEND_TEMPLATE . '/images/logo-01.png'; ?>"
+                             alt="Tintuc360"/>
                         <span class=td-visual-hidden>Tintuc360</span>
                     </a>
                 </h1>
             </div>
             <div class=td-header-sp-recs>
                 <div class=td-header-rec-wrap>
-                    <div class="td-a-rec td-a-rec-id-header  ">
-                        <img src="<?php echo STATIC_URL . '/f/' . FRONTEND_TEMPLATE . '/images/728x90.png'; ?>">
+                    <div class="td-a-rec td-a-rec-id-header">
+                        <div class="td-visible-desktop">
+                            <div class="adsoptimal-slot" style="width: 728px; height: 90px;"></div>
+                        </div>
+                        <div class="td-visible-tablet-landscape">
+                            <div class="adsoptimal-slot" style="width: 728px; height: 90px;"></div>
+                        </div>
+                        <div class="td-visible-tablet-portrait">
+                            <div class="adsoptimal-slot" style="width: 728px; height: 90px;"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -134,27 +144,33 @@ $action = $paramsRouter['action'];
                         <a href="#"><i class="td-icon-font td-icon-mobile"></i></a>
                     </div>
                     <div class="td-main-menu-logo td-logo-in-header">
-                        <a class="td-mobile-logo td-sticky-header" href="<?php echo $this->serverUrl() . $this->Url('home') ?>">
+                        <a class="td-mobile-logo td-sticky-header"
+                           href="<?php echo $this->serverUrl() . $this->Url('home') ?>">
                             <img class=td-retina-data
                                  data-retina="<?php echo STATIC_URL . '/f/' . FRONTEND_TEMPLATE . '/images/logo-02.png'; ?>"
-                                 src="<?php echo STATIC_URL . '/f/' . FRONTEND_TEMPLATE . '/images/logo-02.png'; ?>" alt="Tintuc360"/>
+                                 src="<?php echo STATIC_URL . '/f/' . FRONTEND_TEMPLATE . '/images/logo-02.png'; ?>"
+                                 alt="Tintuc360"/>
                         </a>
-                        <a class="td-header-logo td-sticky-header" href="<?php echo $this->serverUrl() . $this->Url('home') ?>">
+                        <a class="td-header-logo td-sticky-header"
+                           href="<?php echo $this->serverUrl() . $this->Url('home') ?>">
                             <img class="td-retina-data"
                                  data-retina="<?php echo STATIC_URL . '/f/' . FRONTEND_TEMPLATE . '/images/logo-01.png'; ?>"
-                                 src="<?php echo STATIC_URL . '/f/' . FRONTEND_TEMPLATE . '/images/logo-01.png'; ?>" alt="Tintuc360"/>
+                                 src="<?php echo STATIC_URL . '/f/' . FRONTEND_TEMPLATE . '/images/logo-01.png'; ?>"
+                                 alt="Tintuc360"/>
                         </a>
                     </div>
                     <div class="menu-main-menu-container">
                         <ul id="menu-main-menu-1" class=sf-menu>
                             <!--  current-menu-item -->
                             <li class="menu-item menu-item-type-post_type menu-item-object-page page_item current_page_item menu-item-first td-menu-item td-normal-menu">
-                                <a href="<?php echo $this->serverUrl() . $this->Url('home') ?>"><i class="fa fa-home"></i>Home</a>
+                                <a href="<?php echo $this->serverUrl() . $this->Url('home') ?>"><i
+                                        class="fa fa-home"></i>Home</a>
                             </li>
                             <?php foreach (unserialize(ARR_CATEGORY) as $arr_category): ?>
                                 <li class="tax-<?php echo $arr_category['cate_slug']; ?> menu-item menu-item-type-post_type menu-item-object-page page_item current_page_item menu-item-first td-menu-item td-normal-menu">
                                     <a href='<?php echo $this->serverUrl() . $this->Url('category', ['cateSlug' => $arr_category['cate_slug'], 'cateId' => $arr_category['cate_id']]) ?>'>
-                        <!--            i class="fa --><?php //echo $arr_category['cate_icon'] ?><!--"></i>-->
+                                        <!--            i class="fa -->
+                                        <?php //echo $arr_category['cate_icon'] ?><!--"></i>-->
                                         <?php echo $arr_category['cate_name'] ?>
                                     </a>
                                 </li>
@@ -178,10 +194,12 @@ $action = $paramsRouter['action'];
                 <div class="header-search-wrap">
                     <div class="dropdown header-search">
                         <div class="td-drop-down-search aria-labelledby=td-header-search-button">
-                            <form method="get" class="td-search-form" action="<?php echo $this->serverUrl() . $this->Url('search') ?>">
+                            <form method="get" class="td-search-form"
+                                  action="<?php echo $this->serverUrl() . $this->Url('search') ?>">
                                 <div role="search" class="td-head-form-search-wrap">
                                     <input id="td-header-search" type=text value="" name="keyword"/>
-                                    <input class="wpb_button wpb_btn-inverse btn" type="submit" id="td-header-search-top" value="Search"/>
+                                    <input class="wpb_button wpb_btn-inverse btn" type="submit"
+                                           id="td-header-search-top" value="Search"/>
                                 </div>
                             </form>
                             <div id="td-aj-search"></div>
