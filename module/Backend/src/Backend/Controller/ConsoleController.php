@@ -2243,12 +2243,80 @@ class ConsoleController extends MyController
         }
     }
 
+
+
+
+    public function postToFb($arrParams)
+    {
+        $config_fb = General::$configFB;
+        $url_content = 'https://tintuc360.me/bai-viet/' . $arrParams['cont_slug'] . '-' . $arrParams['cont_id'] . '.html';
+        $data = array(
+            "access_token" => $config_fb['access_token'],
+            "message" => $arrParams['cont_description'],
+            "link" => $url_content,
+            "picture" => $arrParams['cont_main_image'],
+            "name" => $arrParams['cont_title'],
+            "caption" => "tintuc360.me",
+            "description" => $arrParams['cont_description']
+        );
+        $post_url = 'https://graph.facebook.com/' . $config_fb['fb_id'] . '/feed';
+
+        try {
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $post_url);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            $return = curl_exec($ch);
+            curl_close($ch);
+            echo \My\General::getColoredString($return, 'green');
+            unset($ch);
+//            if (!empty($return)) {
+//                $post_id = explode('_', json_decode($return, true)['id'])[1];
+//                foreach (General::$face_traffic as $key => $value) {
+//                    $this->shareFb([
+//                        'post_id' => $post_id,
+//                        'access_token' => $value,
+//                        'name' => $key
+//                    ]);
+//                }
+//            }
+            echo \My\General::getColoredString("Post 1 content to facebook success cont_id = {$arrParams['cont_id']}", 'green');
+            unset($ch, $return, $post_id, $data, $post_url, $url_content, $config_fb, $arrParams);
+            $this->flush();
+            return true;
+        } catch (Exception $e) {
+            echo \My\General::getColoredString($e->getMessage(), 'red');
+            return true;
+        }
+    }
+
+    public function shareFb($arrParams)
+    {
+        $config_fb = General::$configFB;
+        try {
+            $fb = new \Facebook\Facebook([
+                'app_id' => $config_fb['appId'],
+                'app_secret' => $config_fb['secret']
+            ]);
+            $fb->setDefaultAccessToken($arrParams['access_token']);
+            $rp = $fb->post('/me/feed', ['link' => 'https://web.facebook.com/khampha.tech/posts/' . $arrParams['post_id']]);
+            echo \My\General::getColoredString(json_decode($rp->getBody(), true), 'green');
+            echo \My\General::getColoredString('Share post id ' . $arrParams['post_id'] . ' to facebook ' . $arrParams['name'] . ' SUCCESS', 'green');
+            unset($data, $return, $arrParams, $rp, $config_fb);
+            return true;
+        } catch (\Exception $exc) {
+            echo \My\General::getColoredString($exc->getMessage(), 'red');
+            echo \My\General::getColoredString('Share post id ' . $arrParams['post_id'] . ' to facebook ' . $arrParams['name'] . ' ERROR', 'red');
+            return true;
+        }
+
+    }
+
     public function testAction()
     {
         $instanceSearchContent = new \My\Search\Content();
-        $serviceContent = $this->serviceLocator->get('My\Models\Content');
-        $upload_dir = General::mkdirUpload();
-        $intLimit = 100;
+        $intLimit = 1;
         for ($intPage = 1; $intPage < 6; $intPage++) {
             $arrContentList = $instanceSearchContent->getListLimit(['not_cont_status' => -1], $intPage, $intLimit, ['cont_id' => ['order' => 'asc']], array('cont_id','cate_id','cont_main_image','cont_slug'));
 
@@ -2257,26 +2325,7 @@ class ConsoleController extends MyController
             }
 
            foreach ($arrContentList as $content) {
-                if(empty($content['cont_main_image'])) {
-                    $content['cont_main_image'] = STATIC_URL . '/f/v1/images/no-image-available.jpg';
-                }
-               $path_main_image_old = str_replace(STATIC_URL, STATIC_PATH, $content['cont_main_image']);
-               $struct_image = explode('.', end(explode('/', $path_main_image_old)));
-
-               $extension = $struct_image[1];
-               //$name_main_image_old = $struct_image[0];
-
-               $name_main_image_new = $content['cont_slug'] . '_main.' . $extension;
-
-               $new_info = General::resizeImages($content['cate_id'], $path_main_image_old, $name_main_image_new, $upload_dir['path']);
-               if ($new_info) {
-                   $url_image = $upload_dir['url'] . '/' . $name_main_image_new;
-                   $serviceContent->editBackground(array('cont_resize_image' => $url_image), $content['cont_id']);
-
-                   echo General::getColoredString("add image resize content id = " . $content['cont_id'] . " Successfully", 'cyan');
-               } else {
-                   echo General::getColoredString("Cannot update main content: " . $content['cont_id'], 'light_cyan', 'red');
-               }
+                $this->postToFb($content);
            }
         }
         die("done");

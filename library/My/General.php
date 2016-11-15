@@ -45,6 +45,11 @@ class General {
     const CATEGORY_ME_VA_BE = 6;
     const CATEGORY_DU_LICH = 7;
 
+    static $configFB = array(
+        'access_token' => 'EAACEdEose0cBAFTP41OU7sQJRvEjziTTTUqfC3zmUC7KlZACpY2YbHRCvuAdPZCz2c0qPpDMiFWYU18fNZABF0LqvzFbgwXuUczDdy0VMNDmbK3Bvx2r0uweufRhn5gZBGOyzjBW2QLxO3voup21qOKm43XvLZA9lLD2pnZBpqJwm6F48vvECn',
+        'fb_id' => '404120303310522',
+    );
+
     static $foreground_colors = array(
         'black' => '0;30', 'dark_gray' => '1;30',
         'blue' => '0;34', 'light_blue' => '1;34',
