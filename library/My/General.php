@@ -34,7 +34,7 @@ class General {
 
     const SEND_MAIL_MESSAGES = 1;
     //define social url
-    const SOCIAL_FACEBOOK_URL = 'https://www.facebook.com/khampha.tech/';
+    const SOCIAL_FACEBOOK_URL = 'https://www.facebook.com/tintuc360.me';
 
     //category
     const CATEGORY_CHUYEN_SAO = 1;
@@ -46,8 +46,14 @@ class General {
     const CATEGORY_DU_LICH = 7;
 
     static $configFB = array(
-        'access_token' => 'EAACEdEose0cBAFTP41OU7sQJRvEjziTTTUqfC3zmUC7KlZACpY2YbHRCvuAdPZCz2c0qPpDMiFWYU18fNZABF0LqvzFbgwXuUczDdy0VMNDmbK3Bvx2r0uweufRhn5gZBGOyzjBW2QLxO3voup21qOKm43XvLZA9lLD2pnZBpqJwm6F48vvECn',
+        'access_token' => 'EAACEdEose0cBAGiaBpu6I5xAzI4tl1BRMfFG2lGOUmCoCT7EBFM3Nvfzv5yrMy5ip04JVWp3p4ZAaXEhZBLZA5LkMqoeNjpachSE2dyg38VKHZCdVR0jw7TDjA41iSjF927MvGs3xYQXabqm0cFMP4hFLziL0bgjTFz0KJ9kIf7damGLLATZA',
         'fb_id' => '404120303310522',
+        'app_secret' => '6966f59963e7fc50bfed91a4b5895a32',
+        'app_id' => '1214610921930231'
+    );
+
+    static $acc_shareFB = array(
+        2 => 'EAAD3mDUDgfgBADfSTL1cQjMZB1Ub6XL3JRbIfp4VDTZBRFCDiFm1CvNgVDR7LXIjMfZCnwkzyM7g7tZCG1gMvyPp6BDXe4NYWbsFAA7K1juIvucPcHNNNMAwgR1zZCQiPy3pZABBsKC1SRy2ZCCyXea6wvMMGZBwZCcaitBJ5s1cPEAZDZD',
     );
 
     static $foreground_colors = array(

@@ -2300,7 +2300,7 @@ class ConsoleController extends MyController
                 'app_secret' => $config_fb['secret']
             ]);
             $fb->setDefaultAccessToken($arrParams['access_token']);
-            $rp = $fb->post('/me/feed', ['link' => 'https://web.facebook.com/khampha.tech/posts/' . $arrParams['post_id']]);
+            $rp = $fb->post('/me/feed', ['link' => 'https://web.facebook.com/tintuc360.me/posts/' . $arrParams['post_id']]);
             echo \My\General::getColoredString(json_decode($rp->getBody(), true), 'green');
             echo \My\General::getColoredString('Share post id ' . $arrParams['post_id'] . ' to facebook ' . $arrParams['name'] . ' SUCCESS', 'green');
             unset($data, $return, $arrParams, $rp, $config_fb);

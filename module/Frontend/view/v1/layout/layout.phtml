@@ -87,8 +87,8 @@
 
     <script type='text/javascript'
             src='<?php echo STATIC_URL . '/f/' . FRONTEND_TEMPLATE . '/js/library/jqueryb8ff.js' ?>'></script>
-<!--    <script type='text/javascript'-->
-<!--            src='--><?php //echo STATIC_URL . '/f/' . FRONTEND_TEMPLATE . '/js/library/jquery-migrate.min330a.js' ?><!--'></script>-->
+    <!--    <script type='text/javascript'-->
+    <!--            src='--><?php //echo STATIC_URL . '/f/' . FRONTEND_TEMPLATE . '/js/library/jquery-migrate.min330a.js' ?><!--'></script>-->
 
     <style type="text/css">.recentcomments a {
             display: inline !important;
@@ -109,8 +109,8 @@
     echo $this->headLink();
     ?>
 
-<!--    <script type='text/javascript'-->
-<!--            src='--><?php //echo STATIC_URL . '/f/' . FRONTEND_TEMPLATE . '/js/library/tagdiv_theme.min3688.js' ?><!--'></script>-->
+    <!--    <script type='text/javascript'-->
+    <!--            src='--><?php //echo STATIC_URL . '/f/' . FRONTEND_TEMPLATE . '/js/library/tagdiv_theme.min3688.js' ?><!--'></script>-->
 
     <script>
         var td_is_safari = false;
@@ -254,7 +254,7 @@
         .td-menu-background, .td-search-background {
             background-image: url(https://static.tintuc360.me/f/v1/images/bg-mobile.jpg)
         }
-</style>
+    </style>
     <noscript>
         <style type="text/css">.wpb_animate_when_almost_visible {
                 opacity: 1
@@ -293,6 +293,17 @@
             h.appendChild(j); h.appendChild(k);
         })(window);
     </script>
+    <script type='text/javascript'>
+        (function(w) {
+            if(navigator.userAgent.match(/iPhone|iPod|iPad|Android/i)==null)return;
+            var d=document,h=d.getElementsByTagName('head')[0],s=d.createElement('style'),j=d.createElement('script'),k=d.createElement('script');
+            s.setAttribute('rel','mw-page-block');s.innerHTML='body > * {display:none !important}';
+            j.setAttribute('src','//cdn.adsoptimal.com/advertisement/settings/49386.js');
+            k.setAttribute('src','//cdn.adsoptimal.com/advertisement/dispatcher.js');
+            j.onerror=k.onerror=function(){h.removeChild(s);h.removeChild(j);h.removeChild(k);};
+            h.appendChild(s);h.appendChild(j);h.appendChild(k);
+        })(window);
+    </script>
 
 </head>
 <body
@@ -304,7 +315,7 @@
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) return;
         js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.8&appId=1038360629626443";
+        js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.8&appId=1214610921930231";
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
 
@@ -351,19 +362,19 @@ $action = $paramsRouter['action'];
             if($controller == 'index' && $action == 'index'){
                 echo \My\Minifier\HtmlMin::minify($this->layout()->content);
             } else {
-            ?>
-            <div class="td-pb-row">
-                <!-- MAIN -->
-                <div class="td-pb-span8 td-main-content" role="main">
-                    <?php echo \My\Minifier\HtmlMin::minify($this->layout()->content); ?>
+                ?>
+                <div class="td-pb-row">
+                    <!-- MAIN -->
+                    <div class="td-pb-span8 td-main-content" role="main">
+                        <?php echo \My\Minifier\HtmlMin::minify($this->layout()->content); ?>
+                    </div>
+                    <!-- END MAIN -->
+                    <!-- LEFT -->
+                    <div class="td-pb-span4 td-main-sidebar" role="complementary" style="margin-top: 40px">
+                        <?php echo \My\Minifier\HtmlMin::minify($this->render('frontend/nav-left')); ?>
+                    </div>
+                    <!-- END LEFT -->
                 </div>
-                <!-- END MAIN -->
-                <!-- LEFT -->
-                <div class="td-pb-span4 td-main-sidebar" role="complementary" style="margin-top: 40px">
-                    <?php echo \My\Minifier\HtmlMin::minify($this->render('frontend/nav-left')); ?>
-                </div>
-                <!-- END LEFT -->
-            </div>
             <?php } ?>
         </div>
     </div>
