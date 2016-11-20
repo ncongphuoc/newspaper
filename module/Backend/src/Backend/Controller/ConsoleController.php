@@ -2243,10 +2243,7 @@ class ConsoleController extends MyController
         }
     }
 
-
-
-
-    public function postToFb($arrParams)
+    public function postToFanpage($arrParams, $acc_share)
     {
         $config_fb = General::$configFB;
         $url_content = 'https://tintuc360.me/bai-viet/' . $arrParams['cont_slug'] . '-' . $arrParams['cont_id'] . '.html';
@@ -2271,16 +2268,18 @@ class ConsoleController extends MyController
             curl_close($ch);
             echo \My\General::getColoredString($return, 'green');
             unset($ch);
-//            if (!empty($return)) {
-//                $post_id = explode('_', json_decode($return, true)['id'])[1];
-//                foreach (General::$face_traffic as $key => $value) {
-//                    $this->shareFb([
-//                        'post_id' => $post_id,
-//                        'access_token' => $value,
-//                        'name' => $key
-//                    ]);
-//                }
-//            }
+
+            if (!empty($return)) {
+                $post_id = explode('_', json_decode($return, true)['id'])[1];
+                foreach ($acc_share as $key => $value) {
+                    $this->shareToWall([
+                        'post_id' => $post_id,
+                        'access_token' => $value,
+                        'name' => $key
+                    ]);
+                }
+            }
+
             echo \My\General::getColoredString("Post 1 content to facebook success cont_id = {$arrParams['cont_id']}", 'green');
             unset($ch, $return, $post_id, $data, $post_url, $url_content, $config_fb, $arrParams);
             $this->flush();
@@ -2291,13 +2290,13 @@ class ConsoleController extends MyController
         }
     }
 
-    public function shareFb($arrParams)
+    public function shareToWall($arrParams)
     {
         $config_fb = General::$configFB;
         try {
             $fb = new \Facebook\Facebook([
-                'app_id' => $config_fb['appId'],
-                'app_secret' => $config_fb['secret']
+                'app_id' => $config_fb['app_id'],
+                'app_secret' => $config_fb['app_secret']
             ]);
             $fb->setDefaultAccessToken($arrParams['access_token']);
             $rp = $fb->post('/me/feed', ['link' => 'https://web.facebook.com/tintuc360.me/posts/' . $arrParams['post_id']]);
@@ -2310,24 +2309,41 @@ class ConsoleController extends MyController
             echo \My\General::getColoredString('Share post id ' . $arrParams['post_id'] . ' to facebook ' . $arrParams['name'] . ' ERROR', 'red');
             return true;
         }
-
     }
 
-    public function testAction()
-    {
+    public function shareFacebookAction() {
         $instanceSearchContent = new \My\Search\Content();
-        $intLimit = 1;
-        for ($intPage = 1; $intPage < 6; $intPage++) {
-            $arrContentList = $instanceSearchContent->getListLimit(['not_cont_status' => -1], $intPage, $intLimit, ['cont_id' => ['order' => 'asc']], array('cont_id','cate_id','cont_main_image','cont_slug'));
+        $params = $this->request->getParams();
 
-            if (empty($arrContentList)) {
-                break;
-            }
+        $cate_id = $params['cateId'];
 
-           foreach ($arrContentList as $content) {
-                $this->postToFb($content);
-           }
+
+        $arrContentList = $instanceSearchContent->getList(['not_cont_status' => -1,'cate_id' => $cate_id], ['cont_id' => ['order' => 'asc']], array('cont_id'));
+        if (empty($arrContentList)) {
+            return false;
         }
-        die("done");
+        $total = count($arrContentList);
+        $index = rand(1,$total);
+
+        $cont_id = $arrContentList[$index]['cont_id'];
+        $contentDetail = $instanceSearchContent->getDetail(['cont_id' => $cont_id], array('cont_id','cate_id','cont_main_image','cont_slug','cont_description'));
+
+        switch ($cate_id) {
+            case General::CATEGORY_THOI_TRANG:
+            case General::CATEGORY_LAM_DEP:
+            case General::CATEGORY_DU_LICH:
+                $acc_share = General::$acc_share_teen;
+                break;
+            case General::CATEGORY_SUC_KHOE:
+            case General::CATEGORY_ME_VA_BE:
+                $acc_share = General::$acc_share_old;
+                break;
+            default:
+                $acc_share = General::$acc_share_teen;
+                break;
+        }
+        $this->postToFanpage($contentDetail, $acc_share);
+
+        return true;
     }
 }

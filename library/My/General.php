@@ -46,15 +46,22 @@ class General {
     const CATEGORY_DU_LICH = 7;
 
     static $configFB = array(
-        'access_token' => 'EAACEdEose0cBAGiaBpu6I5xAzI4tl1BRMfFG2lGOUmCoCT7EBFM3Nvfzv5yrMy5ip04JVWp3p4ZAaXEhZBLZA5LkMqoeNjpachSE2dyg38VKHZCdVR0jw7TDjA41iSjF927MvGs3xYQXabqm0cFMP4hFLziL0bgjTFz0KJ9kIf7damGLLATZA',
+        'access_token' => 'EAARQrqSKvfcBAF8FNlecuAu73Hsdl96XNCZCz5mW7HZCf14WbuXuc76kJxxfrZBBA0H9Rh2ZAaZBdZCnXT8ZC81ufko0WfDq3yBIrNBt0RP3ya9xfDKB262YQosZByMDjZANrGcv1vdMTv9NYtLHNZBTLDcrX7n2fZBYQ6ToWyeevbqTZAEsUuAyxHX1',
         'fb_id' => '404120303310522',
         'app_secret' => '6966f59963e7fc50bfed91a4b5895a32',
         'app_id' => '1214610921930231'
     );
 
-    static $acc_shareFB = array(
-        2 => 'EAAD3mDUDgfgBADfSTL1cQjMZB1Ub6XL3JRbIfp4VDTZBRFCDiFm1CvNgVDR7LXIjMfZCnwkzyM7g7tZCG1gMvyPp6BDXe4NYWbsFAA7K1juIvucPcHNNNMAwgR1zZCQiPy3pZABBsKC1SRy2ZCCyXea6wvMMGZBwZCcaitBJ5s1cPEAZDZD',
+    static $acc_share_teen = array(
+        1 => 'EAARQrqSKvfcBAK8tL8UpApzW7iMq1iWCeA9JAdcLMZA1ow6ZCyYvOzkgs1H0gy8C0zLR6kIyikVqctnMLNEn4ABaZAQoQniH4HUwHOKZBfS2u4t7LJ61xj7jlj5z4Ho26YDh1ceginVn3nU1MrOXqaCDkD7ZA7CwZD',
+        2 => 'EAARQrqSKvfcBAJlY8zArxSYyOZB8tS8OaFy3LqEDyhO7WA1uJFaP9f327JrKSPIb4YFRCxmwnguuZB0lhetN67grNPkR1gORmccSC0kCdD9ZBXQ3yYsAsgALRoi8mZCEipD7H2LKE89sOfoPNEboxdu2PvHyJGIZD',
+        3 => 'EAARQrqSKvfcBAGxZBdZAG2GFfWkL2ZAawqEqEgsZBYx7EGA3rtkLbmVcM2TnnV4ZCik3ZCw3zj7qQu3UUkgpHZBZCkYCwboRGam1ZA9LhtkRX1tPnf2tksqZBYZCKwFDb6y9bwdN9BevZCkZB4dXcvsSgWBZC5vXWyZBJZBhZAuAZD',
     );
+
+    static $acc_share_old = array(
+        4 => 'EAARQrqSKvfcBABe2xCv93ZA7JZBjvvuGjLOzv1ZBlwMkU6sJtcmepu2iCBLeYSsy82pclKHJVHWtqY0Jcjqqm8T3htmPp5gZBbMJz1bjaAVj2C5DzcVRT8Nk6ut8t0SnxPNgQ3ZATigLRrxCFihkzCQBUYZCYDQ9OfQkKWhNdOvgZDZD',
+    );
+
 
     static $foreground_colors = array(
         'black' => '0;30', 'dark_gray' => '1;30',

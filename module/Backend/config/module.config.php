@@ -122,6 +122,16 @@ return array(
                         ),
                     ),
                 ),
+                'shareFb' => array(
+                    'options' => array(
+                        'route' => 'sharefb [--cateId=]',
+                        'defaults' => array(
+                            '__NAMESPACE__' => 'Backend\Controller',
+                            'controller' => 'console',
+                            'action' => 'share-facebook'
+                        ),
+                    ),
+                ),
                 'sitemap' => array(
                     'options' => array(
                         'route' => 'sitemap',
