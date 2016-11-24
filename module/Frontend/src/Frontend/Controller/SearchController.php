@@ -135,7 +135,7 @@ class SearchController extends MyController
                     'full_text_keyname' => $content['cont_title'],
                     'in_cate_id' => array($content['cate_id'], -1)
                 );
-                $arrKeywordList = $instanceSearchKeyword->getListLimit($arrCondition, 1, 5, ['_score' => ['order' => 'desc']]);
+                $arrKeywordList = $instanceSearchKeyword->getListLimit($arrCondition, 1, 3, ['_score' => ['order' => 'desc']]);
                 $listContent[$content['cont_id']]['list_keyword'] = $arrKeywordList;
             }
 
