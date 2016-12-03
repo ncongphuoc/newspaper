@@ -153,14 +153,8 @@ class SearchController extends MyController
             $this->renderer->headLink(array('rel' => 'amphtml', 'href' => BASE_URL . $this->url()->fromRoute('keyword', array('keySlug' => $arrKeyDetail['key_slug'], 'keyId' => $arrKeyDetail['key_id'], 'page' => $intPage))));
             $this->renderer->headLink(array('rel' => 'canonical', 'href' => BASE_URL . $this->url()->fromRoute('keyword', array('keySlug' => $arrKeyDetail['key_slug'], 'keyId' => $arrKeyDetail['key_id'], 'page' => $intPage))));
 
-            /*
-             * get 20 keyword tương tự
-             */
-            $arrKeywordList = $instanceSearch->getListLimit(['full_text_keyname' => $arrKeyDetail['key_name'], 'not_key_id' => $key_id], 1, $intLimit, ['_score' => ['order' => 'desc']]);
-
             return array(
                 'params' => $params,
-                'arrKeywordList' => $arrKeywordList,
                 'paging' => $paging,
                 'intPage' => $intPage,
                 'intTotal' => $intTotal,

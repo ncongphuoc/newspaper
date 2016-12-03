@@ -2346,4 +2346,28 @@ class ConsoleController extends MyController
 
         return true;
     }
+
+    public function testAction(){
+        $instanceSearchKeyword = new \My\Search\Keyword();
+        $intLimit = 1;
+
+        $arrKeyList = $instanceSearchKeyword->getListLimit([], 2, $intLimit, ['key_id' => ['order' => 'desc']]);
+        echo "<pre>";
+        print_r($arrKeyList);
+        echo "</pre>";
+        die;
+        $arrParams = array(
+            'key_description' => '1111111111'
+        );
+        $updateData = new \Elastica\Document();
+        $updateData->setData($arrParams);
+        $document = new \Elastica\Document($arrKeyList[0]['key_id'], $arrParams);
+        $document->setUpsert($updateData);
+
+        $resutl = $instanceSearchKeyword->edit($document);
+echo "<pre>";
+print_r($arrKeyList);
+echo "</pre>";
+die;
+    }
 }

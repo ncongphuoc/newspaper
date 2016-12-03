@@ -29,6 +29,11 @@ class ContentController extends MyController
     {
         try {
             $params = $this->params()->fromRoute();
+            //
+            $serviceContent = $this->serviceLocator->get('My\Models\Content');
+            $serviceCategory = $this->serviceLocator->get('My\Models\Category');
+            $instanceSearchContent = new \My\Search\Content();
+            //
             $cont_id = (int)$params['contentId'];
             $cont_slug = $params['contentSlug'];
 
@@ -39,8 +44,9 @@ class ContentController extends MyController
                 'cont_id' => $cont_id,
                 'not_cont_status' => -1
             ];
-            $instanceSearchContent = new \My\Search\Content();
-            $arrContent = $instanceSearchContent->getDetail($arrConditionContent);
+            
+//            $arrContent = $instanceSearchContent->getDetail($arrConditionContent);
+            $arrContent = $serviceContent->getDetail($arrConditionContent);
 
             if (empty($arrContent)) {
                 return $this->redirect()->toRoute('404');
@@ -55,8 +61,7 @@ class ContentController extends MyController
                 'cont_views' => $arrContent['cont_views'] + 1,
                 'cont_id' => $cont_id
             );
-            $instanceJob = new \My\Job\JobContent();
-            $instanceJob->addJob(SEARCH_PREFIX . 'editContent', $p_arrParams);
+            $serviceContent->edit($p_arrParams, $cont_id);
 
             /*
              render meta
@@ -69,8 +74,10 @@ class ContentController extends MyController
             /*
              * Category
              */
-            $instanceSearchCategory = new \My\Search\Category();
-            $categoryDetail = $instanceSearchCategory->getDetail(array('cate_id'=>$arrContent['cate_id']));
+//            $instanceSearchCategory = new \My\Search\Category();
+//            $categoryDetail = $instanceSearchCategory->getDetail(array('cate_id'=>$arrContent['cate_id']));
+
+            $categoryDetail = $serviceCategory->getDetail(array('cate_id'=>$arrContent['cate_id']));
 
             $this->renderer = $this->serviceLocator->get('Zend\View\Renderer\PhpRenderer');
 //            <meta name="robots" content="INDEX, FOLLOW"/>
@@ -113,12 +120,19 @@ class ContentController extends MyController
 
             //content same category
             $arrFields = array('cont_id', 'cont_title', 'cont_slug', 'cate_id','cont_resize_image','created_date','cont_description');
-            $arrContentCateList = $instanceSearchContent->getListLimit(
-                ['cate_id' => $arrContent['cate_id'], 'not_cont_status' => -1, 'less_cont_id' => $arrContent['cont_id']],
+//            $arrContentCateList = $instanceSearchContent->getListLimit(
+//                ['cate_id' => $arrContent['cate_id'], 'not_cont_status' => -1, 'less_cont_id' => $arrContent['cont_id']],
+//                1,
+//                6,
+//                ['cont_id' => ['order' => 'desc']],
+//                $arrFields
+//            );
+
+            $arrContentCateList = $serviceContent->getListLimit(
+                ['cate_id' => $arrContent['cate_id'], 'not_cont_status' => -1, 'not_cont_id' => $arrContent['cont_id']],
                 1,
                 6,
-                ['cont_id' => ['order' => 'desc']],
-                $arrFields
+                'cont_id DESC'
             );
 //
 //            //content like title
@@ -130,7 +144,7 @@ class ContentController extends MyController
                 $arrFields
             );
 //
-            //lấy 10 keyword :)
+            //lấy 10 keyword 
             $instanceSearchKeyword = new \My\Search\Keyword();
             $arrKeywordList = $instanceSearchKeyword->getListLimit(['full_text_keyname' => $arrContent['cont_title'],'not_cate_id'=>-2], 1, 10, ['_score' => ['order' => 'desc']]);
 

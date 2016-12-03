@@ -192,27 +192,31 @@ class storageContent extends AbstractTableGateway {
         $strWhere = '';
 
         if (!empty($arrCondition['cont_slug'])) {
-            $strWhere .= " AND cont_slug='" . $arrCondition['cont_slug'] . "'";
+            $strWhere .= " AND cont_slug= '" . $arrCondition['cont_slug'] . "'";
         }
 
         if (!empty($arrCondition['cont_id'])) {
-            $strWhere .= " AND cont_id=" . $arrCondition['cont_id'];
+            $strWhere .= " AND cont_id= " . $arrCondition['cont_id'];
         }
 
         if (!empty($arrCondition['cont_title'])) {
-            $strWhere .= " AND cont_title=" . $arrCondition['cont_title'];
+            $strWhere .= " AND cont_title= " . $arrCondition['cont_title'];
         }
 
-        if (!empty($arrCondition['cont_status'])) {
-            $strWhere .= " AND cont_status =" . $arrCondition['cont_status'];
+        if (isset($arrCondition['cont_status'])) {
+            $strWhere .= " AND cont_status = " . $arrCondition['cont_status'];
+        }
+
+        if (isset($arrCondition['not_cont_status'])) {
+            $strWhere .= " AND cont_status != " . $arrCondition['not_cont_status'];
         }
 
         if (!empty($arrCondition['cate_id'])) {
-            $strWhere .= " AND cate_id=" . $arrCondition['cate_id'];
+            $strWhere .= " AND cate_id= " . $arrCondition['cate_id'];
         }
 
         if (!empty($arrCondition['not_cont_id'])) {
-            $strWhere .= " AND cont_id !=" . $arrCondition['not_cont_id'];
+            $strWhere .= " AND cont_id != " . $arrCondition['not_cont_id'];
         }
 
         if (!empty($arrCondition['in_cont_id'])) {

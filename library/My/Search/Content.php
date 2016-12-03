@@ -71,7 +71,7 @@ class Content extends SearchAbstract {
             'cont_slug' => ['type' => 'string', 'index' => 'not_analyzed'],
             'cont_description' => ['type' => 'string', 'index' => 'not_analyzed'],
             'cont_detail' => ['type' => 'string', 'store' => 'yes', 'analyzer' => 'translation_index_analyzer', 'search_analyzer' => 'translation_search_analyzer', 'term_vector' => 'with_positions_offsets'],
-            'created_date' => ['type' => 'long', 'index' => 'not_analyzed'],
+            'created_date' => ['type' => 'integer', 'index' => 'not_analyzed'],
             'cate_id' => ['type' => 'integer', 'index' => 'not_analyzed'],
             'cont_views' => ['type' => 'integer', 'index' => 'not_analyzed'],
             'cont_status' => ['type' => 'integer', 'index' => 'not_analyzed'],

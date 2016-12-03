@@ -59,7 +59,7 @@ class Keyword extends SearchAbstract {
                     'max_gram' => 30,
                 ]
             ],
-                ], true);
+        ], true);
 
         //set search type
         $searchType = $searchIndex->getType('keywordList');
@@ -69,11 +69,39 @@ class Keyword extends SearchAbstract {
             'key_id' => ['type' => 'integer', 'index' => 'not_analyzed'],
             'key_name' => ['type' => 'string', 'store' => 'yes', 'analyzer' => 'translation_index_analyzer', 'search_analyzer' => 'translation_search_analyzer', 'term_vector' => 'with_positions_offsets'],
             'key_slug' => ['type' => 'string', 'index' => 'not_analyzed'],
-            'created_date' => ['type' => 'long', 'index' => 'not_analyzed'],
-            'cate_id' => ['type' => 'long', 'index' => 'not_analyzed'],
-            'key_weight' => ['type' => 'long', 'index' => 'not_analyzed']
+            'created_date' => ['type' => 'integer', 'index' => 'not_analyzed'],
+            'cate_id' => ['type' => 'integer', 'index' => 'not_analyzed'],
+            'key_weight' => ['type' => 'integer', 'index' => 'not_analyzed'],
+            'key_content' => ['type' => 'string', 'index' => 'not_analyzed'],
+            'content_crawler' => ['type' => 'string', 'index' => 'not_analyzed'],
         ]);
         $mapping->send();
+    }
+
+    public function addColumnIndex()
+    {
+        $strIndexName = SEARCH_PREFIX . 'keyword';
+
+        $searchClient = General::getSearchConfig();
+        $searchIndex = $searchClient->getIndex($strIndexName);
+
+        $objStatus = new Status($searchIndex->getClient());
+        $arrIndex = $objStatus->getIndexNames();
+        $searchType = $searchIndex->getType('keywordList');
+
+        $mapping = new Mapping();
+        $mapping->setType($searchType);
+        $mapping->setProperties([
+            'list_content' => ['type' => 'string', 'index' => 'not_analyzed'],
+            'top_search' => ['type' => 'string', 'index' => 'not_analyzed'],
+        ]);
+        $mapping->send();
+        //delete index
+        if (in_array($strIndexName, $arrIndex)) {
+            $searchIndex->delete();
+        }
+
+
     }
 
     public function add($arrDocument) {

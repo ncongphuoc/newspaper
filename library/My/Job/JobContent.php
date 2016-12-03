@@ -48,11 +48,6 @@ class JobContent extends JobAbstract {
             return false;
         }
 
-        //Update DB
-        $serviceContent = new \My\Models\Content();
-        $serviceContent->editBackground(['cont_views' => $arrParams['cont_view']], $arrParams['cont_id']);
-
-        //Update ES
         $id = $arrParams['cont_id'];
         $updateData = new \Elastica\Document();
         $updateData->setData($arrParams);
@@ -60,9 +55,9 @@ class JobContent extends JobAbstract {
         $document->setUpsert($updateData);
 
         $instanceSearch = new \My\Search\Content();
-        $result = $instanceSearch->edit($document);
+        $resutl = $instanceSearch->edit($document);
 
-        if (!$result) {
+        if (!$resutl) {
             echo General::getColoredString("ERROR: Cannot Edit content id = {$id} to Search \n", 'light_cyan', 'red');
             return false;
         }
