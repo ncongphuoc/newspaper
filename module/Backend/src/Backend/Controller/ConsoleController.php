@@ -2376,16 +2376,17 @@ class ConsoleController extends MyController
         );
         $serviceKeyword->edit($arr_update, $keyword['key_id']);
 
+        sleep(10);
         $this->getContentAction();
     }
 
-    public function testAction(){
+    public function setContentAction(){
 
         $instanceSearchKeyword = new \My\Search\Keyword();
         $serviceKeyword = $this->serviceLocator->get('My\Models\Keyword');
         $intLimit = 1000;
         for ($intPage = 1; $intPage < 10000; $intPage++) {
-            $arrKeyList = $instanceSearchKeyword->getListLimit([], $intPage, $intLimit, ['key_id' => ['order' => 'desc']]);
+            $arrKeyList = $instanceSearchKeyword->getListLimit(['not_cate_id' => -2], $intPage, $intLimit, ['key_id' => ['order' => 'desc']]);
 
             if(empty($arrKeyList)) {
                 break;
