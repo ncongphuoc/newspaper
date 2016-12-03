@@ -2347,27 +2347,69 @@ class ConsoleController extends MyController
         return true;
     }
 
-    public function testAction(){
+    public function getContentAction(){
+
         $instanceSearchKeyword = new \My\Search\Keyword();
-        $intLimit = 1;
+        $serviceKeyword = $this->serviceLocator->get('My\Models\Keyword');
+        //
+        $keyword = current($instanceSearchKeyword->getListLimit(['content_crawler' => 1], 1, 1, ['key_id' => ['order' => 'asc']]));
 
-        $arrKeyList = $instanceSearchKeyword->getListLimit([], 2, $intLimit, ['key_id' => ['order' => 'desc']]);
-        echo "<pre>";
-        print_r($arrKeyList);
-        echo "</pre>";
-        die;
-        $arrParams = array(
-            'key_description' => '1111111111'
+        $url = 'http://coccoc.com/composer?q=' . rawurlencode($keyword['key_name']) . '&p=0&reqid=UqRAi2nK&_=1480603345568';
+        $return = General::crawler($url);
+        $arr_result = json_decode($return, true);
+        $arr_content = $arr_result['search']['search_results'];
+
+        $arr_content_crawler = array();
+        foreach ($arr_content as $content) {
+            //
+            $arr_item = array(
+                'description' => strip_tags($content['content']),
+                'title' => strip_tags($content['title']),
+                'url' => $content['url'],
+            );
+            //
+            $arr_content_crawler[] = $arr_item;
+        }
+        //
+        $arr_update = array(
+            'content_crawler' => json_encode($arr_content_crawler)
         );
-        $updateData = new \Elastica\Document();
-        $updateData->setData($arrParams);
-        $document = new \Elastica\Document($arrKeyList[0]['key_id'], $arrParams);
-        $document->setUpsert($updateData);
+        $serviceKeyword->edit($arr_update, $keyword['key_id']);
 
-        $resutl = $instanceSearchKeyword->edit($document);
-echo "<pre>";
-print_r($arrKeyList);
-echo "</pre>";
-die;
+        $this->getContentAction();
+    }
+
+    public function testAction(){
+
+        $instanceSearchKeyword = new \My\Search\Keyword();
+        $serviceKeyword = $this->serviceLocator->get('My\Models\Keyword');
+        $intLimit = 1000;
+        for ($intPage = 1; $intPage < 10000; $intPage++) {
+            $arrKeyList = $instanceSearchKeyword->getListLimit([], $intPage, $intLimit, ['key_id' => ['order' => 'desc']]);
+
+            if(empty($arrKeyList)) {
+                break;
+            }
+
+            $instanceSearchContent = new \My\Search\Content();
+            foreach ($arrKeyList as $keyword){
+                $arr_condition_content = array(
+                    'cont_status' => 1,
+                    'full_text_title' => $keyword['key_name']
+                );
+
+                $arrContentList = $instanceSearchContent->getListLimit($arr_condition_content, 1, 15, ['_score' => ['order' => 'desc']],array('cont_id'));
+                $arr_cont_id = array();
+                foreach ($arrContentList as $content){
+                    $arr_cont_id[] = $content['cont_id'];
+                }
+                $text_cont_id = implode(',', $arr_cont_id);
+                $arr_update = array(
+                    'key_content' => $text_cont_id,
+                    'content_crawler' => '1'
+                );
+                $serviceKeyword->edit($arr_update, $keyword['key_id']);
+            }
+        }
     }
 }

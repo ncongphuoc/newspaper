@@ -112,6 +112,16 @@ return array(
                         ),
                     ),
                 ),
+                'getcontent' => array(
+                    'options' => array(
+                        'route' => 'getcontent',
+                        'defaults' => array(
+                            '__NAMESPACE__' => 'Backend\Controller',
+                            'controller' => 'console',
+                            'action' => 'get-content'
+                        ),
+                    ),
+                ),
                 'resizeimage' => array(
                     'options' => array(
                         'route' => 'resizeimage',

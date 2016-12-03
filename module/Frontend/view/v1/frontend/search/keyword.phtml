@@ -1,6 +1,8 @@
 <?php
 $arr_category = unserialize(ARR_CATEGORY);
 $keyDetail = $this->arrKeyDetail;
+
+$content_crawler = $keyDetail['content_crawler']!= '1' ? json_decode($keyDetail['content_crawler'], true) : '1';
 ?>
 <div class=td-crumb-container>
     <div class=entry-crumbs>
@@ -22,7 +24,7 @@ $keyDetail = $this->arrKeyDetail;
         <h1 class="entry-title td-page-title td-search-query">
             <?php echo $keyDetail['key_name'] ?>
         </h1>
-        <p>Tìm thấy <b><?php echo $this->intTotal; ?></b> bài viết liên quan</p>
+<!--        <p>Tìm thấy <b>--><?php //echo $this->intTotal; ?><!--</b> bài viết liên quan</p>-->
     </div>
     <?php if (!empty($this->arrContentList)){ $i = 1;
         foreach ($this->arrContentList as $arr_content):
@@ -40,6 +42,14 @@ $keyDetail = $this->arrKeyDetail;
                     </div>
                 </div>
         <?php } ?>
+
+            <?php if($i == 2 && $content_crawler != '1'){ ?>
+            <div class="td-post-content" style="margin-top: 0px">
+                <?php foreach ($content_crawler as $item){ ?>
+                    <p style="margin-bottom: 10px"><?php echo $item['description'] ?></p>
+                <?php } ?>
+            </div>
+            <?php } ?>
 
             <div class="td_module_10 td_module_wrap td-animation-stack">
                 <div class=td-module-thumb>
@@ -85,6 +95,6 @@ $keyDetail = $this->arrKeyDetail;
         <div class="no-results td-pb-padding-side"><h2>Không có kết quả cho từ khóa này</h2></div>
     <?php } ?>
 </div>
-<div class="page-nav td-pb-padding-side">
-    <?php echo $this->paging; ?>
-</div>
+<!--<div class="page-nav td-pb-padding-side">-->
+<!--    --><?php //echo $this->paging; ?>
+<!--</div>-->

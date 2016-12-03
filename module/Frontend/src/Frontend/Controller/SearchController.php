@@ -102,30 +102,37 @@ class SearchController extends MyController
             }
 
             $instanceSearch = new \My\Search\Keyword();
+            $serviceContent = $this->serviceLocator->get('My\Models\Content');
+            //
             $arrKeyDetail = $instanceSearch->getDetail(['key_id' => $key_id]);
+
             if (empty($arrKeyDetail)) {
                 return $this->redirect()->toRoute('404', array());
             }
-            $arr_condition_content = array(
-                'cont_status' => 1,
-                'full_text_title' => $arrKeyDetail['key_name']
-            );
+            if(empty($arrKeyDetail['key_content']) || $arrKeyDetail['key_content'] == '0') {
+                $arr_condition_content = array(
+                    'cont_status' => 1,
+                    'full_text_title' => $arrKeyDetail['key_name']
+                );
 
-            if ($arrKeyDetail['cate_id'] != -1 && $arrKeyDetail['cate_id'] != -2) {
-                $arr_condition_content['in_cate_id'] = array($arrKeyDetail['cate_id']);
+                if ($arrKeyDetail['cate_id'] != -1 && $arrKeyDetail['cate_id'] != -2) {
+                    $arr_condition_content['in_cate_id'] = array($arrKeyDetail['cate_id']);
+                }
+                $intPage = 1;
+                $intLimit = 15;
 
+                $arrFields = array('cont_id', 'cont_title', 'cont_slug', 'cate_id','cont_resize_image','created_date','cont_description');
+                $instanceSearchContent = new \My\Search\Content();
+                $arrContentList = $instanceSearchContent->getListLimit($arr_condition_content, $intPage, $intLimit, ['_score' => ['order' => 'desc']],$arrFields);
+
+            } else {
+                $arrFields = 'cont_id, cont_title, cont_slug, cate_id, cont_resize_image, created_date, cont_description';
+                $arr_condition_content = array(
+                    'cont_status' => 1,
+                    'in_cont_id' => $arrKeyDetail['key_content']
+                );
+                $arrContentList = $serviceContent->getList($arr_condition_content, 'cont_id DESC', $arrFields);
             }
-            $intPage = is_numeric($params['page']) ? $params['page'] : 1;
-            $intLimit = 15;
-
-            $arrFields = array('cont_id', 'cont_title', 'cont_slug', 'cate_id','cont_resize_image','created_date','cont_description');
-            $instanceSearchContent = new \My\Search\Content();
-            $arrContentList = $instanceSearchContent->getListLimit($arr_condition_content, $intPage, $intLimit, ['_score' => ['order' => 'desc']],$arrFields);
-
-            $intTotal = $instanceSearchContent->getTotal($arr_condition_content);
-            $helper = $this->serviceLocator->get('viewhelpermanager')->get('Paging');
-            $paging = $helper($params['module'], $params['__CONTROLLER__'], $params['action'], $intTotal, $intPage, $intLimit, 'keyword', $params);
-
             //get keyword
             $listContent = array();
             $instanceSearchKeyword = new \My\Search\Keyword();
@@ -155,9 +162,7 @@ class SearchController extends MyController
 
             return array(
                 'params' => $params,
-                'paging' => $paging,
                 'intPage' => $intPage,
-                'intTotal' => $intTotal,
                 'arrContentList' => $listContent,
                 'arrKeyDetail' => $arrKeyDetail
             );
