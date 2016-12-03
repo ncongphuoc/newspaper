@@ -12,17 +12,17 @@ class Content extends ModelAbstract {
     public function __construct() {
     }
 
-    public function getList($arrCondition = array()) {
-        return $this->getParentTable()->getList($arrCondition);
+    public function getList($arrCondition = array(),$arrFields) {
+        return $this->getParentTable()->getList($arrCondition, $arrFields);
     }
 
-    public function getListLimit($arrCondition, $intPage, $intLimit, $strOrder) {
-        $arrResult = $this->getParentTable()->getListLimit($arrCondition, $intPage, $intLimit, $strOrder);
+    public function getListLimit($arrCondition, $intPage, $intLimit, $strOrder, $arrFields = "*") {
+        $arrResult = $this->getParentTable()->getListLimit($arrCondition, $intPage, $intLimit, $strOrder, $arrFields);
         return $arrResult;
     }
 
-    public function getLimit($arrCondition = [], $intPage = 1, $intLimit = 15, $strOrder = 'cont_id DESC') {
-        $arrResult = $this->getParentTable()->getLimit($arrCondition, $intPage, $intLimit, $strOrder);
+    public function getLimit($arrCondition = [], $intPage = 1, $intLimit = 15, $strOrder, $arrFields = "*") {
+        $arrResult = $this->getParentTable()->getLimit($arrCondition, $intPage, $intLimit, $strOrder, $arrFields);
         return $arrResult;
     }
 

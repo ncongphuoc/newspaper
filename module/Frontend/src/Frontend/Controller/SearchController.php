@@ -131,7 +131,17 @@ class SearchController extends MyController
                     'cont_status' => 1,
                     'in_cont_id' => $arrKeyDetail['key_content']
                 );
-                $arrContentList = $serviceContent->getList($arr_condition_content, 'cont_id DESC', $arrFields);
+                $arrResult = $serviceContent->getList($arr_condition_content, $arrFields);
+                $arrContentList = array();
+                $arr_temp = array();
+                foreach ($arrResult as $content){
+                    $arr_temp[$content['cont_id']] = $content;
+                }
+
+                $arr_cont_id = explode(',', $arrKeyDetail['key_content']);
+                foreach ($arr_cont_id as $cont_id){
+                    $arrContentList[] = $arr_temp[$cont_id];
+                }
             }
             //get keyword
             $listContent = array();

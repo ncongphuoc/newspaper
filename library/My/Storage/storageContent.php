@@ -21,7 +21,7 @@ class storageContent extends AbstractTableGateway {
         $this->adapter->getDriver()->getConnection()->disconnect();
     }
 
-    public function getList($arrCondition = array(),$strOrder = 'cont_id DESC', $arrFields = '*') {
+    public function getList($arrCondition = array(), $arrFields = '*') {
         try {
             $strWhere = $this->_buildWhere($arrCondition);
             $adapter = $this->adapter;
@@ -34,8 +34,7 @@ class storageContent extends AbstractTableGateway {
 
             $query = 'select ' . $arrFields
                 . ' from ' . $this->table
-                . ' where 1=1 ' . $strWhere
-                . ' order by ' . $strOrder;
+                . ' where 1=1 ' . $strWhere;
             return $adapter->query($query, $adapter::QUERY_MODE_EXECUTE)->toArray();
         } catch (\Zend\Http\Exception $exc) {
             if (APPLICATION_ENV !== 'production') {
@@ -45,7 +44,7 @@ class storageContent extends AbstractTableGateway {
         }
     }
 
-    public function getListLimit($arrCondition = [], $intPage = 1, $intLimit = 15, $strOrder = 'cont_id DESC', $arrFields = '*') {
+    public function getListLimit($arrCondition = [], $intPage = 1, $intLimit = 15, $strOrder, $arrFields = '*') {
         try {
             $strWhere = $this->_buildWhere($arrCondition);
             $adapter = $this->adapter;

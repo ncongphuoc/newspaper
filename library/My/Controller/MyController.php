@@ -181,7 +181,8 @@ class MyController extends AbstractActionController {
 
             //get list content hot
             $serviceContent = $this->serviceLocator->get('My\Models\Content');
-            $arr_content_hot = $serviceContent->getListLimit(['cont_status' => 1], 1, 5, 'cont_views DESC');
+            $arrFields = 'cont_id, cont_title, cont_slug, cate_id, cont_resize_image, created_date, cont_description';
+            $arr_content_hot = $serviceContent->getListLimit(['cont_status' => 1], 1, 5, 'cont_views DESC', $arrFields);
 //            $arrFields = array('cont_id', 'cont_title', 'cont_slug', 'cate_id','cont_resize_image','created_date');
 //            $instanceSearchContent = new \My\Search\Content();
 //            $arr_content_hot = $instanceSearchContent->getListLimit(['cont_status' => 1], 1, 5, ['cont_views' => ['order' => 'desc']],$arrFields);
