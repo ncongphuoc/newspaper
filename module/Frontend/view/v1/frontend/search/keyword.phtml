@@ -28,20 +28,21 @@ $content_crawler = $keyDetail['content_crawler']!= '1' ? json_decode($keyDetail[
     </div>
     <?php if (!empty($this->arrContentList)){ $i = 1;
         foreach ($this->arrContentList as $arr_content):
-            if($i % 5 == 0) {
+            if($i == 1 || $i == 5) {
                 ?>
                 <div class="td-a-rec td-a-rec-id-header" style="margin-bottom: 30px">
-                    <div class="td-visible-desktop">
-                        <div class="adsoptimal-slot" style="width: 300px; height: 100px;"></div>
-                    </div>
-                    <div class="td-visible-tablet-landscape">
-                        <div class="adsoptimal-slot" style="width: 300px; height: 100px;"></div>
-                    </div>
-                    <div class="td-visible-tablet-portrait">
-                        <div class="adsoptimal-slot" style="width: 300px; height: 100px;"></div>
-                    </div>
+                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <!-- tintuc360.me -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-9166980393030854"
+                         data-ad-slot="5007199245"
+                         data-ad-format="auto"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
                 </div>
-        <?php } ?>
+            <?php } ?>
 
             <?php if($i == 2 && $content_crawler != '1'){ ?>
             <div class="td-post-content" style="margin-top: 0px">
