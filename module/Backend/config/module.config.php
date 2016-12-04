@@ -124,7 +124,7 @@ return array(
                 ),
                 'setcontent' => array(
                     'options' => array(
-                        'route' => 'setcontent',
+                        'route' => 'setcontent [--page=]',
                         'defaults' => array(
                             '__NAMESPACE__' => 'Backend\Controller',
                             'controller' => 'console',

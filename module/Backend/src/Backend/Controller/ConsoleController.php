@@ -2382,35 +2382,65 @@ class ConsoleController extends MyController
 
     public function setContentAction(){
 
-        $instanceSearchKeyword = new \My\Search\Keyword();
-        $serviceKeyword = $this->serviceLocator->get('My\Models\Keyword');
-        $intLimit = 1000;
-        for ($intPage = 1; $intPage < 10000; $intPage++) {
-            $arrKeyList = $instanceSearchKeyword->getListLimit(['not_cate_id' => -2], $intPage, $intLimit, ['key_id' => ['order' => 'desc']]);
+        try {
+            $filename = "Set_Content";
+            $arrData = array();
+            $params = $this->request->getParams();
+            //
+            $instanceSearchKeyword = new \My\Search\Keyword();
+            $instanceSearchContent = new \My\Search\Content();
+            $serviceKeyword = $this->serviceLocator->get('My\Models\Keyword');
+
+            // $arrKeyList = $instanceSearchKeyword->getListLimit(['key_content' => 0,'not_cate_id' => -2,'key_id_greater' => 922000], 1, 1, ['key_id' => ['order' => 'asc']]);
+            // print_r($arrKeyList);die;
+            $intLimit = 1000;
+            $intPage = $params['page'];
+
+            //for($intPage = 1001; $intPage < 10000;$intPage ++){
+            $arrKeyList = $instanceSearchKeyword->getListLimit(['not_cate_id' => -2], $intPage, $intLimit, ['key_id' => ['order' => 'asc']]);
 
             if(empty($arrKeyList)) {
-                break;
+                return;
             }
-
-            $instanceSearchContent = new \My\Search\Content();
             foreach ($arrKeyList as $keyword){
                 $arr_condition_content = array(
                     'cont_status' => 1,
                     'full_text_title' => $keyword['key_name']
                 );
+                if ($keyword['cate_id'] != -1 && $keyword['cate_id'] != -2) {
+                    $arr_condition_content['in_cate_id'] = array($keyword['cate_id']);
+                }
 
                 $arrContentList = $instanceSearchContent->getListLimit($arr_condition_content, 1, 15, ['_score' => ['order' => 'desc']],array('cont_id'));
-                $arr_cont_id = array();
-                foreach ($arrContentList as $content){
-                    $arr_cont_id[] = $content['cont_id'];
+
+                $text_cont_id = '';
+                if(!empty($arrContentList)){
+                    $arr_cont_id = array();
+                    foreach ($arrContentList as $content){
+                        $arr_cont_id[] = $content['cont_id'];
+                    }
+                    $text_cont_id = implode(',', $arr_cont_id);
                 }
-                $text_cont_id = implode(',', $arr_cont_id);
+
                 $arr_update = array(
                     'key_content' => $text_cont_id,
                     'content_crawler' => '1'
                 );
                 $serviceKeyword->edit($arr_update, $keyword['key_id']);
+
+                $arrData['Data']['Keyword'][] = $keyword['key_id'];
+                $arrData['Params']['Page'] = $intPage;
+
+                General::writeLog($filename, $arrData);
+                
+                $this->flush();
             }
+            //}
+            $next_page = $intPage + 1;
+            return shell_exec("php /var/www/tintuc360/html/public/index.php setcontent --page=" . $next_page);
+        } catch (\Exception $exc) {
+            echo $exc->getMessage();
+            die;
         }
     }
 }

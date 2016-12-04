@@ -671,4 +671,37 @@ class General {
         );
     }
 
+    public static function writeLog($fileName = '', $arrParam = array())
+    {
+        date_default_timezone_set('Asia/Saigon');
+
+        $path = LOG_FOLDER . '/CP7_' . $fileName;
+
+        // set newline character to "\r\n" if script is used on Windows
+        //if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+            $nl = "\r\n";
+        //}
+
+        // define the current date (it will be appended to the log file name)
+        $today = date('Y-m-d');
+        //
+        
+        // open log file for writing only; place the file pointer at the end of the file
+        // if the file does not exist, attempt to create it
+        $fp = fopen($path . '_' . $today, 'a') or exit("Can't open $path!");
+
+        $arrParam['Time'] = date('H:i:s');
+
+        // define script name
+        $script_name = pathinfo($_SERVER['PHP_SELF'], PATHINFO_FILENAME);
+        // define current time
+        $time = date('H:i:s');
+        // write current time, script name and message to the log file
+        $message = json_encode($arrParam);
+        fwrite($fp, "$message" . $nl);
+
+        fclose($fp);
+
+    }
+
 }
