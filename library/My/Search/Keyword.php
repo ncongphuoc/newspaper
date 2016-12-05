@@ -172,6 +172,29 @@ class Keyword extends SearchAbstract {
     }
 
     /**
+     * Get Limit
+     */
+    public function getLimit($params = array(), $intLimit = 15, $sort = ['created_date' => ['order' => 'desc']]) {
+        try {
+            $boolQuery = new Bool();
+            $boolQuery = $this->__buildWhere($params, $boolQuery);
+            $query = new ESQuery();
+            $query->setSize($intLimit)
+                ->setSort($sort);
+            $query->setQuery($boolQuery);
+            $instanceSearch = new Search(General::getSearchConfig());
+            $resultSet = $instanceSearch->addIndex($this->getSearchIndex())
+                ->addType($this->getSearchType())
+                ->search($query);
+            $this->setResultSet($resultSet);
+            return $this->toArray();
+        } catch (\Exception $exc) {
+            echo $exc->getMessage();
+            die;
+        }
+    }
+
+    /**
      * Get List
      */
     public function getList($params, $sort = [], $arrFields = []) {

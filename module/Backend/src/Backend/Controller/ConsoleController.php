@@ -1043,7 +1043,7 @@ class ConsoleController extends MyController
         $intLimit = 4000;
         for ($intPage = 1; $intPage < 10000; $intPage++) {
             $file = PUBLIC_PATH . '/xml/keyword-' . $intPage . '.xml';
-            $arrKeyList = $instanceSearchKeyword->getListLimit(['not_cate_id' => -2], $intPage, $intLimit, ['key_id' => ['order' => 'desc']]);
+            $arrKeyList = $instanceSearchKeyword->getListLimit(['not_cate_id' => -2], $intPage, $intLimit, ['key_id' => ['order' => 'asc']]);
 
             if (empty($arrKeyList)) {
                 break;
@@ -2376,7 +2376,7 @@ class ConsoleController extends MyController
         );
         $serviceKeyword->edit($arr_update, $keyword['key_id']);
 
-        sleep(10);
+        sleep(rand(3,5));
         $this->getContentAction();
     }
 
@@ -2397,7 +2397,7 @@ class ConsoleController extends MyController
             $intPage = $params['page'];
 
             //for($intPage = 1001; $intPage < 10000;$intPage ++){
-            $arrKeyList = $instanceSearchKeyword->getListLimit(['not_cate_id' => -2], $intPage, $intLimit, ['key_id' => ['order' => 'asc']]);
+            $arrKeyList = $instanceSearchKeyword->getLimit([], $intLimit, ['key_id' => ['order' => 'asc']]);
 
             if(empty($arrKeyList)) {
                 return;
@@ -2432,7 +2432,7 @@ class ConsoleController extends MyController
                 $arrData['Params']['Page'] = $intPage;
 
                 General::writeLog($filename, $arrData);
-                
+
                 $this->flush();
             }
             //}
