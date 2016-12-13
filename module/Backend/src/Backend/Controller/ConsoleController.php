@@ -779,8 +779,8 @@ class ConsoleController extends MyController
 
     public function crawlerKeywordAction()
     {
-            $this->getKeyword();
-            return;
+        $this->getKeyword();
+        return;
     }
 
     public function getKeyword()
@@ -2349,35 +2349,45 @@ class ConsoleController extends MyController
 
     public function getContentAction(){
 
+        $params = $this->request->getParams();
+        $PID = $params['pid'];
+        if (!empty($PID)) {
+            shell_exec('kill -9 ' . $PID);
+        }
+
         $instanceSearchKeyword = new \My\Search\Keyword();
         $serviceKeyword = $this->serviceLocator->get('My\Models\Keyword');
         //
-        $keyword = current($instanceSearchKeyword->getListLimit(['content_crawler' => 1], 1, 1, ['key_id' => ['order' => 'asc']]));
+        $arr_keyword = $instanceSearchKeyword->getListLimit(['content_crawler' => 1], 1, 100, ['key_id' => ['order' => 'asc']]);
 
-        $url = 'http://coccoc.com/composer?q=' . rawurlencode($keyword['key_name']) . '&p=0&reqid=UqRAi2nK&_=1480603345568';
-        $return = General::crawler($url);
-        $arr_result = json_decode($return, true);
-        $arr_content = $arr_result['search']['search_results'];
+        foreach($arr_keyword as $keyword) {
+            //$url = 'http://coccoc.com/composer?q=' . rawurlencode($keyword['key_name']) . '&p=0&reqid=UqRAi2nK&_=1480603345568';
 
-        $arr_content_crawler = array();
-        foreach ($arr_content as $content) {
-            //
-            $arr_item = array(
-                'description' => strip_tags($content['content']),
-                'title' => strip_tags($content['title']),
-                'url' => $content['url'],
+            $url = 'https://www.google.com.vn/search?sclient=psy-ab&biw=1366&bih=212&espv=2&q=' . rawurlencode($keyword['key_name']) . '&oq=' . rawurlencode($keyword['key_name']);
+
+            $content = General::crawler($url);
+            $dom = HtmlDomParser::str_get_html($content);
+            $results = $dom->find('span.st');
+
+            $arr_content_crawler = array();
+            foreach ($results as $item) {
+                $arr_item = array(
+                    'description' => $item->plaintext
+                );
+
+                $arr_content_crawler[] = $arr_item;
+            }
+
+            $arr_update = array(
+                'content_crawler' => json_encode($arr_content_crawler)
             );
-            //
-            $arr_content_crawler[] = $arr_item;
+            $serviceKeyword->edit($arr_update, $keyword['key_id']);
+            sleep(rand(4, 10));
         }
-        //
-        $arr_update = array(
-            'content_crawler' => json_encode($arr_content_crawler)
-        );
-        $serviceKeyword->edit($arr_update, $keyword['key_id']);
-
-        sleep(rand(3,5));
-        $this->getContentAction();
+        $this->flush();
+        unset($arr_keyword);
+        exec("ps -ef | grep -v grep | grep getcontent | awk '{ print $2 }'", $PID);
+        return shell_exec('php ' . PUBLIC_PATH . '/index.php getcontent --pid=' . current($PID));
     }
 
     public function setContentAction(){
@@ -2442,5 +2452,27 @@ class ConsoleController extends MyController
             echo $exc->getMessage();
             die;
         }
+    }
+
+    public function checkProcessAction()
+    {
+        $params = $this->request->getParams();
+        $process_name = $params['name'];
+        if (empty($process_name)) {
+            return true;
+        }
+
+        exec("ps -ef | grep -v grep | grep '.$process_name.' | awk '{ print $2 }'", $PID);
+        exec("ps -ef | grep -v grep | grep getcontent | awk '{ print $2 }'", $current_PID);
+
+        if (empty($PID)) {
+            switch ($process_name) {
+                case 'getcontent':
+                    shell_exec('php ' . PUBLIC_PATH . '/index.php getcontent --pid=' . current($current_PID));
+                    break;
+            }
+        }
+
+        return true;
     }
 }

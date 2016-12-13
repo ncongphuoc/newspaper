@@ -114,11 +114,21 @@ return array(
                 ),
                 'getcontent' => array(
                     'options' => array(
-                        'route' => 'getcontent',
+                        'route' => 'getcontent [--pid=]',
                         'defaults' => array(
                             '__NAMESPACE__' => 'Backend\Controller',
                             'controller' => 'console',
                             'action' => 'get-content'
+                        ),
+                    ),
+                ),
+                'checkprocess' => array(
+                    'options' => array(
+                        'route' => 'checkprocess [--name=]',
+                        'defaults' => array(
+                            '__NAMESPACE__' => 'Backend\Controller',
+                            'controller' => 'console',
+                            'action' => 'check-process'
                         ),
                     ),
                 ),
@@ -182,16 +192,16 @@ return array(
                         ),
                     ),
                 ),
-                  'init-data-keyword' => array(
-    'options' => array(
-        'route' => 'init-data-keyword',
-        'defaults' => array(
-            '__NAMESPACE__' => 'Backend\Controller',
-            'controller' => 'console',
-            'action' => 'init-keyword-old'
-        ),
-    ),
-)
+                'init-data-keyword' => array(
+                    'options' => array(
+                        'route' => 'init-data-keyword',
+                        'defaults' => array(
+                            '__NAMESPACE__' => 'Backend\Controller',
+                            'controller' => 'console',
+                            'action' => 'init-keyword-old'
+                        ),
+                    ),
+                )
             )
         )
     ),
