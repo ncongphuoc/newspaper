@@ -4,6 +4,7 @@ namespace Backend\Controller;
 
 use My\General,
     My\Controller\MyController,
+    Zend\Dom\Query,
     Sunra\PhpSimple\HtmlDomParser;
 
 class ConsoleController extends MyController
@@ -1082,7 +1083,7 @@ class ConsoleController extends MyController
         $doc .= '</urlset>';
         $xml = new \SimpleXMLElement($doc);
         $this->flush();
-        $arrData = ['https://tintuc360.me/'];
+        $arrData = ['https://tintuc360.site/'];
         foreach ($arrData as $value) {
             $href = $value;
             $url = $xml->addChild('url');
@@ -1483,8 +1484,8 @@ class ConsoleController extends MyController
                 }
                 //get image
                 $arr_image = $html->find("div.detail_content img");
-                $arr_data['cont_main_image'] = 'https://static.tintuc360.me/f/v1/images/no-image-available.jpg';
-                $arr_data['cont_resize_image'] = 'https://static.tintuc360.me/f/v1/images/no-image-available.jpg';
+                $arr_data['cont_main_image'] = STATIC_URL . '/f/v1/images/no-image-available.jpg';
+                $arr_data['cont_resize_image'] = STATIC_URL . '/f/v1/images/no-image-available.jpg';
                 if (count($arr_image) > 0) {
                     foreach ($arr_image as $key => $img) {
                         $src = $img->src;
@@ -1494,7 +1495,7 @@ class ConsoleController extends MyController
                         if($image_content) {
                             file_put_contents($upload_dir['path'] . '/' . $name_img, $image_content);
                         } else {
-                            $image_content = General::crawler('https://static.tintuc360.me/f/v1/images/no-image-available.jpg');
+                            $image_content = General::crawler(STATIC_URL . '/f/v1/images/no-image-available.jpg');
                             file_put_contents($upload_dir['path'] . '/' . $name_img, $image_content);
                         }
                         $cont_detail = str_replace($src, $upload_dir['url'] . '/' . $name_img, $cont_detail);
@@ -1589,8 +1590,8 @@ class ConsoleController extends MyController
                     }
                 }
                 //get image
-                $arr_data['cont_main_image'] = 'https://static.tintuc360.me/f/v1/images/no-image-available.jpg';
-                $arr_data['cont_resize_image'] = 'https://static.tintuc360.me/f/v1/images/no-image-available.jpg';
+                $arr_data['cont_main_image'] = STATIC_URL . '/f/v1/images/no-image-available.jpg';
+                $arr_data['cont_resize_image'] = STATIC_URL . '/f/v1/images/no-image-available.jpg';
                 $arr_image = $html->find("div.article-content img");
                 if (count($arr_image) > 0) {
                     foreach ($arr_image as $key => $img) {
@@ -1601,7 +1602,7 @@ class ConsoleController extends MyController
                         if($image_content) {
                             file_put_contents($upload_dir['path'] . '/' . $name_img, $image_content);
                         } else {
-                            $image_content = General::crawler('https://static.tintuc360.me/f/v1/images/no-image-available.jpg');
+                            $image_content = General::crawler(STATIC_URL . '/f/v1/images/no-image-available.jpg');
                             file_put_contents($upload_dir['path'] . '/' . $name_img, $image_content);
                         }
                         $cont_detail = str_replace($src, $upload_dir['url'] . '/' . $name_img, $cont_detail);
@@ -1695,8 +1696,8 @@ class ConsoleController extends MyController
 
 
                 //get image
-                $arr_data['cont_main_image'] = 'https://static.tintuc360.me/f/v1/images/no-image-available.jpg';
-                $arr_data['cont_resize_image'] = 'https://static.tintuc360.me/f/v1/images/no-image-available.jpg';
+                $arr_data['cont_main_image'] = STATIC_URL . '/f/v1/images/no-image-available.jpg';
+                $arr_data['cont_resize_image'] = STATIC_URL . '/f/v1/images/no-image-available.jpg';
                 $arr_image = $html->find("div.text-conent img");
                 if (count($arr_image) > 0) {
                     foreach ($arr_image as $key => $img) {
@@ -1707,7 +1708,7 @@ class ConsoleController extends MyController
                         if($image_content) {
                             file_put_contents($upload_dir['path'] . '/' . $name_img, $image_content);
                         } else {
-                            $image_content = General::crawler('https://static.tintuc360.me/f/v1/images/no-image-available.jpg');
+                            $image_content = General::crawler(STATIC_URL . '/f/v1/images/no-image-available.jpg');
                             file_put_contents($upload_dir['path'] . '/' . $name_img, $image_content);
                         }
                         $cont_detail = str_replace($src, $upload_dir['url'] . '/' . $name_img, $cont_detail);
@@ -1820,8 +1821,8 @@ class ConsoleController extends MyController
                     }
                 }
                 //get image
-                $arr_data['cont_main_image'] = 'https://static.tintuc360.me/f/v1/images/no-image-available.jpg';
-                $arr_data['cont_resize_image'] = 'https://static.tintuc360.me/f/v1/images/no-image-available.jpg';
+                $arr_data['cont_main_image'] = STATIC_URL . '/f/v1/images/no-image-available.jpg';
+                $arr_data['cont_resize_image'] = STATIC_URL . '/f/v1/images/no-image-available.jpg';
                 $arr_image = $html->find("div.entry-content img");
                 if (count($arr_image) > 0) {
                     foreach ($arr_image as $key => $img) {
@@ -1832,7 +1833,7 @@ class ConsoleController extends MyController
                         if($image_content) {
                             file_put_contents($upload_dir['path'] . '/' . $name_img, $image_content);
                         } else {
-                            $image_content = General::crawler('https://static.tintuc360.me/f/v1/images/no-image-available.jpg');
+                            $image_content = General::crawler(STATIC_URL . '/f/v1/images/no-image-available.jpg');
                             file_put_contents($upload_dir['path'] . '/' . $name_img, $image_content);
                         }
                         $cont_detail = str_replace($src, $upload_dir['url'] . '/' . $name_img, $cont_detail);
@@ -1927,8 +1928,8 @@ class ConsoleController extends MyController
 //                        }
 //                    }
                 //get image
-                $arr_data['cont_main_image'] = 'https://static.tintuc360.me/f/v1/images/no-image-available.jpg';
-                $arr_data['cont_resize_image'] = 'https://static.tintuc360.me/f/v1/images/no-image-available.jpg';
+                $arr_data['cont_main_image'] = STATIC_URL . '/f/v1/images/no-image-available.jpg';
+                $arr_data['cont_resize_image'] = STATIC_URL . '/f/v1/images/no-image-available.jpg';
                 $arr_image = $html->find("div.knc-content img");
                 if (count($arr_image) > 0) {
                     foreach ($arr_image as $key => $img) {
@@ -1939,7 +1940,7 @@ class ConsoleController extends MyController
                         if($image_content) {
                             file_put_contents($upload_dir['path'] . '/' . $name_img, $image_content);
                         } else {
-                            $image_content = General::crawler('https://static.tintuc360.me/f/v1/images/no-image-available.jpg');
+                            $image_content = General::crawler(STATIC_URL . '/f/v1/images/no-image-available.jpg');
                             file_put_contents($upload_dir['path'] . '/' . $name_img, $image_content);
                         }
                         $cont_detail = str_replace($src, $upload_dir['url'] . '/' . $name_img, $cont_detail);
@@ -2246,14 +2247,14 @@ class ConsoleController extends MyController
     public function postToFanpage($arrParams, $acc_share)
     {
         $config_fb = General::$configFB;
-        $url_content = 'https://tintuc360.me/bai-viet/' . $arrParams['cont_slug'] . '-' . $arrParams['cont_id'] . '.html';
+        $url_content = BASE_URL . '/bai-viet/' . $arrParams['cont_slug'] . '-' . $arrParams['cont_id'] . '.html';
         $data = array(
             "access_token" => $config_fb['access_token'],
             "message" => $arrParams['cont_description'],
             "link" => $url_content,
             "picture" => $arrParams['cont_main_image'],
             "name" => $arrParams['cont_title'],
-            "caption" => "tintuc360.me",
+            "caption" => "tintuc360.site",
             "description" => $arrParams['cont_description']
         );
         $post_url = 'https://graph.facebook.com/' . $config_fb['fb_id'] . '/feed';
@@ -2299,7 +2300,7 @@ class ConsoleController extends MyController
                 'app_secret' => $config_fb['app_secret']
             ]);
             $fb->setDefaultAccessToken($arrParams['access_token']);
-            $rp = $fb->post('/me/feed', ['link' => 'https://web.facebook.com/tintuc360.me/posts/' . $arrParams['post_id']]);
+            $rp = $fb->post('/me/feed', ['link' => 'https://web.facebook.com/tintuc360.site/posts/' . $arrParams['post_id']]);
             echo \My\General::getColoredString(json_decode($rp->getBody(), true), 'green');
             echo \My\General::getColoredString('Share post id ' . $arrParams['post_id'] . ' to facebook ' . $arrParams['name'] . ' SUCCESS', 'green');
             unset($data, $return, $arrParams, $rp, $config_fb);
@@ -2348,7 +2349,6 @@ class ConsoleController extends MyController
     }
 
     public function getContentAction(){
-
         $params = $this->request->getParams();
         $PID = $params['pid'];
         if (!empty($PID)) {
@@ -2366,13 +2366,13 @@ class ConsoleController extends MyController
             $url = 'https://www.google.com.vn/search?sclient=psy-ab&biw=1366&bih=212&espv=2&q=' . rawurlencode($keyword['key_name']) . '&oq=' . rawurlencode($keyword['key_name']);
 
             $content = General::crawler($url);
-            $dom = HtmlDomParser::str_get_html($content);
-            $results = $dom->find('span.st');
+            $dom = new Query($content);
+            $results = $dom->execute('span.st');
 
             $arr_content_crawler = array();
             foreach ($results as $item) {
                 $arr_item = array(
-                    'description' => $item->plaintext
+                    'description' => $item->textContent
                 );
 
                 $arr_content_crawler[] = $arr_item;
