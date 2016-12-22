@@ -284,6 +284,12 @@ class Keyword extends SearchAbstract {
             $addQuery->setTerm('cate_id', $params['not_cate_id']);
             $boolQuery->addMustNot($addQuery);
         }
+
+        if (isset($params['not_content_crawler'])) {
+            $addQuery = new ESQuery\Term();
+            $addQuery->setTerm('content_crawler', $params['not_content_crawler']);
+            $boolQuery->addMustNot($addQuery);
+        }
         
         if (isset($params['full_text_keyname'])) {
             $math = new ESQuery\Match();

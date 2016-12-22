@@ -1044,7 +1044,7 @@ class ConsoleController extends MyController
         $intLimit = 4000;
         for ($intPage = 1; $intPage < 10000; $intPage++) {
             $file = PUBLIC_PATH . '/xml/keyword-' . $intPage . '.xml';
-            $arrKeyList = $instanceSearchKeyword->getListLimit(['not_cate_id' => -2], $intPage, $intLimit, ['key_id' => ['order' => 'asc']]);
+            $arrKeyList = $instanceSearchKeyword->getListLimit(['not_cate_id' => -2,'not_content_crawler' => 1], $intPage, $intLimit, ['key_id' => ['order' => 'asc']]);
 
             if (empty($arrKeyList)) {
                 break;
@@ -2474,5 +2474,20 @@ class ConsoleController extends MyController
         }
 
         return true;
+    }
+
+    public function testAction() {
+        $instanceSearchContent = new \My\Search\Content();
+        $intLimit = 2000;
+        for ($intPage = 1; $intPage < 100; $intPage++) {
+
+            $arrContentList = $instanceSearchContent->getListLimit(['not_cont_status' => -1], $intPage, $intLimit, ['cont_id' => ['order' => 'asc']]);
+
+            if (empty($arrContentList)) {
+                break;
+            }
+
+
+        }
     }
 }
