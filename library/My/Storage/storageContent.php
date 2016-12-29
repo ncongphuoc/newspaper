@@ -117,13 +117,16 @@ class storageContent extends AbstractTableGateway {
             $insert = $sql->insert($this->table)->values($p_arrParams);
             $query = $sql->getSqlStringForSqlObject($insert);
             $adapter->createStatement($query)->execute();
-            $result = $adapter->getDriver()->getLastGeneratedValue();
-            if ($result) {
-                $p_arrParams['cont_id'] = $result;
-                $instanceJob = new \My\Job\JobContent();
-                $instanceJob->addJob(SEARCH_PREFIX . 'writeContent', $p_arrParams);
+            $cont_id = $adapter->getDriver()->getLastGeneratedValue();
+            if ($cont_id) {
+                $p_arrParams['cont_id'] = $cont_id;
+//                $instanceJob = new \My\Job\JobContent();
+//                $instanceJob->addJob(SEARCH_PREFIX . 'writeContent', $p_arrParams);
+                $instanceSearch = new \My\Search\Content();
+                $arrDocument = new \Elastica\Document($cont_id, $p_arrParams);
+                $intResult = $instanceSearch->add($arrDocument);
             }
-            return $result;
+            return $cont_id;
         } catch (\Exception $exc) {
             echo '<pre>';
             print_r($exc->getMessage());
@@ -143,9 +146,16 @@ class storageContent extends AbstractTableGateway {
             }
             $result = $this->update($p_arrParams, 'cont_id=' . $intProductID);
             if ($result) {
-                $p_arrParams['cont_id'] = $intProductID;
-                $instanceJob = new \My\Job\JobContent();
-                $instanceJob->addJob(SEARCH_PREFIX . 'editContent', $p_arrParams);
+//                $p_arrParams['cont_id'] = $intProductID;
+//                $instanceJob = new \My\Job\JobContent();
+//                $instanceJob->addJob(SEARCH_PREFIX . 'editContent', $p_arrParams);
+                $updateData = new \Elastica\Document();
+                $updateData->setData($p_arrParams);
+                $document = new \Elastica\Document($intProductID, $p_arrParams);
+                $document->setUpsert($updateData);
+
+                $instanceSearch = new \My\Search\Content();
+                $resutl = $instanceSearch->edit($document);
             }
             return $result;
         } catch (\Exception $exc) {
