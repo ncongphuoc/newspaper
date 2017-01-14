@@ -27,20 +27,20 @@ class storageKeyword extends AbstractTableGateway {
             if (!is_array($p_arrParams) || empty($p_arrParams)) {
                 return false;
             }
-
-
             $adapter = $this->adapter;
             $sql = new Sql($adapter);
             $insert = $sql->insert($this->table)->values($p_arrParams);
             $query = $sql->getSqlStringForSqlObject($insert);
             $adapter->createStatement($query)->execute();
-            $result = $adapter->getDriver()->getLastGeneratedValue();
-            if ($result) {
-                $p_arrParams['key_id'] = $result;
-                $instanceJob = new \My\Job\JobKeyword();
-                $instanceJob->addJob(SEARCH_PREFIX . 'writeKeyword', $p_arrParams);
+            $keyword_id = $adapter->getDriver()->getLastGeneratedValue();
+            //
+            if ($keyword_id) {
+                $instanceSearch = new \My\Search\Keyword();
+                $arrDocument = new \Elastica\Document($keyword_id, $p_arrParams);
+                $intResult = $instanceSearch->add($arrDocument);
             }
-            return $result;
+            //
+            return $keyword_id;
         } catch (\Exception $exc) {
             echo '<pre>';
             print_r($exc->getMessage());
@@ -56,9 +56,13 @@ class storageKeyword extends AbstractTableGateway {
             }
             $result = $this->update($p_arrParams, 'key_id=' . $id);
             if ($result) {
-                $p_arrParams['key_id'] = $id;
-                $instanceJob = new \My\Job\JobContent();
-                $instanceJob->addJob(SEARCH_PREFIX . 'editKeyword', $p_arrParams);
+                $updateData = new \Elastica\Document();
+                $updateData->setData($p_arrParams);
+                $document = new \Elastica\Document($id, $p_arrParams);
+                $document->setUpsert($updateData);
+
+                $instanceSearch = new \My\Search\Keyword();
+                $result = $instanceSearch->edit($document);
             }
             return $result;
         } catch (\Exception $exc) {
