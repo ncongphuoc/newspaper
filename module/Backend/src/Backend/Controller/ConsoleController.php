@@ -1044,7 +1044,7 @@ class ConsoleController extends MyController
         $intLimit = 4000;
         for ($intPage = 1; $intPage < 10000; $intPage++) {
             $file = PUBLIC_PATH . '/xml/keyword-' . $intPage . '.xml';
-            $arrKeyList = $instanceSearchKeyword->getListLimit(['not_cate_id' => -2,'not_content_crawler' => 1], $intPage, $intLimit, ['key_id' => ['order' => 'asc']]);
+            $arrKeyList = $instanceSearchKeyword->getListLimit(['not_cate_id' => -2, 'not_content_crawler' => 1], $intPage, $intLimit, ['key_id' => ['order' => 'asc']]);
 
             if (empty($arrKeyList)) {
                 break;
@@ -1492,7 +1492,7 @@ class ConsoleController extends MyController
                         $extension = end(explode('.', end(explode('/', $src))));
                         $name_img = $arr_data['cont_slug'] . '_' . ($key + 1) . '.' . $extension;
                         $image_content = General::crawler($src);
-                        if($image_content) {
+                        if ($image_content) {
                             file_put_contents($upload_dir['path'] . '/' . $name_img, $image_content);
                         } else {
                             $image_content = General::crawler(STATIC_URL . '/f/v1/images/no-image-available.jpg');
@@ -1502,8 +1502,8 @@ class ConsoleController extends MyController
                         if ($key == 0) {
                             $arr_data['cont_main_image'] = $upload_dir['url'] . '/' . $name_img;
                             $arr_data['cont_resize_image'] = $upload_dir['url'] . '/' . $name_img;
-                            $results = $this->resizeImage($upload_dir,$arr_data['cont_slug'], $extension, $cate_id);
-                            if($results) {
+                            $results = $this->resizeImage($upload_dir, $arr_data['cont_slug'], $extension, $cate_id);
+                            if ($results) {
                                 $arr_data['cont_resize_image'] = $results;
                             }
                         }
@@ -1599,7 +1599,7 @@ class ConsoleController extends MyController
                         $extension = end(explode('.', end(explode('/', $src))));
                         $name_img = $arr_data['cont_slug'] . '_' . ($key + 1) . '.' . $extension;
                         $image_content = General::crawler($src);
-                        if($image_content) {
+                        if ($image_content) {
                             file_put_contents($upload_dir['path'] . '/' . $name_img, $image_content);
                         } else {
                             $image_content = General::crawler(STATIC_URL . '/f/v1/images/no-image-available.jpg');
@@ -1609,8 +1609,8 @@ class ConsoleController extends MyController
                         if ($key == 0) {
                             $arr_data['cont_main_image'] = $upload_dir['url'] . '/' . $name_img;
                             $arr_data['cont_resize_image'] = $upload_dir['url'] . '/' . $name_img;
-                            $results = $this->resizeImage($upload_dir,$arr_data['cont_slug'], $extension, $cate_id);
-                            if($results) {
+                            $results = $this->resizeImage($upload_dir, $arr_data['cont_slug'], $extension, $cate_id);
+                            if ($results) {
                                 $arr_data['cont_resize_image'] = $results;
                             }
                         }
@@ -1705,7 +1705,7 @@ class ConsoleController extends MyController
                         $extension = end(explode('.', end(explode('/', $src))));
                         $name_img = $arr_data['cont_slug'] . '_' . ($key + 1) . '.' . $extension;
                         $image_content = General::crawler($src);
-                        if($image_content) {
+                        if ($image_content) {
                             file_put_contents($upload_dir['path'] . '/' . $name_img, $image_content);
                         } else {
                             $image_content = General::crawler(STATIC_URL . '/f/v1/images/no-image-available.jpg');
@@ -1715,8 +1715,8 @@ class ConsoleController extends MyController
                         if ($key == 0) {
                             $arr_data['cont_main_image'] = $upload_dir['url'] . '/' . $name_img;
                             $arr_data['cont_resize_image'] = $upload_dir['url'] . '/' . $name_img;
-                            $results = $this->resizeImage($upload_dir,$arr_data['cont_slug'], $extension, $cate_id);
-                            if($results) {
+                            $results = $this->resizeImage($upload_dir, $arr_data['cont_slug'], $extension, $cate_id);
+                            if ($results) {
                                 $arr_data['cont_resize_image'] = $results;
                             }
                         }
@@ -1830,7 +1830,7 @@ class ConsoleController extends MyController
                         $extension = end(explode('.', end(explode('/', $src))));
                         $name_img = $arr_data['cont_slug'] . '_' . ($key + 1) . '.' . $extension;
                         $image_content = General::crawler($src);
-                        if($image_content) {
+                        if ($image_content) {
                             file_put_contents($upload_dir['path'] . '/' . $name_img, $image_content);
                         } else {
                             $image_content = General::crawler(STATIC_URL . '/f/v1/images/no-image-available.jpg');
@@ -1840,8 +1840,8 @@ class ConsoleController extends MyController
                         if ($key == 0) {
                             $arr_data['cont_main_image'] = $upload_dir['url'] . '/' . $name_img;
                             $arr_data['cont_resize_image'] = $upload_dir['url'] . '/' . $name_img;
-                            $results = $this->resizeImage($upload_dir,$arr_data['cont_slug'], $extension, $cate_id);
-                            if($results) {
+                            $results = $this->resizeImage($upload_dir, $arr_data['cont_slug'], $extension, $cate_id);
+                            if ($results) {
                                 $arr_data['cont_resize_image'] = $results;
                             }
                         }
@@ -1937,7 +1937,7 @@ class ConsoleController extends MyController
                         $extension = end(explode('.', end(explode('/', $src))));
                         $name_img = $arr_data['cont_slug'] . '_' . ($key + 1) . '.' . $extension;
                         $image_content = General::crawler($src);
-                        if($image_content) {
+                        if ($image_content) {
                             file_put_contents($upload_dir['path'] . '/' . $name_img, $image_content);
                         } else {
                             $image_content = General::crawler(STATIC_URL . '/f/v1/images/no-image-available.jpg');
@@ -1947,8 +1947,8 @@ class ConsoleController extends MyController
                         if ($key == 0) {
                             $arr_data['cont_main_image'] = $upload_dir['url'] . '/' . $name_img;
                             $arr_data['cont_resize_image'] = $upload_dir['url'] . '/' . $name_img;
-                            $results = $this->resizeImage($upload_dir,$arr_data['cont_slug'], $extension, $cate_id);
-                            if($results) {
+                            $results = $this->resizeImage($upload_dir, $arr_data['cont_slug'], $extension, $cate_id);
+                            if ($results) {
                                 $arr_data['cont_resize_image'] = $results;
                             }
                         }
@@ -2196,7 +2196,7 @@ class ConsoleController extends MyController
             if (preg_match('/[\'^£$%&*().:"}{@#~?><>,|=_+¬-]/', $word)) {
                 continue;
             }
-            if(strlen($word) > 7){
+            if (strlen($word) > 7) {
                 continue;
             }
 
@@ -2229,7 +2229,8 @@ class ConsoleController extends MyController
         return true;
     }
 
-    public function resizeImage($upload_dir, $cont_slug, $extension, $cate_id){
+    public function resizeImage($upload_dir, $cont_slug, $extension, $cate_id)
+    {
 
         $path_old = $upload_dir['path'] . '/' . $cont_slug . '_1.' . $extension;
         if (!file_exists($path_old)) {
@@ -2237,7 +2238,7 @@ class ConsoleController extends MyController
         }
         $name_main_image = $cont_slug . '_main.' . $extension;
         $result = General::resizeImages($cate_id, $path_old, $name_main_image, $upload_dir['path']);
-        if($result) {
+        if ($result) {
             return $upload_dir['url'] . '/' . $cont_slug . '_main.' . $extension;
         } else {
             return false;
@@ -2312,22 +2313,23 @@ class ConsoleController extends MyController
         }
     }
 
-    public function shareFacebookAction() {
+    public function shareFacebookAction()
+    {
         $instanceSearchContent = new \My\Search\Content();
         $params = $this->request->getParams();
 
         $cate_id = $params['cateId'];
 
 
-        $arrContentList = $instanceSearchContent->getList(['not_cont_status' => -1,'cate_id' => $cate_id], ['cont_id' => ['order' => 'asc']], array('cont_id'));
+        $arrContentList = $instanceSearchContent->getList(['not_cont_status' => -1, 'cate_id' => $cate_id], ['cont_id' => ['order' => 'asc']], array('cont_id'));
         if (empty($arrContentList)) {
             return false;
         }
         $total = count($arrContentList);
-        $index = rand(1,$total);
+        $index = rand(1, $total);
 
         $cont_id = $arrContentList[$index]['cont_id'];
-        $contentDetail = $instanceSearchContent->getDetail(['cont_id' => $cont_id], array('cont_id','cate_id','cont_main_image','cont_slug','cont_description'));
+        $contentDetail = $instanceSearchContent->getDetail(['cont_id' => $cont_id], array('cont_id', 'cate_id', 'cont_main_image', 'cont_slug', 'cont_description'));
 
         switch ($cate_id) {
             case General::CATEGORY_THOI_TRANG:
@@ -2348,7 +2350,8 @@ class ConsoleController extends MyController
         return true;
     }
 
-    public function getContentAction(){
+    public function getContentAction()
+    {
         $params = $this->request->getParams();
         $PID = $params['pid'];
         if (!empty($PID)) {
@@ -2360,7 +2363,7 @@ class ConsoleController extends MyController
         //
         $arr_keyword = $instanceSearchKeyword->getListLimit(['content_crawler' => 1], 1, 100, ['key_id' => ['order' => 'asc']]);
 
-        foreach($arr_keyword as $keyword) {
+        foreach ($arr_keyword as $keyword) {
             //$url = 'http://coccoc.com/composer?q=' . rawurlencode($keyword['key_name']) . '&p=0&reqid=UqRAi2nK&_=1480603345568';
 
             $url = 'https://www.google.com.vn/search?sclient=psy-ab&biw=1366&bih=212&espv=2&q=' . rawurlencode($keyword['key_name']) . '&oq=' . rawurlencode($keyword['key_name']);
@@ -2390,7 +2393,8 @@ class ConsoleController extends MyController
         return shell_exec('php ' . PUBLIC_PATH . '/index.php getcontent --pid=' . current($PID));
     }
 
-    public function setContentAction(){
+    public function setContentAction()
+    {
 
         try {
             $filename = "Set_Content";
@@ -2409,10 +2413,10 @@ class ConsoleController extends MyController
             //for($intPage = 1001; $intPage < 10000;$intPage ++){
             $arrKeyList = $instanceSearchKeyword->getLimit([], $intLimit, ['key_id' => ['order' => 'asc']]);
 
-            if(empty($arrKeyList)) {
+            if (empty($arrKeyList)) {
                 return;
             }
-            foreach ($arrKeyList as $keyword){
+            foreach ($arrKeyList as $keyword) {
                 $arr_condition_content = array(
                     'cont_status' => 1,
                     'full_text_title' => $keyword['key_name']
@@ -2421,12 +2425,12 @@ class ConsoleController extends MyController
                     $arr_condition_content['in_cate_id'] = array($keyword['cate_id']);
                 }
 
-                $arrContentList = $instanceSearchContent->getListLimit($arr_condition_content, 1, 15, ['_score' => ['order' => 'desc']],array('cont_id'));
+                $arrContentList = $instanceSearchContent->getListLimit($arr_condition_content, 1, 15, ['_score' => ['order' => 'desc']], array('cont_id'));
 
                 $text_cont_id = '';
-                if(!empty($arrContentList)){
+                if (!empty($arrContentList)) {
                     $arr_cont_id = array();
-                    foreach ($arrContentList as $content){
+                    foreach ($arrContentList as $content) {
                         $arr_cont_id[] = $content['cont_id'];
                     }
                     $text_cont_id = implode(',', $arr_cont_id);
@@ -2476,18 +2480,58 @@ class ConsoleController extends MyController
         return true;
     }
 
-    public function testAction() {
+    public function testAction()
+    {
         $instanceSearchContent = new \My\Search\Content();
-        $intLimit = 2000;
-        for ($intPage = 1; $intPage < 100; $intPage++) {
+        $serviceContent = $this->serviceLocator->get('My\Models\Content');
+        $cate_id = 1; //chuyen sao
+        $intLimit = 10;
 
-            $arrContentList = $instanceSearchContent->getListLimit(['not_cont_status' => -1], $intPage, $intLimit, ['cont_id' => ['order' => 'asc']]);
+        $arr_extension = array('.jpg', '.jpeg', '.gif', '.png');
+        for ($intPage = 1; $intPage < 100; $intPage++) {
+            $arrContentList = $instanceSearchContent->getListLimit(
+                ['cate_id' => $cate_id],
+                $intPage,
+                $intLimit,
+                ['cont_id' => ['order' => 'asc']]
+            );
 
             if (empty($arrContentList)) {
                 break;
             }
+            foreach ($arrContentList as $content) {
+                $created_date = $content['created_date'];
+                $day = date('d', $created_date);
+                $month = date('m', $created_date);
+                $year = date('Y', $created_date);
+                $path_image = UPLOAD_PATH . 'content/' . $year . '/' . $month . '/' . $day . '/' . $content['cont_slug'];
 
+                for ($i = 1; $i < 30; $i++) {
+                    foreach ($arr_extension as $extension) {
+                        $file = $path_image . '_' . $i . $extension;
+                        if (file_exists($file)) {
+                            unlink($file);
+                            break;
+                        }
+                    }
+                }
 
+                //main image
+                foreach ($arr_extension as $extension) {
+                    $file = $path_image . '_main' . $extension;
+                    if (file_exists($file)) {
+                        unlink($file);
+                        break;
+                    }
+                }
+
+                //update status -1
+                $p_arrParams = array(
+                    'cont_status' => -1,
+                );
+                $serviceContent->edit($p_arrParams, $content['cont_id']);
+            }
         }
+        die("done");
     }
 }
