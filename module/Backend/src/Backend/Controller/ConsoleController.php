@@ -906,18 +906,18 @@ class ConsoleController extends MyController
         $xml = '<?xml version="1.0" encoding="UTF-8"?><sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></sitemapindex>';
         $xml = new \SimpleXMLElement($xml);
 
-        $all_file = scandir(PUBLIC_PATH . '/xml/');
+        $all_file = scandir(PUBLIC_PATH . '/sitemap/');
         sort($all_file, SORT_NATURAL | SORT_FLAG_CASE);
 //        sort($all_file);
         foreach ($all_file as $file_name) {
             if (strpos($file_name, 'xml') !== false) {
                 $sitemap = $xml->addChild('sitemap', '');
-                $sitemap->addChild('loc', BASE_URL . '/xml/' . $file_name);
+                $sitemap->addChild('loc', BASE_URL . '/sitemap/' . $file_name);
                 //$sitemap->addChild('lastmod', date('c', time()));
             }
         }
 
-        $result = file_put_contents(PUBLIC_PATH . '/xml/sitemap-tintuc360.xml', $xml->asXML());
+        $result = file_put_contents(PUBLIC_PATH . '/sitemap.xml', $xml->asXML());
         if ($result) {
             echo General::getColoredString("Create sitemap.xml completed!", 'blue', 'cyan');
             $this->flush();
@@ -980,8 +980,8 @@ class ConsoleController extends MyController
             }
         }
 
-        unlink(PUBLIC_PATH . '/xml/category.xml');
-        $result = file_put_contents(PUBLIC_PATH . '/xml/category.xml', $xml->asXML());
+        unlink(PUBLIC_PATH . '/sitemap/category.xml');
+        $result = file_put_contents(PUBLIC_PATH . '/sitemap/category.xml', $xml->asXML());
         if ($result) {
             echo General::getColoredString("Sitemap category done", 'blue', 'cyan');
             $this->flush();
@@ -996,7 +996,7 @@ class ConsoleController extends MyController
         $intLimit = 2000;
         for ($intPage = 1; $intPage < 100; $intPage++) {
 
-            $file = PUBLIC_PATH . '/xml/content-' . $intPage . '.xml';
+            $file = PUBLIC_PATH . '/sitemap/content-' . $intPage . '.xml';
             $arrContentList = $instanceSearchContent->getListLimit(['not_cont_status' => -1], $intPage, $intLimit, ['cont_id' => ['order' => 'desc']]);
 
             if (empty($arrContentList)) {
@@ -1043,8 +1043,8 @@ class ConsoleController extends MyController
         $instanceSearchKeyword = new \My\Search\Keyword();
         $intLimit = 4000;
         for ($intPage = 1; $intPage < 10000; $intPage++) {
-            $file = PUBLIC_PATH . '/xml/keyword-' . $intPage . '.xml';
-            $arrKeyList = $instanceSearchKeyword->getListLimit(['not_cate_id' => -2, 'not_content_crawler' => 1], $intPage, $intLimit, ['key_id' => ['order' => 'asc']]);
+            $file = PUBLIC_PATH . '/sitemap/keyword-' . $intPage . '.xml';
+            $arrKeyList = $instanceSearchKeyword->getListLimit(['not_cate_id' => -2,'not_content_crawler' => 1], $intPage, $intLimit, ['key_id' => ['order' => 'asc']]);
 
             if (empty($arrKeyList)) {
                 break;
@@ -1093,8 +1093,8 @@ class ConsoleController extends MyController
             $url->addChild('priority', 1);
         }
 
-        unlink(PUBLIC_PATH . '/xml/other.xml');
-        $result = file_put_contents(PUBLIC_PATH . '/xml/other.xml', $xml->asXML());
+        unlink(PUBLIC_PATH . '/sitemap/other.xml');
+        $result = file_put_contents(PUBLIC_PATH . '/sitemap/other.xml', $xml->asXML());
         if ($result) {
             echo General::getColoredString("Sitemap orther done", 'blue', 'cyan');
             $this->flush();
@@ -1492,7 +1492,7 @@ class ConsoleController extends MyController
                         $extension = end(explode('.', end(explode('/', $src))));
                         $name_img = $arr_data['cont_slug'] . '_' . ($key + 1) . '.' . $extension;
                         $image_content = General::crawler($src);
-                        if ($image_content) {
+                        if($image_content) {
                             file_put_contents($upload_dir['path'] . '/' . $name_img, $image_content);
                         } else {
                             $image_content = General::crawler(STATIC_URL . '/f/v1/images/no-image-available.jpg');
@@ -1502,7 +1502,7 @@ class ConsoleController extends MyController
                         if ($key == 0) {
                             $arr_data['cont_main_image'] = $upload_dir['url'] . '/' . $name_img;
                             $arr_data['cont_resize_image'] = $upload_dir['url'] . '/' . $name_img;
-                            $results = $this->resizeImage($upload_dir, $arr_data['cont_slug'], $extension, $cate_id);
+                            $results = $this->resizeImage($upload_dir,$arr_data['cont_slug'], $extension, $cate_id);
                             if ($results) {
                                 $arr_data['cont_resize_image'] = $results;
                             }
@@ -2229,8 +2229,7 @@ class ConsoleController extends MyController
         return true;
     }
 
-    public function resizeImage($upload_dir, $cont_slug, $extension, $cate_id)
-    {
+    public function resizeImage($upload_dir, $cont_slug, $extension, $cate_id){
 
         $path_old = $upload_dir['path'] . '/' . $cont_slug . '_1.' . $extension;
         if (!file_exists($path_old)) {
@@ -2313,8 +2312,7 @@ class ConsoleController extends MyController
         }
     }
 
-    public function shareFacebookAction()
-    {
+    public function shareFacebookAction() {
         $instanceSearchContent = new \My\Search\Content();
         $params = $this->request->getParams();
 
@@ -2350,8 +2348,7 @@ class ConsoleController extends MyController
         return true;
     }
 
-    public function getContentAction()
-    {
+    public function getContentAction(){
         $params = $this->request->getParams();
         $PID = $params['pid'];
         if (!empty($PID)) {
@@ -2385,7 +2382,7 @@ class ConsoleController extends MyController
                 'content_crawler' => json_encode($arr_content_crawler)
             );
             $serviceKeyword->edit($arr_update, $keyword['key_id']);
-            sleep(rand(4, 10));
+            sleep(rand(6, 10));
         }
         $this->flush();
         unset($arr_keyword);
@@ -2393,8 +2390,7 @@ class ConsoleController extends MyController
         return shell_exec('php ' . PUBLIC_PATH . '/index.php getcontent --pid=' . current($PID));
     }
 
-    public function setContentAction()
-    {
+    public function setContentAction(){
 
         try {
             $filename = "Set_Content";
