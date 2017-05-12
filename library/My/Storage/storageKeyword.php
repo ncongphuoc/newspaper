@@ -99,6 +99,11 @@ class storageKeyword extends AbstractTableGateway {
 
     private function _buildWhere($arrCondition) {
         $strWhere = '';
+
+        if (!empty($arrCondition['lt_key_id'])) {
+            $strWhere .= " AND key_id > " . $arrCondition['lt_key_id'];
+        }
+
         return $strWhere;
     }
 

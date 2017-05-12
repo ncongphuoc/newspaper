@@ -443,7 +443,7 @@ class ConsoleController extends MyController
         $intLimit = 2000;
         $instanceSearchKeyword = new \My\Search\Keyword();
         for ($intPage = 1; $intPage < 10000; $intPage++) {
-            $arrList = $serviceKeyword->getListLimit([], $intPage, $intLimit, 'key_id ASC');
+            $arrList = $serviceKeyword->getListLimit(['lt_key_id' => 824000], $intPage, $intLimit, 'key_id ASC');
 
             if (empty($arrList)) {
                 break;
