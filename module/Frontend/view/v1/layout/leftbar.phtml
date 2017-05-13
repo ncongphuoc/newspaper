@@ -1,0 +1,24 @@
+<?php
+$arr_category = unserialize(ARR_CATEGORY_INFO);
+?>
+
+<div class="navbox sidenav sticky">
+    <ul class="navigation clearfix">
+        <li class="tax-cong-nghe">
+            <a href="cong-nghe.html">
+                Danh mục
+            </a>
+            <ul>
+                <?php foreach ($arr_category as $cate) { ?>
+                    <li class="tax-<?php echo $cate['cate_slug']; ?>">
+                        <a href="<?php echo $this->serverUrl() . $this->Url('category', ['cateSlug' => $cate['cate_slug'], 'cateId' => $cate['cate_id']]) ?>">
+                            <img
+                                src="<?php echo STATIC_URL . '/f/' . FRONTEND_TEMPLATE . '/images/icon/' . $cate['cate_icon'] . '.png'; ?>"/>
+                            <?php echo $cate['cate_name'] ?>
+                        </a>
+                    </li>
+                <?php } ?>
+            </ul>
+        </li>
+    </ul>
+</div>

@@ -71,17 +71,13 @@ class ContentController extends MyController
             $metaDescription = $arrContent['cont_description'] ? $arrContent['cont_description'] : $arrContent['cont_title'];
             $arrContent['meta_social'] ? $metaSocial = $arrContent['meta_social'] : NULL;
 
-            /*
-             * Category
-             */
-//            $instanceSearchCategory = new \My\Search\Category();
-//            $categoryDetail = $instanceSearchCategory->getDetail(array('cate_id'=>$arrContent['cate_id']));
+            $helper_title = $this->serviceLocator->get('viewhelpermanager')->get('MyHeadTitle');
+            $helper_title->setTitle(html_entity_decode($metaTitle) . General::TITLE_META);
+
 
             $categoryDetail = $serviceCategory->getDetail(array('cate_id'=>$arrContent['cate_id']));
 
             $this->renderer = $this->serviceLocator->get('Zend\View\Renderer\PhpRenderer');
-//            <meta name="robots" content="INDEX, FOLLOW"/>
-            //$this->renderer->headMeta()->appendName('robots','noindex');
             $this->renderer->headMeta()->appendName('dc.description', html_entity_decode($categoryDetail['cate_meta_description']) . General::TITLE_META);
             $this->renderer->headMeta()->appendName('dc.subject', html_entity_decode($categoryDetail['cate_name']) . General::TITLE_META);
             $this->renderer->headTitle(html_entity_decode($metaTitle) . General::TITLE_META);

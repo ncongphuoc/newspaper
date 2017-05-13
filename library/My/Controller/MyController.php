@@ -171,30 +171,38 @@ class MyController extends AbstractActionController {
             $serviceCategory = $this->serviceLocator->get('My\Models\Category');
             $arrCategoryList = $serviceCategory->getList(['cate_status' => 1]);
 
-//            $instanceSearchCategory = new \My\Search\Category();
-//            $arrCategoryList = $instanceSearchCategory->getList(['cate_status' => 1], [], ['cate_sort' => ['order' => 'asc'], 'cate_id' => ['order' => 'asc']]);
             $arr_category = array();
             foreach ($arrCategoryList as $category) {
                 $arr_category[$category['cate_id']] = $category;
             }
-            define('ARR_CATEGORY', serialize($arr_category));
+            define('ARR_CATEGORY_INFO', serialize($arr_category));
 
-            //get list content hot
+
+            $arr_contnet_fields = 'cont_id, cont_title, cont_slug, cate_id, cont_resize_image,cont_main_image, created_date, cont_description';
+
+            //get list hot content
             $serviceContent = $this->serviceLocator->get('My\Models\Content');
-            $arrFields = 'cont_id, cont_title, cont_slug, cate_id, cont_resize_image, created_date, cont_description';
-            $arr_content_hot = $serviceContent->getListLimit(['cont_status' => 1], 1, 5, 'cont_views DESC', $arrFields);
-//            $arrFields = array('cont_id', 'cont_title', 'cont_slug', 'cate_id','cont_resize_image','created_date');
-//            $instanceSearchContent = new \My\Search\Content();
-//            $arr_content_hot = $instanceSearchContent->getListLimit(['cont_status' => 1], 1, 5, ['cont_views' => ['order' => 'desc']],$arrFields);
-            define('ARR_CONTENT_HOT_LIST', serialize($arr_content_hot));
+            $arr_condition_hot = array(
+                'cont_status' => 1
+            );
+            $arr_hot_content = $serviceContent->getListLimitContent(
+                $arr_condition_hot,
+                1,
+                10,
+                'cont_views DESC',
+                $arr_contnet_fields);
 
-            //50 KEYWORD :)
-//            $instanceSearchKeyword = new \My\Search\Keyword();
-////            $arrKeywordList = $instanceSearchKeyword->getListLimit(['full_text_keyname' => 'khám phá'], 1, 50, ['_score' => ['order' => 'desc']]);
-//            $arrKeywordList = $instanceSearchKeyword->getListLimit(['is_crawler' => 1], 1, 50, ['key_id' => ['order' => 'asc']]);
-//            define('ARR_KEYWORD_ALL_PAGE', serialize($arrKeywordList));
-//
-//            define('KEYWORD_SEARCH', !empty($arrData['keyword']) && $arrData['action'] == 'index' && $arrData['controller'] == 'search' ? $arrData['keyword'] : NULL);
+            define('ARR_HOT_CONTENT', serialize($arr_hot_content));
+
+            //get list new content
+            $serviceContent = $this->serviceLocator->get('My\Models\Content');
+            $arr_condition_new = array(
+                'cont_status' => 1,
+                'in_cate_id' => '1,2,4,7'
+            );
+            $arr_new_content = $serviceContent->getListLimitContent($arr_condition_new, 1, 20, 'cont_id DESC', $arr_contnet_fields);
+
+            define('ARR_NEW_CONTENT', serialize($arr_new_content));
 
             unset($arrKeywordList);
             unset($arr_content_hot);

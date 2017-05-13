@@ -15,7 +15,7 @@ use Zend\View\Helper\AbstractHelper;
 class Pagingajax extends AbstractHelper {
 
     public function __invoke($strModule, $strController, $strAction, $intTotal, $intCurrentPage, $intLimit, $strRoute, $arrParams = array()) {
-            $pagingajax = $this->pagingajax($strModule, $strController, $strAction, $intTotal, $intCurrentPage, $intLimit, $strRoute, $arrParams);
+        $pagingajax = $this->pagingajax($strModule, $strController, $strAction, $intTotal, $intCurrentPage, $intLimit, $strRoute, $arrParams);
         return $pagingajax;
     }
 
@@ -31,7 +31,7 @@ class Pagingajax extends AbstractHelper {
      * @param <string> $strRoute
      * @return <string> $result
      */
-    
+
     public function pagingajax($strModule, $strController, $strAction, $intTotal = 0, $intCurrentPage = 1, $intLimit = 15, $strRoute = null, $arrParams = array(), $str = 'kết quả') {
         $result = '';
         $urlHelper = '';

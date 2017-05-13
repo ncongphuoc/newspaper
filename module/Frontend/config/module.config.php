@@ -272,6 +272,7 @@ return array(
     'view_helpers' => array(
         'invokables' => array(
             'paging' => 'My\View\Helper\Paging',
+            'myHeadTitle' => 'My\View\Helper\MyHeadTitle',
         )
     ),
     'translator' => array('locale' => 'en_US'),
@@ -282,23 +283,9 @@ return array(
         'template_map' => array(
             FRONTEND_TEMPLATE . '/layout/layout' => __DIR__ . '/../view/' . FRONTEND_TEMPLATE . '/layout/layout.phtml',
             'frontend/header' => __DIR__ . '/../view/' . FRONTEND_TEMPLATE . '/layout/header.phtml',
-            'frontend/layder-slider' => __DIR__ . '/../view/' . FRONTEND_TEMPLATE . '/layout/layderSlider.phtml',
-            'frontend/search' => __DIR__ . '/../view/' . FRONTEND_TEMPLATE . '/layout/search.phtml',
-            'frontend/premium' => __DIR__ . '/../view/' . FRONTEND_TEMPLATE . '/layout/premium.phtml',
-            'frontend/category' => __DIR__ . '/../view/' . FRONTEND_TEMPLATE . '/layout/category.phtml',
-            'frontend/classify' => __DIR__ . '/../view/' . FRONTEND_TEMPLATE . '/layout/classify.phtml',
+            'frontend/sidebar' => __DIR__ . '/../view/' . FRONTEND_TEMPLATE . '/layout/sidebar.phtml',
+            'frontend/leftbar' => __DIR__ . '/../view/' . FRONTEND_TEMPLATE . '/layout/leftbar.phtml',
             'frontend/footer' => __DIR__ . '/../view/' . FRONTEND_TEMPLATE . '/layout/footer.phtml',
-            'frontend/menu-mobile' => __DIR__ . '/../view/' . FRONTEND_TEMPLATE . '/layout/menu-mobile.phtml',
-            'frontend/content/upload' => __DIR__ . '/../view/' . FRONTEND_TEMPLATE . '/frontend/content/upload.phtml',
-            'frontend/auth/reset-password' => __DIR__ . '/../view/' . FRONTEND_TEMPLATE . '/frontend/auth/reset-password.phtml',
-            'frontend/nav-user-left' => __DIR__ . '/../view/' . FRONTEND_TEMPLATE . '/layout/nav-user-left.phtml',
-            'frontend/nav-right' => __DIR__ . '/../view/' . FRONTEND_TEMPLATE . '/layout/nav-right.phtml',
-            'frontend/nav-left' => __DIR__ . '/../view/' . FRONTEND_TEMPLATE . '/layout/nav-left.phtml',
-            'frontend/content/add-comment' => __DIR__ . '/../view/' . FRONTEND_TEMPLATE . '/frontend/content/add-comment.phtml',
-            'frontend/email-messages' => __DIR__ . '/../view/' . FRONTEND_TEMPLATE . '/layout/email-messages.phtml',
-            'frontend/footer-email' => __DIR__ . '/../view/' . FRONTEND_TEMPLATE . '/layout/footer-email.phtml',
-            'frontend/user/get-messages' => __DIR__ . '/../view/' . FRONTEND_TEMPLATE . '/frontend/user/get-messages.phtml',
-            'frontend/email-replay-messages' => __DIR__ . '/../view/' . FRONTEND_TEMPLATE . '/layout/email-replay-messages.phtml'
         ),
         'template_path_stack' => array(
             __DIR__ . '/../view/' . FRONTEND_TEMPLATE,

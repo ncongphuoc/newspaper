@@ -159,50 +159,8 @@ class storageContent extends AbstractTableGateway {
             }
             return $result;
         } catch (\Exception $exc) {
-            echo '<pre>';
-            print_r($exc->getMessage());
-            echo '</pre>';
-            die();
             if (APPLICATION_ENV !== 'production') {
                 die($exc->getMessage());
-            }
-            return false;
-        }
-    }
-
-    public function editBackground($p_arrParams, $intProductID) {
-        try {
-            if (!is_array($p_arrParams) || empty($p_arrParams) || empty($intProductID)) {
-                return false;
-            }
-            $result = $this->update($p_arrParams, 'cont_id=' . $intProductID);
-            return $result;
-        } catch (\Exception $exc) {
-            $exc->getMessage();
-            return false;
-        }
-    }
-
-    public function multiEdit($p_arrParams, $arrCondition) {
-        try {
-            if (!is_array($p_arrParams) || empty($p_arrParams) || empty($arrCondition) || !is_array($arrCondition)) {
-                return false;
-            }
-            $strWhere = $this->_buildWhere($arrCondition);
-            $result = $this->update($p_arrParams, '1=1 ' . $strWhere);
-            
-            if ($result) {
-                $arrData = [
-                    'data' => $p_arrParams,
-                    'condition' => $arrCondition
-                ];
-                $instanceJob = new \My\Job\JobContent();
-                $instanceJob->addJob(SEARCH_PREFIX . 'multiEditContent', $arrData);
-            }
-            return $result;
-        } catch (\Exception $exc) {
-            if (APPLICATION_ENV !== 'production') {
-                throw new \Exception($exc->getMessage());
             }
             return false;
         }
@@ -232,7 +190,11 @@ class storageContent extends AbstractTableGateway {
         }
 
         if (!empty($arrCondition['cate_id'])) {
-            $strWhere .= " AND cate_id= " . $arrCondition['cate_id'];
+            $strWhere .= " AND cate_id = " . $arrCondition['cate_id'];
+        }
+
+        if (!empty($arrCondition['in_cate_id'])) {
+            $strWhere .= " AND cate_id IN (" . $arrCondition['in_cate_id'] . ")";
         }
 
         if (!empty($arrCondition['not_cont_id'])) {

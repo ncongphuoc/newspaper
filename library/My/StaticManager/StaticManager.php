@@ -25,12 +25,12 @@ class StaticManager {
         list($strModule, $strController, $strAction) = explode(':', $strResource);
         switch ($strModule) {
             case 'frontend':
-                $this->arrData['css']['defaultCSS'] = STATIC_URL . '/f/' . FRONTEND_TEMPLATE . '/css/??font-awesome.min.css';
-                $this->arrData['js']['defaultJS'] = STATIC_URL . '/f/' . FRONTEND_TEMPLATE . '/js/library/??tagdiv_theme.min3688.js,jquery.form.mind03d.js,comment-reply.min62d0.js,js_composer_front.min2720.js,scripts8686.js,wp-embed.min62d0.js';
+                $this->arrData['css']['defaultCSS'] = '';
+                $this->arrData['js']['defaultJS'] = '';
                 break;
             case 'backend':
-                $this->arrData['css']['defaultCSS'] = STATIC_URL . '/b/css/??bootstrap.min.css,bootstrap-reset.css,font-awesome.css,style.css,style-responsive.css,datepicker.css';
-                $this->arrData['js']['defaultJS'] = STATIC_URL . '/b/js/library/??jquery.js,bootstrap.min.js,jquery.dcjqaccordion.2.7.js,hover-dropdown.js,jquery.scrollTo.min.js,jquery.nicescroll.js,respond.min.js,common-scripts.js,jquery.knob.js,bootbox.min.js,bootstrap-datepicker.js,bootstrap-inputmask.min.js';
+                $this->arrData['css']['defaultCSS'] = '';
+                $this->arrData['js']['defaultJS'] = '';
                 break;
             default:
                 $this->arrData['css']['defaultCSS'] = '';

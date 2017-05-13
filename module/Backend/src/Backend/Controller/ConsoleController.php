@@ -395,23 +395,22 @@ class ConsoleController extends MyController
 //        $instanceSearchContent->createIndex();
 //        die();
 
+        if ($intIsCreateIndex) {
+            $instanceSearchContent->createIndex();
+        } else {
+            $result = $instanceSearchContent->removeAllDoc();
+            if (empty($result)) {
+                $this->flush();
+                return General::getColoredString("Cannot delete old search index \n", 'light_cyan', 'red');
+            }
+        }
+
         for ($intPage = 1; $intPage < 10000; $intPage++) {
             $arrContentList = $serviceContent->getListLimit([], $intPage, $intLimit, 'cont_id ASC');
             if (empty($arrContentList)) {
                 break;
             }
 
-            if ($intPage == 1) {
-                if ($intIsCreateIndex) {
-                    $instanceSearchContent->createIndex();
-                } else {
-                    $result = $instanceSearchContent->removeAllDoc();
-                    if (empty($result)) {
-                        $this->flush();
-                        return General::getColoredString("Cannot delete old search index \n", 'light_cyan', 'red');
-                    }
-                }
-            }
             $arrDocument = [];
             foreach ($arrContentList as $arrContent) {
                 $id = (int)$arrContent['cont_id'];

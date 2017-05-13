@@ -37,7 +37,7 @@ class CategoryController extends MyController {
             'cate_id' => $categoryDetail['cate_id']
         );
 
-        $arrFields = array('cont_id', 'cont_title', 'cont_slug', 'cate_id','cont_resize_image','created_date','cont_description');
+        $arrFields = array('cont_id', 'cont_title', 'cont_slug', 'cate_id','cont_resize_image','cont_main_image','created_date','cont_description');
         $instanceSearchContent = new \My\Search\Content();
         $arrContentList = $instanceSearchContent->getListLimit($arrCondition, $intPage, $intLimit, ['created_date' => ['order' => 'desc']],$arrFields);
 
@@ -52,6 +52,9 @@ class CategoryController extends MyController {
         $metaKeyword = $categoryDetail['cate_meta_keyword'] ? $categoryDetail['cate_meta_keyword'] : NULL;
         $metaDescription = $categoryDetail['cate_meta_description'] ? $categoryDetail['cate_meta_description'] : NULL;
         $metaSocial = $categoryDetail['cate_meta_social'] ? $categoryDetail['cate_meta_social'] : NULL;
+
+        $helper_title = $this->serviceLocator->get('viewhelpermanager')->get('MyHeadTitle');
+        $helper_title->setTitle(html_entity_decode($metaTitle) . General::TITLE_META);
 
         $this->renderer = $this->serviceLocator->get('Zend\View\Renderer\PhpRenderer');
 
