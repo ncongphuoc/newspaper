@@ -35,7 +35,7 @@ class Content extends SearchAbstract {
         //create new index
         $searchIndex->create([
             'name' => 'translations',
-            'number_of_shards' => 5,
+            'number_of_shards' => 2,
             'number_of_replicas' => 0,
             'analysis' => [
                 'analyzer' => [
@@ -69,8 +69,6 @@ class Content extends SearchAbstract {
             'cont_id' => ['type' => 'integer', 'index' => 'not_analyzed'],
             'cont_title' => ['type' => 'string', 'store' => 'yes', 'analyzer' => 'translation_index_analyzer', 'search_analyzer' => 'translation_search_analyzer', 'term_vector' => 'with_positions_offsets'],
             'cont_slug' => ['type' => 'string', 'index' => 'not_analyzed'],
-            'cont_description' => ['type' => 'string', 'index' => 'not_analyzed'],
-            'cont_detail' => ['type' => 'string', 'store' => 'yes', 'analyzer' => 'translation_index_analyzer', 'search_analyzer' => 'translation_search_analyzer', 'term_vector' => 'with_positions_offsets'],
             'created_date' => ['type' => 'integer', 'index' => 'not_analyzed'],
             'cate_id' => ['type' => 'integer', 'index' => 'not_analyzed'],
             'cont_views' => ['type' => 'integer', 'index' => 'not_analyzed'],

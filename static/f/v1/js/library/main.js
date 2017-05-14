@@ -34,11 +34,6 @@
     }*/
     //$(".sidebar #sticky").prepend('<div class="adbox fbbox"><div class="fb-page" data-href="https://www.facebook.com/quantrimang.com.vn" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"></div><div class="fbhd">Thích trang để theo dõi trên Facebook</div></div>');
 
-    /*Account Navigation*/
-     $.get("/account/navigation", function (e) {
-         $("#header .toplinks").html(e);
-    }); 
-
      $("a[data-uid]").click(function () {
          var uid = parseInt($(this).attr("data-uid"));
          if (uid && uid > 0) {
