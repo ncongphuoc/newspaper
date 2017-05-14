@@ -1082,7 +1082,7 @@ class ConsoleController extends MyController
         $doc .= '</urlset>';
         $xml = new \SimpleXMLElement($doc);
         $this->flush();
-        $arrData = ['https://tintuc360.site/'];
+        $arrData = ['https://tintuc360.site/','http://tintuc360.site/danh-sach-tu-khoa/'];
         foreach ($arrData as $value) {
             $href = $value;
             $url = $xml->addChild('url');

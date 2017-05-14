@@ -75,6 +75,7 @@ class SearchController extends MyController
             return [
                 'paging' => $paging,
                 'params' => $params,
+                'keyword' => $key_name,
                 'arrContentList' => $listContent,
                 'arrKeywordList' => $arrKeywordList,
                 'intTotal' => $intTotal
