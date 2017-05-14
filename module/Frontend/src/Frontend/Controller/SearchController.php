@@ -192,10 +192,12 @@ class SearchController extends MyController
         $intPage = is_numeric($params['page']) ? $params['page'] : 1;
         $intLimit = 100;
 
-        $serviceKeyword = $this->serviceLocator->get('My\Models\Keyword');
+        $instanceSearchKeyword = new \My\Search\Keyword();
 
-        $arrKeywordList = $serviceKeyword->getListLimit(array(), $intPage, $intLimit, 'key_id ASC', 'key_id, key_name, key_slug');
-        $intTotal = $serviceKeyword->getTotal(array());
+        //phân trang
+        $intTotal = $instanceSearchKeyword->getTotal(array());
+
+        $arrKeywordList = $instanceSearchKeyword->getListLimit(array(), $intPage, $intLimit,['key_id' => ['order' => 'asc']], array('key_id','key_name','key_slug'));
 
         $helper = $this->serviceLocator->get('viewhelpermanager')->get('Paging');
         $paging = $helper($params['module'], $params['__CONTROLLER__'], $params['action'], $intTotal, $intPage, $intLimit, 'list-keyword', $params);
