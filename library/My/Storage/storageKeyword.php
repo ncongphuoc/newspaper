@@ -97,6 +97,24 @@ class storageKeyword extends AbstractTableGateway {
         }
     }
 
+    public function getTotal($arrCondition = []) {
+        try {
+            $strWhere = $this->_buildWhere($arrCondition);
+            $adapter = $this->adapter;
+            $sql = new Sql($adapter);
+            $select = $sql->Select($this->table)
+                ->columns(array('total' => new \Zend\Db\Sql\Expression('COUNT(*)')))
+                ->where('1=1' . $strWhere);
+            $query = $sql->getSqlStringForSqlObject($select);
+            return (int) current($adapter->query($query, $adapter::QUERY_MODE_EXECUTE)->toArray())['total'];
+        } catch (\Zend\Http\Exception $exc) {
+            if (APPLICATION_ENV !== 'production') {
+                die($exc->getMessage());
+            }
+            return false;
+        }
+    }
+
     private function _buildWhere($arrCondition) {
         $strWhere = '';
 

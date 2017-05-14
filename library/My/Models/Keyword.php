@@ -27,4 +27,8 @@ class Keyword extends ModelAbstract {
         return $intResult;
     }
 
+    public function getTotal($arrCondition) {
+        return $this->getParentTable()->getTotal($arrCondition);
+    }
+
 }
