@@ -30,7 +30,7 @@ $content_crawler = $keyDetail['content_crawler']!= '1' ? json_decode($keyDetail[
                         </a>
                         <a class="thumb"
                            href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $arr_content[$i]['cont_slug'], 'contentId' => $arr_content[$i]['cont_id']]) ?>">
-                            <img src="<?php echo $arr_content[$i]['cont_main_image'] ?>"
+                            <img src="<?php echo $arr_content[$i]['cont_resize_image'] ?>"
                                  alt="<?php echo $arr_content[$i]['cont_title'] ?>">
                         </a>
                         <div class="desc"><?php echo $arr_content[$i]['cont_description'] ?></div>
@@ -89,7 +89,7 @@ $content_crawler = $keyDetail['content_crawler']!= '1' ? json_decode($keyDetail[
                         </a>
                         <a class="thumb"
                            href="<?php echo $this->serverUrl() . $this->Url('view-content', ['contentSlug' => $arr_content[$i]['cont_slug'], 'contentId' => $arr_content[$i]['cont_id']]) ?>">
-                            <img src="<?php echo $arr_content[$i]['cont_main_image'] ?>"
+                            <img src="<?php echo $arr_content[$i]['cont_resize_image'] ?>"
                                  alt="<?php echo $arr_content[$i]['cont_title'] ?>">
                         </a>
                         <div class="desc"><?php echo $arr_content[$i]['cont_description'] ?></div>

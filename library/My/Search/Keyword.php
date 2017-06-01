@@ -259,6 +259,15 @@ class Keyword extends SearchAbstract {
         }
         return false;
     }
+	
+	public function removeDocument($document) {
+        $respond = $this->getSearchType()->deleteById($document);
+        $this->getSearchType()->getIndex()->refresh();
+        if ($respond->isOk()) {
+            return true;
+        }
+        return false;
+    }
 
     public function __buildWhere($params, $boolQuery) {
 

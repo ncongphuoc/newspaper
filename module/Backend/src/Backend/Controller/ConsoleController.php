@@ -2477,10 +2477,29 @@ class ConsoleController extends MyController
 
     public function testAction()
     {
-        $instanceSearchContent = new \My\Search\Content();
-        $serviceContent = $this->serviceLocator->get('My\Models\Content');
+        // $instanceSearchContent = new \My\Search\Content();
+        // $serviceContent = $this->serviceLocator->get('My\Models\Content');
+        // $cate_id = 1; //chuyen sao
+        // $intLimit = 10;
+		
+                // $p_arrParams = array(
+                    // 'cont_status' => -1,
+                // );
+                // $serviceContent->edit($p_arrParams, 14273);
+// die("done");
+
+
+        $instanceSearchContent = new \My\Search\Keyword();
+        $serviceContent = $this->serviceLocator->get('My\Models\Keyword');
         $cate_id = 1; //chuyen sao
         $intLimit = 10;
+		
+                $p_arrParams = array(
+                    'key_status' => -1,
+                );
+                $instanceSearchContent->removeDocument(64536);
+die("done");
+
 
         $arr_extension = array('.jpg', '.jpeg', '.gif', '.png');
         for ($intPage = 1; $intPage < 100; $intPage++) {

@@ -159,11 +159,16 @@ class SearchController extends MyController
                         'full_text_keyname' => $content['cont_title'],
                         'in_cate_id' => array($content['cate_id'], -1)
                     );
-                    $arrKeywordList = $instanceSearchKeyword->getListLimit($arrCondition, 1, 3, ['_score' => ['order' => 'desc']]);
+                    $arrKeywordList = $instanceSearchKeyword->getListLimit($arrCondition, 1, 5, ['_score' => ['order' => 'desc']]);
                     $listContent[$content['cont_id']]['list_keyword'] = $arrKeywordList;
                 }
             }
-
+			
+			$arr_content = array();
+			foreach($listContent as $row){
+				$arr_content[] = $row;
+			}
+			
             $helper_title = $this->serviceLocator->get('viewhelpermanager')->get('MyHeadTitle');
             $helper_title->setTitle(html_entity_decode($arrKeyDetail['key_name']) . General::TITLE_META);
 
@@ -184,7 +189,7 @@ class SearchController extends MyController
             return array(
                 'params' => $params,
                 'intPage' => $intPage,
-                'arrContentList' => $listContent,
+                'arrContentList' => $arr_content,
                 'arrKeyDetail' => $arrKeyDetail
             );
         } catch (\Exception $exc) {
