@@ -104,6 +104,7 @@ class SearchController extends MyController
 
             $instanceSearchKeyword = new \My\Search\Keyword();
             $serviceContent = $this->serviceLocator->get('My\Models\Content');
+            $serviceKeyword = $this->serviceLocator->get('My\Models\Keyword');
             //
             $arrKeyDetail = $instanceSearchKeyword->getDetail(['key_id' => $key_id]);
 
@@ -113,23 +114,7 @@ class SearchController extends MyController
 
             $arrContentList = array();
 
-            if (empty($arrKeyDetail['key_content']) || $arrKeyDetail['key_content'] == '0') {
-                $arr_condition_content = array(
-                    'cont_status' => 1,
-                    'full_text_title' => $arrKeyDetail['key_name']
-                );
-
-                if ($arrKeyDetail['cate_id'] != -1 && $arrKeyDetail['cate_id'] != -2) {
-                    $arr_condition_content['in_cate_id'] = array($arrKeyDetail['cate_id']);
-                }
-                $intPage = 1;
-                $intLimit = 15;
-
-                $arrFields = array('cont_id', 'cont_title', 'cont_slug', 'cate_id', 'cont_resize_image', 'created_date', 'cont_description');
-                $instanceSearchContent = new \My\Search\Content();
-                $arrContentList = $instanceSearchContent->getListLimit($arr_condition_content, $intPage, $intLimit, ['_score' => ['order' => 'desc']], $arrFields);
-
-            } else {
+            if(!empty($arrKeyDetail['key_content'] && $arrKeyDetail['key_content'] != '0')) {
                 $arrFields = 'cont_id, cont_title, cont_slug, cate_id, cont_resize_image, created_date, cont_description';
                 $arr_condition_content = array(
                     'cont_status' => 1,
@@ -148,6 +133,34 @@ class SearchController extends MyController
                         $arrContentList[] = $arr_temp[$cont_id];
                     }
                 }
+            }
+
+            if (empty($arrContentList)) {
+                $arr_condition_content = array(
+                    'cont_status' => 1,
+                    'full_text_title' => $arrKeyDetail['key_name']
+                );
+                
+                $intPage = 1;
+                $intLimit = 15;
+
+                $arrFields = array('cont_id', 'cont_title', 'cont_slug', 'cate_id', 'cont_resize_image', 'created_date', 'cont_description');
+                $instanceSearchContent = new \My\Search\Content();
+                $arrContentList = $instanceSearchContent->getListLimit($arr_condition_content, $intPage, $intLimit, ['_score' => ['order' => 'desc']], $arrFields);
+
+                $text_cont_id = '';
+                if (!empty($arrContentList)) {
+                    $arr_cont_id = array();
+                    foreach ($arrContentList as $content) {
+                        $arr_cont_id[] = $content['cont_id'];
+                    }
+                    $text_cont_id = implode(',', $arr_cont_id);
+                }
+
+                $arr_update = array(
+                    'key_content' => $text_cont_id,
+                );
+                $serviceKeyword->edit($arr_update, $key_id);
             }
 
             //get keyword
